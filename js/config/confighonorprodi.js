@@ -1,20 +1,21 @@
 import { addChild } from "https://jscroot.github.io/element/croot.js";
-import { tabletag, templatehonorprodi, templatesdm } from "../template/url.js";
+import { tabletag, templatehonorprodi } from "../template/url.js";
+import { getRandomClass } from "./config.js";
 export const itemsPerPage = 10;
 export let currentPage = 1;
 
-export function renderTablePage(pageNumber, data) {
+export function rendertableprodi(pageNumber, data) {
   const start = (pageNumber - 1) * itemsPerPage;
   const end = start + itemsPerPage;
   const tableBody = document.getElementById('bodycihuy');
   tableBody.innerHTML = ''; // Clear the table body
 
   for (let i = start; i < end && i < data.length; i++) {
-    IsiRowSDM(data[i]);
+    IsirowHonorProdi(data[i]);
   }
 }
 
-export function renderPagination(data) {
+export function renderpagingprodi(data) {
   const pagination = document.getElementById('pagination');
 
   const totalPages = Math.ceil(data.length / itemsPerPage);
@@ -38,8 +39,8 @@ export function renderPagination(data) {
     previousButton.textContent = 'Previous';
     previousButton.addEventListener('click', () => {
       currentPage--;
-      renderTablePage(currentPage, data);
-      renderPagination(data);
+      rendertableprodi(currentPage, data);
+      renderpagingprodi(data);
     });
     pagination.appendChild(previousButton);
   }
@@ -49,8 +50,8 @@ export function renderPagination(data) {
     pageButton.textContent = i;
     pageButton.addEventListener('click', () => {
       currentPage = i;
-      renderTablePage(currentPage, data);
-      renderPagination(data);
+      rendertableprodi(currentPage, data);
+      renderpagingprodi(data);
     });
     pagination.appendChild(pageButton);
   }
@@ -61,39 +62,18 @@ export function renderPagination(data) {
     nextButton.textContent = 'Next';
     nextButton.addEventListener('click', () => {
       currentPage++;
-      renderTablePage(currentPage, data);
-      renderPagination(data);
+      rendertableprodi(currentPage, data);
+      renderpagingprodi(data);
     });
     pagination.appendChild(nextButton);
   }
 }
-
-
-export function IsiRowSDM(value) {
-  const content = templatesdm
-    .replace("#nama#", value.full_name)
-    .replace("#email#", value.email)
-    .replace("#notelp#", value.nomor_telepon)
-    .replace("#kelompok#", value.kelompok)
-    .replace("#jabatan#", value.nama_jabatan);
-  addChild("bodycihuy", tabletag, getRandomClass(), content);
-}
-
-let counter = 0;
-
-export function getRandomClass() {
-  const classes = [
-    "text-xs bg-gray-50",
-    "text-xs",
-  ];
-
-  const randomClass = classes[counter % classes.length];
-  counter++;
-  return randomClass;
-}
-
-
-export function ResponseData(res) {
-    console.log(res)
-    res.data.forEach(IsirowHonorProdi)
-}
+export function IsirowHonorProdi(value) {
+    const content = templatehonorprodi
+      .replace("#nama#", value.nama_dosen)
+      .replace("#jabatan#", value.jabatan_struktural)
+      .replace("#honorkotor", value.jumlah_honor_kotor)
+      .replace("#potongan#", value.pph)
+      .replace("#honorbersih#", value.jumlah_honor_bersih);
+    addChild("bodycihuy", tabletag, getRandomClass(), content);
+  }
