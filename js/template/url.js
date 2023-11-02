@@ -1,5 +1,9 @@
 export let URLKARYAWAN = "https://hris_backend.ulbi.ac.id/peg/rtm/data";
 export let URLHONORMENGAJARPRODI = "https://hris_backend.ulbi.ac.id/honor/dosen/prodi";
+export let URLMAKSIMALMENGAJAR = "https://hris_backend.ulbi.ac.id/honor/dosen/dikjar"
+export let URLEVELJABATAN = "https://hris_backend.ulbi.ac.id/honor/dosen/level"
+export let URLJAFUNG = "https://hris_backend.ulbi.ac.id/honor/dosen/jafung"
+export let URLDOSEN = "https://hris_backend.ulbi.ac.id/honor/dosen/data"
 
 export let templatesdm = `
 <td class="py-5 px-6 font-medium max-w-xs">#nama#</td>
@@ -19,6 +23,27 @@ export let templatehonorprodi = `
   <span class="inline-block py-1 px-2 text-white bg-green-500 rounded-full">#potongan#</span>
 </td>
 <td>#honorbersih#</td>
+`
+
+export let templatedikjar = `
+<td class="py-5 px-6 font-medium">#jenisjabatan#</td>
+<td class="font-medium">#namajabatan#</td>
+<td class="font-medium">#maksimal#</td>
+<td class="font-medium">#status#</td>
+`
+
+export let templatelevel = `
+<td class="py-5 px-6 font-medium">#kodejbt#</td>
+<td class="font-medium">#namajabatan#</td>
+<td class="font-medium">#honor#</td>
+`
+
+export let templatedosen = `
+<td class="py-5 px-6 font-medium">#nama#</td>
+<td class="font-medium">#email#</td>
+<td class="font-medium">#kodejp#</td>
+<td class="font-medium">#nip#</td>
+<td class="font-medium">#nidn#</td>
 `
 export let tabletag = "tr"
 export let tableRowClass = "text-xs bg-gray-50"

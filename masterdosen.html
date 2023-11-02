@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" sizes="32x32" href="shuffle-for-tailwind.png">
     <script src="js/main.js"></script>
+    <script type="module" src="js/controller/dosen.js"></script>
 </head>
 <body class="antialiased bg-body text-body font-body">
     <div class="">
@@ -132,6 +133,42 @@
       <a class="inline-block w-full md:w-1/2 lg:w-auto mb-4 lg:mb-0 px-4 pb-2 border-b-2 border-indigo-500 text-indigo-500" href="#">General</a>
       </div>
       </section>
+      <div class="container px-4 mx-auto">
+        <div>
+        <form id="formhonor">
+        <div class="mb-6">
+          <label class="block text-sm font-medium mb-2" for="">Pilih Prodi</label>
+          <div class="relative">
+            <select class="appearance-none block w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded" name="field-name" id="selector">
+              <option selected value="">Pilih prodi</option>
+              <option value="13">D3 Teknik Informatika</option>
+              <option value="14">D4 Teknik Informatika</option>
+              <option value="23">D3 Manajemen Informatika</option>
+              <option value="33">D3 Akuntansi</option>
+              <option value="34">D4 Akuntansi Keuangan</option>
+              <option value="43">D3 Manajemen Pemasaran</option>
+              <option value="44">D4 Manajemen Perusahaan</option>
+              <option value="53">D3 Administrasi Logistik</option>
+              <option value="54">D4 Logistik Bisnis</option>
+              <option value="74">D4 Logistik Niaga</option>
+              <option value="81">S1 Manajemen Transportasi</option>
+              <option value="82">S1 Manajemen Logistik</option>
+              <option value="83">S1 Bisnis Digital</option>
+              <option value="84">S1 Sains Data</option>
+              <option value="85">S1 Manajemen Rekayasa</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20">
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        
+        <button class="inline-block w-full md:w-auto px-6 py-3 font-medium text-white bg-indigo-500 hover:bg-indigo-600 rounded transition duration-200" type="submit">Hitung</button>
+        </div>
+        </div>
+      </form>
       
       <div class="container px-4 mx-auto">
       <section class="py-8">
@@ -147,67 +184,14 @@
       <th class="pb-3 font-medium">Nama</th>
       <th class="pb-3 font-medium">Email</th>
       <th class="pb-3 font-medium">Nomor Telepon</th>
-      <th class="pb-3 font-medium">Prodi</th>
-      <th class="pb-3 font-medium">Kode Prodi</th>
+      <th class="pb-3 font-medium">NIP</th>
+      <th class="pb-3 font-medium">NIDN</th>
       </tr>
                 </thead>
-                <tbody>
-                  <tr class="text-xs bg-gray-50">
-                    <td class="py-5 px-6 font-medium">SR2451EW32</td>
-                    <td class="font-medium">08.04.2021</td>
-                    <td class="font-medium">name@shuffle.dev</td>
-                    <td class="font-medium">Monthly</td>
-                    <td>
-                      <span class="inline-block py-1 px-2 text-white bg-green-500 rounded-full">Completed</span>
-                    </td>
-                  </tr>
-                  <tr class="text-xs">
-                    <td class="py-5 px-6 font-medium">SR2451EW32</td>
-                    <td class="font-medium">08.04.2021</td>
-                    <td class="font-medium">name@shuffle.dev</td>
-                    <td class="font-medium">Monthly</td>
-                    <td>
-                      <span class="inline-block py-1 px-2 text-white bg-red-500 rounded-full">Canceled</span>
-                    </td>
-                  </tr>
-                  <tr class="text-xs bg-gray-50">
-                    <td class="py-5 px-6 font-medium">SR2451EW32</td>
-                    <td class="font-medium">08.04.2021</td>
-                    <td class="font-medium">name@shuffle.dev</td>
-                    <td class="font-medium">Lifetime</td>
-                    <td>
-                      <span class="inline-block py-1 px-2 text-white bg-orange-500 rounded-full">Pending</span>
-                    </td>
-                  </tr>
-                  <tr class="text-xs">
-                    <td class="py-5 px-6 font-medium">SR2451EW32</td>
-                    <td class="font-medium">08.04.2021</td>
-                    <td class="font-medium">name@shuffle.dev</td>
-                    <td class="font-medium">Yearly</td>
-                    <td>
-                      <span class="inline-block py-1 px-2 text-white bg-green-500 rounded-full">Completed</span>
-                    </td>
-                  </tr>
-                  <tr class="text-xs bg-gray-50">
-                    <td class="py-5 px-6 font-medium">SR2451EW32</td>
-                    <td class="font-medium">08.04.2021</td>
-                    <td class="font-medium">name@shuffle.dev</td>
-                    <td class="font-medium">Monthly</td>
-                    <td>
-                      <span class="inline-block py-1 px-2 text-white bg-green-500 rounded-full">Completed</span>
-                    </td>
-                  </tr>
+                <tbody id="bodycihuy">
                 </tbody>
               </table>
-              <div class="text-center mt-5">
-                <a class="inline-flex items-center text-xs text-indigo-500 hover:text-blue-600 font-medium" href="#">
-                  <span class="inline-block mr-2">
-                    <svg class="text-indigo-400 h-3 w-3" viewbox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      
-                    </svg>
-                  </span>
-                  
-                </a>
+              <div id="pagination" class="text-center mt-5">
               </div>
             </div>
           </div>
