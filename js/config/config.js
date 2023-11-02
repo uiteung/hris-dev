@@ -83,7 +83,7 @@ export function IsirowHonorProdi(value) {
     const content = templatehonorprodi
       .replace("#nama#", value.nama_dosen)
       .replace("#jabatan#", value.jabatan_struktural)
-      .replace("#honorkotor#", value.jumlah_honor_kotor)
+      .replace("#honorkotor", value.jumlah_honor_kotor)
       .replace("#potongan#", value.pph)
       .replace("#honorbersih#", value.jumlah_honor_bersih);
     addChild("bodycihuy", tabletag, getRandomClass(), content);
