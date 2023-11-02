@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
     <link rel="stylesheet" href="css/tailwind/tailwind.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" sizes="32x32" href="shuffle-for-tailwind.png">
     <script src="js/main.js"></script>
 </head>
@@ -134,13 +135,25 @@
       <div class="container px-4 mx-auto">
       <div>
       <div class="mb-6">
-        <label class="block text-sm font-medium mb-2" for="">Label for select</label>
+        <label class="block text-sm font-medium mb-2" for="">Pilih Prodi</label>
         <div class="relative">
           <select class="appearance-none block w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded" name="field-name">
-            <option>Option 1</option>
-            <option>Option 2</option>
-            <option>Option 3</option>
-            <option>Option 4</option>
+            <option selected value="">Pilih prodi</option>
+            <option value="13">D3 Teknik Informatika</option>
+            <option value="14">D4 Teknik Informatika</option>
+            <option value="23">D3 Manajemen Informatika</option>
+            <option value="33">D3 Akuntansi</option>
+            <option value="34">D4 Akuntansi Keuangan</option>
+            <option value="43">D3 Manajemen Pemasaran</option>
+            <option value="44">D4 Manajemen Perusahaan</option>
+            <option value="53">D3 Administrasi Logistik</option>
+            <option value="54">D4 Logistik Bisnis</option>
+            <option value="74">D4 Logistik Niaga</option>
+            <option value="81">S1 Manajemen Transportasi</option>
+            <option value="82">S1 Manajemen Logistik</option>
+            <option value="83">S1 Bisnis Digital</option>
+            <option value="84">S1 Sains Data</option>
+            <option value="85">S1 Manajemen Rekayasa</option>
           </select>
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20">
@@ -150,7 +163,7 @@
         </div>
       </div>
       
-      <button class="inline-block w-full md:w-auto px-6 py-3 font-medium text-white bg-indigo-500 hover:bg-indigo-600 rounded transition duration-200" type="submit">Submit</button>
+      <button class="inline-block w-full md:w-auto px-6 py-3 font-medium text-white bg-indigo-500 hover:bg-indigo-600 rounded transition duration-200" type="submit">Hitung</button>
       </div>
       </div>
       
@@ -177,9 +190,9 @@
               <table class="table-auto w-full">
                 <thead>
                   <tr class="text-xs text-gray-500 text-left">
-                    <th class="flex items-center pl-6 py-4 font-medium">
+                    <th class="flex items-center pl-6 py-4 font-medium text-center">
                       
-                      <a class="flex items-center" href="#">
+                      <a class="flex items-center text-center" href="#">
                         <span>Nama</span>
                         <span class="ml-2">
                           <svg width="9" height="12" viewbox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -188,8 +201,8 @@
                         </span>
                       </a>
                     </th>
-                    <th class="py-4 font-medium">
-                      <a class="flex items-center" href="#">
+                    <th class="py-4 font-medium text-center">
+                      <a class="flex items-center text-center" href="#">
                         <span>Jabatan Struktural</span>
                         <span class="ml-2">
                           <svg width="9" height="12" viewbox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -198,8 +211,8 @@
                         </span>
                       </a>
                     </th>
-                    <th class="py-4 font-medium">
-                      <a class="flex items-center" href="#">
+                    <th class="py-4 font-medium text-center">
+                      <a class="flex items-center text-center" href="#">
                         <span>Honor Kotor</span>
                         <span class="ml-2">
                           <svg width="9" height="12" viewbox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -208,7 +221,7 @@
                         </span>
                       </a>
                     </th>
-                    <th class="py-4 font-medium">
+                    <th class="py-4 font-medium text-center">
                       <a class="flex items-center" href="#">
                         <span>Potongan</span>
                         <span class="ml-2">
@@ -218,8 +231,8 @@
                         </span>
                       </a>
                     </th>
-                    <th class="py-4 font-medium">
-                      <a class="flex items-center" href="#">
+                    <th class="py-4 font-medium text-center">
+                      <a class="flex items-center text-center" href="#">
                         <span>Honor Bersih</span>
                         <span class="ml-2">
                           <svg width="9" height="12" viewbox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg">
