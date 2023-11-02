@@ -34,6 +34,25 @@ a {
 #pagination button:hover {
   background-color: #0056b3;
 }
-  
+
+.max-w-xs {
+  max-width: 150px; /* Adjust the maximum width as needed */
+  word-wrap: break-word;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #e2e8f0; /* Define the border color and style */
+  padding: 8px; /* Add padding for better spacing */
+}
+
+/* Optional: Center-align text in table cells */
+th, td {
+  text-align: center;
+}
   
   
