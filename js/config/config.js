@@ -1,5 +1,5 @@
 import { addChild } from "https://jscroot.github.io/element/croot.js";
-import { tabletag, templatesdm } from "../template/url.js";
+import { tabletag, templatehonorprodi, templatesdm } from "../template/url.js";
 export const itemsPerPage = 10;
 export let currentPage = 1;
 
@@ -79,6 +79,16 @@ export function IsiRowSDM(value) {
   addChild("bodycihuy", tabletag, getRandomClass(), content);
 }
 
+export function IsirowHonorProdi(value) {
+    const content = templatehonorprodi
+      .replace("#nama#", value.nama_dosen)
+      .replace("#jabatan#", value.jabatan_struktural)
+      .replace("#honorkotor#", value.jumlah_honor_kotor)
+      .replace("#potongan#", value.pph)
+      .replace("#honorbersih#", value.jumlah_honor_bersih);
+    addChild("bodycihuy", tabletag, getRandomClass(), content);
+  }
+
 let counter = 0;
 
 export function getRandomClass() {
@@ -90,4 +100,10 @@ export function getRandomClass() {
   const randomClass = classes[counter % classes.length];
   counter++;
   return randomClass;
+}
+
+
+export function ResponseData(res) {
+    console.log(res)
+    res.data.forEach(IsirowHonorProdi)
 }
