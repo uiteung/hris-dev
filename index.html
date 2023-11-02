@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="shuffle-for-tailwind.png">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/main.js"></script>
+    <script type="module" src="js/controller/mastersdm.js"></script>
 </head>
 <body class="antialiased bg-body text-body font-body">
     <div class="">
@@ -150,63 +151,10 @@
       <th class="pb-3 font-medium">Jabatan</th>
       </tr>
                 </thead>
-                <tbody>
-                  <tr class="text-xs bg-gray-50">
-                    <td class="py-5 px-6 font-medium">SR2451EW32</td>
-                    <td class="font-medium">08.04.2021</td>
-                    <td class="font-medium">name@shuffle.dev</td>
-                    <td class="font-medium">Monthly</td>
-                    <td>
-                      <span class="inline-block py-1 px-2 text-white bg-green-500 rounded-full">Completed</span>
-                    </td>
-                  </tr>
-                  <tr class="text-xs">
-                    <td class="py-5 px-6 font-medium">SR2451EW32</td>
-                    <td class="font-medium">08.04.2021</td>
-                    <td class="font-medium">name@shuffle.dev</td>
-                    <td class="font-medium">Monthly</td>
-                    <td>
-                      <span class="inline-block py-1 px-2 text-white bg-red-500 rounded-full">Canceled</span>
-                    </td>
-                  </tr>
-                  <tr class="text-xs bg-gray-50">
-                    <td class="py-5 px-6 font-medium">SR2451EW32</td>
-                    <td class="font-medium">08.04.2021</td>
-                    <td class="font-medium">name@shuffle.dev</td>
-                    <td class="font-medium">Lifetime</td>
-                    <td>
-                      <span class="inline-block py-1 px-2 text-white bg-orange-500 rounded-full">Pending</span>
-                    </td>
-                  </tr>
-                  <tr class="text-xs">
-                    <td class="py-5 px-6 font-medium">SR2451EW32</td>
-                    <td class="font-medium">08.04.2021</td>
-                    <td class="font-medium">name@shuffle.dev</td>
-                    <td class="font-medium">Yearly</td>
-                    <td>
-                      <span class="inline-block py-1 px-2 text-white bg-green-500 rounded-full">Completed</span>
-                    </td>
-                  </tr>
-                  <tr class="text-xs bg-gray-50">
-                    <td class="py-5 px-6 font-medium">SR2451EW32</td>
-                    <td class="font-medium">08.04.2021</td>
-                    <td class="font-medium">name@shuffle.dev</td>
-                    <td class="font-medium">Monthly</td>
-                    <td>
-                      <span class="inline-block py-1 px-2 text-white bg-green-500 rounded-full">Completed</span>
-                    </td>
-                  </tr>
+                <tbody id="bodycihuy">
                 </tbody>
               </table>
-              <div class="text-center mt-5">
-                <a class="inline-flex items-center text-xs text-indigo-500 hover:text-blue-600 font-medium" href="#">
-                  <span class="inline-block mr-2">
-                    <svg class="text-indigo-400 h-3 w-3" viewbox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      
-                    </svg>
-                  </span>
-                  
-                </a>
+              <div id="pagination" class="text-center mt-5">
               </div>
             </div>
           </div>
