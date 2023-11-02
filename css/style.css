@@ -1,0 +1,21 @@
+a {
+    color: blue; /* Change to your desired color */
+    text-decoration: none; /* Remove underlines from links */
+  }
+  
+  /* Style for links when clicked */
+  a:active {
+    color: rgb(128, 0, 255); /* Change to your desired color */
+  }
+  
+  /* Style for the <li> when the child <a> is active */
+  li a.active {
+    /* Your styles for active <li> elements */
+    background-color: rgb(23, 140, 213); /* Change to your desired style for the active <li> */
+    color: white; /* Change to your desired text color for the active <li> */
+  }
+  
+  
+  
+  
+  
