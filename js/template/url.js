@@ -6,6 +6,7 @@ export let URLJAFUNG = "https://hris_backend.ulbi.ac.id/honor/dosen/jafung"
 export let URLDOSEN = "https://hris_backend.ulbi.ac.id/honor/dosen/data"
 export let URLGajiKelompok = "https://hris_backend.ulbi.ac.id/wage/kelompok"
 export let URLEXPORTGAJI = "https://hris_backend.ulbi.ac.id/wage/csv"
+export let URLSLIPGAJI = "https://hris_backend.ulbi.ac.id/wage/slip"
 
 export let templatesdm = `
 <td class="py-5 px-6 font-medium max-w-xs">#nama#</td>
@@ -56,5 +57,9 @@ export let templategaji = `
 <td class="hidden">
   <span class="inline-block py-1 px-2 text-white bg-green-500 rounded-full">Completed</span>
 </td>`
+
+export let modaltemp = `        
+        <h5 class="card-title">Berhasil Membuat Slip Gaji</h5>
+`
 export let tabletag = "tr"
 export let tableRowClass = "text-xs bg-gray-50"

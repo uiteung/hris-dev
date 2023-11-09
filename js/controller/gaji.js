@@ -1,12 +1,13 @@
 import {postWithBearer} from "https://jscroot.github.io/api/croot.js";
 import {getValue} from "https://jscroot.github.io/element/croot.js";
-import { URLEXPORTGAJI, URLGajiKelompok } from "../template/url.js";
-import { renderpagingkelompok, rendertablekelompok, currentPage } from "../config/configgajikelompok.js";
+import { URLEXPORTGAJI, URLGajiKelompok, URLSLIPGAJI } from "../template/url.js";
+import { renderpagingkelompok, rendertablekelompok, currentPage, showSuccessModal } from "../config/configgajikelompok.js";
 
 let token = "emX9£4_pJhEi0ay76Vp8qn&"
 document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById("formgaji");
   const form2 = document.getElementById("formemail");
+  const form3 = document.getElementById("formnotelp");
 
   form.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -37,7 +38,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
     postWithBearer(URLEXPORTGAJI, token, dataexport, (results) => {
       // Handle results for the second action
-      showSuccessModal();
+      showSuccessModal(results);
+    });
+  });
+
+  form3.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let dataexport = {
+      phonenum: getValue("telp")
+    };
+
+    console.log(dataexport);
+
+    postWithBearer(URLSLIPGAJI, token, dataexport, (results) => {
+      // Handle results for the second action
+      showSuccessModal(results);
     });
   });
 });

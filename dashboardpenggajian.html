@@ -229,13 +229,14 @@
               </div>
             </div>
           </div>
-          
-          <div class="mb-6">
-            <label class="block text-sm font-medium mb-2" for="">Nomor Telepon</label>
-            <input class="block w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded" type="text" name="" placeholder="Write a text">
-          </div>
-          
-          <button class="inline-block w-full md:w-auto px-6 py-3 font-medium text-white bg-indigo-500 hover:bg-indigo-600 rounded transition duration-200" type="submit">Kirim</button>
+          <form action="#" method="post" id="formnotelp">
+            <div class="mb-6">
+              <label class="block text-sm font-medium mb-2" for="" >Masukan Email</label>
+              <input class="block w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white border rounded" type="text" name="" placeholder="Write a text" id="telp">
+            </div>
+            
+            <button class="inline-block w-full md:w-auto px-6 py-3 font-medium text-white bg-indigo-500 hover:bg-indigo-600 rounded transition duration-200" type="submit" id="secondButtonId">Kirim</button>
+            </form>
       </div>
       </div>
       </div>
@@ -243,7 +244,7 @@
 
     <div id="successModal" class="modal-overlay">
       <div class="modal-content">
-        <p>Post successful!</p>
+        <!-- <p style="text-align: center;">Post successful!</p> -->
         <!-- You can add additional content or styling here -->
       </div>
     </div>

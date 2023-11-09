@@ -1,5 +1,5 @@
 import { addChild } from "https://jscroot.github.io/element/croot.js";
-import { tabletag, templategaji, templatehonorprodi } from "../template/url.js";
+import { tabletag, templategaji, modaltemp } from "../template/url.js";
 import { getRandomClass } from "./config.js";
 export const itemsPerPage = 10;
 export let currentPage = 1;
@@ -77,13 +77,14 @@ export function IsirowHonorProdi(value) {
     addChild("bodycihuy", tabletag, getRandomClass(), content);
   }
 
-export function showSuccessModal() {
+export function showSuccessModal(res) {
+    const content = modaltemp
     // Assuming you have a modal element with an id "successModal"
     let modal = document.getElementById("successModal");
-  
+    let modalContent = modal.querySelector(".modal-content");
     // Display the modal
     modal.style.display = "block";
-  
+    modalContent.innerHTML = content;
     // You may want to add additional logic to hide the modal after a certain duration
     setTimeout(() => {
       modal.style.display = "none";
