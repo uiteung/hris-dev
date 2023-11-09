@@ -1,7 +1,7 @@
 import {postWithBearer} from "https://jscroot.github.io/api/croot.js";
 import {getValue} from "https://jscroot.github.io/element/croot.js";
 import { URLEXPORTGAJI, URLGajiKelompok } from "../template/url.js";
-import { renderpagingkelompok, rendertablekelompok, currentPage, showSuccessModal } from "../config/configgajikelompok.js";
+import { renderpagingkelompok, rendertablekelompok, currentPage } from "../config/configgajikelompok.js";
 
 let token = "emX9£4_pJhEi0ay76Vp8qn&"
 document.addEventListener("DOMContentLoaded", function() {
@@ -34,20 +34,11 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     console.log(dataexport);
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
 
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: JSON.stringify(dataexport),
-      redirect: 'follow'
-    };
-    
-    fetch("http://hris_backend.ulbi.ac.id/wage/csv", requestOptions)
-      .then(response => response.text())
-      .then(result => showSuccessModal())
-      .catch(error => console.log('error', error));
+    postWithBearer(URLEXPORTGAJI, token, dataexport, (results) => {
+      // Handle results for the second action
+      showSuccessModal();
+    });
   });
 });
 
