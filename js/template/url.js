@@ -5,7 +5,7 @@ export let URLEVELJABATAN = "https://hris_backend.ulbi.ac.id/honor/dosen/level"
 export let URLJAFUNG = "https://hris_backend.ulbi.ac.id/honor/dosen/jafung"
 export let URLDOSEN = "https://hris_backend.ulbi.ac.id/honor/dosen/data"
 export let URLGajiKelompok = "https://hris_backend.ulbi.ac.id/wage/kelompok"
-export let URLEXPORTGAJI = "http://hris_backend.ulbi.ac.id/wage/csv"
+export let URLEXPORTGAJI = "https://hris_backend.ulbi.ac.id/wage/csv"
 
 export let templatesdm = `
 <td class="py-5 px-6 font-medium max-w-xs">#nama#</td>
