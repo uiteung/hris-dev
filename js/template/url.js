@@ -1,5 +1,7 @@
 export let URLKARYAWAN = "https://hris_backend.ulbi.ac.id/peg/rtm/data";
 export let URLHONORMENGAJARPRODI = "https://hris_backend.ulbi.ac.id/honor/dosen/prodi";
+export let URLREKAPHONOR = "https://hris_backend.ulbi.ac.id/honor/dosen/csv"
+export let URLSLIPHONOR = "https://hris_backend.ulbi.ac.id/honor/dosen/sliphonor"
 export let URLMAKSIMALMENGAJAR = "https://hris_backend.ulbi.ac.id/honor/dosen/dikjar"
 export let URLEVELJABATAN = "https://hris_backend.ulbi.ac.id/honor/dosen/level"
 export let URLJAFUNG = "https://hris_backend.ulbi.ac.id/honor/dosen/jafung"
