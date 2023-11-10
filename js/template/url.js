@@ -16,7 +16,9 @@ export let templatesdm = `
 <td class="font-medium text-center max-w-xs">#notelp#</td>
 <td class="font-medium text-center max-w-xs">#kelompok#</td>
 <td class="font-medium text-center max-w-xs">
+<a href="formsdm.html">
 <button type="click" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Detail</button>
+</a>
 </td>
 `
 
