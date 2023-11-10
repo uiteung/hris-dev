@@ -1,4 +1,4 @@
-export let URLKARYAWAN = "https://hris_backend.ulbi.ac.id/peg/rtm/data";
+export let URLKARYAWAN = "https://hris_backend.ulbi.ac.id/master/all";
 export let URLHONORMENGAJARPRODI = "https://hris_backend.ulbi.ac.id/honor/dosen/prodi";
 export let URLREKAPHONOR = "https://hris_backend.ulbi.ac.id/honor/dosen/csv"
 export let URLSLIPHONOR = "https://hris_backend.ulbi.ac.id/honor/dosen/sliphonor"
@@ -15,7 +15,9 @@ export let templatesdm = `
 <td class="font-medium  max-w-xs">#email#</td>
 <td class="font-medium text-center max-w-xs">#notelp#</td>
 <td class="font-medium text-center max-w-xs">#kelompok#</td>
-<td class="font-medium text-center max-w-xs">#jabatan#</td>
+<td class="font-medium text-center max-w-xs">
+<button type="click" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Detail</button>
+</td>
 `
 
 export let templatehonorprodi = `

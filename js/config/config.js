@@ -71,11 +71,11 @@ export function renderPagination(data) {
 
 export function IsiRowSDM(value) {
   const content = templatesdm
-    .replace("#nama#", value.full_name)
-    .replace("#email#", value.email)
-    .replace("#notelp#", value.nomor_telepon)
+    .replace("#nama#", value.nama)
+    .replace("#email#", value.phonenum)
+    .replace("#notelp#", value.jabatan.namajabatan)
     .replace("#kelompok#", value.kelompok)
-    .replace("#jabatan#", value.nama_jabatan);
+    // .replace("#jabatan#", value.nama_jabatan);
   addChild("bodycihuy", tabletag, getRandomClass(), content);
 }
 
