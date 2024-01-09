@@ -1,4 +1,4 @@
-export let URLKARYAWAN = "https://hris_backend.ulbi.ac.id/master/all";
+export let URLKARYAWAN = "https://hris_backend.ulbi.ac.id/api/v2/master/all";
 export let URLHONORMENGAJARPRODI = "https://hris_backend.ulbi.ac.id/honor/dosen/prodi";
 export let URLREKAPHONOR = "https://hris_backend.ulbi.ac.id/honor/dosen/csv"
 export let URLSLIPHONOR = "https://hris_backend.ulbi.ac.id/honor/dosen/sliphonor"
@@ -6,9 +6,9 @@ export let URLMAKSIMALMENGAJAR = "https://hris_backend.ulbi.ac.id/honor/dosen/di
 export let URLEVELJABATAN = "https://hris_backend.ulbi.ac.id/honor/dosen/level"
 export let URLJAFUNG = "https://hris_backend.ulbi.ac.id/honor/dosen/jafung"
 export let URLDOSEN = "https://hris_backend.ulbi.ac.id/honor/dosen/data"
-export let URLGajiKelompok = "https://hris_backend.ulbi.ac.id/wage/kelompok"
-export let URLEXPORTGAJI = "https://hris_backend.ulbi.ac.id/wage/csv"
-export let URLSLIPGAJI = "https://hris_backend.ulbi.ac.id/wage/slip"
+export let URLGajiKelompok = "https://hris_backend.ulbi.ac.id/api/v2/wage/kelompok"
+export let URLEXPORTGAJI = "https://hris_backend.ulbi.ac.id/api/v2/wage/csv"
+export let URLSLIPGAJI = "https://hris_backend.ulbi.ac.id/api/v2/wage/slip"
 
 export let templatesdm = `
 <td class="py-5 px-6 font-medium max-w-xs">#nama#</td>
