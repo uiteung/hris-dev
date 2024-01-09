@@ -73,7 +73,7 @@ export function IsirowHonorProdi(value) {
       .replace("#nama#", value.nama)
       .replace("#GajiKotor#", value.totalgaji)
       .replace("#TotalPotongan#", value.totalpotongan)
-      .replace("#dibayarkan#", value.totalgajibersih);
+      .replace("#dibayarkan#", value.totalgajibersih)
     addChild("bodycihuy", tabletag, getRandomClass(), content);
   }
 
