@@ -9,6 +9,7 @@ export let URLDOSEN = "https://hris_backend.ulbi.ac.id/honor/dosen/data"
 export let URLGajiKelompok = "https://hris_backend.ulbi.ac.id/api/v2/wage/kelompok"
 export let URLEXPORTGAJI = "https://hris_backend.ulbi.ac.id/api/v2/wage/csv"
 export let URLSLIPGAJI = "https://hris_backend.ulbi.ac.id/api/v2/wage/slip"
+export let URLValidate = "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/"
 
 export let templatesdm = `
 <td class="py-5 px-6 font-medium max-w-xs">#nama#</td>
@@ -59,6 +60,17 @@ export let templategaji = `
 <td class="py-5 px-6 font-medium">#nama#</td>
 <td class="font-medium">#GajiKotor#</td>
 <td class="font-medium">#TotalPotongan#</td>
+<td class="font-medium">#dibayarkan#</td>
+<td class="hidden">
+  <span class="inline-block py-1 px-2 text-white bg-green-500 rounded-full">Completed</span>
+</td>`
+
+
+export let templateValidasidata = `                        
+<td class="py-5 px-6 font-medium">#nama#</td>
+<td class="font-medium">#GajiKotor#</td>
+<td class="font-medium">#TotalPotongan#</td>
+<td class="font-medium">#pph#</td>
 <td class="font-medium">#dibayarkan#</td>
 <td class="hidden">
   <span class="inline-block py-1 px-2 text-white bg-green-500 rounded-full">Completed</span>
