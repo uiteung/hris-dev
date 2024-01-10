@@ -68,12 +68,13 @@ export let templategaji = `
 
 export let templateValidasidata = `                        
 <td class="py-5 px-6 font-medium">#nama#</td>
+<td class="py-5 px-6 font-medium">#email#</td>
 <td class="font-medium">#GajiKotor#</td>
 <td class="font-medium">#TotalPotongan#</td>
 <td class="font-medium">#pph#</td>
 <td class="font-medium">#dibayarkan#</td>
-<td class="hidden">
-  <span class="inline-block py-1 px-2 text-white bg-green-500 rounded-full">Completed</span>
+<td>
+  <button class="inline-block py-1 px-2 text-white bg-green-500 rounded-full" id="detail" type="submit">Detail</button>
 </td>`
 
 export let modaltemp = `        
