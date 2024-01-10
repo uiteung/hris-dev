@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const data = results.data;
       renderTableValidasi(currentPage, data);
       renderPagingValidasi(data);
+
+      });
     });
   });
-});

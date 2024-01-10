@@ -69,12 +69,13 @@ export function renderPagingValidasi(data) {
   }
 }
 export function IsirowHonorProdi(value) {
-    const content = templateValidasidata
-      .replace("#nama#", value.nama)
-      .replace("#email#", value.email)
-      .replace("#pph#", value.pph)
-      .replace("#GajiKotor#", value.totalgaji)
-      .replace("#TotalPotongan#", value.totalpotongan)
-      .replace("#dibayarkan#", value.totalgajibersih);
-    addChild("bodycihuy", tabletag, getRandomClass(), content);
-  }
+  const content = templateValidasidata
+    .replace("#nama#", value.nama)
+    .replace("#email#", value.email)
+    .replace("#pph#", value.pph)
+    .replace("#GajiKotor#", value.totalgaji)
+    .replace("#TotalPotongan#", value.totalpotongan)
+    .replace("#dibayarkan#", value.totalgajibersih);
+
+  addChild("bodycihuy", tabletag, getRandomClass(), content);
+}
