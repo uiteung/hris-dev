@@ -62,8 +62,8 @@ export function renderPagingValidasi(data) {
     nextButton.textContent = 'Next';
     nextButton.addEventListener('click', () => {
       currentPage++;
-      rendertableprodi(currentPage, data);
-      renderpagingprodi(data);
+      renderTableValidasi(currentPage, data);
+      renderPagingValidasi(data);
     });
     pagination.appendChild(nextButton);
   }
@@ -71,6 +71,7 @@ export function renderPagingValidasi(data) {
 export function IsirowHonorProdi(value) {
     const content = templateValidasidata
       .replace("#nama#", value.nama)
+      .replace("#email#", value.email)
       .replace("#pph#", value.pph)
       .replace("#GajiKotor#", value.totalgaji)
       .replace("#TotalPotongan#", value.totalpotongan)
