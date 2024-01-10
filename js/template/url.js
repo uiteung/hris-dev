@@ -74,7 +74,7 @@ export let templateValidasidata = `
 <td class="font-medium">#pph#</td>
 <td class="font-medium">#dibayarkan#</td>
 <td>
-  <button class="inline-block py-1 px-2 text-white bg-green-500 rounded-full" id="detail" type="submit">Detail</button>
+  <button class="inline-block py-1 px-2 text-white bg-green-500 rounded-full edit" id="detail" data-email="#cihuy#" type="button">Detail</button>
 </td>`
 
 export let modaltemp = `        
