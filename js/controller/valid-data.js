@@ -3,7 +3,6 @@ import {getValue} from "https://jscroot.github.io/element/croot.js";
 import { URLValidate } from "../template/url.js";
 import { renderPagingValidasi, renderTableValidasi, currentPage } from "../config/configvalidasidata.js";
 
-let token = "emX9£4_pJhEi0ay76Vp8qn&"
 document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById("formgaji");
 
@@ -17,4 +16,5 @@ document.addEventListener("DOMContentLoaded", function() {
       renderTableValidasi(currentPage, data);
       renderPagingValidasi(data);
     });
-  });});
+  });
+});
