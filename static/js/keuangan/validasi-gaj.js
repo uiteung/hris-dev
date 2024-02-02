@@ -91,6 +91,7 @@ CihuyDomReady(() => {
     const rowsToShow = filteredData.slice(mulaiindex, akhirindex);
 
     let tableData = "";
+    document.getElementById("tablebody").innerHTML = "";
 
     // Iterasi melalui rowsToShow dan membangun baris tabel
     rowsToShow.forEach((combinedEntry) => {
@@ -123,7 +124,6 @@ CihuyDomReady(() => {
       const barisBaru = document.createElement("tr");
 
       barisBaru.innerHTML= `
-          <tr>
               <td>
                   <div class="d-flex align-items-center">
                       <div class="ms-3">
@@ -200,57 +200,58 @@ CihuyDomReady(() => {
                 <button type="button" class="btn btn-danger">Batalkan</button>
                 </a>
                 </td>
-          </tr>
       `;
 
       document.getElementById("tablebody").appendChild(barisBaru);
+    // Add event listeners to the buttons (outside of the loop)
+    const editButton = barisBaru.querySelector(".edit");
+    editButton.addEventListener("click", () => {
+      const dataemail = editButton.getAttribute("data-email-id");
+      if (dataemail) {
+          Swal.fire({
+              title: "Validasi Data Gaji?",
+              text: "Apakah Anda yakin ingin menvalidasi data ini?",
+              icon: "question",
+              showCancelButton: true,
+              confirmButtonText: "Ya, Update",
+              cancelButtonText: "Batal",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // Kirim permintaan PUT/UPDATE ke server tanpa gambar
+                validate(dataemail);                }
+            });
+      } else {
+        console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
+      }
+    });
 
-      const editButton = barisBaru.querySelector(".edit");
-      editButton.addEventListener("click", () => {
-        const dataemail = editButton.getAttribute("data-email-id");
-        if (dataemail) {
-            Swal.fire({
-                title: "Validasi Data Gaji?",
-                text: "Apakah Anda yakin ingin menvalidasi data ini?",
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonText: "Ya, Update",
-                cancelButtonText: "Batal",
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  // Kirim permintaan PUT/UPDATE ke server tanpa gambar
-                  validate(dataemail);                }
-              });
-        } else {
-          console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
-        }
-      });
 
-
-      const batalbutton = barisBaru.querySelector(".remove");
-      batalbutton.addEventListener("click", () => {
-        const dataemail = batalbutton.getAttribute("data-email-i");
-        if (dataemail) {
-            Swal.fire({
-                title: "Batal Validasi?",
-                text: "Apakah Anda yakin ingin Membatalkan Validasi?",
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonText: "Ya",
-                cancelButtonText: "Batal",
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  // Kirim permintaan PUT/UPDATE ke server tanpa gambar
-                  Batal(dataemail); 
-               }
-              });
-        } else {
-          console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
-        }
-      });
-});
+    const batalbutton = barisBaru.querySelector(".remove");
+    batalbutton.addEventListener("click", () => {
+      const dataemail = batalbutton.getAttribute("data-email-i");
+      if (dataemail) {
+          Swal.fire({
+              title: "Batal Validasi?",
+              text: "Apakah Anda yakin ingin Membatalkan Validasi?",
+              icon: "question",
+              showCancelButton: true,
+              confirmButtonText: "Ya",
+              cancelButtonText: "Batal",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // Kirim permintaan PUT/UPDATE ke server tanpa gambar
+                Batal(dataemail); 
+             }
+            });
+      } else {
+        console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
+      }
+    });
+  });
 
     // document.getElementById("tablebody").innerHTML = tableData;
+    updatePagination();
+
   }
 
   function validate(email) {
@@ -319,7 +320,7 @@ CihuyDomReady(() => {
     
           Swal.fire({
             icon : 'success',
-            title: 'Data Gaji Berhasil Divalidasi!',
+            title: 'Validasi Berhasil Dibatalkan!',
             backdrop: `
               rgba(0,0,123,0.4)
             `
