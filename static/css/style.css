@@ -121,22 +121,39 @@ table.dataTable thead .sorting_desc_disabled:before {
 
     .table-container {
       width: 100%;
-      overflow-x: auto;
+      overflow: scroll;
+      border: 1px solid #fff;
     }
 
     /* Basic styling for the table */
-    table {
+    .table-container table {
       width: 100%;
       border-collapse: collapse;
     }
 
-    th, td {
+    .table-container th, td {
       border: 1px solid #ddd;
       padding: 8px;
       text-align: center;
       vertical-align: middle;
     }
 
-    th {
+    .table-container th {
       background-color: #f2f2f2;
+    }
+
+    .table-container th:nth-child(1),
+    .table-container td:nth-child(1){
+      position: sticky;
+      border: #f2f2f2;
+      left: 0;
+      z-index: 2;
+    }
+
+    .table-container th:nth-child(1){
+      background: #f2f2f2;
+    }
+
+    .table-container td:nth-child(1){
+      background: #fff;
     }
