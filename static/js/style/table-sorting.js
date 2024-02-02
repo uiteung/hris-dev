@@ -66,37 +66,37 @@ function applyDateFilter(table, startDate, endDate) {
 // Pasang pendengar acara untuk tombol filter berdasarkan tanggal
 const startDateInput = document.getElementById('startDate');
 const endDateInput = document.getElementById('endDate');
-const filterButton = document.getElementById('filterButton');
+// const filterButton = document.getElementById('filterButton');
 
-filterButton.addEventListener('click', () => {
-	const startDateValue = new Date(startDateInput.value);
-	const endDateValue = new Date(endDateInput.value);
+// filterButton.addEventListener('click', () => {
+// 	const startDateValue = new Date(startDateInput.value);
+// 	const endDateValue = new Date(endDateInput.value);
 
-	if (!isNaN(startDateValue) && !isNaN(endDateValue)) {
-		applyDateFilter(table, startDateValue, endDateValue);
-	}
-});
+// 	if (!isNaN(startDateValue) && !isNaN(endDateValue)) {
+// 		applyDateFilter(table, startDateValue, endDateValue);
+// 	}
+// });
 
 // Membuat fitur search
-document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.getElementById("searchInput");
-    const tableBody = document.getElementById("tablebody").getElementsByTagName("tr");
+// document.addEventListener("DOMContentLoaded", function () {
+//     const searchInput = document.getElementById("searchInput");
+//     const tableBody = document.getElementById("tablebody").getElementsByTagName("tr");
 
-    searchInput.addEventListener("input", function () {
-      const searchText = searchInput.value.toLowerCase();
+//     searchInput.addEventListener("input", function () {
+//       const searchText = searchInput.value.toLowerCase();
 
-      for (const row of tableBody) {
-        const cells = row.getElementsByTagName("td");
-        let rowMatchesSearch = false;
+//       for (const row of tableBody) {
+//         const cells = row.getElementsByTagName("td");
+//         let rowMatchesSearch = false;
 
-        for (const cell of cells) {
-          if (cell.textContent.toLowerCase().includes(searchText)) {
-            rowMatchesSearch = true;
-            break;
-          }
-        }
+//         for (const cell of cells) {
+//           if (cell.textContent.toLowerCase().includes(searchText)) {
+//             rowMatchesSearch = true;
+//             break;
+//           }
+//         }
 
-        row.style.display = rowMatchesSearch ? "" : "none";
-      }
-    });
-  });
+//         row.style.display = rowMatchesSearch ? "" : "none";
+//       }
+//     });
+//   });
