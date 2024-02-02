@@ -46,7 +46,7 @@ CihuyDomReady(() => {
   const buttonselanjutnya = CihuyId("nextPageBtn");
   const halamansaatini = CihuyId("currentPage");
   const itemperpage =6;
-  let halamannow = 1;
+  let halamannow = localStorage.getItem('currentPage') || 1;
   let filteredData = []; // To store the filtered data for search
   let totalData = 0;
   // Ambil data masuk
@@ -69,6 +69,7 @@ CihuyDomReady(() => {
               halamannow--;
               displayData(halamannow);
               updatePagination();
+              localStorage.setItem('currentPage', halamannow);
             }
           });
 
@@ -79,6 +80,7 @@ CihuyDomReady(() => {
               halamannow++;
               displayData(halamannow);
               updatePagination();
+              localStorage.setItem('currentPage', halamannow);
             }
           })
         //   console.log(rekapharian)
@@ -218,7 +220,10 @@ CihuyDomReady(() => {
             }).then((result) => {
               if (result.isConfirmed) {
                 // Kirim permintaan PUT/UPDATE ke server tanpa gambar
-                validate(dataemail);                }
+                validate(dataemail);   
+                localStorage.setItem('currentPage', halamannow);
+              
+              }
             });
       } else {
         console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
@@ -241,6 +246,7 @@ CihuyDomReady(() => {
               if (result.isConfirmed) {
                 // Kirim permintaan PUT/UPDATE ke server tanpa gambar
                 Batal(dataemail); 
+                localStorage.setItem('currentPage', halamannow);
              }
             });
       } else {
