@@ -16,13 +16,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       rel="shortcut icon"
-      href="static/img/enam_berlian-removebg-preview.png" />
+      href="../static/img/enam_berlian-removebg-preview.png" />
 
-    <title>Dashboard HRIS | ULBI</title>
+    <title>Validasi data | ULBI</title>
 
     <!-- Import CSS yang diperlukan -->
-    <link href="./static/css/app.css" rel="stylesheet" />
-    <link rel="stylesheet" href="./static/css/style.css" />
+    <link href="../static/css/app.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/css/style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
       rel="stylesheet" />
@@ -37,7 +37,7 @@
           <a class="sidebar-brand" href="index.html">
             <span class="align-middle"
               ><img
-                src="static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png"
+                src="../static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png"
                 alt=""
                 style="width: 150px; margin-left: 25px"
             /></span>
@@ -49,7 +49,7 @@
             </li>
 
             <li class="sidebar-item active">
-              <a class="sidebar-link" href="index.html">
+              <a class="sidebar-link" href="../index.html">
                 <i class="align-middle" data-feather="sliders"></i>
                 <span class="align-middle">Dashboard SDM</span>
               </a>
@@ -61,7 +61,7 @@
 
             <li class="sidebar-item">
               <!-- <a class="sidebar-link" href="../app/rekapan-presensi.html"> -->
-              <a class="sidebar-link" href="app/rekap-harian.html">
+              <a class="sidebar-link" href="#">
                 <i class="align-middle" data-feather="bar-chart-2"></i>
                 <span class="align-middle">Dashboard Penggajian</span>
                 <i class="fa fa-fw fa-check-square-o" style="background-color: #ffffff; color: rgb(255, 0, 0); padding: 2px 5px; border-radius: 5px; font-size: 6.5px;">Maintenance</i>
@@ -151,84 +151,20 @@
             <h5 class="right-aligned" style="float: right">
               <a href="index.html">Home</a> / Presensi Masuk
             </h5>
-            <h1 class="h3 mb-3"><b>Dashboard Presensi Karyawan</b></h1>
+            <h1 class="h3 mb-3"><b>Dashboard Validasi Data Gaji</b></h1>
             <div class="col-md-6 mb-3">
               <input type="hidden" id="titleTextBox" value="Dashboard Presensi Karyawan" disabled>
               <input type="hidden" id="filenameTextBox" value="presensi_karyawan">
-              <div class="d-flex justify-content-start">
-                <button
-                  type="button"
-                  id="exportExcelBtn"
-                  class="btn btn-success me-2">
-                  <i class="align-middle" data-feather="layout"></i>
-                    Export To Excel
-                </button>
-                 <button
-                  type="button"
-                  id="exportPdfBtn"
-                  class="btn btn-danger me-2"
-                  style="color: white">
-                  <i class="align-middle" data-feather="file"></i>
-                    Export To PDF
-                  <i class="fa fa-fw fa-check-square-o" style="background-color: #ffffff; color: rgb(255, 0, 0); padding: 2px 5px; border-radius: 5px; font-size: 10px;">Maintenance</i>
-                </button>
-              </div>
             </div>
             <div class="row justify-content-center">
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <div class="row no-gutters">
                       <div class="col-auto date-filter" style="width: 20%">
-                        <label for="startDate" class="form-label"
-                          >Tanggal Mulai</label
-                        >
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="startDate"
-                          name="startDate" />
-                      </div>
-                      <div class="col-auto date-filter" style="width: 20%">
-                        <label for="endDate" class="form-label"
-                          >Tanggal Akhir</label
-                        >
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="endDate"
-                          name="endDate" />
-                      </div>
-                      <div class="col-auto date-filter" style="width: 20%">
-                        <button
-                          type="button"
-                          id="filterButton"
-                          class="btn btn-info mt-4"
-                          style="height: 40px">
-                          <i
-                            class="align-middle me-1"
-                            data-feather="search"></i>
-                          Filter Berdasarkan Tanggal
-                        </button>
-                      </div>
-                      <div
-                        class="col-md-3"
-                        style="
-                          position: absolute;
-                          top: 0;
-                          right: 0;
-                          width: 15%;
-                          margin-top: 40px;
-                        ">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="searchInput"
-                          placeholder="Cari" />
-                      </div>
                     </div>
 
                     <hr />
+                    <div class="table-container">
                     <table
                       id="example"
                       class="table table-striped"
@@ -236,41 +172,62 @@
                       <thead>
                         <tr style="text-align: center; vertical-align: middle">
                           <th id="namaTh">Nama</th>
-                          <th id="posisiTh">Posisi</th>
-                          <th id="statusTh">Status</th>
-                          <th id="tanggalTh">Tanggal</th>
-                          <th id="DurasiTh">Durasi</th>
-                          <th id="pctDurasiTh">Persentase Durasi</th>
-                          <th id="keteranganTh">Keterangan</th>
-                          <th id="linkDokumenTh">Link Dokumen</th>
+                          <th id="posisiTh">Waktu</th>
+                          <th id="statusTh">Gaji Pokok</th>
+                          <th id="tanggalTh">Keluarga</th>
+                          <th id="DurasiTh">Pangan</th>
+                          <th id="pctDurasiTh">KPI</th>
+                          <th id="keteranganTh">Keahlian</th>
+                          <th id="linkDokumenTh">Struktural</th>
+                          <th id="linkDokumenTh">FGS/Struktural</th>
+                          <th id="linkDokumenTh">Transport</th>
+                          <th id="linkDokumenTh">Kehadiran</th>
+                          <th id="linkDokumenTh">Kopkar</th>
+                          <th id="linkDokumenTh">Bank Jabar</th>
+                          <th id="linkDokumenTh">Arisan</th>
+                          <th id="linkDokumenTh">BPJS TK</th>
+                          <th id="linkDokumenTh">BAUK</th>
+                          <th id="linkDokumenTh">Lain - lain</th>
+                          <th id="linkDokumenTh">PPH</th>
+                          <th id="linkDokumenTh">Jumlah Gaji Kotor</th>
+                          <th id="linkDokumenTh">Jumlah Potongan</th>
+                          <th id="linkDokumenTh">Jumlah Gaji Bersih</th>
+                          <th id="linkDokumenTh">Status Validasi</th>
+                          <th id="linkDokumenTh">Action</th>
                         </tr>
                       </thead>
                       <tbody id="tablebody">
                         <!-- Isi Tabel -->
                       </tbody>
                       <tfoot>
-                        <!-- <tr id="averageDurationRow" style="text-align: center; vertical-align: middle">
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td id="averageDuration"><b>Rata-Rata Durasi</b></td>
-                          <td id="averagePercentage"><b>Rata-Rata Persentase Durasi</b></td>
-                        </tr> -->
-                        <tr id="footerTh" style="text-align: center; vertical-align: middle">
+                        <tr style="text-align: center; vertical-align: middle">
                           <th id="namaTh">Nama</th>
-                          <th id="posisiTh">Posisi</th>
-                          <th id="statusTh">Status</th>
-                          <th id="tanggalTh">Tanggal</th>
-                          <th id="DurasiTh">Durasi</th>
-                          <th id="pctDurasiTh">Persentase Durasi</th>
-                          <th id="keteranganTh">Keterangan</th>
-                          <th id="linkDokumenTh">Link Dokumen</th>
+                          <th id="posisiTh">Waktu</th>
+                          <th id="statusTh">Gaji Pokok</th>
+                          <th id="tanggalTh">Keluarga</th>
+                          <th id="DurasiTh">Pangan</th>
+                          <th id="pctDurasiTh">KPI</th>
+                          <th id="keteranganTh">Keahlian</th>
+                          <th id="linkDokumenTh">Struktural</th>
+                          <th id="linkDokumenTh">FGS/Struktural</th>
+                          <th id="linkDokumenTh">Transport</th>
+                          <th id="linkDokumenTh">Kehadiran</th>
+                          <th id="linkDokumenTh">Kopkar</th>
+                          <th id="linkDokumenTh">Bank Jabar</th>
+                          <th id="linkDokumenTh">Arisan</th>
+                          <th id="linkDokumenTh">BPJS TK</th>
+                          <th id="linkDokumenTh">BAUK</th>
+                          <th id="linkDokumenTh">Lain - lain</th>
+                          <th id="linkDokumenTh">PPH</th>
+                          <th id="linkDokumenTh">Jumlah Gaji Kotor</th>
+                          <th id="linkDokumenTh">Jumlah Potongan</th>
+                          <th id="linkDokumenTh">Jumlah Gaji Bersih</th>
+                          <th id="linkDokumenTh">Status Validasi</th>
+                          <th id="linkDokumenTh">Action</th>
                         </tr>
                       </tfoot>
                     </table>
+                    </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="pagination">
@@ -323,12 +280,12 @@
     <script src="https://unpkg.com/jspdf-invoice"></script>
 
     <!-- Library Javascript Terkait -->
-    <script src="static/js/presensi/index.js" type="module"></script>
+    <!-- <script src="static/js/presensi/index.js" type="module"></script> -->
 
-    <script src="static/js/presensi/cihuyred.js" type="module"></script>
-    <script src="static/js/style/style.js" defer></script>
-    <script src="static/js/style/table-sorting.js"></script>
-    <script src="static/js/app.js"></script>
-    <script src="static/js/croot.js" type="module"></script>
+    <!-- <script src="static/js/presensi/cihuyred.js" type="module"></script> -->
+    <script src="../static/js/style/style.js" defer></script>
+    <script src="../static/js/style/table-sorting.js"></script>
+    <script src="../static/js/app.js"></script>
+    <script src="../static/js/croot.js" type="module"></script>
   </body>
 </html>
