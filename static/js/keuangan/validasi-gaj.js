@@ -2,7 +2,7 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady } from "https://c-craftjs.github.io/table/table.js";
 import { getBadgeMarkup } from "../style/badge.js";
-import { GetDataValidasi} from "../controller/template.js";
+import { GetDataValidasi, ValidasiData} from "../controller/template.js";
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
@@ -81,7 +81,7 @@ CihuyDomReady(() => {
               updatePagination();
             }
           })
-          console.log(rekapharian)
+        //   console.log(rekapharian)
     });
 
   // Fungsi Untuk Menampilkan Data
@@ -118,9 +118,11 @@ CihuyDomReady(() => {
       const totalgajibersih = combinedEntry['totalgajibersih'];
       const totalpotongan = combinedEntry['totalpotongan'];
       const statusvalidasi = combinedEntry['validasi'];
-      console.log(struk)
+    //   console.log(struk)
 
-      tableData += `
+      const barisBaru = document.createElement("tr");
+
+      barisBaru.innerHTML= `
           <tr>
               <td>
                   <div class="d-flex align-items-center">
@@ -191,15 +193,157 @@ CihuyDomReady(() => {
                 <p class="fw-normal mb-1">${getBadgeMarkup(statusvalidasi)}</p>
                 </td>
                 <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1">
+                <a href="#" class="edit" data-email-id="${email}">
                 <button type="button" class="btn btn-success">Validasi</button>
-                </p>
+                </a><br><br>
+                <a href="#" class="remove" data-email-i="${email}">
+                <button type="button" class="btn btn-danger">Batalkan</button>
+                </a>
                 </td>
           </tr>
       `;
-    });
 
-    document.getElementById("tablebody").innerHTML = tableData;
+      document.getElementById("tablebody").appendChild(barisBaru);
+
+      const editButton = barisBaru.querySelector(".edit");
+      editButton.addEventListener("click", () => {
+        const dataemail = editButton.getAttribute("data-email-id");
+        if (dataemail) {
+            Swal.fire({
+                title: "Validasi Data Gaji?",
+                text: "Apakah Anda yakin ingin menvalidasi data ini?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Ya, Update",
+                cancelButtonText: "Batal",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  // Kirim permintaan PUT/UPDATE ke server tanpa gambar
+                  validate(dataemail);                }
+              });
+        } else {
+          console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
+        }
+      });
+
+
+      const batalbutton = barisBaru.querySelector(".remove");
+      batalbutton.addEventListener("click", () => {
+        const dataemail = batalbutton.getAttribute("data-email-i");
+        if (dataemail) {
+            Swal.fire({
+                title: "Batal Validasi?",
+                text: "Apakah Anda yakin ingin Membatalkan Validasi?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Ya",
+                cancelButtonText: "Batal",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  // Kirim permintaan PUT/UPDATE ke server tanpa gambar
+                  Batal(dataemail); 
+               }
+              });
+        } else {
+          console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
+        }
+      });
+});
+
+    // document.getElementById("tablebody").innerHTML = tableData;
+  }
+
+  function validate(email) {
+    const postData = {
+        nama: '',
+        email: email,
+        tanggal_tahun: date,
+        validate : true
+      };
+      console.log(postData)
+    fetch(ValidasiData, {
+        method: 'POST',
+        headers: header,
+        body: JSON.stringify(postData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Display success SweetAlert
+    
+          Swal.fire({
+            icon : 'success',
+            title: 'Data Gaji Berhasil Divalidasi!',
+            backdrop: `
+              rgba(0,0,123,0.4)
+            `
+          }).
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: 'Data Rekap Hari ini Berhasil Diupdate!',
+          // }).
+          then(() => {
+            // Refresh the page after successful addition
+            window.location.href = 'validasi-data.html';
+          });
+        } else {
+          // Display error SweetAlert
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Data rekap Gagal Diupdate!',
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Error while updating data:", error);
+      });
+  }
+
+  function Batal(email) {
+    const postData = {
+        nama: '',
+        email: email,
+        tanggal_tahun: date,
+        validate : false
+      };
+    fetch(ValidasiData, {
+        method: 'POST',
+        headers: header,
+        body: JSON.stringify(postData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Display success SweetAlert
+    
+          Swal.fire({
+            icon : 'success',
+            title: 'Data Gaji Berhasil Divalidasi!',
+            backdrop: `
+              rgba(0,0,123,0.4)
+            `
+          }).
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: 'Data Rekap Hari ini Berhasil Diupdate!',
+          // }).
+          then(() => {
+            // Refresh the page after successful addition
+            window.location.href = 'validasi-data.html';
+          });
+        } else {
+          // Display error SweetAlert
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Data rekap Gagal Diupdate!',
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Error while updating data:", error);
+      });
   }
 
   // Fungsi Untuk Update Pagination
