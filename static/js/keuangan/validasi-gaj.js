@@ -279,10 +279,6 @@ CihuyDomReady(() => {
               rgba(0,0,123,0.4)
             `
           }).
-          // Swal.fire({
-          //   icon: 'success',
-          //   title: 'Data Rekap Hari ini Berhasil Diupdate!',
-          // }).
           then(() => {
             // Refresh the page after successful addition
             window.location.href = 'validasi-data.html';
@@ -292,7 +288,7 @@ CihuyDomReady(() => {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Data rekap Gagal Diupdate!',
+            text: data.status,
           });
         }
       })
