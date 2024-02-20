@@ -157,3 +157,18 @@ table.dataTable thead .sorting_desc_disabled:before {
     .table-container td:nth-child(1){
       background: #fff;
     }
+
+    .edit-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px;
+      background-color: #3498db; /* You can customize the background color */
+      color: #fff; /* You can customize the text color */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .edit-button svg {
+      margin-right: 5px; /* Adjust the spacing between the icon and text */
+    }
