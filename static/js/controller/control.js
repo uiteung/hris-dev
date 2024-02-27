@@ -1,4 +1,4 @@
-import { GetdatabyEmail } from "./template.js";
+import { GetdatabyEmail, ValidasiData } from "./template.js";
 
 
 export function ModalUpdate(header, waktu) {
@@ -77,7 +77,7 @@ export function getLastMonth() {
   }
 
 
-export function validate(email, header) {
+export function validate(email, header, date) {
     const postData = {
         nama: '',
         email: email,
@@ -120,7 +120,7 @@ export function validate(email, header) {
       });
   }
 
-export function Batal(email, header) {
+export function Batal(email, header, date) {
     const postData = {
         nama: '',
         email: email,

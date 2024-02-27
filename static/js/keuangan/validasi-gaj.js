@@ -211,7 +211,7 @@ CihuyDomReady(() => {
             }).then((result) => {
               if (result.isConfirmed) {
                 // Kirim permintaan PUT/UPDATE ke server tanpa gambar
-                validate(dataemail, header);   
+                validate(dataemail, header, date);   
                 localStorage.setItem('currentPage', halamannow);
               
               }
@@ -251,7 +251,7 @@ CihuyDomReady(() => {
             }).then((result) => {
               if (result.isConfirmed) {
                 // Kirim permintaan PUT/UPDATE ke server tanpa gambar
-                Batal(dataemail, header); 
+                Batal(dataemail, header, date); 
                 localStorage.setItem('currentPage', halamannow);
              }
             });
