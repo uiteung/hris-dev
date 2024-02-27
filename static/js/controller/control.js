@@ -9,23 +9,38 @@ export function ModalUpdate(header, waktu) {
       .then(response => response.json())
       .then(data => {
         if (data.success) {
+            const pokok = data.data['pokok'];
+            const keluarga = data.data['keluarga'];
+            const pangan = data.data['pangan'];
+            const kinerja = data.data['kinerja'];
+            const keahlian = data.data['keahlian'];
+            const struk = data.data['fgs-struk'];
+            const transportasi = data.data['transportasi'];
+            const kehadiran = data.data['kehadiran'];
+            const kopkar = data.data['kopkar'];
+            const bankJabar = data.data['bankJabar'];
+            const bpjs = data.data['bpjs'];
+            const bauk = data.data['bauk'];
+            const pph = data.data['pph'];
+            const lain2 = data.data['lain2'];
             Swal.fire({
                 title: "<strong>Form Update <b>Data Gaji</b></strong>",
                 html: `
                 <h3>Silahkan Update data yang perlu diupdate</h3>
-                <input type="text" id="gajipokok" class="swal2-input" placeholder="Gaji Pokok">
-                <input type="text" id="keluarga" class="swal2-input" placeholder="Keluarga">
-                <input type="text" id="pangan" class="swal2-input" placeholder="Pangan">
-                <input type="text" id="keahlian" class="swal2-input" placeholder="Keahlian">
-                <input type="text" id="fgs/struk" class="swal2-input" placeholder="FGS/Struk">
-                <input type="text" id="transport" class="swal2-input" placeholder="Transport">
-                <input type="text" id="kehadiran" class="swal2-input" placeholder="Kehadiran">
-                <input type="text" id="kopkar" class="swal2-input" placeholder="Kopkar">
-                <input type="text" id="bankjabar" class="swal2-input" placeholder="Bank Jabar">
-                <input type="text" id="arisan" class="swal2-input" placeholder="Arisan">
-                <input type="text" id="bpjstk" class="swal2-input" placeholder="BPJS TK">
-                <input type="text" id="bauk" class="swal2-input" placeholder="BAUK">
-                <input type="text" id="lain-lain" class="swal2-input" placeholder="Lain - Lain">
+                <input type="text" id="gajipokok" class="swal2-input" placeholder="Gaji Pokok" value="${pokok}">
+                <input type="text" id="keluarga" class="swal2-input" placeholder="Keluarga" value="${keluarga}">
+                <input type="text" id="pangan" class="swal2-input" placeholder="Pangan" value="${pangan}">
+                <input type="text" id="keahlian" class="swal2-input" placeholder="Keahlian" value="${kinerja}">
+                <input type="text" id="fgs/struk" class="swal2-input" placeholder="FGS/Struk" value="${keahlian}">
+                <input type="text" id="transport" class="swal2-input" placeholder="Transport" value="${struk}">
+                <input type="text" id="kehadiran" class="swal2-input" placeholder="Kehadiran" value="${transportasi}">
+                <input type="text" id="kopkar" class="swal2-input" placeholder="Kopkar" value="${kehadiran}">
+                <input type="text" id="bankjabar" class="swal2-input" placeholder="Bank Jabar" value="${kopkar}">
+                <input type="text" id="arisan" class="swal2-input" placeholder="Arisan" value="${bankJabar}">
+                <input type="text" id="bpjstk" class="swal2-input" placeholder="BPJS TK" value="${bpjs}">
+                <input type="text" id="bauk" class="swal2-input" placeholder="BAUK" value="${bauk}">
+                <input type="text" id="lain-lain" class="swal2-input" placeholder="Lain - Lain" value="${lain2}">
+                <input type="text" id=pph" class="swal2-input" placeholder="pph" value="${pph}">
                 `,
                 showCloseButton: true,
                 showCancelButton: true,
