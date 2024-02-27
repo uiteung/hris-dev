@@ -45,3 +45,47 @@ export function getLastMonth() {
   
     return formattedDate;
   }
+
+
+export function validate(email) {
+    const postData = {
+        nama: '',
+        email: email,
+        tanggal_tahun: date,
+        validate : true
+      };
+      console.log(postData)
+    fetch(ValidasiData, {
+        method: 'POST',
+        headers: header,
+        body: JSON.stringify(postData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Display success SweetAlert
+    
+          Swal.fire({
+            icon : 'success',
+            title: 'Data Gaji Berhasil Divalidasi!',
+            backdrop: `
+              rgba(0,0,123,0.4)
+            `
+          }).
+          then(() => {
+            // Refresh the page after successful addition
+            window.location.href = 'validasi-data.html';
+          });
+        } else {
+          // Display error SweetAlert
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: data.status,
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Error while updating data:", error);
+      });
+  }
