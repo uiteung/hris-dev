@@ -6,7 +6,7 @@ import { GetDataValidasi, ValidasiData} from "../controller/template.js";
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
-import { ModalUpdate } from "../style/style.js";
+import { ModalUpdate, getLastMonth } from "../controller/control.js";
 
 var header = new Headers();
 header.append("login", token);
@@ -16,29 +16,9 @@ const requestOptions = {
   method: "GET",
   headers: header
 };
-
-
-function getLastMonth() {
-    // Get the current date
-    const currentTime = new Date();
   
-    // Subtract one month from the current date
-    currentTime.setMonth(currentTime.getMonth() - 1);
-  
-    // Format the date as "YYYYMM"
-    const year = currentTime.getFullYear();
-    const month = (currentTime.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based, so add 1
-    const formattedDate = `${year}${month}`;
-  
-    return formattedDate;
-  }
-  
-  // Call the function to get the last month
-  const date = getLastMonth();
-  
-  // Print the last month
-  console.log("Last Month:", date);
-
+// Call the function to get the last month
+const date = getLastMonth();
 
 // Untuk Get All data Presensi
 CihuyDomReady(() => {
