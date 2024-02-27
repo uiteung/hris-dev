@@ -251,8 +251,19 @@ CihuyDomReady(() => {
         Swal.fire({
           title: "<strong>Form Update <b>Data Gaji</b></strong>",
           html: `
-          <input type="text" id="username" class="swal2-input" placeholder=test">
-          <input type="password" id="password" class="swal2-input" placeholder="test">
+          <input type="text" id="username" class="swal2-input" placeholder="Gaji Pokok">
+          <input type="text" id="password" class="swal2-input" placeholder="Keluarga">
+          <input type="text" id="password" class="swal2-input" placeholder="Pangan">
+          <input type="text" id="password" class="swal2-input" placeholder="Keahlian">
+          <input type="text" id="password" class="swal2-input" placeholder="FGS/Struk">
+          <input type="text" id="password" class="swal2-input" placeholder="Transport">
+          <input type="text" id="password" class="swal2-input" placeholder="Kehadiran">
+          <input type="text" id="password" class="swal2-input" placeholder="Kopkar">
+          <input type="text" id="password" class="swal2-input" placeholder="Bank Jabar">
+          <input type="text" id="password" class="swal2-input" placeholder="Arisan">
+          <input type="text" id="password" class="swal2-input" placeholder="BPJS TK">
+          <input type="text" id="password" class="swal2-input" placeholder="BAUK">
+          <input type="text" id="password" class="swal2-input" placeholder="Lain - Lain">
           `,
           showCloseButton: true,
           showCancelButton: true,
