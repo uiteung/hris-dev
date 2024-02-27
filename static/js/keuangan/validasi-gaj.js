@@ -6,7 +6,7 @@ import { GetDataValidasi, ValidasiData} from "../controller/template.js";
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
-import { ModalUpdate, getLastMonth } from "../controller/control.js";
+import { Batal, ModalUpdate, getLastMonth, validate } from "../controller/control.js";
 
 var header = new Headers();
 header.append("login", token);
@@ -261,97 +261,7 @@ CihuyDomReady(() => {
   });
 
     // document.getElementById("tablebody").innerHTML = tableData;
-    updatePagination();
-
-  }
-
-  function validate(email) {
-    const postData = {
-        nama: '',
-        email: email,
-        tanggal_tahun: date,
-        validate : true
-      };
-      console.log(postData)
-    fetch(ValidasiData, {
-        method: 'POST',
-        headers: header,
-        body: JSON.stringify(postData)
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          // Display success SweetAlert
-    
-          Swal.fire({
-            icon : 'success',
-            title: 'Data Gaji Berhasil Divalidasi!',
-            backdrop: `
-              rgba(0,0,123,0.4)
-            `
-          }).
-          then(() => {
-            // Refresh the page after successful addition
-            window.location.href = 'validasi-data.html';
-          });
-        } else {
-          // Display error SweetAlert
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: data.status,
-          });
-        }
-      })
-      .catch(error => {
-        console.error("Error while updating data:", error);
-      });
-  }
-
-  function Batal(email) {
-    const postData = {
-        nama: '',
-        email: email,
-        tanggal_tahun: date,
-        validate : false
-      };
-    fetch(ValidasiData, {
-        method: 'POST',
-        headers: header,
-        body: JSON.stringify(postData)
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          // Display success SweetAlert
-    
-          Swal.fire({
-            icon : 'success',
-            title: 'Validasi Berhasil Dibatalkan!',
-            backdrop: `
-              rgba(0,0,123,0.4)
-            `
-          }).
-          // Swal.fire({
-          //   icon: 'success',
-          //   title: 'Data Rekap Hari ini Berhasil Diupdate!',
-          // }).
-          then(() => {
-            // Refresh the page after successful addition
-            window.location.href = 'validasi-data.html';
-          });
-        } else {
-          // Display error SweetAlert
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Data rekap Gagal Diupdate!',
-          });
-        }
-      })
-      .catch(error => {
-        console.error("Error while updating data:", error);
-      });
+    updatePagination()
   }
 
   // Fungsi Untuk Update Pagination
