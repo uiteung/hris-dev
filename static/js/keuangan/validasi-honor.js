@@ -5,6 +5,7 @@ import { ValidasiHonor } from "../controller/template.js";
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
+import { getLastMonth } from "../controller/control.js";
 
 var header = new Headers();
 header.append("login", token);
@@ -14,22 +15,6 @@ const requestOptions = {
   method: "POST",
   headers: header
 };
-
-console.log(header)
-function getLastMonth() {
-    // Get the current date
-    const currentTime = new Date();
-  
-    // Subtract one month from the current date
-    currentTime.setMonth(currentTime.getMonth() - 1);
-  
-    // Format the date as "YYYYMM"
-    const year = currentTime.getFullYear();
-    const month = (currentTime.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based, so add 1
-    const formattedDate = `${year}${month}`;
-  
-    return formattedDate;
-  }
   
   // Call the function to get the last month
   const date = getLastMonth();
