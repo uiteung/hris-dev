@@ -89,3 +89,49 @@ export function validate(email) {
         console.error("Error while updating data:", error);
       });
   }
+
+export function Batal(email) {
+    const postData = {
+        nama: '',
+        email: email,
+        tanggal_tahun: date,
+        validate : false
+      };
+    fetch(ValidasiData, {
+        method: 'POST',
+        headers: header,
+        body: JSON.stringify(postData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Display success SweetAlert
+    
+          Swal.fire({
+            icon : 'success',
+            title: 'Validasi Berhasil Dibatalkan!',
+            backdrop: `
+              rgba(0,0,123,0.4)
+            `
+          }).
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: 'Data Rekap Hari ini Berhasil Diupdate!',
+          // }).
+          then(() => {
+            // Refresh the page after successful addition
+            window.location.href = 'validasi-data.html';
+          });
+        } else {
+          // Display error SweetAlert
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Data rekap Gagal Diupdate!',
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Error while updating data:", error);
+      });
+  }
