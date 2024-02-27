@@ -6,6 +6,7 @@ import { GetDataValidasi, ValidasiData} from "../controller/template.js";
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
+import { ModalUpdate } from "../style/style.js";
 
 var header = new Headers();
 header.append("login", token);
@@ -248,35 +249,7 @@ CihuyDomReady(() => {
     updatebutton.addEventListener("click", () => {
       const dataemail = updatebutton.getAttribute("data-email-u");
       if (dataemail) {
-        Swal.fire({
-          title: "<strong>Form Update <b>Data Gaji</b></strong>",
-          html: `
-          <input type="text" id="username" class="swal2-input" placeholder="Gaji Pokok">
-          <input type="text" id="password" class="swal2-input" placeholder="Keluarga">
-          <input type="text" id="password" class="swal2-input" placeholder="Pangan">
-          <input type="text" id="password" class="swal2-input" placeholder="Keahlian">
-          <input type="text" id="password" class="swal2-input" placeholder="FGS/Struk">
-          <input type="text" id="password" class="swal2-input" placeholder="Transport">
-          <input type="text" id="password" class="swal2-input" placeholder="Kehadiran">
-          <input type="text" id="password" class="swal2-input" placeholder="Kopkar">
-          <input type="text" id="password" class="swal2-input" placeholder="Bank Jabar">
-          <input type="text" id="password" class="swal2-input" placeholder="Arisan">
-          <input type="text" id="password" class="swal2-input" placeholder="BPJS TK">
-          <input type="text" id="password" class="swal2-input" placeholder="BAUK">
-          <input type="text" id="password" class="swal2-input" placeholder="Lain - Lain">
-          `,
-          showCloseButton: true,
-          showCancelButton: true,
-          focusConfirm: false,
-          confirmButtonText: `
-             Confirm!
-          `,
-          confirmButtonAriaLabel: "Berhasil",
-          cancelButtonText: `
-            Cancel
-          `,
-          cancelButtonAriaLabel: "Gagal"
-        });
+        ModalUpdate();
       } else {
         console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
       }
