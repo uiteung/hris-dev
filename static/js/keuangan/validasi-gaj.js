@@ -211,7 +211,7 @@ CihuyDomReady(() => {
             }).then((result) => {
               if (result.isConfirmed) {
                 // Kirim permintaan PUT/UPDATE ke server tanpa gambar
-                validate(dataemail);   
+                validate(dataemail, header);   
                 localStorage.setItem('currentPage', halamannow);
               
               }
@@ -229,7 +229,8 @@ CihuyDomReady(() => {
     updatebutton.addEventListener("click", () => {
       const dataemail = updatebutton.getAttribute("data-email-u");
       if (dataemail) {
-        ModalUpdate();
+        header.append("email", dataemail);
+        ModalUpdate(header, date);
       } else {
         console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
       }
@@ -250,7 +251,7 @@ CihuyDomReady(() => {
             }).then((result) => {
               if (result.isConfirmed) {
                 // Kirim permintaan PUT/UPDATE ke server tanpa gambar
-                Batal(dataemail); 
+                Batal(dataemail, header); 
                 localStorage.setItem('currentPage', halamannow);
              }
             });
