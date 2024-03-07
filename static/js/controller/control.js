@@ -190,4 +190,5 @@ export function Batal(email, header, date) {
       text: "Berhasil Mencari data",
       icon: "success"
     });
+    console.log(data)
   }
