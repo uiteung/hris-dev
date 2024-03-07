@@ -182,3 +182,12 @@ export function Batal(email, header, date) {
         console.error("Error while updating data:", error);
       });
   }
+
+
+  export function responseSearch(data) {
+    Swal.fire({
+      title: data.success,
+      text: "Berhasil Mencari data",
+      icon: "success"
+    });
+  }
