@@ -218,7 +218,7 @@ export function Batal(email, header, date) {
     <p class="fw-normal mb-1">${getLastMonth()}</p>
   </td>
   <td style="text-align: center; vertical-align: middle">
-    <p class="fw-normal mb-1"><b>${item.pokok}</b></p>
+    <p class="fw-normal mb-1"><b>${item['gaji-pokok']}</b></p>
   </td>
   <td style="text-align: center; vertical-align: middle">
       <p class="fw-normal mb-1">${item.keluarga}</p>
@@ -233,7 +233,7 @@ export function Batal(email, header, date) {
     <p class="fw-normal mb-1">${item.keahlian}</p>
   </td>
   <td style="text-align: center; vertical-align: middle">
-    <p class="fw-normal mb-1"><b>${item['fgs-struk']}</b></p>
+    <p class="fw-normal mb-1"><b>${item['struk']}</b></p>
   </td>
   <td style="text-align: center; vertical-align: middle">
   <p class="fw-normal mb-1">${item.transportasi}</p>
@@ -263,13 +263,13 @@ export function Batal(email, header, date) {
     <p class="fw-normal mb-1">${item.pph}</p>
     </td>
     <td style="text-align: center; vertical-align: middle">
-    <p class="fw-normal mb-1">totalgaji</p>
+    <p class="fw-normal mb-1">${item['totalgaji']}</p>
     </td>
     <td style="text-align: center; vertical-align: middle">
-    <p class="fw-normal mb-1">totalpotongan}</p>
+    <p class="fw-normal mb-1">${item['totalpotongan']}</p>
     </td>
     <td style="text-align: center; vertical-align: middle">
-    <p class="fw-normal mb-1">totalgajibersih</p>
+    <p class="fw-normal mb-1">${item['totalgajibersih']}</p>
     </td>
     <td style="text-align: center; vertical-align: middle">
     <p class="fw-normal mb-1">${getBadgeMarkup(item.validasi)}</p>
