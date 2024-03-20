@@ -1,6 +1,11 @@
 import { getBadgeMarkup } from "../style/badge.js";
+import { token } from "./cookies.js";
 import { GetdatabyEmail, ValidasiData } from "./template.js";
 
+
+var header = new Headers();
+header.append("login", token);
+header.append("Content-Type", "application/json");
 
 export function ModalUpdate(header, waktu) {
     fetch(GetdatabyEmail + waktu, {
@@ -291,5 +296,68 @@ export function Batal(email, header, date) {
   
       // Append the newly created row to your table
       inhtm.appendChild(barisBaru);
+
+      // Add event listeners to the buttons (outside of the loop)
+    const editButton = barisBaru.querySelector(".edit");
+    editButton.addEventListener("click", () => {
+      const dataemail = editButton.getAttribute("data-email-id");
+      if (dataemail) {
+          Swal.fire({
+              title: "Validasi Data Gaji?",
+              text: "Apakah Anda yakin ingin menvalidasi data ini?",
+              icon: "question",
+              showCancelButton: true,
+              confirmButtonText: "Ya, Update",
+              cancelButtonText: "Batal",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // Kirim permintaan PUT/UPDATE ke server tanpa gambar
+                validate(dataemail, header, getLastMonth());   
+                localStorage.setItem('currentPage', halamannow);
+              }
+            });
+      } else {
+        console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
+      }
+    });
+
+
+
+    document.getElementById("tablebody").appendChild(barisBaru);
+    // Add event listeners to the buttons (outside of the loop)
+    const updatebutton = barisBaru.querySelector(".update");
+    updatebutton.addEventListener("click", () => {
+      const dataemail = updatebutton.getAttribute("data-email-u");
+      if (dataemail) {
+        header.append("email", dataemail);
+        ModalUpdate(header, getLastMonth());
+      } else {
+        console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
+      }
+    });
+
+
+    const batalbutton = barisBaru.querySelector(".remove");
+    batalbutton.addEventListener("click", () => {
+      const dataemail = batalbutton.getAttribute("data-email-i");
+      if (dataemail) {
+          Swal.fire({
+              title: "Batal Validasi?",
+              text: "Apakah Anda yakin ingin Membatalkan Validasi?",
+              icon: "question",
+              showCancelButton: true,
+              confirmButtonText: "Ya",
+              cancelButtonText: "Batal",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // Kirim permintaan PUT/UPDATE ke server tanpa gambar
+                Batal(dataemail, header, getLastMonth()); 
+                localStorage.setItem('currentPage', halamannow);
+             }
+            });
+      } else {
+        console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
+      }
+    });
   });
-}
+  }
