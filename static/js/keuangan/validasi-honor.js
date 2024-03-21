@@ -1,7 +1,7 @@
 // Import function & library yang dibutuhkan
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady } from "https://c-craftjs.github.io/table/table.js";
-import { ValidasiHonor } from "../controller/template.js";
+import { UrlDetailHonor, ValidasiHonor } from "../controller/template.js";
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
@@ -12,7 +12,7 @@ header.append("login", token);
 header.append("Content-Type", "application/json");
 
 const requestOptions = {
-  method: "POST",
+  method: "GET",
   headers: header
 };
   
@@ -34,7 +34,7 @@ CihuyDomReady(() => {
   let filteredData = []; // To store the filtered data for search
   let totalData = 0;
   // Ambil data masuk
-  fetch(ValidasiHonor  + date, requestOptions)
+  fetch(UrlDetailHonor  + date, requestOptions)
     .then((result) => result.json())
     .then((rekapharian) => {
         let rkp = rekapharian.data
@@ -88,7 +88,7 @@ CihuyDomReady(() => {
 
       // Ekstrak data yang relevan
       const nama = combinedEntry['nama'];
-      const namamatkul = combinedEntry['namamatkul'];
+      const namamatkul = combinedEntry['list-honor'].namamatkul;
       const kelas = combinedEntry['kelas'];
       const jurusan = combinedEntry['jurusan'];
       const jumlahtemu = combinedEntry['jumlah-temu'];
