@@ -6,6 +6,7 @@ import { UrlDetailHonor, ValidasiHonor } from "../controller/template.js";
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
 import { getLastMonth } from "../controller/control.js";
+import { getBadgeMarkup } from "../style/badge.js";
 
 var header = new Headers();
 header.append("login", token);
@@ -46,6 +47,8 @@ CihuyDomReady(() => {
             text: 'Data Honor Bulan Ini belum ada',
           });
         }
+
+        console.log(rkp)
 
           // Inisialisasi data tabel
           totalData = rkp.length;
@@ -88,11 +91,10 @@ CihuyDomReady(() => {
 
       // Ekstrak data yang relevan
       const nama = combinedEntry['nama'];
-      const namamatkul = combinedEntry['list-honor'].namamatkul;
-      const kelas = combinedEntry['kelas'];
-      const jurusan = combinedEntry['jurusan'];
-      const jumlahtemu = combinedEntry['jumlah-temu'];
-      const honorajar = combinedEntry['honor-ajar'];
+      const pph = combinedEntry['pph'];
+      const totalhonor = combinedEntry['total-honor'];
+      const totaldibayarkan = combinedEntry['total-dibayarkan'];
+      const Validasi = combinedEntry['validasi'];
     //   console.log(struk)
 
       const barisBaru = document.createElement("tr");
@@ -105,19 +107,16 @@ CihuyDomReady(() => {
             </div>
         </td>
         <td style="text-align: center; vertical-align: middle">
-          <p class="fw-normal mb-1">${namamatkul}</p>
+          <p class="fw-normal mb-1">${pph}</p>
         </td>
         <td style="text-align: center; vertical-align: middle">
-          <p class="fw-normal mb-1"><b>${kelas}</b></p>
+          <p class="fw-normal mb-1"><b>${totalhonor}</b></p>
         </td>
         <td style="text-align: center; vertical-align: middle">
-            <p class="fw-normal mb-1">${jurusan}</p>
+            <p class="fw-normal mb-1">${totaldibayarkan}</p>
         </td>
         <td style="text-align: center; vertical-align: middle">
-            <p class="fw-normal mb-1">${jumlahtemu}</p>
-        </td>
-        <td style="text-align: center; vertical-align: middle">
-            <p class="fw-normal mb-1">${honorajar}</p>
+            <p class="fw-normal mb-1">${getBadgeMarkup(Validasi)}</p>
         </td>
       `;
 
