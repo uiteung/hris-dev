@@ -5,7 +5,7 @@ import { UrlDetailHonor, ValidasiHonor } from "../controller/template.js";
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
-import { getLastMonth } from "../controller/control.js";
+import { ModalUpdate, getLastMonth } from "../controller/control.js";
 import { getBadgeMarkup } from "../style/badge.js";
 
 var header = new Headers();
@@ -140,10 +140,45 @@ CihuyDomReady(() => {
 
 
       document.getElementById("tablebody").appendChild(barisBaru);
-  });
-    updatePagination();
-
-  }
+      const updatebutton = barisBaru.querySelector(".update");
+      updatebutton.addEventListener("click", () => {
+        const dataemail = updatebutton.getAttribute("data-email-u");
+        if (dataemail) {
+          header.append("email", dataemail);
+          // ModalUpdate(header, date);
+        } else {
+          console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
+        }
+      });
+  
+  
+      const batalbutton = barisBaru.querySelector(".remove");
+      batalbutton.addEventListener("click", () => {
+        const dataemail = batalbutton.getAttribute("data-email-i");
+        if (dataemail) {
+            Swal.fire({
+                title: "Batal Validasi?",
+                text: "Apakah Anda yakin ingin Membatalkan Validasi?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Ya",
+                cancelButtonText: "Batal",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  // Kirim permintaan PUT/UPDATE ke server tanpa gambar
+                  // Batal(dataemail, header, date); 
+                  localStorage.setItem('currentPage', halamannow);
+               }
+              });
+        } else {
+          console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
+        }
+      });
+    });
+  
+      // document.getElementById("tablebody").innerHTML = tableData;
+      updatePagination()
+    }
 
 
   // Fungsi Untuk Update Pagination
