@@ -1,6 +1,6 @@
 import { postWithToken } from "https://jscroot.github.io/api/croot.js";
 import  { getValue } from "https://jscroot.github.io/element/croot.js";
-import { getLastMonth, responseSearch } from "./control.js";
+import { getLastMonth,  responseFilter } from "./control.js";
 import { UrlFilterGaji } from "./template.js";
 import { token } from "./cookies.js";
 
@@ -15,6 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     console.log(src)
     event.preventDefault();
-    postWithToken(UrlFilterGaji + getLastMonth(), 'login', token, data, responseSearch);
+    postWithToken(UrlFilterGaji + getLastMonth(), 'login', token, data, responseFilter);
   });
 });
