@@ -21,7 +21,8 @@
     <link
       rel="shortcut icon"
       href="../static/img/enam_berlian-removebg-preview.png" />
-
+      <link rel="stylesheet" href="assets/vendor/libs/select2/select2.css " />
+      <script src="assets/vendor/libs/select2/select2.js"></script>
     <title>Validasi data | ULBI</title>
 
     <!-- Import CSS yang diperlukan -->
@@ -206,8 +207,8 @@
                     </div>
                     <br>
                     <form id="selecttag">
-                      <div class="selectKelompok">
-                      <select class="form-select" aria-label="Default select example">
+                      <div class="mb-3">
+                        <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true">
                         <option selected>Pilih Kelompok</option>
                         <option value="Struktural">Struktural</option>
                         <option value="Dosen Kontrak">Dosen Kontrak</option>
@@ -217,6 +218,7 @@
                         <option value="TKK">TKK</option>
                       </select>
                     </div>
+                    <button class="btn-primary">Filter</button>
                     </form>
                     <hr />
                     <div class="table-container">
