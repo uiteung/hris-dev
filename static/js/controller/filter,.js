@@ -6,13 +6,13 @@ import { token } from "./cookies.js";
 
 document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById("selecttag")
-  const kelompok = document.getElementById("select2Basic")
-  const data = {
-    kelompok: kelompok,
-    email: ""
-  }
   form.addEventListener("submit", function(event) {
     let src = getValue("searchinput")
+    let kelompok = getValue("select2Basic")
+    let data = {
+      "kelompok": kelompok,
+      "email": ""
+    }
     console.log(src)
     event.preventDefault();
     postWithToken(UrlFilterGaji + getLastMonth(), 'login', token, data, responseSearch);
