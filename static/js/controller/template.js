@@ -4,5 +4,6 @@ export let ValidasiHonor = "https://hris_backend.ulbi.ac.id/api/v2/rkp/rawhonor/
 export let GetHistoryData = "https://hris_backend.ulbi.ac.id/api/v2/rkp/log/"
 export let GetdatabyEmail = "https://hris_backend.ulbi.ac.id/api/v2/wage/byemail/"
 export let UrlSearchGaji = "https://hris_backend.ulbi.ac.id/api/v2/wage/search/"
+export let URLUpdategaji = "https://hris_backend.ulbi.ac.id/api/v2/wage/update/"
 export let UrlDetailHonor = "https://hris_backend.ulbi.ac.id/api/v2/rkp/honordetail/"
 export let UrlFilterGaji = "https://hris_backend.ulbi.ac.id/api/v2/rkp/filterwage/"
