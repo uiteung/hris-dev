@@ -1,7 +1,10 @@
 import { getBadgeMarkup } from "../style/badge.js";
 import { token } from "./cookies.js";
-import { GetdatabyEmail, ValidasiData } from "./template.js";
+import { GetdatabyEmail, UrlDetailHonor, ValidasiData } from "./template.js";
 
+
+let nama1 , pangkat1 , jabatan1 , email1 , gaji1 , keluarga1 , pangan1, kinerja1 , keahlian1 , fgsstruk1 ,  transport1 , kehadiran1 ,  kopkar1 , bankjabar1 , arisan1 , bpjstk1 , bauk1 , lain21 , pph1 
+let nama2, email2, pangkat2,jabatan2,gajiPokok2,keluarga2,pangan2,keahlian2,kinerja2,transport2,kehadiran2,kopkar2,arisan2,bankjabar2,bpjstk2,bauk2,pph2,lain22,fgsstruk2, data
 
 var header = new Headers();
 header.append("login", token);
@@ -15,6 +18,10 @@ export function ModalUpdate(header, waktu) {
       .then(response => response.json())
       .then(data => {
         if (data.success) {
+            const nama = data.data['nama'];
+            const email = data.data['email'];
+            const pangkat = data.data['pangkat']
+            const jabatan = data.data['jabatan']
             const pokok = data.data['pokok'];
             const keluarga = data.data['keluarga'];
             const pangan = data.data['pangan'];
@@ -34,40 +41,168 @@ export function ModalUpdate(header, waktu) {
             Swal.fire({
                 title: "<strong>Form Update <b>Data Gaji</b></strong>",
                 html:` 
+                <input type="text" id="nama" class="swal2-input" placeholder="Gaji Pokok" value="${nama}"disabled><br><br>
+                <input type="text" id="email" class="swal2-input" placeholder="Gaji Pokok" value="${email}"disabled><br><br>
+                <span style="text-align: left; position: relative;">Pangkat</span>
+                <input type="text" id="pangkat" class="swal2-input" placeholder="Gaji Pokok" value="${pangkat}"disabled><br><br>
+                <span style="text-align: left; position: relative;">Jabatan</span>
+                <input type="text" id="jabatan" class="swal2-input" placeholder="Gaji Pokok" value="${jabatan}"disabled><br><br>
                 <span style="text-align: left; position: relative;">Gaji Pokok</span>
-                <input type="text" id="gajipokok" class="swal2-input" placeholder="Gaji Pokok" value="${pokok}"><br><br>
+                <input type="number" id="gajipokok" class="swal2-input" placeholder="Gaji Pokok" value="${pokok}"><br><br>
                 <span style="text-align: left; position: relative;">Tunjangan Keluarga</span>
-                <input type="text" id="keluarga" class="swal2-input" placeholder="Keluarga" value="${keluarga}"><br><br>
+                <input type="number" id="keluarga" class="swal2-input" placeholder="Keluarga" value="${keluarga}"><br><br>
                 <span style="text-align: left; position: relative;">Tunjangan Pangan</span>
-                <input type="text" id="pangan" class="swal2-input" placeholder="Pangan" value="${pangan}"><br><br>
+                <input type="number" id="pangan" class="swal2-input" placeholder="Pangan" value="${pangan}"><br><br>
                 <span style="text-align: left; position: relative;">Tunjangan Kinerja</span>
-                <input type="text" id="kinerja" class="swal2-input" placeholder="kinerja" value="${kinerja}"><br><br>
+                <input type="number" id="kinerja" class="swal2-input" placeholder="kinerja" value="${kinerja}"><br><br>
                 <span style="text-align: left; position: relative;">Tunjangan Keahlian</span>
-                <input type="text" id="keahlian" class="swal2-input" placeholder="keahlian" value="${keahlian}"><br><br>
+                <input type="number" id="keahlian" class="swal2-input" placeholder="keahlian" value="${keahlian}"><br><br>
                 <span style="text-align: left; position: relative;">Tunjangan Stuktural/Fungsional</span>
-                <input type="text" id="fgs/struk" class="swal2-input" placeholder="FGS/Struk" value="${struk}"><br><br>
+                <input type="number" id="fgs" class="swal2-input" placeholder="FGS/Struk" value="${struk}"><br><br>
                 <span style="text-align: left; position: relative;">Tunjangan Transportasi</span>
-                <input type="text" id="transport" class="swal2-input" placeholder="Transport" value="${transportasi}"><br><br>
+                <input type="number" id="transport" class="swal2-input" placeholder="Transport" value="${transportasi}"><br><br>
                 <span style="text-align: left; position: relative;">Tunjangan Kehadiran</span>
-                <input type="text" id="kehadiran" class="swal2-input" placeholder="Kehadiran" value="${kehadiran}"><br><br>
+                <input type="number" id="kehadiran" class="swal2-input" placeholder="Kehadiran" value="${kehadiran}"><br><br>
                 <span style="text-align: left; position: relative;">Potongan Kopkar</span>
-                <input type="text" id="kopkar" class="swal2-input" placeholder="Kopkar" value="${kopkar}"><br><br>
+                <input type="number" id="kopkar" class="swal2-input" placeholder="Kopkar" value="${kopkar}"><br><br>
                 <span style="text-align: left; position: relative;">Potongan Bank Jabar</span>
-                <input type="text" id="bankjabar" class="swal2-input" placeholder="Bank Jabar" value="${bankJabar}"><br><br>
+                <input type="number" id="bankjabar" class="swal2-input" placeholder="Bank Jabar" value="${bankJabar}"><br><br>
                 <span style="text-align: left; position: relative;">Potongan Arisan</span>
-                <input type="text" id="arisan" class="swal2-input" placeholder="Arisan" value="${arisan}"><br><br>
+                <input type="number" id="arisan" class="swal2-input" placeholder="Arisan" value="${arisan}"><br><br>
                 <span style="text-align: left; position: relative;">Potongan BPJS</span>
-                <input type="text" id="bpjstk" class="swal2-input" placeholder="BPJS TK" value="${bpjs}"><br><br>
+                <input type="number" id="bpjstk" class="swal2-input" placeholder="BPJS TK" value="${bpjs}"><br><br>
                 <span style="text-align: left; position: relative;">Potongan BAUK</span>
-                <input type="text" id="bauk" class="swal2-input" placeholder="BAUK" value="${bauk}"><br><br>
+                <input type="number" id="bauk" class="swal2-input" placeholder="BAUK" value="${bauk}"><br><br>
                 <span style="text-align: left; position: relative;">Potongan Lain - lain</span>
-                <input type="text" id="lain-lain" class="swal2-input" placeholder="Lain - Lain" value="${lain2}"><br><br>
+                <input type="number" id="lain-lain" class="swal2-input" placeholder="Lain - Lain" value="${lain2}"><br><br>
                 <span style="text-align: left; position: relative;">Potongan PPH</span>
-                <input type="text" id=pph" class="swal2-input" placeholder="pph" value="${pph}"><br><br>
+                <input type="number" id="pph" class="swal2-input" placeholder="pph" value="${pph}"><br><br>
                 `,
                 showCloseButton: true,
                 showCancelButton: true,
                 focusConfirm: false,
+                didOpen:() => {
+                  const popup = Swal.getPopup();
+                   nama1 = popup.querySelector("#nama")
+                   pangkat1 = popup.querySelector("#pangkat")
+                   jabatan1 = popup.querySelector("#jabatan")
+                   email1 = popup.querySelector("#email")
+                   gaji1 = popup.querySelector("#gajipokok") // Define gaji here
+                   keluarga1 = popup.querySelector("#keluarga")
+                   pangan1= popup.querySelector("#pangan")
+                   kinerja1 = popup.querySelector("#kinerja")
+                    keahlian1 = popup.querySelector("#keahlian")
+                   fgsstruk1 = popup.querySelector("#fgs")
+                    transport1 = popup.querySelector("#transport")
+                   kehadiran1 = popup.querySelector("#kehadiran")
+                    kopkar1 = popup.querySelector("#kopkar")
+                   bankjabar1 = popup.querySelector("#bankjabar")
+                   arisan1 = popup.querySelector("#arisan")
+                   bpjstk1 = popup.querySelector("#bpjstk")
+                   bauk1 = popup.querySelector("#bauk")
+                   lain21 = popup.querySelector("#lain-lain")
+                   pph1 = popup.querySelector("#pph")
+                  nama1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  pangkat1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  jabatan1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  email1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  gaji1.addEventListener('keyup', (event) => { // Add event listener for gaji
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  pangan1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  keluarga1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  kinerja1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  keahlian1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  fgsstruk1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  transport1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  kehadiran1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  kopkar1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  bankjabar1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  arisan1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  bpjstk1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  bauk1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  lain21.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                  pph1.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') Swal.clickConfirm();
+                  });
+                },
+                preConfirm: () => {
+                   nama2 = nama1.value;
+                   email2 = email1.value;
+                   pangkat2 = pangkat1.value;
+                   jabatan2 = jabatan1.value;
+                   gajiPokok2 = gaji1.value;
+                   keluarga2 = keluarga1.value;
+                   pangan2 = pangan1.value;
+                   keahlian2 = keahlian1.value;
+                   kinerja2 = kinerja1.value;
+                   transport2 = transport1.value;
+                   kehadiran2 = kehadiran1.value;
+                   kopkar2 = kopkar1.value;
+                   arisan2 = arisan1.value;
+                   bankjabar2 = bankjabar1.value;
+                   bpjstk2 = bpjstk1.value;
+                   bauk2 = bauk1.value;
+                   pph2 = pph1.value;
+                   lain22 = lain21.value;
+                   fgsstruk2 = fgsstruk1.value;
+                    data = {
+                    nama: nama2,
+                    email: email2,
+                    pangkat: pangkat2,
+                    jabatan: jabatan2,
+                    pokok: gajiPokok2,
+                    keluarga: keluarga2,
+                    pangan: pangan2,
+                    kinerja: kinerja2,
+                    'fgs-struk': fgsstruk2,
+                    keahlian: keahlian2,
+                    transportasi: transport2,
+                    kehadiran: kehadiran2,
+                    kopkar: kopkar2,
+                    bank_jabar: bankjabar2,
+                    bpjs: bpjstk2,
+                    bauk: bauk2,
+                    pph: pph2,
+                    lain2: lain22,
+                    arisan: arisan2,
+                };
+                console.log(data);
+                },
                 confirmButtonText: `
                    Update
                 `,
@@ -76,6 +211,7 @@ export function ModalUpdate(header, waktu) {
                   Cancel
                 `,
                 cancelButtonAriaLabel: "Gagal"
+                
               })
             }
         })
@@ -167,10 +303,6 @@ export function Batal(email, header, date) {
               rgba(0,0,123,0.4)
             `
           }).
-          // Swal.fire({
-          //   icon: 'success',
-          //   title: 'Data Rekap Hari ini Berhasil Diupdate!',
-          // }).
           then(() => {
             // Refresh the page after successful addition
             window.location.href = 'validasi-data.html';
@@ -189,6 +321,42 @@ export function Batal(email, header, date) {
       });
   }
 
+
+  export function UpdateGaji(email, header, date, data) {
+    fetch(UrlDetailHonor, {
+        method: 'POST',
+        headers: header,
+        body: JSON.stringify(postData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Display success SweetAlert
+    
+          Swal.fire({
+            icon : 'success',
+            title: 'Validasi Berhasil Dibatalkan!',
+            backdrop: `
+              rgba(0,0,123,0.4)
+            `
+          }).
+          then(() => {
+            // Refresh the page after successful addition
+            window.location.href = 'validasi-data.html';
+          });
+        } else {
+          // Display error SweetAlert
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Data rekap Gagal Diupdate!',
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Error while updating data:", error);
+      });
+  }
 
   export function responseSearch(data) {
     Swal.fire({
@@ -533,4 +701,7 @@ export function Batal(email, header, date) {
       }
     });
   });
+  // updatePagination()
   }
+
+    // Fungsi Untuk Update Pagination
