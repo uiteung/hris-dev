@@ -1,10 +1,10 @@
 import { getBadgeMarkup } from "../style/badge.js";
 import { token } from "./cookies.js";
-import { GetdatabyEmail, UrlDetailHonor, ValidasiData } from "./template.js";
+import { GetdatabyEmail, URLUpdategaji, UrlDetailHonor, ValidasiData } from "./template.js";
 
 
 let nama1 , pangkat1 , jabatan1 , email1 , gaji1 , keluarga1 , pangan1, kinerja1 , keahlian1 , fgsstruk1 ,  transport1 , kehadiran1 ,  kopkar1 , bankjabar1 , arisan1 , bpjstk1 , bauk1 , lain21 , pph1 
-let nama2, email2, pangkat2,jabatan2,gajiPokok2,keluarga2,pangan2,keahlian2,kinerja2,transport2,kehadiran2,kopkar2,arisan2,bankjabar2,bpjstk2,bauk2,pph2,lain22,fgsstruk2, data
+let nama2, email2, pangkat2,jabatan2,gajiPokok2,keluarga2,pangan2,keahlian2,kinerja2,transport2,kehadiran2,kopkar2,arisan2,bankjabar2,bpjstk2,bauk2,pph2,lain22,fgsstruk2, datas
 
 var header = new Headers();
 header.append("login", token);
@@ -37,6 +37,8 @@ export function ModalUpdate(header, waktu) {
             const bauk = data.data['bauk'];
             const pph = data.data['pph'];
             const lain2 = data.data['lain2'];
+            const validasi = data.data['validasi'];
+            const kelompok = data.data['kelompok'];
 
             Swal.fire({
                 title: "<strong>Form Update <b>Data Gaji</b></strong>",
@@ -180,43 +182,42 @@ export function ModalUpdate(header, waktu) {
                    pph2 = pph1.value;
                    lain22 = lain21.value;
                    fgsstruk2 = fgsstruk1.value;
-                    data = {
+                    datas = {
                     nama: nama2,
                     email: email2,
                     pangkat: pangkat2,
                     jabatan: jabatan2,
-                    pokok: gajiPokok2,
-                    keluarga: keluarga2,
-                    pangan: pangan2,
-                    kinerja: kinerja2,
-                    'fgs-struk': fgsstruk2,
-                    keahlian: keahlian2,
-                    transportasi: transport2,
-                    kehadiran: kehadiran2,
-                    kopkar: kopkar2,
-                    bank_jabar: bankjabar2,
-                    bpjs: bpjstk2,
-                    bauk: bauk2,
-                    pph: pph2,
-                    lain2: lain22,
-                    arisan: arisan2,
+                    pokok: parseFloat(gajiPokok2),
+                    keluarga: parseFloat(keluarga2),
+                    pangan: parseFloat(pangan2),
+                    kinerja: parseFloat(kinerja2),
+                    'fgs-struk': parseFloat(fgsstruk2),
+                    keahlian: parseFloat(keahlian2),
+                    transportasi: parseFloat(transport2),
+                    kehadiran: parseFloat(kehadiran2),
+                    kopkar: parseFloat(kopkar2),
+                    bank_jabar: parseFloat(bankjabar2),
+                    bpjs: parseFloat(bpjstk2),
+                    bauk: parseFloat(bauk2),
+                    pph: parseFloat(pph2),
+                    lain2: parseFloat(lain22),
+                    arisan: parseFloat(arisan2),
+                    validasi: validasi,
+                    kelompok: kelompok
                 };
-                console.log(data);
+                // console.log(data);
                 },
-                confirmButtonText: `
-                   Update
-                `,
-                confirmButtonAriaLabel: data.success,
-                cancelButtonText: `
-                  Cancel
-                `,
-                cancelButtonAriaLabel: "Gagal"
-                
-              })
+                showCancelButton: true,
+                confirmButtonText: "Update",
+                cancelButtonText: "Batal",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  UpdateGaji(email2, header, getLastMonth(), datas);
+              }
+            })
             }
-        })
-      .catch(error => {
-        console.error("Error while updating data:", error);
+        }).catch(error => {
+          console.error("Error while updating data:", error);
       });
 }
 
@@ -323,10 +324,10 @@ export function Batal(email, header, date) {
 
 
   export function UpdateGaji(email, header, date, data) {
-    fetch(UrlDetailHonor, {
-        method: 'POST',
+    fetch(URLUpdategaji + date, {
+        method: 'PUT',
         headers: header,
-        body: JSON.stringify(postData)
+        body: JSON.stringify(data)
       })
       .then(response => response.json())
       .then(data => {
