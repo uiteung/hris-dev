@@ -336,7 +336,7 @@ export function Batal(email, header, date) {
     
           Swal.fire({
             icon : 'success',
-            title: 'Validasi Berhasil Dibatalkan!',
+            title: 'Berhasil Update data!',
             backdrop: `
               rgba(0,0,123,0.4)
             `
