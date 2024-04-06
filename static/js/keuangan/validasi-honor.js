@@ -88,7 +88,7 @@ CihuyDomReady(() => {
 
     // Iterasi melalui rowsToShow dan membangun baris tabel
     rowsToShow.forEach((combinedEntry) => {
-
+      console.log(combinedEntry)
       // Ekstrak data yang relevan
       const nama = combinedEntry['nama'];
       const pph = combinedEntry['pph'];
@@ -163,7 +163,7 @@ CihuyDomReady(() => {
                 if (result.isConfirmed) {
                   // Kirim permintaan PUT/UPDATE ke server tanpa gambar
                   BatchValidateHonor(dataemail, header, date);   
-                  // localStorage.setItem('currentPage', halamannow);
+                  localStorage.setItem('currentPage', halamannow);
                 
                 }
               });
