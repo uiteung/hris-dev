@@ -1,6 +1,6 @@
 import { getBadgeMarkup } from "../style/badge.js";
 import { token } from "./cookies.js";
-import { GetdatabyEmail, URLUpdategaji, UrlDetailHonor, ValidasiData } from "./template.js";
+import { GetdatabyEmail, URLBatchHonor, URLUpdategaji, UrlDetailHonor, ValidasiData } from "./template.js";
 
 
 let nama1 , pangkat1 , jabatan1 , email1 , gaji1 , keluarga1 , pangan1, kinerja1 , keahlian1 , fgsstruk1 ,  transport1 , kehadiran1 ,  kopkar1 , bankjabar1 , arisan1 , bpjstk1 , bauk1 , lain21 , pph1 
@@ -236,6 +236,94 @@ export function getLastMonth() {
     return formattedDate;
   }
 
+
+  export function BatchValidateHonor(email, header, date) {
+    const postData = {
+        nama: email,
+        email: "",
+        tanggal_tahun: date,
+        validate : true
+      };
+      console.log(postData)
+    fetch(URLBatchHonor, {
+        method: 'POST',
+        headers: header,
+        body: JSON.stringify(postData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Display success SweetAlert
+    
+          Swal.fire({
+            icon : 'success',
+            title: 'Data Gaji Berhasil Divalidasi!',
+            backdrop: `
+              rgba(0,0,123,0.4)
+            `
+          }).
+          then(() => {
+            // Refresh the page after successful addition
+            window.location.href = 'validasi-dataHonor.html';
+          });
+        } else {
+          // Display error SweetAlert
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: data.status,
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Error while updating data:", error);
+      });
+  }
+
+
+
+  export function CancelHonor(email, header, date) {
+    const postData = {
+        nama: email,
+        email: "",
+        tanggal_tahun: date,
+        validate : false
+      };
+      console.log(postData)
+    fetch(URLBatchHonor, {
+        method: 'POST',
+        headers: header,
+        body: JSON.stringify(postData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Display success SweetAlert
+    
+          Swal.fire({
+            icon : 'success',
+            title: 'Data Gaji Berhasil Divalidasi!',
+            backdrop: `
+              rgba(0,0,123,0.4)
+            `
+          }).
+          then(() => {
+            // Refresh the page after successful addition
+            window.location.href = 'validasi-dataHonor.html';
+          });
+        } else {
+          // Display error SweetAlert
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: data.status,
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Error while updating data:", error);
+      });
+  }
 
 export function validate(email, header, date) {
     const postData = {
