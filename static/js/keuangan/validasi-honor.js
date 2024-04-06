@@ -5,7 +5,7 @@ import { UrlDetailHonor, ValidasiHonor } from "../controller/template.js";
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
-import { ModalUpdate, getLastMonth } from "../controller/control.js";
+import { BatchValidateHonor, ModalUpdate, getLastMonth } from "../controller/control.js";
 import { getBadgeMarkup } from "../style/badge.js";
 
 var header = new Headers();
@@ -151,7 +151,31 @@ CihuyDomReady(() => {
           console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
         }
       });
-  
+
+
+      const editButton = barisBaru.querySelector(".edit");
+      editButton.addEventListener("click", () => {
+        const dataemail = editButton.getAttribute("data-email-id");
+        if (dataemail) {
+            Swal.fire({
+                title: "Validasi Data Gaji?",
+                text: "Apakah Anda yakin ingin menvalidasi data ini?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Ya, Update",
+                cancelButtonText: "Batal",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  // Kirim permintaan PUT/UPDATE ke server tanpa gambar
+                  BatchValidateHonor(dataemail, header, date);   
+                  // localStorage.setItem('currentPage', halamannow);
+                
+                }
+              });
+        } else {
+          console.error("Data Honor dengan nama " + dataemail + " tidak ditemukan");
+        }
+      });
   
       const batalbutton = barisBaru.querySelector(".remove");
       batalbutton.addEventListener("click", () => {
@@ -167,12 +191,12 @@ CihuyDomReady(() => {
               }).then((result) => {
                 if (result.isConfirmed) {
                   // Kirim permintaan PUT/UPDATE ke server tanpa gambar
-                  // Batal(dataemail, header, date); 
+                  Batal(dataemail, header, date); 
                   localStorage.setItem('currentPage', halamannow);
                }
               });
         } else {
-          console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
+          console.error("Data Honor dengan nama " + dataemail + " tidak ditemukan");
         }
       });
     });
