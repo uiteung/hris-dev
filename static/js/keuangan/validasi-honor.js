@@ -5,7 +5,7 @@ import { UrlDetailHonor, ValidasiHonor } from "../controller/template.js";
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
-import { BatchValidateHonor, ModalUpdate, getLastMonth } from "../controller/control.js";
+import { BatchValidateHonor, CancelHonor, ModalUpdate, getLastMonth } from "../controller/control.js";
 import { getBadgeMarkup } from "../style/badge.js";
 
 var header = new Headers();
@@ -191,7 +191,7 @@ CihuyDomReady(() => {
               }).then((result) => {
                 if (result.isConfirmed) {
                   // Kirim permintaan PUT/UPDATE ke server tanpa gambar
-                  Batal(dataemail, header, date); 
+                  CancelHonor(dataemail, header, date); 
                   localStorage.setItem('currentPage', halamannow);
                }
               });
