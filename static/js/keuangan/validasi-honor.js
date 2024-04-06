@@ -31,7 +31,7 @@ CihuyDomReady(() => {
   const buttonselanjutnya = CihuyId("nextPageBtn");
   const halamansaatini = CihuyId("currentPage");
   const itemperpage =6;
-  let halamannow = 1;
+  let halamannow = localStorage.getItem('currentPage') || 1;
   let filteredData = []; // To store the filtered data for search
   let totalData = 0;
   // Ambil data masuk
