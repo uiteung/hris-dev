@@ -257,7 +257,7 @@ export function getLastMonth() {
     
           Swal.fire({
             icon : 'success',
-            title: 'Data Gaji Berhasil Divalidasi!',
+            title: 'Data Honor Berhasil Divalidasi!',
             backdrop: `
               rgba(0,0,123,0.4)
             `
@@ -302,7 +302,7 @@ export function getLastMonth() {
     
           Swal.fire({
             icon : 'success',
-            title: 'Data Gaji Berhasil Divalidasi!',
+            title: 'Validasi berhasil dibatalkan!',
             backdrop: `
               rgba(0,0,123,0.4)
             `
