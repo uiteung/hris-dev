@@ -11,7 +11,7 @@ header.append("login", token);
 header.append("Content-Type", "application/json");
 
 export function ModalUpdate(header, waktu) {
-    fetch(GetdatabyEmail + waktu, {
+    fetch(GetdatabyEmail + "202403", {
         method: 'GET',
         headers: header
       })
@@ -447,6 +447,8 @@ export function Batal(email, header, date) {
       });
   }
 
+  
+
   export function responseSearch(data) {
     Swal.fire({
       title: data.success,
@@ -619,6 +621,119 @@ export function Batal(email, header, date) {
   });
   }
 
+
+  export function ResponsesSearchHonor(data) {
+    Swal.fire({
+      title: data.success,
+      text: "Berhasil Mencari data",
+      icon: "success"
+    });
+
+    console.log(data)
+
+    let inhtm = document.getElementById("tablebody")
+
+    inhtm.innerHTML = "";
+    data.data.forEach((item) => {
+      const barisBaru = document.createElement("tr");
+      barisBaru.innerHTML= `
+      <tr>
+      <td>
+          <div class="d-flex align-items-center">
+              <div class="ms-3">
+                  <p class="fw-bold mb-1">${item.nama}</p>
+              </div>
+          </div>
+      </td>
+      <td style="text-align: center; vertical-align: middle">
+          <p class="fw-normal mb-1">${item.pph}</p>
+      </td>
+      <td style="text-align: center; vertical-align: middle">
+          <p class="fw-normal mb-1"><b>${item['total-honor']}</b></p>
+      </td>
+      <td style="text-align: center; vertical-align: middle">
+          <p class="fw-normal mb-1">${item[total-dibayarkan]}</p>
+      </td>
+      <td style="text-align: center; vertical-align: middle">
+          <p class="fw-normal mb-1">${getBadgeMarkup(item.validasi)}</p>
+      </td>
+      <td style="text-align: center; vertical-align: middle">
+          <a href="#" class="edit" data-email-id="${item.nama}">
+              <svg class="feather feather-check" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <polyline points="20 6 9 17 4 12"/>
+              </svg>
+          </a>
+          <a href="#" class="remove" data-email-i="${item.nama}">
+              <svg class="feather feather-x" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="18" x2="6" y1="6" y2="18"/>
+                  <line x1="6" x2="18" y1="6" y2="18"/>
+              </svg>
+          </a>
+      </td>
+    `;
+
+
+    document.getElementById("tablebody").appendChild(barisBaru);
+    // const updatebutton = barisBaru.querySelector(".update");
+    // updatebutton.addEventListener("click", () => {
+    //   const dataemail = updatebutton.getAttribute("data-email-u");
+    //   if (dataemail) {
+    //     header.append("email", dataemail);
+    //     // ModalUpdate(header, date);
+    //   } else {
+    //     console.error("Data gaji dengan email " + dataemail + " tidak ditemukan");
+    //   }
+    // });
+
+
+    const editButton = barisBaru.querySelector(".edit");
+    editButton.addEventListener("click", () => {
+      const dataemail = editButton.getAttribute("data-email-id");
+      if (dataemail) {
+          Swal.fire({
+              title: "Validasi Data Gaji?",
+              text: "Apakah Anda yakin ingin menvalidasi data ini?",
+              icon: "question",
+              showCancelButton: true,
+              confirmButtonText: "Ya, Update",
+              cancelButtonText: "Batal",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // Kirim permintaan PUT/UPDATE ke server tanpa gambar
+                BatchValidateHonor(dataemail, header, date);   
+                // localStorage.setItem('currentPage', halamannow);
+              
+              }
+            });
+      } else {
+        console.error("Data Honor dengan nama " + dataemail + " tidak ditemukan");
+      }
+    });
+
+    const batalbutton = barisBaru.querySelector(".remove");
+    batalbutton.addEventListener("click", () => {
+      const dataemail = batalbutton.getAttribute("data-email-i");
+      if (dataemail) {
+          Swal.fire({
+              title: "Batal Validasi?",
+              text: "Apakah Anda yakin ingin Membatalkan Validasi?",
+              icon: "question",
+              showCancelButton: true,
+              confirmButtonText: "Ya",
+              cancelButtonText: "Batal",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // Kirim permintaan PUT/UPDATE ke server tanpa gambar
+                CancelHonor(dataemail, header, date); 
+                localStorage.setItem('currentPage', halamannow);
+             }
+            });
+      } else {
+        console.error("Data Honor dengan nama " + dataemail + " tidak ditemukan");
+      }
+    });
+  });
+}
 
   export function responseFilter(data) {
     Swal.fire({
