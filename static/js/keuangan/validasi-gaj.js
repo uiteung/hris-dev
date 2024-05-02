@@ -31,7 +31,7 @@ CihuyDomReady(() => {
   let filteredData = []; // To store the filtered data for search
   let totalData = 0;
   // Ambil data masuk
-  fetch(GetDataValidasi  + getLastMonth(), requestOptions)
+  fetch(GetDataValidasi  + "202403", requestOptions)
     .then((result) => result.json())
     .then((rekapharian) => {
         let rkp = rekapharian.data
