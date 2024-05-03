@@ -44,6 +44,7 @@ CihuyDomReady(() => {
       // Inisialisasi data tabel
       totalData = rkp.length;
       filteredData = rkp;
+      rkp.sort((a, b) => a.nama.localeCompare(b.nama));
 
       // Untuk Memunculkan Pagination Halamannya
       displayData(halamannow);
