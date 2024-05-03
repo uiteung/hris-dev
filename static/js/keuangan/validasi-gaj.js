@@ -112,9 +112,9 @@ CihuyDomReady(() => {
       const barisBaru = document.createElement("tr");
 
       barisBaru.innerHTML = `
-              <td style="margin: px">
-                  <div class="d-flex align-items-center">
-                      <div class="ms-3">
+              <td style="">
+                  <div class="d-flex align-items-center" style="width: 100%; max-width:100%" >
+                      <div class="ms-3"style="width: 100%; max-width:100%" >
                           <p class="fw-bold mb-3 text-left" style="font-size: 12px;  white-space: pre-line;">${nama}</p>
                           <p class="text-muted text-left " style="font-size: 12px;  white-space: pre-line;">${email}</p>
                       </div>
