@@ -52,6 +52,28 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
+    <style>
+      .table-container table th,
+      .table-container table td {
+        text-align: center;
+        vertical-align: middle;
+        width: 150px; /* Atur lebar setiap kolom, atau gunakan % untuk responsif */
+      }
+      .table-container table th {
+        background-color: #f4f4f4; /* Warna latar untuk header tabel */
+      }
+      .table-fixed {
+        table-layout: fixed;
+        width: 100%; /* Sesuaikan kebutuhan */
+      }
+
+      .table-fixed th,
+      .table-fixed td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    </style>
   </head>
 
   <body>
@@ -165,7 +187,11 @@
                       >
                         <thead>
                           <tr
-                            style="text-align: center; vertical-align: middle"
+                            style="
+                              text-align: center;
+                              vertical-align: middle;
+                              width: 100%;
+                            "
                           >
                             <th id="namaTh">Nama</th>
                             <th id="posisiTh">Waktu</th>
@@ -231,11 +257,11 @@
                       <div class="col-md-6">
                         <div class="pagination">
                           <button id="prevPageBtn" class="btn btn-primary">
-                            Previous
+                            Sebelumnya
                           </button>
                           <span id="currentPage" class="mx-2">Page 1</span>
                           <button id="nextPageBtn" class="btn btn-primary">
-                            Next
+                            Selanjutnya
                           </button>
                         </div>
                       </div>
