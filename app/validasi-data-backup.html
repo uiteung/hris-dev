@@ -42,7 +42,7 @@
       rel="shortcut icon"
       href="../static/img/enam_berlian-removebg-preview.png"
     />
-    <title>Master data | ULBI</title>
+    <title>Validasi data | ULBI</title>
 
     <!-- Import CSS yang diperlukan -->
     <link href="../static/css/app.css" rel="stylesheet" />
@@ -54,9 +54,17 @@
     />
     <style>
       .table-container table th,
+      .table-container table td {
+        text-align: center;
+        vertical-align: middle;
+        width: 150px; /* Atur lebar setiap kolom, atau gunakan % untuk responsif */
+      }
       .table-container table th {
-        background-color: #495057;
-        color: white;
+        background-color: #f4f4f4; /* Warna latar untuk header tabel */
+      }
+      .table-fixed {
+        table-layout: fixed;
+        width: 100%; /* Sesuaikan kebutuhan */
       }
 
       .table-fixed th,
@@ -64,41 +72,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        padding: 10px;
-      }
-      .table-container th,
-      .table-container td {
-        padding: 10px;
-        width: 150px;
-        text-align: left;
-        vertical-align: middle;
-      }
-      .table-container {
-        overflow-x: auto;
-      }
-
-      .name-email-header,
-      .name-email-cell {
-        white-space: normal;
-        text-align: left;
-        vertical-align: top;
-        font-size: 12px;
-      }
-      .name-email-cell {
-        overflow-x: auto;
-      }
-      .name-email-cell {
-        white-space: normal;
-      }
-      #selecttag .form-control,
-      #selecttag button {
-        margin-bottom: 0.5rem; /* Ensures spacing on smaller screens */
-      }
-
-      @media (max-width: 768px) {
-        #exportButton {
-          margin-top: 0.5rem; /* Adds space above the export button on small screens */
-        }
       }
     </style>
   </head>
@@ -153,9 +126,9 @@
         <main class="content">
           <div class="container-fluid p-0">
             <h5 class="right-aligned" style="float: right">
-              <a href="index.html">Home</a> / Dashboard Master Gaji
+              <a href="index.html">Home</a> / Presensi Masuk
             </h5>
-            <h1 class="h3 mb-3"><b>Dashboard Master Data Gaji</b></h1>
+            <h1 class="h3 mb-3"><b>Dashboard Validasi Data Gaji</b></h1>
             <div class="col-md-6 mb-3">
               <input
                 type="hidden"
@@ -173,12 +146,26 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <div class="row align-items-center">
-                      <!-- Ensures vertical alignment in the middle -->
-                      <!-- Filter Dropdown -->
-                      <div class="col-md-4">
-                        <select id="filterKelompok" class="form-control">
-                          <option value="">Pilih Kelompok</option>
+                    <div class="col-auto date-filter" style="width: 20%"></div>
+                    <div class="searchingdiv">
+                      <form id="search">
+                        <input
+                          type="text"
+                          placeholder="Search.."
+                          id="searchinput"
+                        />
+                        <button class="btn-primary">Search</button>
+                      </form>
+                    </div>
+                    <br />
+                    <form id="selecttag">
+                      <div class="mb-3">
+                        <select
+                          id="select2Basic"
+                          class="select2 form-select form-select-lg"
+                          data-allow-clear="true"
+                        >
+                          <option selected>Pilih Kelompok</option>
                           <option value="Struktural">Struktural</option>
                           <option value="Dosen Kontrak">Dosen Kontrak</option>
                           <option value="Dosen Tetap">Dosen Tetap</option>
@@ -187,53 +174,39 @@
                           <option value="TKK">TKK</option>
                         </select>
                       </div>
-
-                      <!-- Search Input and Button -->
-                      <div class="col-md-4 d-flex">
-                        <input
-                          type="text"
-                          placeholder="Search.."
-                          id="searchinput"
-                          class="form-control mr-2"
-                        />
-                        <button class="btn btn-primary">Search</button>
-                      </div>
-
-                      <!-- Export Button -->
-                      <div
-                        class="col-md-4 d-flex justify-content-end align-items-center"
+                      <button
+                        type="button"
+                        id="filterButton"
+                        class="btn-primary"
                       >
-                        <button
-                          type="button"
-                          id="generateButton"
-                          class="btn btn-info mr-2"
-                        >
-                          Generate Report
-                        </button>
-                        <button
-                          type="button"
-                          id="exportButton"
-                          class="btn btn-success"
-                        >
-                          Export to Excel
-                        </button>
-                      </div>
-                    </div>
+                        Filter
+                      </button>
+                      <button
+                        type="button"
+                        id="exportButton"
+                        class="btn-success"
+                      >
+                        Export to Excel
+                      </button>
+                    </form>
                     <br />
                     <!-- <hr /> -->
                     <div class="table-container">
-                      <table id="example" class="table table-fixed">
+                      <table
+                        id="example"
+                        class="table table-striped"
+                        style="width: 100%"
+                      >
                         <thead>
                           <tr
-                            style="text-align: center; vertical-align: middle"
+                            style="
+                              text-align: center;
+                              vertical-align: middle;
+                              width: 100%;
+                            "
                           >
-                            <th
-                              class="name-email-header"
-                              style="background-color: #2b343d"
-                            >
-                              Nama
-                            </th>
-                            <!-- <th id="posisiTh">Jabatan</th> -->
+                            <th id="namaTh">Nama</th>
+                            <th id="posisiTh">Waktu</th>
                             <th id="statusTh">Gaji Pokok</th>
                             <th id="tanggalTh">Keluarga</th>
                             <th id="DurasiTh">Pangan</th>
@@ -250,6 +223,10 @@
                             <th id="linkDokumenTh">BAUK</th>
                             <th id="linkDokumenTh">Lain - lain</th>
                             <th id="linkDokumenTh">PPH</th>
+                            <th id="linkDokumenTh">Jumlah Gaji Kotor</th>
+                            <th id="linkDokumenTh">Jumlah Potongan</th>
+                            <th id="linkDokumenTh">Jumlah Gaji Bersih</th>
+                            <th id="linkDokumenTh">Status Validasi</th>
                             <th id="linkDokumenTh">Action</th>
                           </tr>
                         </thead>
@@ -325,22 +302,16 @@
       type="text/javascript"
       src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"
     ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
     <!-- Library Untuk Export to Pdf -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
     <!-- <script src="https://unpkg.com/jspdf-invoice"></script> -->
-    <link
-      href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css"
-      rel="stylesheet"
-    />
 
     <!-- Library Javascript Terkait -->
     <script src="https://cdn.jsdelivr.net/gh/PMBULBI/javascript-fe@0.0.7/jquery-3.6.0.min.js"></script>
-    <script src="../static/js/keuangan/validasi-data.js" type="module"></script>
-    <!-- <script src="../static/js/controller/filter.js" type="module"></script> -->
+    <script src="../static/js/keuangan/validasi-gaj.js" type="module"></script>
+    <script src="../static/js/controller/filter,.js" type="module"></script>
     <script src="../static/js/controller/search.js" type="module"></script>
 
     <!-- <script src="static/js/presensi/cihuyred.js" type="module"></script> -->

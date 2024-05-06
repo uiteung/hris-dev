@@ -1,8 +1,8 @@
 import { token } from "../controller/cookies.js";
-let allRecords = [];
+
 let allData = []; // Holds the current page data for filtering
 let currentPage = 1; // Start from the first page
-const baseUrl = "https://hris_backend.ulbi.ac.id/api/v2/wagemst/masterall";
+const baseUrl = "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/";
 // export let GetDataValidasi = "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/";
 let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
@@ -49,6 +49,7 @@ function searchFromInput() {
   if (searchInput) {
     fetchDataFromSearch(searchInput);
   } else {
+    // If search input is empty, fetch the initial dataset
     fetchDataFromHRIS(1); // Assuming you want to reset to the first page
   }
 }
@@ -137,37 +138,35 @@ function populateTableWithData(data) {
 function createRow(item) {
   const struk = item["fgs-struk"];
   return `<tr>
-    <td class="name-email-cell">${item.nama} <br>${item.email}</td>
-    <td>${item.pokok}</td>
-    <td>${item.keluarga}</td>
-    <td>${item.pangan}</td>
-    <td>${item.kinerja}</td>
-    <td>${item.keahlian}</td>
-    <td>${struk}</td>
-    <td>${item.transportasi}</td>
-    <td>${item.kehadiran}</td>
-    <td>${item.kopkar}</td>
-    <td>${item.bankJabar}</td>
-    <td>${item.arisan}</td>
-    <td>${item.bpjs}</td>
-    <td>${item.bauk}</td>
-    <td>${item.lain2}</td>
-    <td>${item.pph}</td>        
-    <td>
-        <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" onclick="editItem(this)">
-            <i class="mdi mdi-table-edit"></i>
-        </button>
-        <button class="btn btn-danger btn-sm delete-btn" data-id="${item.id}" onclick="deleteItem(this)">
-            <i class="mdi mdi-delete"></i>
-        </button>
-    </td>  
-</tr>`;
+
+  <td class="name-email-cell">${item.nama} <br>${item.email}</td>
+
+        <td>${item.pokok}</td>
+        <td>${item.keluarga}</td>
+        <td>${item.pangan}</td>
+        <td>${item.kinerja}</td>
+        <td>${item.keahlian}</td>
+        <td>${struk}</td>
+        <td>${item.transportasi}</td>
+        <td>${item.kehadiran}</td>
+        <td>${item.kopkar}</td>
+        <td>${item.bankJabar}</td>
+        <td>${item.arisan}</td>
+        <td>${item.bpjs}</td>
+        <td>${item.bauk}</td>
+        <td>${item.lain2}</td>
+        <td>${item.pph}</td>        
+        <td>
+        <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id}" onclick="editItem(this)" aria-label="Edit">
+        <i class="mdi mdi-table-edit"></i>
+    </button>
+    <button class="btn btn-danger btn-sm delete-btn" data-id="${item.id}" onclick="deleteItem(this)" aria-label="Delete">
+        <i class="mdi mdi-delete"></i>
+    </button>
+    
+        </td>    
+    </tr>`;
 }
-window.editItem = function (element) {
-  const email = element.getAttribute("data-email");
-  localStorage.setItem("editingEmail", email);
-  window.location.href = "master-data-edit.html"; // Redirect to the edit page
-};
 
 function updatePaginationButtons(data) {
   document.getElementById(
@@ -175,7 +174,7 @@ function updatePaginationButtons(data) {
   ).textContent = `Page ${data.current_page}`;
   document.getElementById("prevPageBtn").disabled = !data.prev_page_url;
   document.getElementById("nextPageBtn").disabled = !data.next_page_url;
-  currentPage = data.current_page;
+  currentPage = data.current_page; // Update the current page
 }
 function filterTableByKelompok() {
   currentKelompok = document
@@ -191,8 +190,12 @@ function handlingErrorSearch() {
     text: "Data Tidak Ditemukan.",
   });
 }
+import { token } from "../controller/cookies.js";
+
+let allRecords = []; // Holds all records across pages
 
 function exportToExcel() {
+  // Start fetching from the first page
   fetchAllPages(1);
 }
 
@@ -211,13 +214,17 @@ function fetchAllPages(page) {
     })
     .then((data) => {
       if (data.data.data_query.length === 0) {
+        // No more data, generate Excel
         generateExcel(allRecords);
         return;
       }
+      // Append current page's data to allRecords
       allRecords = allRecords.concat(data.data.data_query);
       if (data.data.next_page_url) {
+        // If there is a next page, fetch it
         fetchAllPages(page + 1);
       } else {
+        // No next page, generate Excel
         generateExcel(allRecords);
       }
     })
@@ -248,40 +255,6 @@ function generateExcel(data) {
       PPH: item.pph,
     }))
   );
-
-  // Adjust column widths
-  const colWidths = [
-    { wch: 30 }, // Nama
-    { wch: 15 }, // Gaji Pokok
-    { wch: 15 }, // Keluarga
-    { wch: 15 }, // Pangan
-    { wch: 15 }, // KPI
-    { wch: 15 }, // Keahlian
-    { wch: 20 }, // FGS/Struktural
-    { wch: 15 }, // Transport
-    { wch: 15 }, // Kehadiran
-    { wch: 15 }, // Kopkar
-    { wch: 15 }, // Bank Jabar
-    { wch: 15 }, // Arisan
-    { wch: 15 }, // BPJS TK
-    { wch: 15 }, // BAUK
-    { wch: 15 }, // Lain-lain
-    { wch: 15 }, // PPH
-  ];
-
-  ws["!cols"] = colWidths;
-
-  // Set header style
-  const range = XLSX.utils.decode_range(ws["!ref"]);
-  for (let C = range.s.c; C <= range.e.c; ++C) {
-    const address = XLSX.utils.encode_col(C) + "1"; // Target the first row
-    if (!ws[address]) continue;
-    ws[address].s = {
-      font: { bold: true },
-      alignment: { horizontal: "center" },
-      fill: { fgColor: { rgb: "FFFFAA00" } },
-    };
-  }
 
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "MasterData");
