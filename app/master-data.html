@@ -90,6 +90,16 @@
       .name-email-cell {
         white-space: normal;
       }
+      #selecttag .form-control,
+      #selecttag button {
+        margin-bottom: 0.5rem; /* Ensures spacing on smaller screens */
+      }
+
+      @media (max-width: 768px) {
+        #exportButton {
+          margin-top: 0.5rem; /* Adds space above the export button on small screens */
+        }
+      }
     </style>
   </head>
 
@@ -163,20 +173,10 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <div class="col-auto date-filter" style="width: 20%"></div>
-                    <div class="searchingdiv">
-                      <form id="search">
-                        <input
-                          type="text"
-                          placeholder="Search.."
-                          id="searchinput"
-                        />
-                        <button class="btn-primary">Search</button>
-                      </form>
-                    </div>
-                    <br />
-                    <form id="selecttag">
-                      <div class="mb-3">
+                    <div class="row align-items-center">
+                      <!-- Ensures vertical alignment in the middle -->
+                      <!-- Filter Dropdown -->
+                      <div class="col-md-4">
                         <select id="filterKelompok" class="form-control">
                           <option value="">Pilih Kelompok</option>
                           <option value="Struktural">Struktural</option>
@@ -187,21 +187,29 @@
                           <option value="TKK">TKK</option>
                         </select>
                       </div>
-                      <button
-                        type="submit"
-                        id="filterButton"
-                        class="btn-primary"
-                      >
-                        Filter
-                      </button>
-                      <button
-                        type="button"
-                        id="exportButton"
-                        class="btn-success"
-                      >
-                        Export to Excel
-                      </button>
-                    </form>
+
+                      <!-- Search Input and Button -->
+                      <div class="col-md-4 d-flex">
+                        <input
+                          type="text"
+                          placeholder="Search.."
+                          id="searchinput"
+                          class="form-control mr-2"
+                        />
+                        <button class="btn btn-primary">Search</button>
+                      </div>
+
+                      <!-- Export Button -->
+                      <div class="col-md-4 d-flex justify-content-end">
+                        <button
+                          type="button"
+                          id="exportButton"
+                          class="btn btn-success"
+                        >
+                          Export to Excel
+                        </button>
+                      </div>
+                    </div>
                     <br />
                     <!-- <hr /> -->
                     <div class="table-container">

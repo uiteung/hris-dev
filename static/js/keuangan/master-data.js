@@ -4,7 +4,7 @@ let allData = []; // Holds the current page data for filtering
 let currentPage = 1; // Start from the first page
 const baseUrl = "https://hris_backend.ulbi.ac.id/api/v2/wagemst/masterall";
 // export let GetDataValidasi = "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/";
-
+let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
   fetchDataFromHRIS(currentPage);
@@ -25,9 +25,12 @@ function setupEventListeners() {
     .getElementById("filterKelompok")
     .addEventListener("change", filterTableByKelompok);
 }
-
 function fetchDataFromHRIS(page) {
-  const url = `${baseUrl}?page=${page}`;
+  let url = `${baseUrl}?page=${page}`;
+  if (currentKelompok) {
+    url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/filter/${currentKelompok}?page=${page}`;
+  }
+
   fetch(url, {
     method: "GET",
     headers: {
@@ -48,8 +51,8 @@ function fetchDataFromHRIS(page) {
         Swal.fire("Informasi", "Tidak ada data lebih lanjut.", "info");
         return;
       }
-      allData = data.data.data_query; // Update current page data
-      filterTableByKelompok(); // Apply filters right after fetching
+      allData = data.data.data_query;
+      populateTableWithData(allData);
       updatePaginationButtons(data.data);
     })
     .catch((error) => {
@@ -106,11 +109,9 @@ function updatePaginationButtons(data) {
   document.getElementById("nextPageBtn").disabled = !data.next_page_url;
   currentPage = data.current_page; // Update the current page
 }
-
 function filterTableByKelompok() {
-  const selectedKelompok = document.getElementById("filterKelompok").value;
-  const filteredData = allData.filter(
-    (item) => item.kelompok === selectedKelompok || selectedKelompok === ""
-  );
-  populateTableWithData(filteredData);
+  currentKelompok = document
+    .getElementById("filterKelompok")
+    .value.replace(" ", "_");
+  fetchDataFromHRIS(1); // Always fetch the first page when changing the group
 }
