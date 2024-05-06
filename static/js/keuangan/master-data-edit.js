@@ -16,8 +16,9 @@ function fetchUserDataByEmail(email) {
   fetch(url, {
     method: "GET",
     headers: {
-      login: token, // Ensure your authentication mechanism is secure
+      login: `${token}`,
       Accept: "application/json",
+      "Content-Type": "application/json",
     },
   })
     .then((response) => {
@@ -43,11 +44,11 @@ function fetchUserDataByEmail(email) {
 }
 
 function populateForm(data) {
-  if (!data || !data.data_query || !data.data_query.length) {
+  if (!data || !data || !data.data_query.length) {
     console.error("No data to populate the form.");
     return;
   }
-  const userData = data.data_query[0]; // assuming the data is the first index
+  const userData = data[0]; // assuming the data is the first index
   document.getElementById("name").value = userData.nama || "";
   document.getElementById("email").value = userData.email || "";
   document.getElementById("rank").value = userData.pangkat || "";
