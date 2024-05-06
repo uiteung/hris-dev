@@ -42,7 +42,7 @@
       rel="shortcut icon"
       href="../static/img/enam_berlian-removebg-preview.png"
     />
-    <title>Validasi data | ULBI</title>
+    <title>Master data | ULBI</title>
 
     <!-- Import CSS yang diperlukan -->
     <link href="../static/css/app.css" rel="stylesheet" />
@@ -54,17 +54,9 @@
     />
     <style>
       .table-container table th,
-      .table-container table td {
-        text-align: center;
-        vertical-align: middle;
-        width: 150px; /* Atur lebar setiap kolom, atau gunakan % untuk responsif */
-      }
       .table-container table th {
-        background-color: #f4f4f4; /* Warna latar untuk header tabel */
-      }
-      .table-fixed {
-        table-layout: fixed;
-        width: 100%; /* Sesuaikan kebutuhan */
+        background-color: #495057;
+        color: white;
       }
 
       .table-fixed th,
@@ -72,6 +64,31 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        padding: 10px;
+      }
+      .table-container th,
+      .table-container td {
+        padding: 10px;
+        width: 150px;
+        text-align: left;
+        vertical-align: middle;
+      }
+      .table-container {
+        overflow-x: auto;
+      }
+
+      .name-email-header,
+      .name-email-cell {
+        white-space: normal;
+        text-align: left;
+        vertical-align: top;
+        font-size: 12px;
+      }
+      .name-email-cell {
+        overflow-x: auto;
+      }
+      .name-email-cell {
+        white-space: normal;
       }
     </style>
   </head>
@@ -160,11 +177,7 @@
                     <br />
                     <form id="selecttag">
                       <div class="mb-3">
-                        <select
-                          id="filterKelompok"
-                          class="form-control"
-                          onchange="filterTable()"
-                        >
+                        <select id="filterKelompok" class="form-control">
                           <option value="">Pilih Kelompok</option>
                           <option value="Struktural">Struktural</option>
                           <option value="Dosen Kontrak">Dosen Kontrak</option>
@@ -192,21 +205,18 @@
                     <br />
                     <!-- <hr /> -->
                     <div class="table-container">
-                      <table
-                        id="example"
-                        class="table table-striped"
-                        style="width: 100%"
-                      >
+                      <table id="example" class="table table-fixed">
                         <thead>
                           <tr
-                            style="
-                              text-align: center;
-                              vertical-align: middle;
-                              width: 100%;
-                            "
+                            style="text-align: center; vertical-align: middle"
                           >
-                            <th id="namaTh">Nama</th>
-                            <th id="posisiTh">Waktu</th>
+                            <th
+                              class="name-email-header"
+                              style="background-color: #2b343d"
+                            >
+                              Nama
+                            </th>
+                            <th id="posisiTh">Jabatan</th>
                             <th id="statusTh">Gaji Pokok</th>
                             <th id="tanggalTh">Keluarga</th>
                             <th id="DurasiTh">Pangan</th>
@@ -223,9 +233,6 @@
                             <th id="linkDokumenTh">BAUK</th>
                             <th id="linkDokumenTh">Lain - lain</th>
                             <th id="linkDokumenTh">PPH</th>
-                            <th id="linkDokumenTh">Jumlah Gaji Kotor</th>
-                            <th id="linkDokumenTh">Jumlah Potongan</th>
-                            <th id="linkDokumenTh">Jumlah Gaji Bersih</th>
                             <th id="linkDokumenTh">Status Validasi</th>
                             <th id="linkDokumenTh">Action</th>
                           </tr>
@@ -311,7 +318,7 @@
     <!-- Library Javascript Terkait -->
     <script src="https://cdn.jsdelivr.net/gh/PMBULBI/javascript-fe@0.0.7/jquery-3.6.0.min.js"></script>
     <script src="../static/js/keuangan/master-data.js" type="module"></script>
-    <script src="../static/js/controller/filter.js" type="module"></script>
+    <!-- <script src="../static/js/controller/filter.js" type="module"></script> -->
     <script src="../static/js/controller/search.js" type="module"></script>
 
     <!-- <script src="static/js/presensi/cihuyred.js" type="module"></script> -->
