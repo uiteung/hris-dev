@@ -1,7 +1,8 @@
 import { token } from "../controller/cookies.js";
-
+import { getLastMonth } from "../controller/control.js";
 function fetchDataFromHRIS() {
-  const url = "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/202403";
+  const url =
+    "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/" + getLastMonth();
 
   if (token) {
     fetch(url, {
@@ -49,12 +50,24 @@ function populateTableWithData(data) {
     const struk = item["fgs-struk"];
     const row = `<tr>
     
-        <td>${item.nama}</td>
-        <td>${item.jabatan}</td> <!-- Assuming 'jabatan' is the 'Waktu' -->
+    <td style="">
+    <div class="d-flex align-items-center" style="width: 100%; max-width:100%" >
+        <div class="ms-3"style="width: 100%; max-width:100%" >
+            <p class="fw-bold mb-3 text-left" style="font-size: 12px;  white-space: pre-line;">${
+              item.nama
+            }</p>
+            <p class="text-muted text-left " style="font-size: 12px;  white-space: pre-line;">${
+              item.email
+            }</p>
+        </div>
+    </div>
+</td>
+
+        <td>${item.jabatan}</td> 
         <td>${item["gaji-pokok"]}</td>
         <td>${item.keluarga}</td>
         <td>${item.pangan}</td>
-        <td>${item.kinerja}</td> <!-- Assuming 'kinerja' is the 'KPI' -->
+        <td>${item.kinerja}</td> 
         <td>${item.keahlian}</td>
         <td>${struk}</td>
         <td>${item.transportasi}</td>
