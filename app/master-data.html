@@ -160,7 +160,11 @@
                     <br />
                     <form id="selecttag">
                       <div class="mb-3">
-                        <select id="filterKelompok" class="form-control">
+                        <select
+                          id="filterKelompok"
+                          class="form-control"
+                          onchange="filterTable()"
+                        >
                           <option value="">Pilih Kelompok</option>
                           <option value="Struktural">Struktural</option>
                           <option value="Dosen Kontrak">Dosen Kontrak</option>
