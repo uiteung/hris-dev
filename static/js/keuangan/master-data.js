@@ -1,99 +1,111 @@
 import { token } from "../controller/cookies.js";
-import { getLastMonth } from "../controller/control.js";
-let allData = [];
-function fetchDataFromHRIS() {
-  const url =
-    "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/" + getLastMonth();
 
-  if (token) {
-    fetch(url, {
-      method: "GET",
-      headers: {
-        login: `${token}`,
-        Accept: "application/json",
-      },
+let allData = []; // Holds the current page data for filtering
+let currentPage = 1; // Start from the first page
+const baseUrl = "https://hris_backend.ulbi.ac.id/api/v2/wagemst/masterall";
+// export let GetDataValidasi = "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/";
+
+document.addEventListener("DOMContentLoaded", () => {
+  setupEventListeners();
+  fetchDataFromHRIS(currentPage);
+});
+
+function setupEventListeners() {
+  document.getElementById("prevPageBtn").addEventListener("click", () => {
+    if (currentPage > 1) {
+      fetchDataFromHRIS(currentPage - 1);
+    }
+  });
+
+  document.getElementById("nextPageBtn").addEventListener("click", () => {
+    fetchDataFromHRIS(currentPage + 1);
+  });
+
+  document
+    .getElementById("filterKelompok")
+    .addEventListener("change", filterTableByKelompok);
+}
+
+function fetchDataFromHRIS(page) {
+  const url = `${baseUrl}?page=${page}`;
+  fetch(url, {
+    method: "GET",
+    headers: {
+      login: `${token}`,
+      Accept: "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          "Terjadi kesalahan saat mengambil data. Silakan coba lagi."
+        );
+      }
+      return response.json();
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(
-            "Terjadi kesalahan saat mengambil data rekapitulasi. Silakan coba lagi."
-          );
-        }
-        return response.json();
-      })
-      .then((data) => {
-        allData = data.data; // Store fetched data
-        populateTableWithData(allData);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: error.message,
-        });
+    .then((data) => {
+      if (!data.data.data_query || data.data.data_query.length === 0) {
+        Swal.fire("Informasi", "Tidak ada data lebih lanjut.", "info");
+        return;
+      }
+      allData = data.data.data_query; // Update current page data
+      filterTableByKelompok(); // Apply filters right after fetching
+      updatePaginationButtons(data.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
       });
-  } else {
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Anda belum login. Silakan login terlebih dahulu.",
     });
-  }
 }
 
 function populateTableWithData(data) {
   const tableBody = document.getElementById("tablebody");
   tableBody.innerHTML = ""; // Clear existing table data
-
-  // Iterate over each item in the data array
   data.forEach((item) => {
     tableBody.innerHTML += createRow(item);
   });
 }
+
 function createRow(item) {
   const struk = item["fgs-struk"];
   return `<tr>
-    
-<td style="">
-<div class="d-flex align-items-center" style="width: 100%; max-width:100%" >
-    <div class="ms-3"style="width: 100%; max-width:100%" >
-        <p class="fw-bold mb-3 text-left" style="font-size: 12px;  white-space: pre-line;">${
-          item.nama
-        }</p>
-        <p class="text-muted text-left " style="font-size: 12px;  white-space: pre-line;">${
-          item.email
-        }</p>
-    </div>
-</div>
-</td>
 
-    <td>${item.jabatan}</td> 
-    <td>${item["gaji-pokok"]}</td>
-    <td>${item.keluarga}</td>
-    <td>${item.pangan}</td>
-    <td>${item.kinerja}</td> 
-    <td>${item.keahlian}</td>
-    <td>${struk}</td>
-    <td>${item.transportasi}</td>
-    <td>${item.kehadiran}</td>
-    <td>${item.kopkar}</td>
-    <td>${item.bankJabar}</td>
-    <td>${item.arisan}</td>
-    <td>${item.bpjs}</td>
-    <td>${item.bauk}</td>
-    <td>${item.lain2}</td>
-    <td>${item.pph}</td>
-    <td>${item.totalgaji}</td>
-    <td>${item.totalpotongan}</td>
-    <td>${item.totalgajibersih}</td>
-    <td>${item.validasi ? "Validated" : "Not Validated"}</td>
-    <td><button class="btn btn-primary">Action</button></td>
-  </tr>`;
+  <td class="name-email-cell">${item.nama} <br>${item.email}</td>
+
+        <td>${item.jabatan}</td>
+        <td>${item.pokok}</td>
+        <td>${item.keluarga}</td>
+        <td>${item.pangan}</td>
+        <td>${item.kinerja}</td>
+        <td>${item.keahlian}</td>
+        <td>${struk}</td>
+        <td>${item.transportasi}</td>
+        <td>${item.kehadiran}</td>
+        <td>${item.kopkar}</td>
+        <td>${item.bankJabar}</td>
+        <td>${item.arisan}</td>
+        <td>${item.bpjs}</td>
+        <td>${item.bauk}</td>
+        <td>${item.lain2}</td>
+        <td>${item.pph}</td>
+        
+        <td>${item.validasi ? "Validated" : "Not Validated"}</td>
+        <td><button class="btn btn-primary">Action</button></td>
+    </tr>`;
 }
-document
-  .getElementById("filterKelompok")
-  .addEventListener("change", filterTableByKelompok);
+
+function updatePaginationButtons(data) {
+  document.getElementById(
+    "currentPage"
+  ).textContent = `Page ${data.current_page}`;
+  document.getElementById("prevPageBtn").disabled = !data.prev_page_url;
+  document.getElementById("nextPageBtn").disabled = !data.next_page_url;
+  currentPage = data.current_page; // Update the current page
+}
 
 function filterTableByKelompok() {
   const selectedKelompok = document.getElementById("filterKelompok").value;
@@ -102,5 +114,3 @@ function filterTableByKelompok() {
   );
   populateTableWithData(filteredData);
 }
-
-fetchDataFromHRIS();
