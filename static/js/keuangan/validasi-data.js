@@ -1,8 +1,10 @@
+import { getLastMonth } from "../controller/control.js";
 import { token } from "../controller/cookies.js";
 
 let allData = []; // Holds the current page data for filtering
 let currentPage = 1; // Start from the first page
-const baseUrl = "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/";
+const baseUrl =
+  "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/" + getLastMonth();
 // export let GetDataValidasi = "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/";
 let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
@@ -137,11 +139,13 @@ function populateTableWithData(data) {
 
 function createRow(item) {
   const struk = item["fgs-struk"];
+  const gajipokok = item["gaji-pokok"];
+
   return `<tr>
 
   <td class="name-email-cell">${item.nama} <br>${item.email}</td>
 
-        <td>${item.pokok}</td>
+        <td>${gajipokok}</td>
         <td>${item.keluarga}</td>
         <td>${item.pangan}</td>
         <td>${item.kinerja}</td>
@@ -155,16 +159,14 @@ function createRow(item) {
         <td>${item.bpjs}</td>
         <td>${item.bauk}</td>
         <td>${item.lain2}</td>
-        <td>${item.pph}</td>        
-        <td>
-        <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id}" onclick="editItem(this)" aria-label="Edit">
-        <i class="mdi mdi-table-edit"></i>
-    </button>
-    <button class="btn btn-danger btn-sm delete-btn" data-id="${item.id}" onclick="deleteItem(this)" aria-label="Delete">
-        <i class="mdi mdi-delete"></i>
-    </button>
-    
-        </td>    
+        <td>${item.pph}</td> 
+        <td>${item.totalgaji}</td>        
+        <td>${item.totalgajibersih}</td>        
+        <td>${item.totalpotongan}</td>        
+        <td>${item.transportasi}</td>        
+        <td>${item.status}</td>        
+
+        
     </tr>`;
 }
 
@@ -190,7 +192,6 @@ function handlingErrorSearch() {
     text: "Data Tidak Ditemukan.",
   });
 }
-import { token } from "../controller/cookies.js";
 
 let allRecords = []; // Holds all records across pages
 
