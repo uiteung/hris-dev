@@ -1,6 +1,6 @@
 $(function () {
   // Load navbar.html on page load
   $(".sidebar-nav").load(
-    "https://cdn.jsdelivr.net/gh/uiteung/hris-dev@0.1.1/static/template/sidebar.html"
+    "https://cdn.jsdelivr.net/gh/uiteung/hris-dev@0.1.2/static/template/sidebar.html"
   );
 });
