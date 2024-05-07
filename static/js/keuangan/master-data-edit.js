@@ -1,5 +1,5 @@
 import { token } from "../controller/cookies.js";
-
+//
 document.addEventListener("DOMContentLoaded", function () {
   const email = localStorage.getItem("editingEmail");
   if (email) {
