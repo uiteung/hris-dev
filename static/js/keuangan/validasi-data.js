@@ -99,7 +99,7 @@ function fetchDataFromHRIS(page) {
   let url = `${baseUrl}?page=${page}`;
   if (currentKelompok) {
     url =
-      `https://hris_backend.ulbi.ac.id/api/v2/rkp/filter/${currentKelompok}?page=${page} ` +
+      `https://hris_backend.ulbi.ac.id/api/v2/rkp/filter/${currentKelompok}?waktu ` +
       getLastMonth();
   }
 
