@@ -157,7 +157,7 @@ function createRow(item) {
         <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" onclick="editItem(this)">
             <i class="mdi mdi-table-edit"></i>
         </button>
-        <button class="btn btn-danger btn-sm delete-btn" data-id="${item.id}" onclick="deleteItem(this)">
+        <button class="btn btn-danger btn-sm delete-btn" data-id="${item.id}" data-email="${item.email}" onclick="deleteItem(this)">
             <i class="mdi mdi-delete"></i>
         </button>
     </td>  
@@ -166,7 +166,7 @@ function createRow(item) {
 window.editItem = function (element) {
   const email = element.getAttribute("data-email");
   localStorage.setItem("editingEmail", email);
-  window.location.href = "master-data-edit.html"; // Redirect to the edit page
+  window.location.href = "master-data-edit.html";
 };
 
 function updatePaginationButtons(data) {
@@ -347,5 +347,49 @@ function generateGaji() {
     .catch((error) => {
       console.error("Error:", error);
       Swal.fire("Error", "Error: " + error.message, "error");
+    });
+}
+window.deleteItem = function (element) {
+  const email = element.getAttribute("data-email"); // Mengambil email dari attribute
+
+  Swal.fire({
+    title: "Apakah Anda yakin?",
+    text: "Data tidak dapat dikembalikan setelah dihapus!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Hapus",
+    cancelButtonText: "Batal",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      sendDeleteRequest(email); // Melakukan request penghapusan
+    }
+  });
+};
+function sendDeleteRequest(email) {
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/delete?email=${encodeURIComponent(
+    email
+  )}`;
+  fetch(url, {
+    method: "DELETE",
+    headers: {
+      login: token, // Pastikan token tersedia
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        Swal.fire("Deleted!", "Data berhasil dihapus.", "success").then(() => {
+          window.location.reload();
+        });
+      } else {
+        Swal.fire("Failed!", "Gagal menghapus data: " + data.message, "error");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      Swal.fire("Error", "Kesalahan: " + error.message, "error");
     });
 }
