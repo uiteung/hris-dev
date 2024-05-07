@@ -209,7 +209,10 @@ function exportToExcel() {
 }
 
 function fetchAllPages(page) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/masterall?page=${page}`;
+  const url =
+    `https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/` +
+    getLastMonth() +
+    `?page=${page}`;
   fetch(url, {
     method: "GET",
     headers: {
