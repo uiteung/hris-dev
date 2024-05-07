@@ -285,7 +285,7 @@ function generateExcel(data) {
 
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "MasterData");
-  XLSX.writeFile(wb, "HRIS_Data_Export.xlsx");
+  XLSX.writeFile(wb, "HRIS_Master_Data_Export.xlsx");
 }
 
 document
@@ -296,8 +296,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const generateButton = document.getElementById("generateButton");
   generateButton.addEventListener("click", () => {
     Swal.fire({
-      title: "Generate Gaji",
-      text: "Apakah Anda ingin menginput gaji ?",
+      title: "Sebelum Anda Menggenerate Gaji Pastikan Kembali",
+      text: "Apakah Mata Master Sudah Valid?",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
