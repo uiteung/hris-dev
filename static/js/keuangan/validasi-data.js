@@ -66,7 +66,7 @@ function fetchDataFromSearch(searchKey) {
     searchKey;
 
   fetch(url, {
-    method: "GET",
+    method: "POST",
     headers: {
       login: `${token}`,
       Accept: "application/json",
