@@ -172,7 +172,7 @@ function createRow(item) {
         <td>${item.totalgajibersih}</td>        
         <td>${item.totalpotongan}</td>        
         <td>${item.transportasi}</td>        
-        <td>${item.validasi}</td>        
+         
 
         
     </tr>`;
