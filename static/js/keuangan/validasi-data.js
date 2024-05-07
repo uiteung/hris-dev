@@ -3,6 +3,8 @@ import { token } from "../controller/cookies.js";
 
 let allData = []; // Holds the current page data for filtering
 let currentPage = 1; // Start from the first page
+const baseUrlsearch =
+  "https://hris_backend.ulbi.ac.id/api/v2/rkp/" + getLastMonth();
 const baseUrl =
   "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/" + getLastMonth();
 // export let GetDataValidasi = "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/";
@@ -57,10 +59,14 @@ function searchFromInput() {
 }
 
 function fetchDataFromSearch(searchKey) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/search?key=${searchKey}`;
+  const url =
+    "https://hris_backend.ulbi.ac.id/api/v2/rkp/search/" +
+    getLastMonth() +
+    "?key=" +
+    searchKey;
 
   fetch(url, {
-    method: "POST",
+    method: "GET",
     headers: {
       login: `${token}`,
       Accept: "application/json",
@@ -92,7 +98,7 @@ function fetchDataFromSearch(searchKey) {
 function fetchDataFromHRIS(page) {
   let url = `${baseUrl}?page=${page}`;
   if (currentKelompok) {
-    url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/filter/${currentKelompok}?page=${page}`;
+    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/filter/${currentKelompok}?page=${page} `;
   }
 
   fetch(url, {
