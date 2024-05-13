@@ -53,78 +53,78 @@ function searchFromInput() {
   }
 }
 
-// function fetchDataFromSearch(searchKey) {
-//   const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/search?key=${searchKey}`;
+function fetchDataFromSearch(searchKey) {
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/search?key=${searchKey}`;
 
-//   fetch(url, {
-//     method: "POST",
-//     headers: {
-//       login: `${token}`,
-//       Accept: "application/json",
-//     },
-//   })
-//     .then((response) => {
-//       if (!response.ok) {
-//         throw new Error(
-//           "Terjadi kesalahan saat mencari data. Silakan coba lagi."
-//         );
-//       }
-//       return response.json();
-//     })
-//     .then((data) => {
-//       if (!data.data.data_query || data.data.data_query.length === 0) {
-//         Swal.fire("Informasi", "Tidak ada data yang cocok ditemukan.", "info");
-//         return;
-//       }
-//       allData = data.data.data_query;
-//       populateTableWithData(allData);
-//       updatePaginationButtons(data.data);
-//     })
-//     .catch((error) => {
-//       console.error("Error fetching data:", error);
-//       handlingErrorSearch();
-//     });
-// }
+  fetch(url, {
+    method: "POST",
+    headers: {
+      login: `${token}`,
+      Accept: "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          "Terjadi kesalahan saat mencari data. Silakan coba lagi."
+        );
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (!data.data.data_query || data.data.data_query.length === 0) {
+        Swal.fire("Informasi", "Tidak ada data yang cocok ditemukan.", "info");
+        return;
+      }
+      allData = data.data.data_query;
+      populateTableWithData(allData);
+      updatePaginationButtons(data.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+      handlingErrorSearch();
+    });
+}
 
-// function fetchDataFromHRIS(page) {
-//   let url = `${baseUrl}?page=${page}`;
-//   if (currentKelompok) {
-//     url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/filter/${currentKelompok}?page=${page}`;
-//   }
+function fetchDataFromHRIS(page) {
+  let url = `${baseUrl}?page=${page}`;
+  if (currentKelompok) {
+    url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/filter/${currentKelompok}?page=${page}`;
+  }
 
-//   fetch(url, {
-//     method: "GET",
-//     headers: {
-//       login: `${token}`,
-//       Accept: "application/json",
-//     },
-//   })
-//     .then((response) => {
-//       if (!response.ok) {
-//         throw new Error(
-//           "Terjadi kesalahan saat mengambil data. Silakan coba lagi."
-//         );
-//       }
-//       return response.json();
-//     })
-//     .then((data) => {
-//       if (!data.data.data_query || data.data.data_query.length === 0) {
-//         Swal.fire("Informasi", "Tidak ada data lebih lanjut.", "info");
-//         return;
-//       }
-//       allData = data.data.data_query;
-//       populateTableWithData(allData);
-//       updatePaginationButtons(data.data);
-//     })
-//     .catch((error) => {
-//       console.error("Error fetching data:", error);
-//       Swal.fire({
-//         icon: "error",
-//         title: "Oops...",
-//         text: error.message,
-//       });
-//     });
-// }
+  fetch(url, {
+    method: "GET",
+    headers: {
+      login: `${token}`,
+      Accept: "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          "Terjadi kesalahan saat mengambil data. Silakan coba lagi."
+        );
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (!data.data.data_query || data.data.data_query.length === 0) {
+        Swal.fire("Informasi", "Tidak ada data lebih lanjut.", "info");
+        return;
+      }
+      allData = data.data.data_query;
+      populateTableWithData(allData);
+      updatePaginationButtons(data.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
+    });
+}
 
 function populateTableWithData(data) {
   const tableBody = document.getElementById("tablebody");
@@ -138,21 +138,14 @@ function createRow(item) {
   const struk = item["fgs-struk"];
   return `<tr>
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
-    <td>${item.pokok}</td>
-    <td>${item.keluarga}</td>
-    <td>${item.pangan}</td>
-    <td>${item.kinerja}</td>
-    <td>${item.keahlian}</td>
-    <td>${struk}</td>
-    <td>${item.transportasi}</td>
-    <td>${item.kehadiran}</td>
-    <td>${item.kopkar}</td>
-    <td>${item.bankJabar}</td>
-    <td>${item.arisan}</td>
-    <td>${item.bpjs}</td>
-    <td>${item.bauk}</td>
-    <td>${item.lain2}</td>
-    <td>${item.pph}</td>        
+    <td>${item.pangkat}</td>
+    <td>${item.jabatan}</td>
+    <td>${item.jafung}</td>
+    <td>${item.status_keluarga}</td>
+    <td>${item.suskel.dirisendiri}</td>
+    <td>${item.suskel.suamiistri}</td>
+    <td>${item.suskel.anak}</td>
+    <td>${item.kelompok}</td>  
     <td>
         <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" onclick="editItem(this)">
             <i class="mdi mdi-table-edit"></i>
