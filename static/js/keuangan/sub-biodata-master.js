@@ -135,24 +135,30 @@ function populateTableWithData(data) {
 }
 
 function createRow(item) {
-  const struk = item["fgs-struk"];
+  if (!item || Object.keys(item).length === 0) {
+    return `<tr><td colspan="10">No data available</td></tr>`;
+  }
   return `<tr>
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
-    <td>${item.pangkat}</td>
-    <td>${item.jabatan}</td>
-    <td>${item.jafung}</td>
-    <td>${item.status_keluarga}</td>
-    <td>${item.suskel.dirisendiri}</td>
-    <td>${item.suskel.suamiistri}</td>
-    <td>${item.suskel.anak}</td>
-    <td>${item.kelompok}</td>  
+    <td>${item.pangkat || "Tidak Tersedia"}  </td>
+    <td>${item.jabatan || "Tidak Tersedia"}</td>
+    <td>${item.jafung || "Tidak Tersedia"}</td>
+    <td>${item.status_keluarga || "Tidak Tersedia"}</td>
+    <td>${item.suskel.dirisendiri || "Tidak Tersedia"}</td>
+    <td>${item.suskel.suamiistri || "Tidak Tersedia"}</td>
+    <td>${item.suskel.anak || "Tidak Tersedia"}</td>
+    <td>${item.kelompok || "Tidak Tersedia"}</td>  
     <td>
-        <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" onclick="editItem(this)">
-            <i class="mdi mdi-table-edit"></i>
-        </button>
-        <button class="btn btn-danger btn-sm delete-btn" data-id="${item.id}" data-email="${item.email}" onclick="deleteItem(this)">
-            <i class="mdi mdi-delete"></i>
-        </button>
+            <button class="btn btn-primary btn-sm edit-btn" data-id="${
+              item.id
+            }" data-email="${item.email}" onclick="editItem(this)">
+                    <i class="mdi mdi-table-edit"></i>
+            </button>
+            <button class="btn btn-danger btn-sm delete-btn" data-id="${
+              item.id
+            }" data-email="${item.email}" onclick="deleteItem(this)">
+                    <i class="mdi mdi-delete"></i>
+            </button>
     </td>  
 </tr>`;
 }
