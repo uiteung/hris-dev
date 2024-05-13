@@ -1,4 +1,4 @@
-import { token } from "../controller/cookies.js";
+import { token } from "../../controller/cookies.js";
 //
 document.addEventListener("DOMContentLoaded", function () {
   const email = localStorage.getItem("editingEmail");
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchUserDataByEmail(email) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/bio/getbyemail?email=${encodeURIComponent(
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/bio/email?email=${encodeURIComponent(
     email
   )}`;
   fetch(url, {
@@ -45,26 +45,23 @@ function fetchUserDataByEmail(email) {
 }
 
 function populateForm(userData) {
-  document.getElementById("name").value = userData.nama || "";
-  document.getElementById("email").value = userData.email || "";
-  document.getElementById("rank").value = userData.pangkat || "";
-  document.getElementById("position").value = userData.jabatan || "";
-  document.getElementById("basicSalary").value = userData.pokok;
-  document.getElementById("familyAllowance").value = userData.keluarga;
-  document.getElementById("foodAllowance").value = userData.pangan;
-  document.getElementById("performanceAllowance").value = userData.kinerja;
-  document.getElementById("expertiseAllowance").value = userData.keahlian;
-  document.getElementById("structuralAllowance").value = userData["fgs-struk"];
-  document.getElementById("transportationAllowance").value =
-    userData.transportasi;
-  document.getElementById("attendanceAllowance").value = userData.kehadiran;
-  document.getElementById("kopkarDeduction").value = userData.kopkar;
-  document.getElementById("bankJabarDeduction").value = userData.bankJabar;
-  document.getElementById("arisanDeduction").value = userData.arisan;
-  document.getElementById("bpjsDeduction").value = userData.bpjs;
-  document.getElementById("baukDeduction").value = userData.bauk;
-  document.getElementById("otherDeductions").value = userData.lain2;
-  document.getElementById("pphDeduction").value = userData.pph;
+  document.getElementById("nama").value = userData.nama || "Tidak Tersedia";
+  document.getElementById("email").value = userData.email || "Tidak Tersedia";
+  document.getElementById("pangkat").value =
+    userData.pangkat || "Tidak Tersedia";
+  document.getElementById("jabatan").value =
+    userData.jabatan || "Tidak Tersedia";
+  document.getElementById("jafung").value = userData.jafung || "Tidak Tersedia";
+  document.getElementById("status_keluarga").value =
+    userData.status_keluarga || "Tidak Tersedia";
+  document.getElementById("suskel_dirisendiri").value =
+    userData.suskel.dirisendiri || "Tidak Tersedia";
+  document.getElementById("suskel_suamiistri").value =
+    userData.suskel.suamiistri || "Tidak Tersedia";
+  document.getElementById("suskel_anak").value =
+    userData.suskel.anak || "Tidak Tersedia";
+  document.getElementById("kelompok").value =
+    userData.kelompok || "Tidak Tersedia";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
