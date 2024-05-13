@@ -196,7 +196,7 @@ function exportToExcel() {
 }
 
 function fetchAllPages(page) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/masterall?page=${page}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/biodata?page=${page}`;
   fetch(url, {
     method: "GET",
     headers: {
@@ -367,7 +367,7 @@ window.deleteItem = function (element) {
   });
 };
 function sendDeleteRequest(email) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/delete?email=${encodeURIComponent(
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/delete?email=${encodeURIComponent(
     email
   )}`;
   fetch(url, {
