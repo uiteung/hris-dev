@@ -92,26 +92,18 @@ function updateUserData() {
   )}`;
 
   const formData = {
-    nama: document.getElementById("name").value,
-    pangkat: document.getElementById("rank").value,
-    jabatan: document.getElementById("position").value,
-    pokok: parseFloat(document.getElementById("basicSalary").value),
-    keluarga: parseFloat(document.getElementById("familyAllowance").value),
-    pangan: parseFloat(document.getElementById("foodAllowance").value),
-    kinerja: parseFloat(document.getElementById("performanceAllowance").value),
-    keahlian: parseFloat(document.getElementById("expertiseAllowance").value),
-    fgs_struk: parseFloat(document.getElementById("structuralAllowance").value),
-    transportasi: parseFloat(
-      document.getElementById("transportationAllowance").value
-    ),
-    kehadiran: parseFloat(document.getElementById("attendanceAllowance").value),
-    kopkar: parseFloat(document.getElementById("kopkarDeduction").value),
-    bankJabar: parseFloat(document.getElementById("bankJabarDeduction").value),
-    arisan: parseFloat(document.getElementById("arisanDeduction").value),
-    bpjs: parseFloat(document.getElementById("bpjsDeduction").value),
-    bauk: parseFloat(document.getElementById("baukDeduction").value),
-    lain2: parseFloat(document.getElementById("otherDeductions").value),
-    pph: parseFloat(document.getElementById("pphDeduction").value),
+    nama: document.getElementById("nama").value,
+    email: email,
+    pangkat: document.getElementById("pangkat").value,
+    jabatan: document.getElementById("jabatan").value,
+    jafung: document.getElementById("jafung").value,
+    status_keluarga: document.getElementById("status_keluarga").value,
+    suskel: {
+      dirisendiri: document.getElementById("suskel_dirisendiri").value,
+      suamiistri: document.getElementById("suskel_suamiistri").value,
+      anak: document.getElementById("suskel_anak").value,
+    },
+    kelompok: document.getElementById("kelompok").value,
   };
 
   fetch(url, {
@@ -134,7 +126,7 @@ function updateUserData() {
           setTimeout(
             () =>
               (window.location.href =
-                "https://euis.ulbi.ac.id/hris-dev/app/master-data.html"),
+                "https://euis.ulbi.ac.id/hris-dev/app/Biodata/biodata-master.html"),
             1000
           );
         });
