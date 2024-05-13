@@ -52,16 +52,13 @@ function populateForm(userData) {
   document.getElementById("jabatan").value =
     userData.jabatan || "Tidak Tersedia";
   document.getElementById("jafung").value = userData.jafung || "Tidak Tersedia";
-  document.getElementById("status_keluarga").value =
-    userData.status_keluarga || "Tidak Tersedia";
+  document.getElementById("status_keluarga").value = userData.status_keluarga;
   document.getElementById("suskel_dirisendiri").value =
-    userData.suskel.dirisendiri || "Tidak Tersedia";
+    userData.suskel.dirisendiri;
   document.getElementById("suskel_suamiistri").value =
-    userData.suskel.suamiistri || "Tidak Tersedia";
-  document.getElementById("suskel_anak").value =
-    userData.suskel.anak || "Tidak Tersedia";
-  document.getElementById("kelompok").value =
-    userData.kelompok || "Tidak Tersedia";
+    userData.suskel.suamiistri;
+  document.getElementById("suskel_anak").value = userData.suskel.anak;
+  document.getElementById("kelompok").value = userData.kelompok;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -99,9 +96,11 @@ function updateUserData() {
     jafung: document.getElementById("jafung").value,
     status_keluarga: document.getElementById("status_keluarga").value,
     suskel: {
-      dirisendiri: document.getElementById("suskel_dirisendiri").value,
-      suamiistri: document.getElementById("suskel_suamiistri").value,
-      anak: document.getElementById("suskel_anak").value,
+      dirisendiri: parseInt(
+        document.getElementById("suskel_dirisendiri").value
+      ),
+      suamiistri: parseInt(document.getElementById("suskel_suamiistri").value),
+      anak: parseInt(document.getElementById("suskel_anak").value),
     },
     kelompok: document.getElementById("kelompok").value,
   };
