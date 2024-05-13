@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function updateUserData() {
   const email = document.getElementById("email").value; // mendapatkan email dari form
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/update?email=${encodeURIComponent(
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/bioupdate?email=${encodeURIComponent(
     email
   )}`;
 
