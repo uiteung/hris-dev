@@ -54,7 +54,7 @@ function searchFromInput() {
 }
 
 function fetchDataFromSearch(searchKey) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/search?key=${searchKey}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/bio/search?key=${searchKey}`;
 
   fetch(url, {
     method: "POST",
@@ -89,7 +89,7 @@ function fetchDataFromSearch(searchKey) {
 function fetchDataFromHRIS(page) {
   let url = `${baseUrl}?page=${page}`;
   if (currentKelompok) {
-    url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/filter/${currentKelompok}?page=${page}`;
+    url = `https://hris_backend.ulbi.ac.id/api/v2/master/bio/filter/${currentKelompok}?page=${page}`;
   }
 
   fetch(url, {
