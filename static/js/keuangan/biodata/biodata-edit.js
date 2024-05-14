@@ -28,6 +28,7 @@ function fetchUserDataByEmail(email) {
         populateForm(data.data);
         populatePangkatDropdown(data.data);
         populateJabatanFungsional(data.data);
+        polpulateKelompok(data.data);
       } else {
         Swal.fire(
           "Informasi",
@@ -75,6 +76,15 @@ function populatePangkatDropdown(userData) {
 function populateJabatanFungsional(userData) {
   const pangkatDropdown = document.getElementById("jafung");
   const pangkatValue = userData.jafung || "Tidak Tersedia";
+  const option = document.createElement("option");
+  option.text = pangkatValue;
+  option.value = pangkatValue;
+  pangkatDropdown.appendChild(option);
+}
+
+function polpulateKelompok(userData) {
+  const pangkatDropdown = document.getElementById("kelompok");
+  const pangkatValue = userData.kelompok || "Tidak Tersedia";
   const option = document.createElement("option");
   option.text = pangkatValue;
   option.value = pangkatValue;
