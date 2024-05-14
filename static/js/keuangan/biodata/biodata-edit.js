@@ -29,6 +29,7 @@ function fetchUserDataByEmail(email) {
         populatePangkatDropdown(data.data);
         populateJabatanFungsional(data.data);
         polpulateKelompok(data.data);
+        populateKelompokDropdown(data.data.kelompok);
       } else {
         Swal.fire(
           "Informasi",
@@ -89,6 +90,24 @@ function polpulateKelompok(userData) {
   option.text = pangkatValue;
   option.value = pangkatValue;
   pangkatDropdown.appendChild(option);
+}
+function populateKelompokDropdown(selectedKelompok) {
+  const kelompokDropdown = document.getElementById("kelompok");
+
+  // Mengecek apakah nilai yang diget sudah ada di dropdown
+  const existingOption = Array.from(kelompokDropdown.options).find(
+    (option) => option.value === selectedKelompok
+  );
+
+  if (existingOption) {
+    existingOption.selected = true;
+  } else {
+    const newOption = document.createElement("option");
+    newOption.value = selectedKelompok;
+    newOption.textContent = selectedKelompok;
+    newOption.selected = true;
+    kelompokDropdown.appendChild(newOption);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
