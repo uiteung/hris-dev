@@ -126,9 +126,9 @@
         <main class="content">
           <div class="container-fluid p-0">
             <h5 class="right-aligned" style="float: right">
-              <a href="index.html">Home</a> / Presensi Masuk
+              <a href="index.html">Home</a> / Detail Biodata
             </h5>
-            <h1 class="h3 mb-3"><b>Dashboard Validasi Data Gaji</b></h1>
+            <h1 class="h3 mb-3"><b>Detail Biodata</b></h1>
             <div class="col-md-6 mb-3">
               <input
                 type="hidden"
@@ -146,253 +146,97 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Form Perbarui Data Gaji</h4>
+                    <h4>Form Perbarui Data Biodata</h4>
                   </div>
                   <div class="card-body">
                     <form id="editForm">
                       <!-- Name Field -->
-                      <div class="mb-3">
-                        <label for="name" class="form-label">Nama:</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="name"
-                          name="name"
-                          required
-                        />
-                      </div>
-
-                      <!-- Email Field -->
-                      <div class="mb-3">
-                        <label for="email" class="form-label">Email:</label>
-                        <input
-                          type="email"
-                          class="form-control"
-                          id="email"
-                          name="email"
-                          required
-                        />
-                      </div>
-
-                      <!-- Rank (Pangkat) Field -->
-                      <div class="mb-3">
-                        <label for="rank" class="form-label">Pangkat:</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="rank"
-                          name="rank"
-                        />
-                      </div>
-
-                      <!-- Position (Jabatan) Field -->
-                      <div class="mb-3">
-                        <label for="position" class="form-label"
-                          >Jabatan:</label
-                        >
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="position"
-                          name="position"
-                        />
-                      </div>
-
-                      <!-- Basic Salary Field -->
-                      <div class="mb-3">
-                        <label for="basicSalary" class="form-label"
-                          >Gaji Pokok:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="basicSalary"
-                          name="basicSalary"
-                        />
-                      </div>
-
-                      <!-- Family Allowance Field -->
-                      <div class="mb-3">
-                        <label for="familyAllowance" class="form-label"
-                          >Tunjangan Keluarga:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="familyAllowance"
-                          name="familyAllowance"
-                        />
-                      </div>
-
-                      <!-- Food Allowance Field -->
-                      <div class="mb-3">
-                        <label for="foodAllowance" class="form-label"
-                          >Tunjangan Pangan:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="foodAllowance"
-                          name="foodAllowance"
-                        />
-                      </div>
-
-                      <!-- Performance Allowance Field -->
-                      <div class="mb-3">
-                        <label for="performanceAllowance" class="form-label"
-                          >Tunjangan Kinerja:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="performanceAllowance"
-                          name="performanceAllowance"
-                        />
-                      </div>
-
-                      <!-- Expertise Allowance Field -->
-                      <div class="mb-3">
-                        <label for="expertiseAllowance" class="form-label"
-                          >Tunjangan Keahlian:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="expertiseAllowance"
-                          name="expertiseAllowance"
-                        />
-                      </div>
-
-                      <!-- Structural/Functional Allowance Field -->
-                      <div class="mb-3">
-                        <label for="structuralAllowance" class="form-label"
-                          >Tunjangan Struktural/Fungsional:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="structuralAllowance"
-                          name="structuralAllowance"
-                        />
-                      </div>
-
-                      <!-- Transportation Allowance Field -->
-                      <div class="mb-3">
-                        <label for="transportationAllowance" class="form-label"
-                          >Tunjangan Transportasi:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="transportationAllowance"
-                          name="transportationAllowance"
-                        />
-                      </div>
-
-                      <!-- Attendance Allowance Field -->
-                      <div class="mb-3">
-                        <label for="attendanceAllowance" class="form-label"
-                          >Tunjangan Kehadiran:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="attendanceAllowance"
-                          name="attendanceAllowance"
-                        />
-                      </div>
-
-                      <!-- Deductions Section -->
-                      <!-- Cooperative Deduction (Kopkar) -->
-                      <div class="mb-3">
-                        <label for="kopkarDeduction" class="form-label"
-                          >Potongan Kopkar:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="kopkarDeduction"
-                          name="kopkarDeduction"
-                        />
-                      </div>
-
-                      <!-- Bank Deduction (Bank Jabar) -->
-                      <div class="mb-3">
-                        <label for="bankJabarDeduction" class="form-label"
-                          >Potongan Bank Jabar:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="bankJabarDeduction"
-                          name="bankJabarDeduction"
-                        />
-                      </div>
-
-                      <!-- Arisan Deduction -->
-                      <div class="mb-3">
-                        <label for="arisanDeduction" class="form-label"
-                          >Potongan Arisan:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="arisanDeduction"
-                          name="arisanDeduction"
-                        />
-                      </div>
-
-                      <!-- BPJS Deduction -->
-                      <div class="mb-3">
-                        <label for="bpjsDeduction" class="form-label"
-                          >Potongan BPJS:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="bpjsDeduction"
-                          name="bpjsDeduction"
-                        />
-                      </div>
-
-                      <!-- BAUK Deduction -->
-                      <div the="mb-3">
-                        <label for="baukDeduction" class="form-label"
-                          >Potongan BAUK:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="baukDeduction"
-                          name="baukDeduction"
-                        />
-                      </div>
-
-                      <!-- Other Deductions -->
-                      <div class="mb-3">
-                        <label for="otherDeductions" class="form-label"
-                          >Potongan Lain-lain:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="otherDeductions"
-                          name="otherDeductions"
-                        />
-                      </div>
 
                       <!-- PPH Deduction -->
                       <div class="mb-3">
-                        <label for="pphDeduction" class="form-label"
-                          >Potongan PPH:</label
+                        <label for="nama" class="form-label">Nama :</label>
+                        <input class="form-control" id="nama" name="nama" />
+                      </div>
+                      <div class="mb-3">
+                        <label for="email" class="form-label">Email :</label>
+                        <input class="form-control" id="email" name="email" />
+                      </div>
+                      <div class="mb-3">
+                        <label for="pangkat" class="form-label"
+                          >Pangkat :</label
                         >
                         <input
                           class="form-control"
-                          id="pphDeduction"
-                          name="pphDeduction"
+                          id="pangkat"
+                          name="Pangkat"
                         />
                       </div>
-
+                      <div class="mb-3">
+                        <label for="jabatan" class="form-label"
+                          >Jabatan :</label
+                        >
+                        <input
+                          class="form-control"
+                          id="jabatan"
+                          name="jabatan"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="Jafung" class="form-label"
+                          >Jabatan Fungsional :</label
+                        >
+                        <input class="form-control" id="jafung" name="Jafung" />
+                      </div>
+                      <div class="mb-3">
+                        <label for="status Keluarga" class="form-label"
+                          >Status Keluarga :</label
+                        >
+                        <input
+                          class="form-control"
+                          id="status_keluarga"
+                          name="status_keluarga"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="Suskel Diri Sendiri" class="form-label"
+                          >Suskel Diri Sendiri :</label
+                        >
+                        <input
+                          class="form-control"
+                          id="suskel_dirisendiri"
+                          name="suskel_dirisendiri"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="Suskel Suami Istri" class="form-label"
+                          >Suskel Suami Istri :</label
+                        >
+                        <input
+                          class="form-control"
+                          id="suskel_suamiistri"
+                          name="suskel_suamiistri"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="Suskel Anak" class="form-label"
+                          >Suskel Anak :</label
+                        >
+                        <input
+                          class="form-control"
+                          id="suskel_anak"
+                          name="suskel_anak"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="Kelompok" class="form-label"
+                          >Kelompok :</label
+                        >
+                        <input
+                          class="form-control"
+                          id="kelompok"
+                          name="kelompok"
+                        />
+                      </div>
                       <button
                         id="updatebutton"
                         type="submit"
@@ -430,8 +274,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
     <!-- <script src="https://unpkg.com/jspdf-invoice"></script> -->
+    <!-- Include DataTables -->
     <script
-      src="../static/js/keuangan/master-data-edit.js"
+      src="../../static/js/keuangan/biodata/biodata-edit.js"
       type="module"
     ></script>
     <!-- Library Javascript Terkait -->
