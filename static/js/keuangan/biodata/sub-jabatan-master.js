@@ -140,14 +140,8 @@ function createRow(item) {
   }
   return `<tr>
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
-    <td>${item.pangkat || "Tidak Tersedia"}  </td>
     <td>${item.jabatan || "Tidak Tersedia"}</td>
-    <td>${item.jafung || "Tidak Tersedia"}</td>
-    <td>${item.status_keluarga || "Tidak Tersedia"}</td>
-    <td>${item.suskel.dirisendiri || "Tidak Tersedia"}</td>
-    <td>${item.suskel.suamiistri || "Tidak Tersedia"}</td>
-    <td>${item.suskel.anak || "Tidak Tersedia"}</td>
-    <td>${item.kelompok || "Tidak Tersedia"}</td>  
+
     <td>
             <button class="btn btn-primary btn-sm edit-btn" data-id="${
               item.id
