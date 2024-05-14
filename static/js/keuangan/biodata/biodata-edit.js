@@ -25,7 +25,9 @@ function fetchUserDataByEmail(email) {
     .then((response) => response.json())
     .then((data) => {
       if (data.code === 200 && data.success) {
-        populateForm(data.data); // Mengisi form dengan data yang didapat
+        populateForm(data.data);
+        populatePangkatDropdown(data.data);
+        populateJabatanFungsional(data.data);
       } else {
         Swal.fire(
           "Informasi",
@@ -59,6 +61,24 @@ function populateForm(userData) {
     userData.suskel.suamiistri;
   document.getElementById("suskel_anak").value = userData.suskel.anak;
   document.getElementById("kelompok").value = userData.kelompok;
+}
+
+function populatePangkatDropdown(userData) {
+  const pangkatDropdown = document.getElementById("pangkat");
+  const pangkatValue = userData.pangkat || "Tidak Tersedia";
+  const option = document.createElement("option");
+  option.text = pangkatValue;
+  option.value = pangkatValue;
+  pangkatDropdown.appendChild(option);
+}
+
+function populateJabatanFungsional(userData) {
+  const pangkatDropdown = document.getElementById("jafung");
+  const pangkatValue = userData.jafung || "Tidak Tersedia";
+  const option = document.createElement("option");
+  option.text = pangkatValue;
+  option.value = pangkatValue;
+  pangkatDropdown.appendChild(option);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
