@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5"
+    />
+    <meta name="author" content="AdminKit" />
+    <meta
+      name="keywords"
+      content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="shortcut icon"
+      href="../../static/img/enam_berlian-removebg-preview.png"
+    />
+    <title>Master data | ULBI</title>
+
+    <!-- Import CSS yang diperlukan -->
+    <link href="../../static/css/app.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../static/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .table-container table th,
+      .table-container table th {
+        background-color: #495057;
+        color: white;
+      }
+
+      .table-fixed th,
+      .table-fixed td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 10px;
+      }
+      .table-container th,
+      .table-container td {
+        padding: 10px;
+        width: 150px;
+        text-align: left;
+        vertical-align: middle;
+      }
+      .table-container {
+        overflow-x: auto;
+      }
+
+      .name-email-header,
+      .name-email-cell {
+        white-space: normal;
+        text-align: left;
+        vertical-align: top;
+        font-size: 12px;
+      }
+      .name-email-cell {
+        overflow-x: auto;
+      }
+      .name-email-cell {
+        white-space: normal;
+      }
+      #selecttag .form-control,
+      #selecttag button {
+        margin-bottom: 0.5rem; /* Ensures spacing on smaller screens */
+      }
+
+      @media (max-width: 768px) {
+        #exportButton {
+          margin-top: 0.5rem; /* Adds space above the export button on small screens */
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="pdfFilename"></div>
+    <!-- <div id="sidebarcont">  -->
+    <div class="wrapper">
+      <!-- Sidebar Start -->
+      <!---->
+      <nav id="sidebar" class="sidebar js-sidebar">
+        <div class="sidebar-content js-simplebar">
+          <a class="sidebar-brand" href="index.html">
+            <span class="align-middle"
+              ><img
+                src="../../static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png"
+                alt=""
+                style="width: 150px; margin-left: 25px"
+            /></span>
+          </a>
+
+          <ul class="sidebar-nav"></ul>
+
+          <div class="sidebar-cta">
+            <div class="sidebar-cta-content">
+              <strong class="d-inline-block mb-2">HRIS ULBI</strong>
+              <div class="mb-3 text-sm" style="font-size: 13px">
+                Dashboard Keuangan, untuk memonitor data keuangan dan permintaan
+                slip gaji melalui ITeung
+              </div>
+              <a
+                class="btn btn-success"
+                style="padding: 5px 55px"
+                href="https://api.whatsapp.com/send?phone=628112000279"
+                role="button"
+              >
+                Iteung
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Sidebar End -->
+
+      <div class="main">
+        <!-- Header Start -->
+        <div id="headercont"></div>
+        <!-- Header End -->
+
+        <!-- Main Content Start -->
+        <main class="content">
+          <div class="container-fluid p-0">
+            <h5 class="right-aligned" style="float: right">
+              <a href="index.html">Home</a> / Dashboard Biodata
+            </h5>
+            <h1 class="h3 mb-3"><b>Dashboard Detail Data Biodata</b></h1>
+            <div class="col-md-6 mb-3">
+              <input
+                type="hidden"
+                id="titleTextBox"
+                value="Dashboard Presensi Karyawan"
+                disabled
+              />
+              <input
+                type="hidden"
+                id="filenameTextBox"
+                value="presensi_karyawan"
+              />
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="row align-items-center">
+                      <!-- Ensures vertical alignment in the middle -->
+                      <!-- Filter Dropdown -->
+                      <div class="col-md-4">
+                        <select id="filterKelompok" class="form-control">
+                          <option value="">Pilih Kelompok</option>
+                          <option value="Struktural">Struktural</option>
+                          <option value="Dosen Kontrak">Dosen Kontrak</option>
+                          <option value="Dosen Tetap">Dosen Tetap</option>
+                          <option value="Staff ADM">Staff ADM</option>
+                          <option value="Tenaga Lepas">
+                            Tenaga Lepas (TLH)
+                          </option>
+                          <option value="TKK">
+                            Tenaga Kerja Kontrak (TKK)
+                          </option>
+                        </select>
+                      </div>
+
+                      <!-- Search Input and Button -->
+                      <div class="col-md-4 d-flex">
+                        <input
+                          type="text"
+                          placeholder="Search.."
+                          id="searchinput"
+                          class="form-control mr-2"
+                        />
+                        <button class="btn btn-primary">Search</button>
+                      </div>
+
+                      <!-- Export Button -->
+                      <div
+                        class="col-md-4 d-flex justify-content-end align-items-center"
+                      >
+                        <button
+                          type="button"
+                          id="exportButton"
+                          class="btn btn-success"
+                        >
+                          Export to Excel
+                        </button>
+                      </div>
+                    </div>
+                    <br />
+                    <!-- <hr /> -->
+                    <div class="table-container">
+                      <table id="example" class="table table-fixed">
+                        <thead>
+                          <tr
+                            style="text-align: center; vertical-align: middle"
+                          >
+                            <th
+                              class="name-email-header"
+                              style="background-color: #2b343d"
+                            >
+                              Nama
+                            </th>
+                            <!-- <th id="posisiTh">Jabatan</th> -->
+
+                            <!-- <th id="linkDokumenTh">Struktural</th> -->
+                            <th id="linkDokumenTh">Pangkat</th>
+                            <th id="linkDokumenTh">Jabatan</th>
+                            <th id="linkDokumenTh">Jabatan Fungsional</th>
+                            <th id="linkDokumenTh">Status Keluarga</th>
+                            <th id="linkDokumenTh">Suskel Diri Sendiri</th>
+                            <th id="linkDokumenTh">Suskel Suami Istri</th>
+                            <th id="linkDokumenTh">Suskel Anak</th>
+                            <th id="linkDokumenTh">Kelompok</th>
+                            <th id="linkDokumenTh">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tablebody">
+                          <!-- Isi Tabel -->
+                        </tbody>
+                        <!-- <tfoot>
+                          <tr
+                            style="text-align: center; vertical-align: middle"
+                          >
+                            <th id="namaTh">Nama</th>
+                            <th id="posisiTh">Waktu</th>
+                            <th id="statusTh">Gaji Pokok</th>
+                            <th id="tanggalTh">Keluarga</th>
+                            <th id="DurasiTh">Pangan</th
+                            <th id="pctDurasiTh">KPI</th>
+                            <th id="keteranganTh">Keahlian</th>
+                            <th id="linkDokumenTh">Struktural</th>
+                            <th id="linkDokumenTh">FGS/Struktural</th>
+                            <th id="linkDokumenTh">Transport</th>
+                            <th id="linkDokumenTh">Kehadiran</th>
+                            <th id="linkDokumenTh">Kopkar</th>
+                            <th id="linkDokumenTh">Bank Jabar</th>
+                            <th id="linkDokumenTh">Arisan</th>
+                            <th id="linkDokumenTh">BPJS TK</th>
+                            <th id="linkDokumenTh">BAUK</th>
+                            <th id="linkDokumenTh">Lain - lain</th>
+                            <th id="linkDokumenTh">PPH</th>
+                            <th id="linkDokumenTh">Jumlah Gaji Kotor</th>
+                            <th id="linkDokumenTh">Jumlah Potongan</th>
+                            <th id="linkDokumenTh">Jumlah Gaji Bersih</th>
+                            <th id="linkDokumenTh">Status Validasi</th>
+                            <th id="linkDokumenTh">Action</th>
+                          </tr>
+                        </tfoot> -->
+                      </table>
+                    </div>
+                    <br />
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="pagination">
+                          <button id="prevPageBtn" class="btn btn-primary">
+                            Sebelumnya
+                          </button>
+                          <span id="currentPage" class="mx-2">Page 1</span>
+                          <button id="nextPageBtn" class="btn btn-primary">
+                            Selanjutnya
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Main Content End -->
+
+        <!-- Footer Start -->
+        <div class="footer"></div>
+        <!-- Footer End -->
+      </div>
+    </div>
+
+    <!-- Spinner Start -->
+    <div class="loader"></div>
+    <!-- Spinner End -->
+
+    <!-- Library Untuk Export to Excel dan DataTables -->
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+    <!-- Library Untuk Export to Pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <!-- <script src="https://unpkg.com/jspdf-invoice"></script> -->
+    <link
+      href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Library Javascript Terkait -->
+    <script src="https://cdn.jsdelivr.net/gh/PMBULBI/javascript-fe@0.0.7/jquery-3.6.0.min.js"></script>
+    <script
+      src="../../static/js/keuangan/sub-biodata-master.js"
+      type="module"
+    ></script>
+    <!-- <script src="../../static/js/controller/filter.js" type="module"></script> -->
+    <!-- <script src="../../static/js/controller/search.js" type="module"></script> -->
+
+    <!-- <script src="static/js/presensi/cihuyred.js" type="module"></script> -->
+    <script src="../../static/js/style/style.js" defer></script>
+    <!-- <script src="../../static/js/style/table-sorting.js"></script> -->
+    <script src="../../static/js/app.js"></script>
+    <script src="../../static/js/controller/sidebar.js" type="module"></script>
+    <script src="../../static/js/controller/header.js" type="module"></script>
+    <script src="../../static/js/controller/footer.js" type="module"></script>
+    <!-- <script src="../../static/js/controller/croot.js" type="module"></script> -->
+  </body>
+</html>
