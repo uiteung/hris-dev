@@ -2,7 +2,7 @@ import { token } from "../../controller/cookies.js";
 let allRecords = [];
 let allData = []; // Holds the current page data for filtering
 let currentPage = 1; // Start from the first page
-const baseUrl = "https://hris_backend.ulbi.ac.id/api/v2/master/biodata";
+const baseUrl = "https://hris_backend.ulbi.ac.id/api/v2/master/potongan";
 // export let GetDataValidasi = "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/";
 let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
@@ -140,14 +140,14 @@ function createRow(item) {
   }
   return `<tr>
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
-    <td>${item.pangkat || "Tidak Tersedia"}  </td>
-    <td>${item.jabatan || "Tidak Tersedia"}</td>
-    <td>${item.jafung || "Tidak Tersedia"}</td>
-    <td>${item.status_keluarga || "Tidak Tersedia"}</td>
-    <td>${item.suskel.dirisendiri || "Tidak Tersedia"}</td>
-    <td>${item.suskel.suamiistri || "Tidak Tersedia"}</td>
-    <td>${item.suskel.anak || "Tidak Tersedia"}</td>
-    <td>${item.kelompok || "Tidak Tersedia"}</td>  
+    <td>${item.kopkar || "Tidak Tersedia"}  </td>
+    <td>${item.banjabar || "Tidak Tersedia"}</td>
+    <td>${item.bpjstk || "Tidak Tersedia"}</td>
+    <td>${item.bauk || "Tidak Tersedia"}</td>
+    <td>${item.pph || "Tidak Tersedia"}</td>
+    <td>${item.lain2 || "Tidak Tersedia"}</td>
+    <td>${item.lainlain2 || "Tidak Tersedia"}</td>
+    <td>${item.lainlain3 || "Tidak Tersedia"}</td>  
     <td>
             <button class="btn btn-primary btn-sm edit-btn" data-id="${
               item.id
