@@ -141,11 +141,10 @@ function createRow(item) {
   return `<tr>
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
     <td>${item.kopkar || "Tidak Tersedia"}  </td>
-    <td>${item.banjabar || "Tidak Tersedia"}</td>
+    <td>${item.bankjabar || "Tidak Tersedia"}</td>
     <td>${item.bpjstk || "Tidak Tersedia"}</td>
     <td>${item.bauk || "Tidak Tersedia"}</td>
     <td>${item.pph || "Tidak Tersedia"}</td>
-    <td>${item.lain2 || "Tidak Tersedia"}</td>
     <td>${item.lainlain2 || "Tidak Tersedia"}</td>
     <td>${item.lainlain3 || "Tidak Tersedia"}</td>  
     <td>
@@ -165,7 +164,7 @@ function createRow(item) {
 window.editItem = function (element) {
   const email = element.getAttribute("data-email");
   localStorage.setItem("editingEmail", email);
-  window.location.href = "biodata-edit.html";
+  window.location.href = "potongan-edit.html";
 };
 
 function updatePaginationButtons(data) {

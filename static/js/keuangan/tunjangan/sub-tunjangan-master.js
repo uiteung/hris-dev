@@ -165,7 +165,7 @@ function createRow(item) {
 window.editItem = function (element) {
   const email = element.getAttribute("data-email");
   localStorage.setItem("editingEmail", email);
-  window.location.href = "biodata-edit.html";
+  window.location.href = "tunjangan-edit.html";
 };
 
 function updatePaginationButtons(data) {
