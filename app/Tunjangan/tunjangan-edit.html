@@ -126,9 +126,9 @@
         <main class="content">
           <div class="container-fluid p-0">
             <h5 class="right-aligned" style="float: right">
-              <a href="index.html">Home</a> / Detail Biodata
+              <a href="index.html">Home</a> / Detail Tunjangan
             </h5>
-            <h1 class="h3 mb-3"><b>Detail Biodata</b></h1>
+            <h1 class="h3 mb-3"><b>Detail Tunjangan</b></h1>
             <div class="col-md-6 mb-3">
               <input
                 type="hidden"
@@ -146,7 +146,7 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Form Perbarui Data Biodata</h4>
+                    <h4>Form Perbarui Data Tunjangan</h4>
                   </div>
                   <div class="card-body">
                     <form id="editForm">
@@ -165,66 +165,82 @@
                         <label for="gaji_pokok" class="form-label"
                           >Gaji Pokok :</label
                         >
-                        <select
+                        <input
+                          type="text"
                           class="form-control"
                           id="gaji_pokok"
                           name="gaji_pokok"
-                        ></select>
+                        />
                       </div>
 
                       <div class="mb-3">
                         <label for="pangan" class="form-label">Pangan :</label>
-                        <input class="form-control" id="pangan" name="pangan" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="pangan"
+                          name="pangan"
+                        />
                       </div>
+
                       <div class="mb-3">
                         <label for="keluarga" class="form-label"
                           >Keluarga :</label
                         >
-                        <select
+                        <input
+                          type="text"
                           class="form-control"
                           id="keluarga"
                           name="keluarga"
-                        ></select>
+                        />
                       </div>
+
                       <div class="mb-3">
                         <label for="FGS Struk" class="form-label"
                           >FGS Struk :</label
                         >
-                        <select
+                        <input
+                          type="text"
                           class="form-control"
                           id="fgs-struk"
                           name="FGS Struk"
-                        ></select>
+                        />
                       </div>
+
                       <div class="mb-3">
                         <label for="kehadiran" class="form-label"
                           >Kehadiran :</label
                         >
-                        <select
+                        <input
+                          type="text"
                           class="form-control"
                           id="kehadiran"
                           name="kehadiran"
-                        ></select>
+                        />
                       </div>
+
                       <div class="mb-3">
                         <label for="Keahlian" class="form-label"
                           >Keahlian :</label
                         >
-                        <select
+                        <input
+                          type="text"
                           class="form-control"
                           id="keahlian"
                           name="Keahlian"
-                        ></select>
+                        />
                       </div>
+
                       <div class="mb-3">
                         <label for="Transportasi" class="form-label"
                           >Transportasi :</label
                         >
-                        <select
+                        <input
+                          type="text"
                           class="form-control"
                           id="transportasi"
                           name="Transportasi"
-                        ></select>
+                        />
                       </div>
                       <button
                         id="updatebutton"
@@ -265,7 +281,7 @@
     <!-- <script src="https://unpkg.com/jspdf-invoice"></script> -->
     <!-- Include DataTables -->
     <script
-      src="../../static/js/keuangan/biodata/biodata-edit.js"
+      src="../../static/js/keuangan/tunjangan/tunjangan-edit.js"
       type="module"
     ></script>
     <!-- Library Javascript Terkait -->
