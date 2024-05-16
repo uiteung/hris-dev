@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const email = localStorage.getItem("editingEmail");
   if (email) {
     fetchUserDataByEmail(email);
+    fetchPangkatOptions();
   } else {
     console.error("No email found in localStorage.");
     Swal.fire("Error", "Email tidak ditemukan di penyimpanan lokal.", "error");
@@ -26,10 +27,12 @@ function fetchUserDataByEmail(email) {
     .then((data) => {
       if (data.code === 200 && data.success) {
         populateForm(data.data);
-        populatePangkatDropdown(data.data);
-        populateJabatanFungsional(data.data);
-        // polpulateKelompok(data.data);
-        populateKelompokDropdown(data.data.kelompok);
+        const userJafung = data.jafung;
+        fetchJafungOptions(userJafung);
+        const userPangkat = data.data.pangkat;
+        fetchPangkatOptions(userPangkat);
+        const userKelompok = data.data.kelompok;
+        fetchKelompokOptions(userKelompok);
       } else {
         Swal.fire(
           "Informasi",
@@ -46,6 +49,159 @@ function fetchUserDataByEmail(email) {
         "error"
       );
     });
+}
+function fetchPangkatOptions(userPangkat) {
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/master/pangkat";
+  fetch(url, {
+    method: "GET",
+    headers: {
+      login: token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.code === 200 && data.success) {
+        populatePangkatDropdown(data.data, userPangkat);
+      } else {
+        Swal.fire(
+          "Informasi",
+          "Gagal mengambil data pangkat: " +
+            (data.status || "Status tidak diketahui"),
+          "error"
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching pangkat options:", error);
+      Swal.fire(
+        "Error",
+        "Terjadi kesalahan saat mengambil data pangkat: " + error.message,
+        "error"
+      );
+    });
+}
+
+function populatePangkatDropdown(pangkatData, userPangkat) {
+  const pangkatDropdown = document.getElementById("pangkat");
+  pangkatDropdown.innerHTML = "";
+  const userPangkatOption = document.createElement("option");
+  userPangkatOption.textContent = `${userPangkat} `;
+  userPangkatOption.value = userPangkat;
+  pangkatDropdown.appendChild(userPangkatOption);
+  pangkatData.forEach((pangkat) => {
+    if (pangkat.jenis_pangkat !== userPangkat) {
+      const option = document.createElement("option");
+      option.text = `${pangkat.jenis_pangkat} `;
+      option.value = pangkat.jenis_pangkat;
+      pangkatDropdown.appendChild(option);
+    }
+  });
+}
+
+function fetchJafungOptions(userJafung) {
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/master/jafung";
+  fetch(url, {
+    method: "GET",
+    headers: {
+      login: token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.code === 200 && data.success) {
+        populateJafungDropdown(data.data, userJafung);
+      } else {
+        Swal.fire(
+          "Informasi",
+          "Gagal mengambil data jafung: " +
+            (data.status || "Status tidak diketahui"),
+          "error"
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching jafung options:", error);
+      Swal.fire(
+        "Error",
+        "Terjadi kesalahan saat mengambil data jafung: " + error.message,
+        "error"
+      );
+    });
+}
+
+function populateJafungDropdown(jafungData, userJafung) {
+  const jafungDropdown = document.getElementById("jafung");
+  jafungDropdown.innerHTML = "";
+  const userJafungOption = document.createElement("option");
+  if (userJafung) {
+    userJafungOption.textContent = `${userJafung}`;
+  } else {
+    userJafungOption.textContent = "";
+  }
+  userJafungOption.value = userJafung;
+  jafungDropdown.appendChild(userJafungOption);
+  jafungData.forEach((jafung) => {
+    if (jafung.nama_jafung !== userJafung) {
+      const option = document.createElement("option");
+      option.text = `${jafung.nama_jafung} - ${jafung.singkatan}`;
+      option.value = jafung.nama_jafung;
+      jafungDropdown.appendChild(option);
+    }
+  });
+}
+
+function fetchKelompokOptions(userKelompok) {
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/master/kelompok";
+  fetch(url, {
+    method: "GET",
+    headers: {
+      login: token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.code === 200 && data.success) {
+        populateKelompokDropdown(data.data, userKelompok);
+      } else {
+        Swal.fire(
+          "Informasi",
+          "Gagal mengambil data kelompok: " +
+            (data.status || "Status tidak diketahui"),
+          "error"
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching kelompok options:", error);
+      Swal.fire(
+        "Error",
+        "Terjadi kesalahan saat mengambil data kelompok: " + error.message,
+        "error"
+      );
+    });
+}
+
+function populateKelompokDropdown(kelompokData, userKelompok) {
+  const kelompokDropdown = document.getElementById("kelompok");
+  kelompokDropdown.innerHTML = "";
+  const userKelompokOption = document.createElement("option");
+  userKelompokOption.textContent = `${userKelompok} `;
+  userKelompokOption.value = userKelompok;
+  kelompokDropdown.appendChild(userKelompokOption);
+  kelompokData.forEach((kelompok) => {
+    if (kelompok !== userKelompok) {
+      const option = document.createElement("option");
+      option.text = kelompok.nama_kelompok;
+      option.value = kelompok.nama_kelompok;
+      kelompokDropdown.appendChild(option);
+    }
+  });
 }
 
 function populateForm(userData) {
@@ -65,23 +221,23 @@ function populateForm(userData) {
   document.getElementById("kelompok").value = userData.kelompok;
 }
 
-function populatePangkatDropdown(userData) {
-  const pangkatDropdown = document.getElementById("pangkat");
-  const pangkatValue = userData.pangkat || "Tidak Tersedia";
-  const option = document.createElement("option");
-  option.text = pangkatValue;
-  option.value = pangkatValue;
-  pangkatDropdown.appendChild(option);
-}
+// function populatePangkatDropdown(pangkat) {
+//   const pangkatDropdown = document.getElementById("pangkat");
+//   const pangkatValue = pangkat.pangkat || "Tidak Tersedia";
+//   const option = document.createElement("option");
+//   option.text = pangkatValue;
+//   option.value = pangkatValue;
+//   pangkatDropdown.appendChild(option);
+// }
 
-function populateJabatanFungsional(userData) {
-  const pangkatDropdown = document.getElementById("jafung");
-  const pangkatValue = userData.jafung || "Tidak Tersedia";
-  const option = document.createElement("option");
-  option.text = pangkatValue;
-  option.value = pangkatValue;
-  pangkatDropdown.appendChild(option);
-}
+// function populateJabatanFungsional(userData) {
+//   const pangkatDropdown = document.getElementById("jafung");
+//   const pangkatValue = userData.jafung || "Tidak Tersedia";
+//   const option = document.createElement("option");
+//   option.text = pangkatValue;
+//   option.value = pangkatValue;
+//   pangkatDropdown.appendChild(option);
+// }
 
 // function polpulateKelompok(userData) {
 //   const pangkatDropdown = document.getElementById("kelompok");
@@ -90,25 +246,25 @@ function populateJabatanFungsional(userData) {
 //   option.text = pangkatValue;
 //   option.value = pangkatValue;
 //   pangkatDropdown.appendChild(option);
+// // }
+// function populateKelompokDropdown(selectedKelompok) {
+//   const kelompokDropdown = document.getElementById("kelompok");
+
+//   // Mengecek apakah nilai yang diget sudah ada di dropdown
+//   const existingOption = Array.from(kelompokDropdown.options).find(
+//     (option) => option.value === selectedKelompok
+//   );
+
+//   if (existingOption) {
+//     existingOption.selected = true;
+//   } else {
+//     const newOption = document.createElement("option");
+//     newOption.value = selectedKelompok;
+//     newOption.textContent = selectedKelompok;
+//     newOption.selected = true;
+//     kelompokDropdown.appendChild(newOption);
+//   }
 // }
-function populateKelompokDropdown(selectedKelompok) {
-  const kelompokDropdown = document.getElementById("kelompok");
-
-  // Mengecek apakah nilai yang diget sudah ada di dropdown
-  const existingOption = Array.from(kelompokDropdown.options).find(
-    (option) => option.value === selectedKelompok
-  );
-
-  if (existingOption) {
-    existingOption.selected = true;
-  } else {
-    const newOption = document.createElement("option");
-    newOption.value = selectedKelompok;
-    newOption.textContent = selectedKelompok;
-    newOption.selected = true;
-    kelompokDropdown.appendChild(newOption);
-  }
-}
 
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("editForm");
