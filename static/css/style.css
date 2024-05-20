@@ -172,3 +172,9 @@ table.dataTable thead .sorting_desc_disabled:before {
     .edit-button svg {
       margin-right: 5px; /* Adjust the spacing between the icon and text */
     }
+
+    .sub-menu {
+      list-style-type: none;
+    }
+
+    
