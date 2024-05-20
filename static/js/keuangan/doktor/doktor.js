@@ -1,4 +1,4 @@
-import { token } from "../controller/cookies.js";
+import { token } from "../../controller/cookies.js";
 let allRecords = [];
 let allData = []; // Holds the current page data for filtering
 let currentPage = 1; // Start from the first page
@@ -135,24 +135,16 @@ function populateTableWithData(data) {
 }
 
 function createRow(item) {
-  const struk = item["fgs-struk"];
   return `<tr>
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
-    <td>${item.pokok}</td>
-    <td>${item.keluarga}</td>
-    <td>${item.pangan}</td>
-    <td>${item.kinerja}</td>
-    <td>${item.keahlian}</td>
-    <td>${struk}</td>
-    <td>${item.transportasi}</td>
-    <td>${item.kehadiran}</td>
-    <td>${item.kopkar}</td>
-    <td>${item.bankJabar}</td>
-    <td>${item.arisan}</td>
-    <td>${item.bpjs}</td>
-    <td>${item.bauk}</td>
-    <td>${item.lain2}</td>
-    <td>${item.pph}</td>        
+
+    <td>${item.jabatan_fungsional}</td>
+    <td>${item.jabatan_struktural}</td>
+    <td>${item.tunjangan}</td>
+    <td>${item.pph}</td>
+    <td>${item.jumlah_dibayarkan}</td>
+    <td>${item.masa_perolehan}</td>
+    <td>${item.validasi}</td>
     <td>
         <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" onclick="editItem(this)">
             <i class="mdi mdi-table-edit"></i>
