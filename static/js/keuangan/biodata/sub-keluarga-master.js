@@ -148,19 +148,19 @@ function createRow(item) {
     <td>
             <button class="btn btn-primary btn-sm edit-btn" data-id="${
               item.id
-            }" data-email="${item.email}" onclick="editItem(this)">
+            }" data-id="${item._id}" onclick="editItem(this)">
                     <i class="mdi mdi-table-edit"></i>
             </button>
             <button class="btn btn-danger btn-sm delete-btn" data-id="${
               item.id
-            }" data-email="${item.email}" onclick="deleteItem(this)">
+            }" data-id="${item._id}" onclick="deleteItem(this)">
                     <i class="mdi mdi-delete"></i>
             </button>
     </td>  
 </tr>`;
 }
 window.editItem = function (element) {
-  const email = element.getAttribute("data-email");
+  const email = element.getAttribute("data-id");
   localStorage.setItem("editingEmail", email);
   window.location.href = "tunjangan-edit.html";
 };
@@ -346,7 +346,7 @@ function generateExcel(data) {
 //     });
 // }
 window.deleteItem = function (element) {
-  const email = element.getAttribute("data-email"); // Mengambil email dari attribute
+  const _id = element.getAttribute("data-id"); // Mengambil email dari attribute
 
   Swal.fire({
     title: "Apakah Anda yakin?",
@@ -359,14 +359,12 @@ window.deleteItem = function (element) {
     cancelButtonText: "Batal",
   }).then((result) => {
     if (result.isConfirmed) {
-      sendDeleteRequest(email); // Melakukan request penghapusan
+      sendDeleteRequest(_id); // Melakukan request penghapusan
     }
   });
 };
-function sendDeleteRequest(email) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/delete?email=${encodeURIComponent(
-    email
-  )}`;
+function sendDeleteRequest(_id) {
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/komponenkeluarga/delete?_id=${_id}`;
   fetch(url, {
     method: "DELETE",
     headers: {

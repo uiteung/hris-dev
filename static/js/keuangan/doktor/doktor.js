@@ -280,67 +280,6 @@ function generateExcel(data) {
   XLSX.writeFile(wb, "HRIS_Master_Data_Export.xlsx");
 }
 
-document
-  .getElementById("exportButton")
-  .addEventListener("click", exportToExcel);
-
-document.addEventListener("DOMContentLoaded", () => {
-  const generateButton = document.getElementById("generateButton");
-  generateButton.addEventListener("click", () => {
-    Swal.fire({
-      title: "Sebelum Anda Menggenerate Gaji Pastikan Kembali",
-      text: "Apakah Mata Master Sudah Valid?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Ya, generate!",
-      cancelButtonText: "Batal",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        generateGaji();
-      }
-    });
-  });
-});
-
-function generateGaji() {
-  const url = "https://hris_backend.ulbi.ac.id/api/v2/wagemst/generate";
-
-  fetch(url, {
-    method: "POST",
-    headers: {
-      login: token,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({}),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        Swal.fire({
-          title: "Success",
-          text: "Gaji berhasil digenerate!",
-          icon: "success",
-          confirmButtonText: "OK",
-        }).then((result) => {
-          if (result.value) {
-            window.location.reload(true);
-          }
-        });
-      } else {
-        Swal.fire(
-          "Failed",
-          "Gagal menggenerate gaji: " + data.message,
-          "error"
-        );
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      Swal.fire("Error", "Error: " + error.message, "error");
-    });
-}
 window.deleteItem = function (element) {
   const email = element.getAttribute("data-email"); // Mengambil email dari attribute
 
