@@ -144,7 +144,7 @@ function createRow(item) {
     <td>${item.jenis_pangkat}</td>
     <td>${item.kepanjangan}</td>
     <td>
-        <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" onclick="editItem(this)">
+        <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id_pangkat}" data-id="${item.id_pangkat}" onclick="editItem(this)">
             <i class="mdi mdi-table-edit"></i>
         </button>
         <button class="btn btn-danger btn-sm delete-btn" data-id="${item.id_pangkat}" data-id="${item.id_pangkat}" onclick="deleteItem(this)">
@@ -154,8 +154,8 @@ function createRow(item) {
 </tr>`;
 }
 window.editItem = function (element) {
-  const email = element.getAttribute("data-email");
-  localStorage.setItem("editingEmail", email);
+  const id = element.getAttribute("data-id");
+  localStorage.setItem("editingid", id);
   window.location.href = "pangkat-edit.html";
 };
 
