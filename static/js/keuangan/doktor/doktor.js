@@ -299,7 +299,7 @@ window.deleteItem = function (element) {
   });
 };
 function sendDeleteRequest(email) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/delete?email=${encodeURIComponent(
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/doktor/delete?email=${encodeURIComponent(
     email
   )}`;
   fetch(url, {
