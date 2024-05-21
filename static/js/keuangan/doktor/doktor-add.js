@@ -1,7 +1,6 @@
 import { token } from "../../controller/cookies.js";
 function postData() {
-  const url =
-    "https://hris_backend.ulbi.ac.id/api/v2/master/komponenkeluarga/insert";
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/master/doktor/insert";
 
   const nama = document.getElementById("nama");
   const email = document.getElementById("email");
