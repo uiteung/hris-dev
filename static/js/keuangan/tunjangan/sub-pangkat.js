@@ -156,7 +156,7 @@ function createRow(item) {
 window.editItem = function (element) {
   const email = element.getAttribute("data-email");
   localStorage.setItem("editingEmail", email);
-  window.location.href = "master-data-edit.html";
+  window.location.href = "pangkat-edit.html";
 };
 
 function updatePaginationButtons(data) {
@@ -217,67 +217,6 @@ function fetchAllPages(page) {
     });
 }
 
-function generateExcel(data) {
-  const ws = XLSX.utils.json_to_sheet(
-    data.map((item) => ({
-      Nama: item.nama,
-      "Gaji Pokok": item.pokok,
-      Keluarga: item.keluarga,
-      Pangan: item.pangan,
-      KPI: item.kinerja,
-      Keahlian: item.keahlian,
-      "FGS/Struktural": item["fgs-struk"],
-      Transport: item.transportasi,
-      Kehadiran: item.kehadiran,
-      Kopkar: item.kopkar,
-      "Bank Jabar": item.bankJabar,
-      Arisan: item.arisan,
-      "BPJS TK": item.bpjs,
-      BAUK: item.bauk,
-      "Lain-lain": item.lain2,
-      PPH: item.pph,
-    }))
-  );
-
-  // Adjust column widths
-  const colWidths = [
-    { wch: 30 }, // Nama
-    { wch: 15 }, // Gaji Pokok
-    { wch: 15 }, // Keluarga
-    { wch: 15 }, // Pangan
-    { wch: 15 }, // KPI
-    { wch: 15 }, // Keahlian
-    { wch: 20 }, // FGS/Struktural
-    { wch: 15 }, // Transport
-    { wch: 15 }, // Kehadiran
-    { wch: 15 }, // Kopkar
-    { wch: 15 }, // Bank Jabar
-    { wch: 15 }, // Arisan
-    { wch: 15 }, // BPJS TK
-    { wch: 15 }, // BAUK
-    { wch: 15 }, // Lain-lain
-    { wch: 15 }, // PPH
-  ];
-
-  ws["!cols"] = colWidths;
-
-  // Set header style
-  const range = XLSX.utils.decode_range(ws["!ref"]);
-  for (let C = range.s.c; C <= range.e.c; ++C) {
-    const address = XLSX.utils.encode_col(C) + "1"; // Target the first row
-    if (!ws[address]) continue;
-    ws[address].s = {
-      font: { bold: true },
-      alignment: { horizontal: "center" },
-      fill: { fgColor: { rgb: "FFFFAA00" } },
-    };
-  }
-
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "MasterData");
-  XLSX.writeFile(wb, "HRIS_Master_Data_Export.xlsx");
-}
-
 window.deleteItem = function (element) {
   const email = element.getAttribute("data-email"); // Mengambil email dari attribute
 
@@ -322,3 +261,55 @@ function sendDeleteRequest(email) {
       Swal.fire("Error", "Kesalahan: " + error.message, "error");
     });
 }
+
+function postData() {
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/master/pangkat/insert";
+
+  const id_pangkat = document.getElementById("id_pangkat");
+  const kepanjangan = document.getElementById("kepanjangan");
+  const jenis_pangkat = document.getElementById("jenis_pangkat");
+
+  const data = {
+    id_pangkat: id_pangkat,
+    jenis_pangkat: jenis_pangkat,
+    kepanjangan: kepanjangan,
+  };
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      login: token,
+    },
+    body: JSON.stringify(data),
+  };
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, submit it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Only proceed with fetch if user confirms
+      fetch(url, options)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          Swal.fire("Submitted!", "Your data has been submitted.", "success");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          Swal.fire(
+            "Failed!",
+            "There was an issue submitting your data.",
+            "error"
+          );
+        });
+    }
+  });
+}
+
+document.getElementById("updatebutton").addEventListener("click", postData);
