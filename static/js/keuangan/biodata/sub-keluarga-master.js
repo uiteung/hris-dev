@@ -147,12 +147,12 @@ function createRow(item) {
    
     <td>
             <button class="btn btn-primary btn-sm edit-btn" data-id="${
-              item.id
+              item._id
             }" data-id="${item._id}" onclick="editItem(this)">
                     <i class="mdi mdi-table-edit"></i>
             </button>
             <button class="btn btn-danger btn-sm delete-btn" data-id="${
-              item.id
+              item._id
             }" data-id="${item._id}" onclick="deleteItem(this)">
                     <i class="mdi mdi-delete"></i>
             </button>
