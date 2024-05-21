@@ -31,6 +31,7 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/feather-icons"></script>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
@@ -227,48 +228,48 @@
 
       <div class="main">
         <!-- Header Start -->
-<nav class="navbar navbar-expand navbar-light navbar-bg">
-    <a class="sidebar-toggle js-sidebar-toggle" style="margin-left: 30px">
-      <i class="hamburger align-self-center"></i>
-    </a>
-
-    <div class="navbar-collapse collapse">
-      <ul class="navbar-nav navbar-align">
-        <li class="nav-item dropdown">
-          <a
-            class="nav-icon dropdown-toggle d-inline-block d-sm-none"
-            href="#"
-            data-bs-toggle="dropdown">
-            <i class="align-middle" data-feather="settings"></i>
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+          <a class="sidebar-toggle js-sidebar-toggle" style="margin-left: 30px">
+            <i class="hamburger align-self-center"></i>
           </a>
-
-          <a
-            class="nav-link dropdown-toggle d-none d-sm-inline-block"
-            href="#"
-            data-bs-toggle="dropdown">
-            <img
-              src="../static/img/avatars/admin.png"
-              class="avatar img-fluid rounded me-1" />
-            <span class="text-dark">Admin</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-end">
-            <a class="dropdown-item" href="https://euis.ulbi.ac.id"
-              >Log out</a
-            >
+      
+          <div class="navbar-collapse collapse">
+            <ul class="navbar-nav navbar-align">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-icon dropdown-toggle d-inline-block d-sm-none"
+                  href="#"
+                  data-bs-toggle="dropdown">
+                  <i class="align-middle" data-feather="settings"></i>
+                </a>
+      
+                <a
+                  class="nav-link dropdown-toggle d-none d-sm-inline-block"
+                  href="#"
+                  data-bs-toggle="dropdown">
+                  <img
+                    src="../static/img/avatars/admin.png"
+                    class="avatar img-fluid rounded me-1" />
+                  <span class="text-dark">Admin</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <a class="dropdown-item" href="https://euis.ulbi.ac.id"
+                    >Log out</a
+                  >
+                </div>
+              </li>
+            </ul>
           </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
+        </nav>
         <!-- Header End -->
 
         <!-- Main Content Start -->
         <main class="content">
           <div class="container-fluid p-0">
             <h5 class="right-aligned" style="float: right">
-              <a href="index.html">Home</a> / Dashboard Biodata
+              <a href="index.html">Home</a> / Dashboard Master Jafung
             </h5>
-            <h1 class="h3 mb-3"><b>Dashboard Detail Data Biodata</b></h1>
+            <h1 class="h3 mb-3"><b>Dashboard Master Jafung</b></h1>
             <div class="col-md-6 mb-3">
               <input
                 type="hidden"
@@ -289,7 +290,7 @@
                     <div class="row align-items-center">
                       <!-- Ensures vertical alignment in the middle -->
                       <!-- Filter Dropdown -->
-                      <div class="col-md-4">
+                      <!-- <div class="col-md-4">
                         <select id="filterKelompok" class="form-control">
                           <option value="">Pilih Kelompok</option>
                           <option value="Struktural">Struktural</option>
@@ -303,7 +304,7 @@
                             Tenaga Kerja Kontrak (TKK)
                           </option>
                         </select>
-                      </div>
+                      </div> -->
 
                       <!-- Search Input and Button -->
                       <div class="col-md-4 d-flex">
@@ -318,15 +319,23 @@
 
                       <!-- Export Button -->
                       <div
-                        class="col-md-4 d-flex justify-content-end align-items-center"
+                        class="col-md-4  justify-content-end align-items-center"
                       >
                         <button
+                          type="button"
+                          id="generateButton"
+                          class="btn btn-info mr-2"
+                          onclick="window.location.href='jabatan-fungsional-add.html'"
+                        >
+                          Tambah Jafung
+                        </button>
+                        <!-- <button
                           type="button"
                           id="exportButton"
                           class="btn btn-success"
                         >
                           Export to Excel
-                        </button>
+                        </button> -->
                       </div>
                     </div>
                     <br />
@@ -341,19 +350,15 @@
                               class="name-email-header"
                               style="background-color: #2b343d"
                             >
-                              Nama
+                            ID Jafung
                             </th>
                             <!-- <th id="posisiTh">Jabatan</th> -->
-
+                       
                             <!-- <th id="linkDokumenTh">Struktural</th> -->
-                            <th id="linkDokumenTh">Pangkat</th>
-                            <th id="linkDokumenTh">Jabatan</th>
-                            <th id="linkDokumenTh">Jabatan Fungsional</th>
-                            <th id="linkDokumenTh">Status Keluarga</th>
-                            <th id="linkDokumenTh">Suskel Diri Sendiri</th>
-                            <th id="linkDokumenTh">Suskel Suami Istri</th>
-                            <th id="linkDokumenTh">Suskel Anak</th>
-                            <th id="linkDokumenTh">Kelompok</th>
+                            
+                            <th id="linkDokumenTh">Singkatan</th>
+                            <th id="linkDokumenTh">Nama Jafung</th>
+                            
                             <th id="linkDokumenTh">Action</th>
                           </tr>
                         </thead>
@@ -368,7 +373,7 @@
                             <th id="posisiTh">Waktu</th>
                             <th id="statusTh">Gaji Pokok</th>
                             <th id="tanggalTh">Keluarga</th>
-                            <th id="DurasiTh">Pangan</th
+                            <th id="DurasiTh">Pangan</th>
                             <th id="pctDurasiTh">KPI</th>
                             <th id="keteranganTh">Keahlian</th>
                             <th id="linkDokumenTh">Struktural</th>
@@ -415,17 +420,17 @@
         <!-- Main Content End -->
 
         <!-- Footer Start -->
-<footer class="footer">
-    <div class="container-fluid">
-      <div class="row text-muted">
-        <div class="col-6 text-start">
-          <p class="mb-0">
-            <a class="text-muted"><strong>DTI ULBI</strong></a> &copy;
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row text-muted">
+              <div class="col-6 text-start">
+                <p class="mb-0">
+                  <a class="text-muted"><strong>DTI ULBI</strong></a> &copy;
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
         <!-- Footer End -->
       </div>
     </div>
@@ -453,10 +458,10 @@
 
     <!-- Library Javascript Terkait -->
     <script src="https://cdn.jsdelivr.net/gh/PMBULBI/javascript-fe@0.0.7/jquery-3.6.0.min.js"></script>
-    <!-- <script
-      src="../../static/js/keuangan/sub-biodata-master.js"
+    <script
+      src="../../static/js/keuangan/biodata/sub-jafung.js"
       type="module"
-    ></script> -->
+    ></script>
     <!-- <script src="../../static/js/controller/filter.js" type="module"></script> -->
     <!-- <script src="../../static/js/controller/search.js" type="module"></script> -->
 
@@ -464,9 +469,9 @@
     <script src="../../static/js/style/style.js" defer></script>
     <!-- <script src="../../static/js/style/table-sorting.js"></script> -->
     <script src="../../static/js/app.js"></script>
-        <!-- <script src="../../static/js/controller/sidebar.js" type="module"></script> -->
+    <!--      <script src="../../static/js/controller/sidebar.js" type="module"></script> --> 
     <!-- <script src="../../static/js/controller/header.js" type="module"></script>
     <script src="../../static/js/controller/footer.js" type="module"></script>
-    <!-- <script src="../../static/js/controller/croot.js" type="module"></script> -->
+    <script src="../../static/js/controller/croot.js" type="module"></script> -->
   </body>
 </html>
