@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchUserDataByEmail(email) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/bio/email?email=${encodeURIComponent(
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/tunjangan/email?email=${encodeURIComponent(
     email
   )}`;
   fetch(url, {
@@ -45,8 +45,21 @@ function fetchUserDataByEmail(email) {
 }
 
 function populateForm(userData) {
+  const struk = userData["fgs-struk"];
   document.getElementById("nama").value = userData.nama || "Tidak Tersedia";
   document.getElementById("email").value = userData.email || "Tidak Tersedia";
+  document.getElementById("gaji_pokok").value =
+    userData.pokok || "Tidak Tersedia";
+  document.getElementById("pangan").value = userData.pangan || "Tidak Tersedia";
+  document.getElementById("keluarga").value =
+    userData.keluarga || "Tidak Tersedia";
+  document.getElementById("fgs-struk").value = struk || "Tidak Tersedia";
+  document.getElementById("kehadiran").value =
+    userData.kehadiran || "Tidak Tersedia";
+  document.getElementById("keahlian").value =
+    userData.keahlian || "Tidak Tersedia";
+  document.getElementById("transportasi").value =
+    userData.transportasi || "Tidak Tersedia";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -72,25 +85,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function updateUserData() {
   const email = document.getElementById("email").value; // mendapatkan email dari form
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/bioupdate?email=${encodeURIComponent(
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/tunjangan/update?email=${encodeURIComponent(
     email
   )}`;
 
   const formData = {
     nama: document.getElementById("nama").value,
     email: email,
-    pangkat: document.getElementById("pangkat").value,
-    jabatan: document.getElementById("jabatan").value,
-    jafung: document.getElementById("jafung").value,
-    status_keluarga: document.getElementById("status_keluarga").value,
-    suskel: {
-      dirisendiri: parseInt(
-        document.getElementById("suskel_dirisendiri").value
-      ),
-      suamiistri: parseInt(document.getElementById("suskel_suamiistri").value),
-      anak: parseInt(document.getElementById("suskel_anak").value),
-    },
-    kelompok: document.getElementById("kelompok").value,
+    pokok: parseFloat(document.getElementById("gaji_pokok").value),
+    pangan: parseFloat(document.getElementById("pangan").value),
+    keluarga: parseFloat(document.getElementById("keluarga").value),
+    "fgs-struk": parseFloat(document.getElementById("fgs-struk").value),
+    kehadiran: parseFloat(document.getElementById("kehadiran").value),
+    keahlian: parseFloat(document.getElementById("keahlian").value),
+    transportasi: parseFloat(document.getElementById("transportasi").value),
   };
 
   fetch(url, {
@@ -109,13 +117,6 @@ function updateUserData() {
           text: "Data telah berhasil diperbarui.",
           icon: "success",
           confirmButtonText: "OK",
-        }).then((result) => {
-          setTimeout(
-            () =>
-              (window.location.href =
-                "https://euis.ulbi.ac.id/hris-dev/app/Biodata/biodata-master.html"),
-            1000
-          );
         });
       } else {
         Swal.fire("Error", "Gagal memperbarui data: " + data.message, "error");
