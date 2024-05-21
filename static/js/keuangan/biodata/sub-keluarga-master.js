@@ -395,8 +395,8 @@ function postData() {
     "https://hris_backend.ulbi.ac.id/api/v2/master/komponenkeluarga/insert";
 
   const jenis = document.getElementById("jenis");
-  const nominal = parseInt(document.getElementById("nominal"));
-  const persentase = parseInt(document.getElementById("persentase"));
+  const nominal = parseFloat(document.getElementById("nominal"));
+  const persentase = parseFloat(document.getElementById("persentase"));
 
   const data = {
     jenis: jenis,
