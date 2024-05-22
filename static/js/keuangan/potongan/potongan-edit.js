@@ -84,8 +84,6 @@ function updateUserData() {
   )}`;
 
   const formData = {
-    nama: document.getElementById("nama").value,
-    email: email,
     kopkar: parseFloat(document.getElementById("kopkar").value),
     bankjabar: parseFloat(document.getElementById("bankjabar").value),
     bpjstk: parseFloat(document.getElementById("bpjstk").value),
