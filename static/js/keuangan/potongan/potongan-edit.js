@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchUserDataByEmail(email) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/bio/email?email=${encodeURIComponent(
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/potongan/email?email=${encodeURIComponent(
     email
   )}`;
   fetch(url, {
@@ -47,6 +47,17 @@ function fetchUserDataByEmail(email) {
 function populateForm(userData) {
   document.getElementById("nama").value = userData.nama || "Tidak Tersedia";
   document.getElementById("email").value = userData.email || "Tidak Tersedia";
+  document.getElementById("kopkar").value = userData.kopkar || "Tidak Tersedia";
+  document.getElementById("bankjabar").value =
+    userData.bankjabar || "Tidak Tersedia";
+  document.getElementById("bjpstk").value = userData.bjpstk || "Tidak Tersedia";
+  document.getElementById("bankjabar").value =
+    userData.bankjabar || "Tidak Tersedia";
+  document.getElementById("pph").value = userData.pph || "Tidak Tersedia";
+  document.getElementById("lainlain2").value =
+    userData.lainlain2 || "Tidak Tersedia";
+  document.getElementById("lainlain3").value =
+    userData.lainlain3 || "Tidak Tersedia";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -79,18 +90,8 @@ function updateUserData() {
   const formData = {
     nama: document.getElementById("nama").value,
     email: email,
-    pangkat: document.getElementById("pangkat").value,
-    jabatan: document.getElementById("jabatan").value,
-    jafung: document.getElementById("jafung").value,
-    status_keluarga: document.getElementById("status_keluarga").value,
-    suskel: {
-      dirisendiri: parseInt(
-        document.getElementById("suskel_dirisendiri").value
-      ),
-      suamiistri: parseInt(document.getElementById("suskel_suamiistri").value),
-      anak: parseInt(document.getElementById("suskel_anak").value),
-    },
-    kelompok: document.getElementById("kelompok").value,
+    kopkar: document.getElementById("kopkar").value,
+    bankjabar: document.getElementById("bankjabar").value,
   };
 
   fetch(url, {
