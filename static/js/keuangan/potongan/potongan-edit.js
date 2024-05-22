@@ -49,7 +49,7 @@ function populateForm(userData) {
   document.getElementById("email").value = userData.email || "0";
   document.getElementById("kopkar").value = userData.kopkar || "0";
   document.getElementById("bankjabar").value = userData.bankjabar || "0";
-  document.getElementById("bpjstk").value = userData.bjpstk || "0";
+  document.getElementById("bpjstk").value = userData.bpjstk || "0";
   document.getElementById("bankjabar").value = userData.bankjabar || "0";
   document.getElementById("pph").value = userData.pph || "0";
   document.getElementById("lainlain2").value = userData.lainlain2 || "0";
@@ -88,7 +88,7 @@ function updateUserData() {
     email: email,
     kopkar: parseFloat(document.getElementById("kopkar").value),
     bankjabar: parseFloat(document.getElementById("bankjabar").value),
-    bjpstk: parseFloat(document.getElementById("bpjstk").value),
+    bpjstk: parseFloat(document.getElementById("bpjstk").value),
     pph: parseFloat(document.getElementById("pph").value),
     lainlain2: parseFloat(document.getElementById("lainlain2").value),
     lainlain3: parseFloat(document.getElementById("lainlain3").value),
