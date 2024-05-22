@@ -29,27 +29,27 @@ function setupEventListeners() {
     searchFromInput();
   });
 
-  // Listen for Enter key on the search input
-  searchInput.addEventListener("keypress", (event) => {
-    if (event.keyCode === 13) {
-      // 13 is the keycode for Enter
-      event.preventDefault(); // Prevent form submission
-      searchFromInput();
-    }
-  });
+  // // Listen for Enter key on the search input
+  // searchInput.addEventListener("keypress", (event) => {
+  //   if (event.keyCode === 13) {
+  //     // 13 is the keycode for Enter
+  //     event.preventDefault(); // Prevent form submission
+  //     searchFromInput();
+  //   }
+  // });
 }
 
-function searchFromInput() {
-  const searchInput = document
-    .getElementById("searchinput")
-    .value.trim()
-    .replace(/\s+/g, "_");
-  if (searchInput) {
-    fetchDataFromSearch(searchInput);
-  } else {
-    fetchDataFromHRIS(1); // Assuming you want to reset to the first page
-  }
-}
+// function searchFromInput() {
+//   const searchInput = document
+//     .getElementById("searchinput")
+//     .value.trim()
+//     .replace(/\s+/g, "_");
+//   if (searchInput) {
+//     fetchDataFromSearch(searchInput);
+//   } else {
+//     fetchDataFromHRIS(1); // Assuming you want to reset to the first page
+//   }
+// }
 
 function fetchDataFromSearch(searchKey) {
   const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/search?key=${searchKey}`;

@@ -44,7 +44,7 @@ function fetchUserDataByid_pangkat(id_pangkat) {
 function populateForm(userData) {
   document.getElementById("jenis").value = userData.jenis || "";
   document.getElementById("nominal").value = userData.nominal || "";
-  document.getElementById("persentase").value = userData.nominal || "";
+  document.getElementById("persentase").value = userData.persentase || "";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -98,7 +98,6 @@ function updateUserData() {
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
-          window.location.reload(true);
           window.location.href =
             "https://euis.ulbi.ac.id/hris-dev/app/Biodata/keluarga-master.html";
         });

@@ -138,7 +138,7 @@
                   </a>
                   <ul class="sub-menu">
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/Potongan/pph-master.html">
+                        <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/Biodata/pph-master.html">
                             <i class="align-middle" data-feather="dollar-sign"></i>
                             <span class="align-middle">Master PPH</span>
                         </a>
@@ -239,9 +239,9 @@
         <main class="content">
           <div class="container-fluid p-0">
             <h5 class="right-aligned" style="float: right">
-              <a href="index.html">Home</a> / Detail Status Keluarga
+              <a href="index.html">Home</a> / Detail pangkat
             </h5>
-            <h1 class="h3 mb-3"><b>Detail Status Keluarga</b></h1>
+            <h1 class="h3 mb-3"><b>Detail pangkat</b></h1>
             <div class="col-md-6 mb-3">
               <input
                 type="hidden"
@@ -259,7 +259,7 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Form Status Keluarga</h4>
+                    <h4>Form pangkat</h4>
                   </div>
                   <div class="card-body">
                     <form id="editForm">
@@ -268,19 +268,20 @@
                       <!-- PPH Deduction -->
 
                       <div class="mb-3">
-                        <label for="Jenis" class="form-label"
+                        <label for="jenis" class="form-label"
                           >Jenis :</label
                         >
-                        <input class="form-control" id="jenis" name="jenis" />
+                        <input
+                          class="form-control"
+                          id="jenis"
+                          name="jenis"
+                        />
                       </div>
-
                       <div class="mb-3">
-                        <label for="Nominal" class="form-label"
-                          >Nominal :</label
+                        <label for="nominal" class="form-label"
+                          >nominal :</label
                         >
                         <input
-                        type="text"
-
                           class="form-control"
                           id="nominal"
                           name="nominal"
@@ -288,19 +289,19 @@
                       </div>
                       <div class="mb-3">
                         <label for="persentase" class="form-label"
-                          >Persentase :</label
+                          >Persentase PPH :</label
                         >
                         <input
-                          type="text"
                           class="form-control"
                           id="persentase"
                           name="persentase"
                         />
                       </div>
+                      
 
                       <button
-                        id="buttonupdate"
-                        type="button"
+                        id="updatebutton"
+                        type="submit"
                         class="btn btn-primary"
                       >
                         Submit
@@ -346,20 +347,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
     <!-- <script src="https://unpkg.com/jspdf-invoice"></script> -->
     <!-- Include DataTables -->
-    <!-- <script
-      src="../../static/js/keuangan/biodata/biodata-edit.js"
+    <script
+      src="../../static/js/keuangan/biodata/sub-keluarga-edit.js"
       type="module"
-    ></script> -->
+    ></script>
     <!-- Library Javascript Terkait -->
     <script src="https://cdn.jsdelivr.net/gh/PMBULBI/javascript-fe@0.0.7/jquery-3.6.0.min.js"></script>
+
     <!-- <script src="static/js/presensi/cihuyred.js" type="module"></script> -->
-    <script type="module" src="../../static/js/keuangan/biodata/sub-keluarga-edit.js"></script>
     <script src="../../static/js/style/style.js" defer></script>
     <script src="../../static/js/style/table-sorting.js"></script>
     <script src="../../static/js/app.js"></script>
         <!-- <script src="../../static/js/controller/sidebar.js" type="module"></script> -->
     <!-- <script src="../../static/js/controller/header.js" type="module"></script>
     <script src="../../static/js/controller/footer.js" type="module"></script>
-     <script src="../../static/js/controller/croot.js" type="module"></script> -->
+    <!-- <script src="../../static/js/controller/croot.js" type="module"></script> -->
   </body>
 </html>

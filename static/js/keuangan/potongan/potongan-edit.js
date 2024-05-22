@@ -49,7 +49,7 @@ function populateForm(userData) {
   document.getElementById("email").value = userData.email || "0";
   document.getElementById("kopkar").value = userData.kopkar || "0";
   document.getElementById("bankjabar").value = userData.bankjabar || "0";
-  document.getElementById("bjpstk").value = userData.bjpstk || "0";
+  document.getElementById("bpjstk").value = userData.bjpstk || "0";
   document.getElementById("bankjabar").value = userData.bankjabar || "0";
   document.getElementById("pph").value = userData.pph || "0";
   document.getElementById("lainlain2").value = userData.lainlain2 || "0";
