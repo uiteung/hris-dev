@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function updateUserData() {
   const email = document.getElementById("email").value; // mendapatkan email dari form
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/bioupdate?email=${encodeURIComponent(
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/potongan?email=${encodeURIComponent(
     email
   )}`;
 
@@ -92,6 +92,10 @@ function updateUserData() {
     email: email,
     kopkar: document.getElementById("kopkar").value,
     bankjabar: document.getElementById("bankjabar").value,
+    bjpstk: document.getElementById("bjpstk").value,
+    pph: document.getElementById("pph").value,
+    lainlain2: document.getElementById("lainlain2").value,
+    lainlain3: document.getElementById("lainlain3").value,
   };
 
   fetch(url, {
