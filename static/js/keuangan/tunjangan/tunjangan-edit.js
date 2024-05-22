@@ -46,20 +46,15 @@ function fetchUserDataByEmail(email) {
 
 function populateForm(userData) {
   const struk = userData["fgs-struk"];
-  document.getElementById("nama").value = userData.nama || "Tidak Tersedia";
-  document.getElementById("email").value = userData.email || "Tidak Tersedia";
-  document.getElementById("gaji_pokok").value =
-    userData.pokok || "Tidak Tersedia";
-  document.getElementById("pangan").value = userData.pangan || "Tidak Tersedia";
-  document.getElementById("keluarga").value =
-    userData.keluarga || "Tidak Tersedia";
-  document.getElementById("fgs-struk").value = struk || "Tidak Tersedia";
-  document.getElementById("kehadiran").value =
-    userData.kehadiran || "Tidak Tersedia";
-  document.getElementById("keahlian").value =
-    userData.keahlian || "Tidak Tersedia";
-  document.getElementById("transportasi").value =
-    userData.transportasi || "Tidak Tersedia";
+  document.getElementById("nama").value = userData.nama || "0";
+  document.getElementById("email").value = userData.email || "0";
+  document.getElementById("gaji_pokok").value = userData.pokok || "0";
+  document.getElementById("pangan").value = userData.pangan || "0";
+  document.getElementById("keluarga").value = userData.keluarga || "0";
+  document.getElementById("fgs-struk").value = struk || "0";
+  document.getElementById("kehadiran").value = userData.kehadiran || "0";
+  document.getElementById("keahlian").value = userData.keahlian || "0";
+  document.getElementById("transportasi").value = userData.transportasi || "0";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
