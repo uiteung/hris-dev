@@ -112,7 +112,7 @@ function updateUserData() {
           setTimeout(
             () =>
               (window.location.href =
-                "https://euis.ulbi.ac.id/hris-dev/app/Biodata/biodata-master.html"),
+                "https://euis.ulbi.ac.id/hris-dev/app/Potongan/potongan-master.html"),
             1000
           );
         });
