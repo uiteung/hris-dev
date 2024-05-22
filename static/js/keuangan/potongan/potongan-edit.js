@@ -45,19 +45,15 @@ function fetchUserDataByEmail(email) {
 }
 
 function populateForm(userData) {
-  document.getElementById("nama").value = userData.nama || "Tidak Tersedia";
-  document.getElementById("email").value = userData.email || "Tidak Tersedia";
-  document.getElementById("kopkar").value = userData.kopkar || "Tidak Tersedia";
-  document.getElementById("bankjabar").value =
-    userData.bankjabar || "Tidak Tersedia";
-  document.getElementById("bjpstk").value = userData.bjpstk || "Tidak Tersedia";
-  document.getElementById("bankjabar").value =
-    userData.bankjabar || "Tidak Tersedia";
-  document.getElementById("pph").value = userData.pph || "Tidak Tersedia";
-  document.getElementById("lainlain2").value =
-    userData.lainlain2 || "Tidak Tersedia";
-  document.getElementById("lainlain3").value =
-    userData.lainlain3 || "Tidak Tersedia";
+  document.getElementById("nama").value = userData.nama || "0";
+  document.getElementById("email").value = userData.email || "0";
+  document.getElementById("kopkar").value = userData.kopkar || "0";
+  document.getElementById("bankjabar").value = userData.bankjabar || "0";
+  document.getElementById("bjpstk").value = userData.bjpstk || "0";
+  document.getElementById("bankjabar").value = userData.bankjabar || "0";
+  document.getElementById("pph").value = userData.pph || "0";
+  document.getElementById("lainlain2").value = userData.lainlain2 || "0";
+  document.getElementById("lainlain3").value = userData.lainlain3 || "0";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
