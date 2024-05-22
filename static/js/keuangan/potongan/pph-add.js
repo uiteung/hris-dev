@@ -10,6 +10,7 @@ function postData() {
   );
 
   const data = {
+    idpph: 0,
     bulan: bulan,
     persentase_pph: persentase_pph,
     tahun: tahun,
