@@ -37,9 +37,6 @@ function setupEventListeners() {
       searchFromInput();
     }
   });
-  // document
-  //   .getElementById("filterKelompok")
-  //   .addEventListener("change", filterTableByKelompok);
 }
 
 function searchFromInput() {
@@ -55,7 +52,7 @@ function searchFromInput() {
 }
 
 function fetchDataFromSearch(searchKey) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/bio/search?key=${searchKey}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/search?key=${searchKey}`;
 
   fetch(url, {
     method: "POST",
@@ -73,7 +70,7 @@ function fetchDataFromSearch(searchKey) {
       return response.json();
     })
     .then((data) => {
-      if (!data.data.data_query || data.data === 0) {
+      if (!data.data.data_query || data.data.data_query.length === 0) {
         Swal.fire("Informasi", "Tidak ada data yang cocok ditemukan.", "info");
         return;
       }
@@ -90,7 +87,7 @@ function fetchDataFromSearch(searchKey) {
 function fetchDataFromHRIS(page) {
   let url = `${baseUrl}?page=${page}`;
   if (currentKelompok) {
-    url = `https://hris_backend.ulbi.ac.id/api/v2/master/bio/filter/${currentKelompok}?page=${page}`;
+    url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/filter/${currentKelompok}?page=${page}`;
   }
 
   fetch(url, {
@@ -109,13 +106,13 @@ function fetchDataFromHRIS(page) {
       return response.json();
     })
     .then((data) => {
-      if (!data.data || data.data === 0) {
+      if (!data.data.data_query || data.data.data_query.length === 0) {
         Swal.fire("Informasi", "Tidak ada data lebih lanjut.", "info");
         return;
       }
-      allData = data.data;
+      allData = data.data.data_query;
       populateTableWithData(allData);
-      updatePaginationButtons(data);
+      updatePaginationButtons(data.data);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -136,33 +133,26 @@ function populateTableWithData(data) {
 }
 
 function createRow(item) {
-  if (!item || Object.keys(item).length === 0) {
-    return `<tr><td colspan="10">No data available</td></tr>`;
-  }
   const struk = item["fgs-struk"];
   return `<tr>
-    <td class="name-email-cell">${item.jenis} </td>
-    <td>${item.nominal || "Tidak Tersedia"}</td>
-    <td>${item.persentase || "Tidak Tersedia"}</td>
-   
+  <td >${item.jenis}</td>
+  <td >${item.nominal}</td>
+  <td >${item.persentase}</td>
+
     <td>
-            <button class="btn btn-primary btn-sm edit-btn" data-id="${
-              item._id
-            }" data-id="${item._id}" onclick="editItem(this)">
-                    <i class="mdi mdi-table-edit"></i>
-            </button>
-            <button class="btn btn-danger btn-sm delete-btn" data-id="${
-              item._id
-            }" data-id="${item._id}" onclick="deleteItem(this)">
-                    <i class="mdi mdi-delete"></i>
-            </button>
+        <button class="btn btn-primary btn-sm edit-btn" data-id="${item._id}" data-id="${item._id}" onclick="editItem(this)">
+            <i class="mdi mdi-table-edit"></i>
+        </button>
+        <button class="btn btn-danger btn-sm delete-btn" data-id="${item._id}" data-id="${item._id}" onclick="deleteItem(this)">
+            <i class="mdi mdi-delete"></i>
+        </button>
     </td>  
 </tr>`;
 }
 window.editItem = function (element) {
   const email = element.getAttribute("data-id");
-  localStorage.setItem("editingEmail", email);
-  window.location.href = "tunjangan-edit.html";
+  localStorage.setItem("editingId", email);
+  window.location.href = "status-keluarga-edit.html";
 };
 
 function updatePaginationButtons(data) {
@@ -193,7 +183,7 @@ function exportToExcel() {
 }
 
 function fetchAllPages(page) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/biodata?page=${page}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/masterall?page=${page}`;
   fetch(url, {
     method: "GET",
     headers: {
@@ -223,130 +213,8 @@ function fetchAllPages(page) {
     });
 }
 
-function generateExcel(data) {
-  const ws = XLSX.utils.json_to_sheet(
-    data.map((item) => ({
-      Nama: item.nama,
-      "Gaji Pokok": item.pokok,
-      Keluarga: item.keluarga,
-      Pangan: item.pangan,
-      KPI: item.kinerja,
-      Keahlian: item.keahlian,
-      "FGS/Struktural": item["fgs-struk"],
-      Transport: item.transportasi,
-      Kehadiran: item.kehadiran,
-      Kopkar: item.kopkar,
-      "Bank Jabar": item.bankJabar,
-      Arisan: item.arisan,
-      "BPJS TK": item.bpjs,
-      BAUK: item.bauk,
-      "Lain-lain": item.lain2,
-      PPH: item.pph,
-    }))
-  );
-
-  // Adjust column widths
-  const colWidths = [
-    { wch: 30 }, // Nama
-    { wch: 15 }, // Gaji Pokok
-    { wch: 15 }, // Keluarga
-    { wch: 15 }, // Pangan
-    { wch: 15 }, // KPI
-    { wch: 15 }, // Keahlian
-    { wch: 20 }, // FGS/Struktural
-    { wch: 15 }, // Transport
-    { wch: 15 }, // Kehadiran
-    { wch: 15 }, // Kopkar
-    { wch: 15 }, // Bank Jabar
-    { wch: 15 }, // Arisan
-    { wch: 15 }, // BPJS TK
-    { wch: 15 }, // BAUK
-    { wch: 15 }, // Lain-lain
-    { wch: 15 }, // PPH
-  ];
-
-  ws["!cols"] = colWidths;
-
-  // Set header style
-  const range = XLSX.utils.decode_range(ws["!ref"]);
-  for (let C = range.s.c; C <= range.e.c; ++C) {
-    const address = XLSX.utils.encode_col(C) + "1"; // Target the first row
-    if (!ws[address]) continue;
-    ws[address].s = {
-      font: { bold: true },
-      alignment: { horizontal: "center" },
-      fill: { fgColor: { rgb: "FFFFAA00" } },
-    };
-  }
-
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "MasterData");
-  XLSX.writeFile(wb, "HRIS_Master_Data_Export.xlsx");
-}
-
-// document
-//   .getElementById("exportButton")
-//   .addEventListener("click", exportToExcel);
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const generateButton = document.getElementById("generateButton");
-//   generateButton.addEventListener("click", () => {
-//     Swal.fire({
-//       title: "Sebelum Anda Menggenerate Gaji Pastikan Kembali",
-//       text: "Apakah Mata Master Sudah Valid?",
-//       icon: "question",
-//       showCancelButton: true,
-//       confirmButtonColor: "#3085d6",
-//       cancelButtonColor: "#d33",
-//       confirmButtonText: "Ya, generate!",
-//       cancelButtonText: "Batal",
-//     }).then((result) => {
-//       if (result.isConfirmed) {
-//         generateGaji();
-//       }
-//     });
-//   });
-// });
-
-// function generateGaji() {
-//   const url = "https://hris_backend.ulbi.ac.id/api/v2/wagemst/generate";
-
-//   fetch(url, {
-//     method: "POST",
-//     headers: {
-//       login: token,
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({}),
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       if (data.success) {
-//         Swal.fire({
-//           title: "Success",
-//           text: "Gaji berhasil digenerate!",
-//           icon: "success",
-//           confirmButtonText: "OK",
-//         }).then((result) => {
-//           if (result.value) {
-//             window.location.reload(true);
-//           }
-//         });
-//       } else {
-//         Swal.fire(
-//           "Failed",
-//           "Gagal menggenerate gaji: " + data.message,
-//           "error"
-//         );
-//       }
-//     })
-//     .catch((error) => {
-//       console.error("Error:", error);
-//       Swal.fire("Error", "Error: " + error.message, "error");
-//     });
-// }
 window.deleteItem = function (element) {
-  const _id = element.getAttribute("data-id"); // Mengambil email dari attribute
+  const id = element.getAttribute("data-id"); // Mengambil _id dari attribute
 
   Swal.fire({
     title: "Apakah Anda yakin?",
@@ -359,12 +227,12 @@ window.deleteItem = function (element) {
     cancelButtonText: "Batal",
   }).then((result) => {
     if (result.isConfirmed) {
-      sendDeleteRequest(_id); // Melakukan request penghapusan
+      sendDeleteRequest(id);
     }
   });
 };
-function sendDeleteRequest(_id) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/komponenkeluarga/delete?_id=${_id}`;
+function sendDeleteRequest(id) {
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/komponenkeluarga/delete?_id=${id}`;
   fetch(url, {
     method: "DELETE",
     headers: {
@@ -392,14 +260,14 @@ function postData() {
   const url =
     "https://hris_backend.ulbi.ac.id/api/v2/master/komponenkeluarga/insert";
 
-  const jenis = document.getElementById("jenis");
-  const nominal = parseFloat(document.getElementById("nominal"));
-  const persentase = parseFloat(document.getElementById("persentase"));
+  const jenis = document.getElementById("jenis").value;
+  const nominal = parseFloat(document.getElementById("nominal").value);
+  const persentase = parseFloat(document.getElementById("persentase").value);
 
   const data = {
     jenis: jenis,
-    nominal: nominal,
     persentase: persentase,
+    nominal: nominal,
   };
 
   const options = {
@@ -411,8 +279,8 @@ function postData() {
     body: JSON.stringify(data),
   };
   Swal.fire({
-    title: "Anda Yakin?",
-    text: "Kamu ingin mengirim data!",
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
@@ -425,7 +293,15 @@ function postData() {
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
-          Swal.fire("Submitted!", "Your data has been submitted.", "success");
+          Swal.fire(
+            "Submitted!",
+            "Your data has been submitted.",
+            "success"
+          ).then(() => {
+            window.location.reload(true);
+            window.location.href =
+              "https://euis.ulbi.ac.id/hris-dev/app/Biodata/keluarga-master.html";
+          });
         })
         .catch((error) => {
           console.error("Error:", error);
