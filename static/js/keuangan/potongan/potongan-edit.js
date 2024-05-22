@@ -88,7 +88,7 @@ function updateUserData() {
     email: email,
     kopkar: parseFloat(document.getElementById("kopkar").value),
     bankjabar: parseFloat(document.getElementById("bankjabar").value),
-    bjpstk: parseFloat(document.getElementById("bjpstk").value),
+    bjpstk: parseFloat(document.getElementById("bpjstk").value),
     pph: parseFloat(document.getElementById("pph").value),
     lainlain2: parseFloat(document.getElementById("lainlain2").value),
     lainlain3: parseFloat(document.getElementById("lainlain3").value),
