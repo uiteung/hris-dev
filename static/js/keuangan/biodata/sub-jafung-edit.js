@@ -46,10 +46,8 @@ function fetchUserDataByid_pangkat(id_pangkat) {
     });
 }
 function populateForm(userData) {
-  document.getElementById("jafung").value =
-    userData.nama_jafung || "Tidak Tersedia";
-  document.getElementById("singkatan").value =
-    userData.singkatan || "Tidak Tersedia";
+  document.getElementById("jafung").value = userData.nama_jafung || "";
+  document.getElementById("singkatan").value = userData.singkatan || "";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
