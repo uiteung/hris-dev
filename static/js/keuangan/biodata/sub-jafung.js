@@ -156,7 +156,7 @@ function createRow(item) {
 window.editItem = function (element) {
   const id = element.getAttribute("data-id");
   localStorage.setItem("editingid", id);
-  window.location.href = "pangkat-edit.html";
+  window.location.href = "jabatan-fungsional-edit.html";
 };
 
 function updatePaginationButtons(data) {
