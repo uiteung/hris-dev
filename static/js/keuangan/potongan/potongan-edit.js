@@ -90,12 +90,12 @@ function updateUserData() {
   const formData = {
     nama: document.getElementById("nama").value,
     email: email,
-    kopkar: document.getElementById("kopkar").value,
-    bankjabar: document.getElementById("bankjabar").value,
-    bjpstk: document.getElementById("bjpstk").value,
-    pph: document.getElementById("pph").value,
-    lainlain2: document.getElementById("lainlain2").value,
-    lainlain3: document.getElementById("lainlain3").value,
+    kopkar: parseFloat(document.getElementById("kopkar").value),
+    bankjabar: parseFloat(document.getElementById("bankjabar").value),
+    bjpstk: parseFloat(document.getElementById("bjpstk").value),
+    pph: parseFloat(document.getElementById("pph").value),
+    lainlain2: parseFloat(document.getElementById("lainlain2").value),
+    lainlain3: parseFloat(document.getElementById("lainlain3").value),
   };
 
   fetch(url, {

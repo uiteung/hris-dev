@@ -54,7 +54,7 @@ function searchFromInput() {
 }
 
 function fetchDataFromSearch(searchKey) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/bio/search?key=${searchKey}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/potongan/search?key=${searchKey}`;
 
   fetch(url, {
     method: "POST",
@@ -89,7 +89,7 @@ function fetchDataFromSearch(searchKey) {
 function fetchDataFromHRIS(page) {
   let url = `${baseUrl}?page=${page}`;
   if (currentKelompok) {
-    url = `https://hris_backend.ulbi.ac.id/api/v2/master/bio/filter/${currentKelompok}?page=${page}`;
+    url = `https://hris_backend.ulbi.ac.id/api/v2/master/potongan/filter/${currentKelompok}?page=${page}`;
   }
 
   fetch(url, {
@@ -285,10 +285,6 @@ function generateExcel(data) {
   XLSX.utils.book_append_sheet(wb, ws, "MasterData");
   XLSX.writeFile(wb, "HRIS_Master_Data_Export.xlsx");
 }
-
-document
-  .getElementById("exportButton")
-  .addEventListener("click", exportToExcel);
 
 document.addEventListener("DOMContentLoaded", () => {
   const generateButton = document.getElementById("generateButton");
