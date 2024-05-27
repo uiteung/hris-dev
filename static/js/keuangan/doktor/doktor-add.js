@@ -10,9 +10,9 @@ function postData() {
     document.getElementById("jabatan_struktural").value;
   const tunjangan = parseFloat(document.getElementById("tunjangan").value);
   const pph = parseFloat(document.getElementById("pph").value);
-  const jumlah_dibayarkan = parseFloat(
-    document.getElementById("jumlah_dibayarkan").value
-  );
+  //   const jumlah_dibayarkan = parseFloat(
+  //     document.getElementById("jumlah_dibayarkan").value
+  //   );
   const masa_perolehan = document.getElementById("masa_perolehan").value;
   const validasi = document.getElementById("validasi").value;
 
@@ -23,7 +23,7 @@ function postData() {
     jabatan_struktural: jabatan_struktural,
     tunjangan: tunjangan,
     pph: pph,
-    jumlah_dibayarkan: jumlah_dibayarkan,
+    // jumlah_dibayarkan: jumlah_dibayarkan,
     masa_perolehan: masa_perolehan,
     validasi: validasi === "true", // Convert to boolean
   };
