@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (email) {
     fetchUserDataByEmail(email);
     fetchPangkatOptions();
+    fetchstrukturalOptions();
   } else {
     console.error("No email found in localStorage.");
     Swal.fire("Error", "Email tidak ditemukan di penyimpanan lokal.", "error");
@@ -150,6 +151,61 @@ function populateJafungDropdown(jafungData, userJafung) {
       option.text = `${jafung.nama_jafung} - ${jafung.singkatan}`;
       option.value = jafung.nama_jafung;
       jafungDropdown.appendChild(option);
+    }
+  });
+}
+
+function fetchstrukturalOptions(userstruktural) {
+  const url =
+    "https://hris_backend.ulbi.ac.id/api/v2/master/jabatan/struktural";
+  fetch(url, {
+    method: "GET",
+    headers: {
+      login: token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.code === 200 && data.success) {
+        populatestrukturalDropdown(data.data, userstruktural);
+      } else {
+        Swal.fire(
+          "Informasi",
+          "Gagal mengambil data struktural: " +
+            (data.status || "Status tidak diketahui"),
+          "error"
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching struktural options:", error);
+      Swal.fire(
+        "Error",
+        "Terjadi kesalahan saat mengambil data struktural: " + error.message,
+        "error"
+      );
+    });
+}
+
+function populatestrukturalDropdown(strukturalData, userstruktural) {
+  const strukturalDropdown = document.getElementById("jabatan");
+  strukturalDropdown.innerHTML = "";
+  const userstrukturalOption = document.createElement("option");
+  if (userstruktural) {
+    userstrukturalOption.textContent = `${userstruktural}`;
+  } else {
+    userstrukturalOption.textContent = "";
+  }
+  userstrukturalOption.value = userstruktural;
+  strukturalDropdown.appendChild(userstrukturalOption);
+  strukturalData.forEach((struktural) => {
+    if (struktural.nama !== userstruktural) {
+      const option = document.createElement("option");
+      option.text = `${struktural.nama} - ${struktural.singkatan}`;
+      option.value = struktural.nama;
+      strukturalDropdown.appendChild(option);
     }
   });
 }
