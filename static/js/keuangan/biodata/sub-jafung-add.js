@@ -20,8 +20,8 @@ function postData() {
     body: JSON.stringify(data),
   };
   Swal.fire({
-    title: "Anda Yakin Ingin ?",
-    text: "Kamu tidak akan bisa mengembalikan ini!",
+    title: "Anda Yakin?",
+    text: "Kamu ingin mengirim data!",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
