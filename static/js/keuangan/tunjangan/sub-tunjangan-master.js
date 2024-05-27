@@ -145,7 +145,9 @@ function createRow(item) {
     <td>${item.pangan || "Tidak Tersedia"}</td>
     <td>${item.keluarga || "Tidak Tersedia"}</td>
     <td>${struk || "Tidak Tersedia"}  </td>
+    <td>${item.kehadiran || "Tidak Tersedia"}</td>
     <td>${item.kinerja || "Tidak Tersedia"}</td>
+
     <td>${item.keahlian || "Tidak Tersedia"}</td>
     <td>${item.transportasi || "Tidak Tersedia"}</td>
     <td>
