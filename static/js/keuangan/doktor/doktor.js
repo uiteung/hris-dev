@@ -144,7 +144,6 @@ function createRow(item) {
     <td>${item.pph}</td>
     <td>${item.jumlah_dibayarkan}</td>
     <td>${item.masa_perolehan}</td>
-    <td>${item.validasi}</td>
     <td>
         <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" onclick="editItem(this)">
             <i class="mdi mdi-table-edit"></i>
