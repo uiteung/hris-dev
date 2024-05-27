@@ -8,7 +8,7 @@ table.dataTable thead .sorting_desc:after,
 table.dataTable thead .sorting_desc:before,
 table.dataTable thead .sorting_desc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:before {
-  bottom: .5em;
+  bottom: 0.5em;
 }
 
 /* Gaya untuk pop-up */
@@ -33,20 +33,20 @@ table.dataTable thead .sorting_desc_disabled:before {
 }
 
 .alert-container {
-    text-align: center;
+  text-align: center;
 }
 
 .alert {
-    padding: 0.5rem 1rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-    margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
 }
 
 .alert-success {
-    color: #155724;
-    background-color: #d4edda;
-    border-color: #c3e6cb;
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
 }
 
 .alert-danger {
@@ -84,97 +84,156 @@ table.dataTable thead .sorting_desc_disabled:before {
   width: 75px;
   height: 75px;
   border: 15px solid #dddddd;
-  border-top-color : #ff8700;
+  border-top-color: #ff8700;
   border-radius: 50%;
   animation: loading 0.75s ease infinite;
 }
 
 @keyframes loading {
-  from{
-    transform : rotate(0turn);
+  from {
+    transform: rotate(0turn);
   }
   to {
     transform: rotate(1turn);
   }
 }
 
-    /* Basic styling for the select dropdown */
-    select {
-      padding: 10px;
-      font-size: 16px;
-    }
+/* Basic styling for the select dropdown */
+select {
+  padding: 10px;
+  font-size: 16px;
+}
 
-    /* Styling for the dropdown arrow */
-    select:after {
-      content: '\25BC'; /* Unicode character for a downward-pointing triangle */
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      pointer-events: none; /* Ensure the arrow doesn't interfere with the select functionality */
-    }
+/* Styling for the dropdown arrow */
+select:after {
+  content: "\25BC"; /* Unicode character for a downward-pointing triangle */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Ensure the arrow doesn't interfere with the select functionality */
+}
 
-    /* Custom styling for the option values */
-    option {
-      background-color: #f2f2f2;
-    }
+/* Custom styling for the option values */
+option {
+  background-color: #f2f2f2;
+}
 
-    .table-container {
-      width: 100%;
-      overflow: scroll;
-      border: 1px solid #fff;
-    }
+.table-container {
+  width: 100%;
+  overflow: scroll;
+  border: 1px solid #fff;
+}
 
-    /* Basic styling for the table */
-    .table-container table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+/* Basic styling for the table */
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-    .table-container th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-      vertical-align: middle;
-    }
+.table-container th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle;
+}
 
-    .table-container th {
-      background-color: #f2f2f2;
-    }
+.table-container th {
+  background-color: #f2f2f2;
+}
 
-    .table-container th:nth-child(1),
-    .table-container td:nth-child(1){
-      position: sticky;
-      border: #f2f2f2;
-      left: 0;
-      z-index: 2;
-    }
+.table-container th:nth-child(1),
+.table-container td:nth-child(1) {
+  position: sticky;
+  border: #f2f2f2;
+  left: 0;
+  z-index: 2;
+}
 
-    .table-container th:nth-child(1){
-      background: #f2f2f2;
-    }
+.table-container th:nth-child(1) {
+  background: #f2f2f2;
+}
 
-    .table-container td:nth-child(1){
-      background: #fff;
-    }
+.table-container td:nth-child(1) {
+  background: #fff;
+}
 
-    .edit-button {
-      display: inline-flex;
-      align-items: center;
-      padding: 10px;
-      background-color: #3498db; /* You can customize the background color */
-      color: #fff; /* You can customize the text color */
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+.table-container-nopages {
+  width: 100%;
+  overflow: scroll;
+  border: 1px solid #fff;
+}
 
-    .edit-button svg {
-      margin-right: 5px; /* Adjust the spacing between the icon and text */
-    }
+/* Basic styling for the table */
+.table-container-nopages table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-    .sub-menu {
-      list-style-type: none;
-    }
+.table-container-nopages th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle;
+}
 
-    
+.table-container-nopages th {
+  background-color: #f2f2f2;
+}
+
+.table-container-nopages th:nth-child(1),
+.table-container-nopages td:nth-child(1) {
+  position: sticky;
+  /* border: #f2f2f2; */
+  left: 0;
+  z-index: 2;
+}
+
+.table-container-nopages th:nth-child(1) {
+  background: #f2f2f2;
+}
+
+.table-container-nopages td:nth-child(1) {
+  background: #fff;
+}
+
+.edit-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #3498db; /* You can customize the background color */
+  color: #fff; /* You can customize the text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-button svg {
+  margin-right: 5px; /* Adjust the spacing between the icon and text */
+}
+
+.sub-menu {
+  list-style-type: none;
+}
+.custom-dropdown {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-top: none;
+  z-index: 1000;
+  width: 95%; /* Adjust according to your input width */
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-dropdown div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.custom-dropdown div:hover {
+  background-color: #f8f8f8;
+}
