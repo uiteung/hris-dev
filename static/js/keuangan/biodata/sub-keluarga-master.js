@@ -8,27 +8,24 @@ const baseUrl =
 let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
-  fetchDataFromHRIS(currentPage);
+  fetchDataFromHRIS(allData);
 });
 
 function setupEventListeners() {
-  document.getElementById("prevPageBtn").addEventListener("click", () => {
-    if (currentPage > 1) {
-      fetchDataFromHRIS(currentPage - 1);
-    }
-  });
-
-  document.getElementById("nextPageBtn").addEventListener("click", () => {
-    fetchDataFromHRIS(currentPage + 1);
-  });
-  const searchButton = document.querySelector(".btn-primary");
-  const searchInput = document.getElementById("searchinput");
-
-  searchButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    searchFromInput();
-  });
-
+  // document.getElementById("prevPageBtn").addEventListener("click", () => {
+  //   if (currentPage > 1) {
+  //     fetchDataFromHRIS(currentPage - 1);
+  //   }
+  // });
+  // document.getElementById("nextPageBtn").addEventListener("click", () => {
+  //   fetchDataFromHRIS(currentPage + 1);
+  // });
+  // const searchButton = document.querySelector(".btn-primary");
+  // const searchInput = document.getElementById("searchinput");
+  // searchButton.addEventListener("click", (event) => {
+  //   event.preventDefault();
+  //   searchFromInput();
+  // });
   // // Listen for Enter key on the search input
   // searchInput.addEventListener("keypress", (event) => {
   //   if (event.keyCode === 13) {
@@ -112,7 +109,7 @@ function fetchDataFromHRIS(page) {
       }
       allData = data.data.data_query;
       populateTableWithData(allData);
-      updatePaginationButtons(data.data);
+      // updatePaginationButtons(data.data);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -127,14 +124,16 @@ function fetchDataFromHRIS(page) {
 function populateTableWithData(data) {
   const tableBody = document.getElementById("tablebody");
   tableBody.innerHTML = ""; // Clear existing table data
-  data.forEach((item) => {
-    tableBody.innerHTML += createRow(item);
+  data.forEach((item, index) => {
+    tableBody.innerHTML += createRow(item, index);
   });
 }
 
-function createRow(item) {
-  const struk = item["fgs-struk"];
+function createRow(item, index) {
+  // const struk = item["fgs-struk"];
+  index++;
   return `<tr>
+  <td >${index}</td>
   <td >${item.jenis}</td>
   <td >${item.nominal}</td>
   <td >${item.persentase}</td>
@@ -243,9 +242,16 @@ function sendDeleteRequest(id) {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        Swal.fire("Deleted!", "Data berhasil dihapus.", "success").then(() => {
-          window.location.reload();
-        });
+        Swal.fire("Deleted!", "Data berhasil dihapus.", "success").then(
+          (result) => {
+            setTimeout(
+              () =>
+                (window.location.href =
+                  "https://euis.ulbi.ac.id/hris-dev/app/Biodata/keluarga-master.html"),
+              1000
+            );
+          }
+        );
       } else {
         Swal.fire("Failed!", "Gagal menghapus data: " + data.message, "error");
       }
@@ -255,64 +261,3 @@ function sendDeleteRequest(id) {
       Swal.fire("Error", "Kesalahan: " + error.message, "error");
     });
 }
-
-function postData() {
-  const url =
-    "https://hris_backend.ulbi.ac.id/api/v2/master/komponenkeluarga/insert";
-
-  const jenis = document.getElementById("jenis").value;
-  const nominal = parseFloat(document.getElementById("nominal").value);
-  const persentase = parseFloat(document.getElementById("persentase").value);
-
-  const data = {
-    jenis: jenis,
-    persentase: persentase,
-    nominal: nominal,
-  };
-
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      login: token,
-    },
-    body: JSON.stringify(data),
-  };
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, submit it!",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // Only proceed with fetch if user confirms
-      fetch(url, options)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Success:", data);
-          Swal.fire(
-            "Submitted!",
-            "Your data has been submitted.",
-            "success"
-          ).then(() => {
-            window.location.reload(true);
-            window.location.href =
-              "https://euis.ulbi.ac.id/hris-dev/app/Biodata/keluarga-master.html";
-          });
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          Swal.fire(
-            "Failed!",
-            "There was an issue submitting your data.",
-            "error"
-          );
-        });
-    }
-  });
-}
-
-document.getElementById("updatebutton").addEventListener("click", postData);

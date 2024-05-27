@@ -7,35 +7,32 @@ const baseUrl = "https://hris_backend.ulbi.ac.id/api/v2/master/jafung";
 let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
-  fetchDataFromHRIS(currentPage);
+  fetchDataFromHRIS(allData);
 });
 
 function setupEventListeners() {
-  document.getElementById("prevPageBtn").addEventListener("click", () => {
-    if (currentPage > 1) {
-      fetchDataFromHRIS(currentPage - 1);
-    }
-  });
-
-  document.getElementById("nextPageBtn").addEventListener("click", () => {
-    fetchDataFromHRIS(currentPage + 1);
-  });
-  const searchButton = document.querySelector(".btn-primary");
-  const searchInput = document.getElementById("searchinput");
-
-  searchButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    searchFromInput();
-  });
-
+  // document.getElementById("prevPageBtn").addEventListener("click", () => {
+  //   if (currentPage > 1) {
+  //     fetchDataFromHRIS(currentPage - 1);
+  //   }
+  // });
+  // document.getElementById("nextPageBtn").addEventListener("click", () => {
+  //   fetchDataFromHRIS(currentPage + 1);
+  // });
+  // const searchButton = document.querySelector(".btn-primary");
+  // const searchInput = document.getElementById("searchinput");
+  // searchButton.addEventListener("click", (event) => {
+  //   event.preventDefault();
+  //   searchFromInput();
+  // });
   // Listen for Enter key on the search input
-  searchInput.addEventListener("keypress", (event) => {
-    if (event.keyCode === 13) {
-      // 13 is the keycode for Enter
-      event.preventDefault(); // Prevent form submission
-      searchFromInput();
-    }
-  });
+  // searchInput.addEventListener("keypress", (event) => {
+  //   if (event.keyCode === 13) {
+  //      13 is the keycode for Enter
+  //     event.preventDefault(); // Prevent form submission
+  //     searchFromInput();
+  //   }
+  // });
   // document
   //   .getElementById("filterKelompok")
   //   .addEventListener("change", filterTableByKelompok);
@@ -78,7 +75,7 @@ function fetchDataFromSearch(searchKey) {
       }
       allData = data.data.data_query;
       populateTableWithData(allData);
-      updatePaginationButtons(data.data);
+      // updatePaginationButtons(data.data);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -117,7 +114,7 @@ function fetchDataFromHRIS(page) {
       }
       allData = data.data;
       populateTableWithData(allData);
-      updatePaginationButtons(data);
+      // updatePaginationButtons(data);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -139,7 +136,7 @@ function populateTableWithData(data) {
 
 function createRow(item) {
   return `<tr>
-    <td class="name-email-cell">${item.id_jafung} </td>
+    <td>${item.id_jafung}</td>
 
     <td>${item.singkatan}</td>
     <td>${item.nama_jafung}</td>
@@ -259,55 +256,3 @@ function sendDeleteRequest(id) {
       Swal.fire("Error", "Kesalahan: " + error.message, "error");
     });
 }
-
-function postData() {
-  const url = "https://hris_backend.ulbi.ac.id/api/v2/master/jafung/insert";
-
-  const id_jafung = document.getElementById("id_jafung");
-  const singkatan = document.getElementById("singkatan");
-  const nama_jafung = document.getElementById("nama_jafung");
-
-  const data = {
-    id_jafung: id_jafung,
-    nama_jafung: nama_jafung,
-    singkatan: singkatan,
-  };
-
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      login: token,
-    },
-    body: JSON.stringify(data),
-  };
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, submit it!",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // Only proceed with fetch if user confirms
-      fetch(url, options)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Success:", data);
-          Swal.fire("Submitted!", "Your data has been submitted.", "success");
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          Swal.fire(
-            "Failed!",
-            "There was an issue submitting your data.",
-            "error"
-          );
-        });
-    }
-  });
-}
-
-document.getElementById("updatebutton").addEventListener("click", postData);

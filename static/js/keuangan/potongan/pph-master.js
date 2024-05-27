@@ -7,38 +7,35 @@ const baseUrl = "https://hris_backend.ulbi.ac.id/api/v2/master/pph";
 let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
-  fetchDataFromHRIS(currentPage);
+  fetchDataFromHRIS(allData);
 });
 
 function setupEventListeners() {
-  document.getElementById("prevPageBtn").addEventListener("click", () => {
-    if (currentPage > 1) {
-      fetchDataFromHRIS(currentPage - 1);
-    }
-  });
-
-  document.getElementById("nextPageBtn").addEventListener("click", () => {
-    fetchDataFromHRIS(currentPage + 1);
-  });
-  const searchButton = document.querySelector(".btn-primary");
-  const searchInput = document.getElementById("searchinput");
-
-  searchButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    searchFromInput();
-  });
-
-  // Listen for Enter key on the search input
-  searchInput.addEventListener("keypress", (event) => {
-    if (event.keyCode === 13) {
-      // 13 is the keycode for Enter
-      event.preventDefault(); // Prevent form submission
-      searchFromInput();
-    }
-  });
-  document
-    .getElementById("filterKelompok")
-    .addEventListener("change", filterTableByKelompok);
+  //   document.getElementById("prevPageBtn").addEventListener("click", () => {
+  //     if (currentPage > 1) {
+  //       fetchDataFromHRIS(currentPage - 1);
+  //     }
+  //   });
+  //   document.getElementById("nextPageBtn").addEventListener("click", () => {
+  //     fetchDataFromHRIS(currentPage + 1);
+  //   });
+  //   const searchButton = document.querySelector(".btn-primary");
+  //   const searchInput = document.getElementById("searchinput");
+  //   searchButton.addEventListener("click", (event) => {
+  //     event.preventDefault();
+  //     searchFromInput();
+  //   });
+  //   // Listen for Enter key on the search input
+  //   searchInput.addEventListener("keypress", (event) => {
+  //     if (event.keyCode === 13) {
+  //       // 13 is the keycode for Enter
+  //       event.preventDefault(); // Prevent form submission
+  //       searchFromInput();
+  //     }
+  //   });
+  //   document
+  //     .getElementById("filterKelompok")
+  //     .addEventListener("change", filterTableByKelompok);
 }
 
 function searchFromInput() {

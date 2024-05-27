@@ -1,19 +1,15 @@
 import { token } from "../../controller/cookies.js";
 
 function postData() {
-  const url = "https://hris_backend.ulbi.ac.id/api/v2/master/pph/insert";
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/master/pangkat/insert";
 
-  const bulan = document.getElementById("bulan").value;
-  const tahun = document.getElementById("tahun").value;
-  const persentase_pph = parseFloat(
-    document.getElementById("persentase_pph").value
-  );
+  //   const id_pangkat = document.getElementById("id_pangkat").value;
+  const kepanjangan = document.getElementById("kepanjangan").value;
+  const jenis_pangkat = document.getElementById("jenis_pangkat").value;
 
   const data = {
-    idpph: 0,
-    bulan: bulan,
-    persentase_pph: persentase_pph,
-    tahun: tahun,
+    jenis_pangkat: jenis_pangkat,
+    kepanjangan: kepanjangan,
   };
 
   const options = {
@@ -47,7 +43,7 @@ function postData() {
             setTimeout(
               () =>
                 (window.location.href =
-                  "https://euis.ulbi.ac.id/hris-dev/app/Potongan/pph-master.html"),
+                  "https://euis.ulbi.ac.id/hris-dev/app/Biodata/pangkat-master.html"),
               1000
             );
           });
@@ -64,4 +60,4 @@ function postData() {
   });
 }
 
-document.getElementById("updateButton").addEventListener("click", postData);
+document.getElementById("updatebutton").addEventListener("click", postData);

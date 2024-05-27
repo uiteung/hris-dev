@@ -1,4 +1,5 @@
 import { token } from "../../controller/cookies.js";
+
 function postData() {
   const url = "https://hris_backend.ulbi.ac.id/api/v2/master/doktor/insert";
 

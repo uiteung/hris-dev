@@ -79,7 +79,7 @@ function updateUserData() {
   const url = `https://hris_backend.ulbi.ac.id/api/v2/master/pangkat/edit?id=${id_pangkat}`;
 
   const formData = {
-    id_pangkat: id_pangkat,
+    id_pangkat: parseInt(id_pangkat),
     jenis_pangkat: document.getElementById("jenis_pangkat").value,
     kepanjangan: document.getElementById("kepanjangan").value,
   };

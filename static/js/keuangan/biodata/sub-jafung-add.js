@@ -1,19 +1,14 @@
-import { token } from "../../controller/cookies.js";
-
 function postData() {
-  const url = "https://hris_backend.ulbi.ac.id/api/v2/master/pph/insert";
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/master/jafung/insert";
 
-  const bulan = document.getElementById("bulan").value;
-  const tahun = document.getElementById("tahun").value;
-  const persentase_pph = parseFloat(
-    document.getElementById("persentase_pph").value
-  );
+  //   const id_jafung = document.getElementById("id_jafung");
+  const singkatan = document.getElementById("singkatan");
+  const nama_jafung = document.getElementById("nama_jafung");
 
   const data = {
-    idpph: 0,
-    bulan: bulan,
-    persentase_pph: persentase_pph,
-    tahun: tahun,
+    // id_jafung: id_jafung,
+    nama_jafung: nama_jafung,
+    singkatan: singkatan,
   };
 
   const options = {
@@ -47,7 +42,7 @@ function postData() {
             setTimeout(
               () =>
                 (window.location.href =
-                  "https://euis.ulbi.ac.id/hris-dev/app/Potongan/pph-master.html"),
+                  "https://euis.ulbi.ac.id/hris-dev/app/Biodata/jabatan-fungsional-master.html"),
               1000
             );
           });
@@ -64,4 +59,4 @@ function postData() {
   });
 }
 
-document.getElementById("updateButton").addEventListener("click", postData);
+document.getElementById("updatebutton").addEventListener("click", postData);

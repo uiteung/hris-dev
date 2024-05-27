@@ -1,19 +1,17 @@
 import { token } from "../../controller/cookies.js";
 
 function postData() {
-  const url = "https://hris_backend.ulbi.ac.id/api/v2/master/pph/insert";
+  const url =
+    "https://hris_backend.ulbi.ac.id/api/v2/master/komponenkeluarga/insert";
 
-  const bulan = document.getElementById("bulan").value;
-  const tahun = document.getElementById("tahun").value;
-  const persentase_pph = parseFloat(
-    document.getElementById("persentase_pph").value
-  );
+  const jenis = document.getElementById("jenis").value;
+  const nominal = parseFloat(document.getElementById("nominal").value);
+  const persentase = parseFloat(document.getElementById("persentase").value);
 
   const data = {
-    idpph: 0,
-    bulan: bulan,
-    persentase_pph: persentase_pph,
-    tahun: tahun,
+    jenis: jenis,
+    persentase: persentase,
+    nominal: nominal,
   };
 
   const options = {
@@ -47,7 +45,7 @@ function postData() {
             setTimeout(
               () =>
                 (window.location.href =
-                  "https://euis.ulbi.ac.id/hris-dev/app/Potongan/pph-master.html"),
+                  "https://euis.ulbi.ac.id/hris-dev/app/Biodata/keluarga-master.html"),
               1000
             );
           });
@@ -64,4 +62,4 @@ function postData() {
   });
 }
 
-document.getElementById("updateButton").addEventListener("click", postData);
+document.getElementById("updatebutton").addEventListener("click", postData);

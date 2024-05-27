@@ -100,6 +100,13 @@ function updateUserData() {
           text: "Data telah berhasil diperbarui.",
           icon: "success",
           confirmButtonText: "OK",
+        }).then((result) => {
+          setTimeout(
+            () =>
+              (window.location.href =
+                "https://euis.ulbi.ac.id/hris-dev/app/Biodata/jabatan-fungsional-master.html"),
+            1000
+          );
         });
       } else {
         Swal.fire("Error", "Gagal memperbarui data: " + data.message, "error");
