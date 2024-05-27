@@ -53,8 +53,8 @@
       rel="stylesheet"
     />
     <style>
-      .table-container table th,
-      .table-container table th {
+      .table-container-nopages table th,
+      .table-container-nopages table th {
         background-color: #495057;
         color: white;
       }
@@ -66,14 +66,13 @@
         white-space: nowrap;
         padding: 10px;
       }
-      .table-container th,
-      .table-container td {
-        padding: 10px;
-        width: 150px;
+      .table-container-nopages th,
+      .table-container-nopages td {
+     
         text-align: left;
         vertical-align: middle;
       }
-      .table-container {
+      .table-container-nopages {
         overflow-x: auto;
       }
 
@@ -332,16 +331,14 @@
                     </div>
                     <br />
                     <!-- <hr /> -->
-                    <div class="table-container">
+                    <div class="table-container-nopages">
                       <table id="example" class="table table-fixed">
                         <thead>
                           <tr
                             style="text-align: center; vertical-align: middle"
                           >
-                            <th
-                              class="name-email-header"
-                              style="background-color: #2b343d"
-                            >Jenis</th>
+                            <th id="linkDokumenTh"style="width: 100px; color: white; background-color: #405057;">No</th>
+                            <th id="linkDokumenTh">Jenis</th>
                             <th id="linkDokumenTh">Nominal</th>
                             <th id="linkDokumenTh">Persentase</th>
                             <th id="linkDokumenTh">Action</th>
@@ -354,7 +351,7 @@
                       </table>
                     </div>
                     <br />
-                    <div class="row">
+                    <!-- <div class="row">
                       <div class="col-md-6">
                         <div class="pagination">
                           <button id="prevPageBtn" class="btn btn-primary">
@@ -366,7 +363,7 @@
                           </button>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
