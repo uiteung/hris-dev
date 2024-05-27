@@ -36,9 +36,9 @@ function setupEventListeners() {
       searchFromInput();
     }
   });
-  document
-    .getElementById("filterKelompok")
-    .addEventListener("change", filterTableByKelompok);
+  // document
+  //   .getElementById("filterKelompok")
+  //   .addEventListener("change", filterTableByKelompok);
 }
 
 function searchFromInput() {
@@ -54,7 +54,7 @@ function searchFromInput() {
 }
 
 function fetchDataFromSearch(searchKey) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/search?key=${searchKey}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/doktor/search?key=${searchKey}`;
 
   fetch(url, {
     method: "POST",

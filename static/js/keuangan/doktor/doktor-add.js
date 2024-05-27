@@ -54,8 +54,13 @@ function postData() {
             "Submitted!",
             "Your data has been submitted.",
             "success"
-          ).then(() => {
-            location.reload(true);
+          ).then((result) => {
+            setTimeout(
+              () =>
+                (window.location.href =
+                  "https://euis.ulbi.ac.id/hris-dev/app/Doktor/doktor-master.html"),
+              1000
+            );
           });
 
           //   window.location.href =
