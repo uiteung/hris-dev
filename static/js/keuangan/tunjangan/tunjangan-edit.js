@@ -51,8 +51,12 @@ function populateForm(userData) {
   document.getElementById("gaji_pokok").value = userData.pokok || "0";
   document.getElementById("pangan").value = userData.pangan || "0";
   document.getElementById("keluarga").value = userData.keluarga || "0";
+
   document.getElementById("fgs-struk").value = struk || "0";
   document.getElementById("kehadiran").value = userData.kehadiran || "0";
+  document.getElementById("keluarga").value = userData.keluarga || "0";
+  document.getElementById("kinerja").value = userData.kinerja || "0";
+
   document.getElementById("keahlian").value = userData.keahlian || "0";
   document.getElementById("transportasi").value = userData.transportasi || "0";
 }
@@ -91,6 +95,8 @@ function updateUserData() {
     pangan: parseFloat(document.getElementById("pangan").value),
     keluarga: parseFloat(document.getElementById("keluarga").value),
     "fgs-struk": parseFloat(document.getElementById("fgs-struk").value),
+    kinerja: parseFloat(document.getElementById("kinerja").value),
+
     kehadiran: parseFloat(document.getElementById("kehadiran").value),
     keahlian: parseFloat(document.getElementById("keahlian").value),
     transportasi: parseFloat(document.getElementById("transportasi").value),
