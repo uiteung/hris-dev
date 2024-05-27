@@ -34,7 +34,18 @@ function postData() {
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
-          Swal.fire("Submitted!", "Your data has been submitted.", "success");
+          Swal.fire(
+            "Submitted!",
+            "Your data has been submitted.",
+            "success"
+          ).then((result) => {
+            setTimeout(
+              () =>
+                (window.location.href =
+                  "https://euis.ulbi.ac.id/hris-dev/app/Biodata/jabatan-fungsional-master.html"),
+              1000
+            );
+          });
         })
         .catch((error) => {
           console.error("Error:", error);
