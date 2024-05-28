@@ -157,7 +157,7 @@ function createRow(item) {
 window.editItem = function (element) {
   const email = element.getAttribute("data-email");
   localStorage.setItem("editingEmail", email);
-  window.location.href = "master-data-edit.html";
+  window.location.href = "doktor-edit.html";
 };
 
 function updatePaginationButtons(data) {
