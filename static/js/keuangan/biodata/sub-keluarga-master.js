@@ -128,6 +128,23 @@ function populateTableWithData(data) {
     tableBody.innerHTML += createRow(item, index);
   });
 }
+function formatRupiah(value) {
+  const numberString = value
+    .toString()
+    .replace(/[^,\d]/g, "")
+    .toString();
+  let split = numberString.split(",");
+  let sisa = split[0].length % 3;
+  let rupiah = split[0].substr(0, sisa);
+  let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+  if (ribuan) {
+    let separator = sisa ? "." : "";
+    rupiah += separator + ribuan.join(".");
+  }
+
+  return "Rp" + " " + rupiah + (split[1] ? "," + split[1] : "");
+}
 
 function createRow(item, index) {
   // const struk = item["fgs-struk"];
@@ -135,14 +152,18 @@ function createRow(item, index) {
   return `<tr>
   <td >${index}</td>
   <td >${item.jenis}</td>
-  <td >${item.nominal}</td>
+  <td>${formatRupiah(item.nominal)}</td>
   <td >${item.persentase}</td>
 
     <td>
-        <button class="btn btn-primary btn-sm edit-btn" data-id="${item._id}" data-id="${item._id}" onclick="editItem(this)">
+        <button class="btn btn-primary btn-sm edit-btn" data-id="${
+          item._id
+        }" data-id="${item._id}" onclick="editItem(this)">
             <i class="mdi mdi-table-edit"></i>
         </button>
-        <button class="btn btn-danger btn-sm delete-btn" data-id="${item._id}" data-id="${item._id}" onclick="deleteItem(this)">
+        <button class="btn btn-danger btn-sm delete-btn" data-id="${
+          item._id
+        }" data-id="${item._id}" onclick="deleteItem(this)">
             <i class="mdi mdi-delete"></i>
         </button>
     </td>  
