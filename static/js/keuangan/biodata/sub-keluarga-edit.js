@@ -69,15 +69,44 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+function formatRupiah(value, prefix = "Rp") {
+  const stringified = String(value)
+    .replace(/[^,\d]/g, "")
+    .toString();
+  let split = stringified.split(",");
+  let sisa = split[0].length % 3;
+  let rupiah = split[0].substr(0, sisa);
+  let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+  if (ribuan) {
+    let separator = sisa ? "." : "";
+    rupiah += separator + ribuan.join(".");
+  }
+
+  rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
+  return prefix ? prefix + " " + rupiah : rupiah;
+}
+document.addEventListener("DOMContentLoaded", function () {
+  const nominalInput = document.getElementById("nominal");
+
+  nominalInput.addEventListener("input", function () {
+    const numbersOnly = this.value.replace(/[^,\d]/g, "").toString();
+    this.value = formatRupiah(numbersOnly);
+  });
+});
 
 function updateUserData() {
   const id_pangkat = localStorage.getItem("editingId");
 
   const url = `https://hris_backend.ulbi.ac.id/api/v2/master/komponenkeluarga/update?_id=${id_pangkat}`;
+  const formattedNominal = document
+    .getElementById("nominal")
+    .value.replace(/[^,\d]/g, "")
+    .replace(",", ".");
 
   const formData = {
     jenis: document.getElementById("jenis").value,
-    nominal: parseFloat(document.getElementById("nominal").value),
+    nominal: parseFloat(formattedNominal),
     persentase: parseFloat(document.getElementById("persentase").value),
   };
 
