@@ -137,61 +137,58 @@ function createRow(item) {
   let mataKuliahHtml = item.mata_kuliah
     .map(
       (mk) => `
-        <tr>
-          <td>${mk.nama_matkul}</td>
-          <td>${mk.jurusan}</td>
-          <td>${mk.kelas}</td>
-          <td>${mk.jam}</td>
-          <td>${mk.maks_kjm}</td>
-          <td>${mk.jumlah_kelas}</td>
-          <td>${mk.jumlah_temu}</td>
-          <td>${mk.jam_dibayar}</td>
-          <td>Rp${mk.honor_ajar.toLocaleString()}</td>
-        </tr>
-      `
+      <tr>
+        <td>${mk.nama_matkul}</td>
+        <td>${mk.jurusan}</td>
+        <td>${mk.kelas}</td>
+        <td>${mk.jam}</td>
+        <td>${mk.maks_kjm.toFixed(1)}</td>
+        <td>${mk.jumlah_kelas}</td>
+        <td>${mk.jumlah_temu}</td>
+        <td>${mk.jam_dibayar}</td>
+        <td>Rp${mk.honor_ajar.toLocaleString()}</td>
+      </tr>
+    `
     )
     .join("");
 
   return `<tr>
-        <td>${item.nama_pengajar}</td>
-        <td>${item.jabatan}</td>
-        <td>${item.phone_number}</td>
-        <td>
-          <table class="nested-table">
-            <thead>
-              <tr>
-                <th style="background-color: #495057; color: white;">Nama Matkul</th>
-                <th style="background-color: #495057; color: white;">Jurusan</th>
-                <th style="background-color: #495057; color: white;">Kelas</th>
-                <th style="background-color: #495057; color: white;">Jam</th>
-                <th style="background-color: #495057; color: white;">Maks KJM</th>
-                <th style="background-color: #495057; color: white;">Jumlah Kelas</th>
-                <th style="background-color: #495057; color: white;">Jumlah Temu</th>
-                <th style="background-color: #495057; color: white;">Jam Dibayar</th>
-                <th style="background-color: #495057; color: white;">Honor Ajar</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${mataKuliahHtml}
-            </tbody>
-          </table>
-        </td>
-        <td>Rp${item.total_honor.toLocaleString()}</td>
-        <td>Rp${item.pph.toLocaleString()}</td>
-        <td>Rp${item.jumlah_dibayar.toLocaleString()}</td>
-       <td>
-            <button class="btn btn-primary btn-sm edit-btn" data-id="${
-              item.id
-            }" data-email="${item.email}" onclick="editItem(this)">
-                    <i class="mdi mdi-table-edit"></i>
-            </button>
-            <button class="btn btn-danger btn-sm delete-btn" data-id="${
-              item.id
-            }" data-email="${item.email}" onclick="deleteItem(this)">
-                    <i class="mdi mdi-delete"></i>
-            </button>
-    </td>  
-      </tr>`;
+      <td>${item.nama_pengajar}</td>
+      <td>${item.jabatan}</td>
+      <td>
+        <table class="nested-table">
+          <thead>
+            <tr>
+              <th >Nama Matkul</th>
+              <th>Jurusan</th>
+              <th>Kelas</th>
+              <th>Jam</th>
+              <th>Maks KJM</th>
+              <th>Jumlah Kelas</th>
+              <th>Jumlah Temu</th>
+              <th>Jam Dibayar</th>
+              <th>Honor Ajar</th>
+            </tr>
+          </thead>
+          <tbody>${mataKuliahHtml}</tbody>
+        </table>
+      </td>
+      <td>Rp${item.total_honor.toLocaleString()}</td>
+      <td>Rp${item.pph.toLocaleString()}</td>
+      <td>Rp${item.jumlah_dibayar.toLocaleString()}</td>
+      <td>
+        <button class="btn btn-primary btn-sm edit-btn" data-id="${
+          item._id
+        }" onclick="editItem(this)">
+          <i class="mdi mdi-table-edit"></i> 
+        </button>
+        <button class="btn btn-danger btn-sm delete-btn" data-id="${
+          item._id
+        }" onclick="deleteItem(this)">
+          <i class="mdi mdi-delete"></i> 
+        </button>
+      </td>  
+    </tr>`;
 }
 
 window.editItem = function (element) {
