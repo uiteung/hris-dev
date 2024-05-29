@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchUserDataByEmail(email) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/doktor/edit?email=${encodeURIComponent(
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/doktor/email?email=${encodeURIComponent(
     email
   )}`;
   fetch(url, {
