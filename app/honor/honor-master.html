@@ -103,37 +103,68 @@
       }
     </style> -->
     <style>
-   .nested-table {
-    width: 100%;
-    background-color: #f9f9f9;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-.nested-table th, .nested-table td {
-    border: 1px solid #ccc;
-    padding: 5px;
-    text-align: left;
-}
-
-.nested-table th {
-    background-color: #e9e9e9;
-}
-
-.table-fixed {
-    width: 100%;
-    border-collapse: collapse;
+   .table-fixed {
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .table-fixed th, .table-fixed td {
-    padding: 8px;
-    border: 1px solid #ddd;
-    text-align: left;
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: left;
 }
 
-.table-fixed th {
-    background-color: #f4f4f4;
+.table-fixed thead th {
+  color: black;
 }
+
+.nested-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+}
+
+.nested-table th, .nested-table td {
+  padding: 5px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.nested-table th {
+  background-color: #f1f1f1;
+}
+
+.btn {
+  display: inline-block; /* Pastikan tombol berdampingan secara horizontal */
+  margin-right: 10px; /* Memberikan sedikit ruang antar tombol */
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+.mdi {
+  margin-right: 4px;
+}
+
 
 
     </style>
@@ -406,7 +437,6 @@
                               <tr>
                                   <th style="background-color: #495057; color: white;" >Nama Pengajar</th>
                                   <th style="background-color: #495057; color: white;">Jabatan</th>
-                                  <th style="background-color: #495057; color: white;">No. Telepon</th>
                                   <th style="background-color: #495057; color: white;">Detail Mata Kuliah</th>
                                   <th style="background-color: #495057; color: white;">Total Honor</th>
                                   <th style="background-color: #495057; color: white;">PPh</th>
