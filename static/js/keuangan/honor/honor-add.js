@@ -71,6 +71,7 @@ function postData() {
             );
           });
         })
+        //s
         .catch((error) => {
           console.error("Error:", error);
           Swal.fire(
