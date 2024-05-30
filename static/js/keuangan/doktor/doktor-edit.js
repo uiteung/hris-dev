@@ -121,7 +121,7 @@ function updateUserData() {
     ),
     pph: parseFloat(document.getElementById("pph").value),
     tunjangan: parseFloat(document.getElementById("tunjangan").value),
-    validasi: document.getElementById("validasi").value,
+    validasi: document.getElementById("validasi").checked,
     masa_perolehan: document.getElementById("masa_perolehan").value,
   };
 
