@@ -175,7 +175,7 @@ function createRow(item) {
       </td>
       <td>Rp${item.total_honor.toLocaleString()}</td>
       <td>Rp${item.pph.toLocaleString()}</td>
-      <td>Rp${item.jumlah_dibayar.toLocaleString()}</td>
+      <td>Rp${item.jumlah_dibayar}</td>
       <td>
         <button class="btn btn-primary btn-sm edit-btn" data-id="${
           item._id
@@ -192,9 +192,9 @@ function createRow(item) {
 }
 
 window.editItem = function (element) {
-  const email = element.getAttribute("data-email");
-  localStorage.setItem("editingEmail", email);
-  window.location.href = "doktor-edit.html";
+  const id = element.getAttribute("data-id");
+  localStorage.setItem("editingId", id);
+  window.location.href = "honor-edit.html";
 };
 
 function updatePaginationButtons(data) {
@@ -255,69 +255,8 @@ function fetchAllPages(page) {
     });
 }
 
-function generateExcel(data) {
-  const ws = XLSX.utils.json_to_sheet(
-    data.map((item) => ({
-      Nama: item.nama,
-      "Gaji Pokok": item.pokok,
-      Keluarga: item.keluarga,
-      Pangan: item.pangan,
-      KPI: item.kinerja,
-      Keahlian: item.keahlian,
-      "FGS/Struktural": item["fgs-struk"],
-      Transport: item.transportasi,
-      Kehadiran: item.kehadiran,
-      Kopkar: item.kopkar,
-      "Bank Jabar": item.bankJabar,
-      Arisan: item.arisan,
-      "BPJS TK": item.bpjs,
-      BAUK: item.bauk,
-      "Lain-lain": item.lain2,
-      PPH: item.pph,
-    }))
-  );
-
-  // Adjust column widths
-  const colWidths = [
-    { wch: 30 }, // Nama
-    { wch: 15 }, // Gaji Pokok
-    { wch: 15 }, // Keluarga
-    { wch: 15 }, // Pangan
-    { wch: 15 }, // KPI
-    { wch: 15 }, // Keahlian
-    { wch: 20 }, // FGS/Struktural
-    { wch: 15 }, // Transport
-    { wch: 15 }, // Kehadiran
-    { wch: 15 }, // Kopkar
-    { wch: 15 }, // Bank Jabar
-    { wch: 15 }, // Arisan
-    { wch: 15 }, // BPJS TK
-    { wch: 15 }, // BAUK
-    { wch: 15 }, // Lain-lain
-    { wch: 15 }, // PPH
-  ];
-
-  ws["!cols"] = colWidths;
-
-  // Set header style
-  const range = XLSX.utils.decode_range(ws["!ref"]);
-  for (let C = range.s.c; C <= range.e.c; ++C) {
-    const address = XLSX.utils.encode_col(C) + "1"; // Target the first row
-    if (!ws[address]) continue;
-    ws[address].s = {
-      font: { bold: true },
-      alignment: { horizontal: "center" },
-      fill: { fgColor: { rgb: "FFFFAA00" } },
-    };
-  }
-
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "MasterData");
-  XLSX.writeFile(wb, "HRIS_Master_Data_Export.xlsx");
-}
-
 window.deleteItem = function (element) {
-  const email = element.getAttribute("data-email"); // Mengambil email dari attribute
+  const id = element.getAttribute("data-id"); // Mengambil email dari attribute
 
   Swal.fire({
     title: "Apakah Anda yakin?",
@@ -330,14 +269,12 @@ window.deleteItem = function (element) {
     cancelButtonText: "Batal",
   }).then((result) => {
     if (result.isConfirmed) {
-      sendDeleteRequest(email); // Melakukan request penghapusan
+      sendDeleteRequest(id); // Melakukan request penghapusan
     }
   });
 };
-function sendDeleteRequest(email) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/doktor/delete?email=${encodeURIComponent(
-    email
-  )}`;
+function sendDeleteRequest(id) {
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/honormengajar/delete?_id=${id}`;
   fetch(url, {
     method: "DELETE",
     headers: {
