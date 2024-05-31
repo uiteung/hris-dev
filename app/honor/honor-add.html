@@ -302,7 +302,10 @@
                                                 <label for="phoneNumber" class="form-label">Nomor Telepon:</label>
                                                 <input type="tel" class="form-control" id="phoneNumber" name="phone_number" required>
                                             </div>
-                                        
+                                            <div class="mb-3">
+                                              <label for="name" class="form-label">Jabatan:</label>
+                                              <input type="text" class="form-control" id="jabatan" name="jabatan" autocomplete="off" required>
+                                            </div>
                                             <!-- Dynamic Courses Input -->
                                             <div id="courseList">
                                                 <div class="courseItem mb-3">
@@ -371,7 +374,10 @@
                                         <label for="fileUpload" class="form-label">Upload Excel File:</label>
                                         <input type="file" id="fileUpload" accept=".xlsx, .xls" class="form-control">
                                         <button type="button" id="bulkUploadButton" class="btn btn-success mt-2" onclick="handleFileUpload()">Upload Bulk Data</button>
-                                        <button type="button" id="templateExcel" class="btn btn-info mt-2" >Download Template Excel</button>
+                                        <button type="button" id="templateExcel" class="btn btn-info mt-2" >Unduh Template Excel</button>
+                                        <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none;">
+                                          <span class="sr-only">Loading...</span>
+                                      </div>
 
                                     </div>
                                 </div>
@@ -418,9 +424,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
     <!-- <script src="https://unpkg.com/jspdf-invoice"></script> -->
     <!-- <script
+      
       src="../static/js/keuangan/master-data-edit.js"
       type="module"
     ></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
     <script src="../../static/js/keuangan/honor/honor-add-row.js" type="module">
                        
     </script>
