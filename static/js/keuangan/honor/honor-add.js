@@ -7,6 +7,8 @@ function postData() {
   const nama_pengajar = document.getElementById("name").value;
   const phone_number = document.getElementById("phoneNumber").value;
   const total_honor = parseFloat(document.getElementById("total_honor").value);
+  const jabatan = document.getElementById("jabatan").value;
+
   const pph = parseFloat(document.getElementById("pph").value);
   const mata_kuliah = Array.from(
     document.getElementsByClassName("courseItem")
@@ -31,6 +33,7 @@ function postData() {
     phone_number: phone_number,
     mata_kuliah: mata_kuliah,
     total_honor: total_honor,
+    jabatan: jabatan,
     pph: pph,
     jumlah_dibayar: 1, // Assuming a constant value or retrieve from another input if needed
   };
