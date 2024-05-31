@@ -21,7 +21,11 @@ function addCourse(courseList) {
     newCourse.querySelectorAll("input").forEach((input) => (input.value = ""));
     courseList.appendChild(newCourse);
   } else {
-    alert("No course item to clone!");
+    Swal.fire(
+      "Gagal!",
+      "Setidaknya Masukkan 1 Mata kuliah Untuk Diinputkan.",
+      "info"
+    );
   }
 }
 
@@ -30,6 +34,6 @@ function removeCourse(button) {
   if (courseItem.parentNode.children.length > 1) {
     courseItem.parentNode.removeChild(courseItem);
   } else {
-    alert("You must keep at least one course.");
+    Swal.fire("Gagal!", "Setidaknya Masukkan 1 Mata kuliah.", "info");
   }
 }
