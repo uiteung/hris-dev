@@ -290,7 +290,14 @@
                   
                     <div class="card-body">
                         <form id="editForm" method="POST" action="/your-endpoint-url">
-                      
+                            <div class="mb-3">
+                                <label for="fileUpload" class="form-label">Upload Excel File:</label>
+                                <input type="file" id="fileUpload" accept=".xlsx, .xls" class="form-control">
+                                <button type="button" id="bulkUploadButton" class="btn btn-success mt-2" onclick="handleFileUpload()">Upload Bulk Data</button>
+                                <!-- <button type="button" id="bulkUploadButton" class="btn btn-info mt-2" onclick="handleFileUpload()">Templat Honor Ajar</button> -->
+
+                            </div>
+                           
                           <!-- Name Field -->
                           <div class="mb-3">
                             <label for="name" class="form-label">Nama Pengajar:</label>
@@ -351,11 +358,13 @@
                             <label for="pph" class="form-label">PPH:</label>
                             <input type="number" class="form-control" id="pph" name="pph">
                           </div>
+                          
                       
                           <!-- Submit Button -->
                           <button type="button" id="updateButton" class="btn btn-primary">Submit</button>
                         </form>
                       </div>
+                      
                       
                       <script src="../../static/js/keuangan/honor/honor-add-row.js" type="module">
                        
@@ -363,7 +372,8 @@
                       <script src="../../static/js/keuangan/honor/honor-add.js" type="module">
                        
                       </script>
-                      
+                      <script src="../../static/js/keuangan/honor/bulkUpload.js" type="module"></script>
+
               </div>
             </div>
           </div>
