@@ -1,13 +1,27 @@
 import { token } from "../../controller/cookies.js"; // Adjust path as needed
-
 document.addEventListener("DOMContentLoaded", function () {
   const bulkUploadButton = document.getElementById("bulkUploadButton");
-  bulkUploadButton.addEventListener("click", handleFileUpload);
+  const templateExcel = document.getElementById("templateExcel");
+  const loadingSpinner = document.getElementById("loadingSpinner"); // Ensure you have this element in HTML
+
+  bulkUploadButton.addEventListener("click", function () {
+    handleFileUpload(loadingSpinner);
+  });
+
+  templateExcel.addEventListener("click", downloadExcelTemplate);
 });
 function handleFileUpload() {
   const fileInput = document.getElementById("fileUpload");
   const file = fileInput.files[0];
   if (file) {
+    Swal.fire({
+      title: "Processing...",
+      text: "Please wait while the file is being processed",
+      allowOutsideClick: false,
+      onBeforeOpen: () => {
+        Swal.showLoading();
+      },
+    });
     const reader = new FileReader();
     reader.onload = function (event) {
       const data = new Uint8Array(event.target.result);
@@ -22,15 +36,14 @@ function handleFileUpload() {
     };
     reader.readAsArrayBuffer(file);
   } else {
-    alert("Please select a file to upload.");
+    Swal.fire("Error!", "Please select a file to upload.", "error");
   }
 }
-
 function groupCoursesByInstructor(data) {
   const instructors = {};
 
   data.forEach((row) => {
-    const key = row["Phone Number"]; // Use phone number as the unique identifier
+    const key = row["Nama Pengajar"] + "_" + row["Phone Number"];
     if (!instructors[key]) {
       instructors[key] = {
         nama_pengajar: row["Nama Pengajar"],
@@ -58,7 +71,6 @@ function groupCoursesByInstructor(data) {
 
   return Object.values(instructors);
 }
-
 function postInstructorData(data) {
   const url =
     "https://hris_backend.ulbi.ac.id/api/v2/master/honormengajar/insert";
@@ -72,11 +84,48 @@ function postInstructorData(data) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log("Success:", data);
-      alert("Data successfully uploaded and processed.");
+      Swal.fire(
+        "Success!",
+        "Data successfully uploaded and processed.",
+        "success"
+      ).then((result) => {
+        setTimeout(
+          () =>
+            (window.location.href =
+              "https://euis.ulbi.ac.id/hris-dev/app/Honor/honor-master.html"),
+          1000
+        );
+      });
     })
     .catch((error) => {
-      console.error("Error:", error);
-      alert("Failed to upload data.");
+      Swal.fire("Failed!", "There was an issue uploading your data.", "error");
     });
+}
+
+function downloadExcelTemplate() {
+  const ws_data = [
+    [
+      "Nama Pengajar",
+      "Jabatan",
+      "Phone Number",
+      "Honor Ajar",
+      "Jam",
+      "Jam Dibayar",
+      "Jumlah Dibayar",
+      "Jumlah Kelas",
+      "Jumlah Temu",
+      "Jurusan",
+      "Kelas",
+      "Maks KJM",
+      "Nama Mata Kuliah",
+      "PPH",
+      "Total Honor",
+    ],
+  ];
+
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(ws_data);
+  XLSX.utils.book_append_sheet(wb, ws, "Template");
+  XLSX.writeFile(wb, "Honor_Template.xlsx");
+  Swal.fire("Unduh!", "Template Berhasil di Unduh.", "success");
 }
