@@ -266,117 +266,120 @@
 
         <!-- Main Content Start -->
         <main class="content">
-          <div class="container-fluid p-0">
-            <h5 class="right-aligned" style="float: right">
-              <a href="index.html">Home</a> / Tambah Data Honor
-            </h5>
-            <h1 class="h3 mb-3"><b>Form Tambah Data Honor</b></h1>
-            <div class="col-md-6 mb-3">
-              <input
-                type="hidden"
-                id="titleTextBox"
-                value="Dashboard Presensi Karyawan"
-                disabled
-              />
-              <input
-                type="hidden"
-                id="filenameTextBox"
-                value="presensi_karyawan"
-              />
-            </div>
-            <div class="row justify-content-center">
-              <div class="col-md-12">
-                <div class="card">
-                  
-                    <div class="card-body">
-                        <form id="editForm" method="POST" action="/your-endpoint-url">
-                            <div class="mb-3">
-                                <label for="fileUpload" class="form-label">Upload Excel File:</label>
-                                <input type="file" id="fileUpload" accept=".xlsx, .xls" class="form-control">
-                                <button type="button" id="bulkUploadButton" class="btn btn-success mt-2" onclick="handleFileUpload()">Upload Bulk Data</button>
-                                <!-- <button type="button" id="bulkUploadButton" class="btn btn-info mt-2" onclick="handleFileUpload()">Templat Honor Ajar</button> -->
-
+            <div class="container-fluid p-0">
+                <h5 class="right-aligned" style="float: right">
+                    <a href="index.html">Home</a> / Tambah Data Honor
+                </h5>
+                <h1 class="h3 mb-3"><b>Form Tambah Data Honor</b></h1>
+        
+                <!-- Tab Navigation for Different Input Methods -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#manualInput" data-bs-toggle="tab">Manual Input</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#bulkUpload" data-bs-toggle="tab">Upload Excel</a>
+                    </li>
+                </ul>
+        
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Manual Input Tab -->
+                    <div class="tab-pane fade show active" id="manualInput">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form id="editForm" method="POST" action="/your-endpoint-url">
+                                            <!-- Name Field -->
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Nama Pengajar:</label>
+                                                <input type="text" class="form-control" id="name" name="nama_pengajar" autocomplete="off" required>
+                                            </div>
+                                        
+                                            <!-- Phone Number Field -->
+                                            <div class="mb-3">
+                                                <label for="phoneNumber" class="form-label">Nomor Telepon:</label>
+                                                <input type="tel" class="form-control" id="phoneNumber" name="phone_number" required>
+                                            </div>
+                                        
+                                            <!-- Dynamic Courses Input -->
+                                            <div id="courseList">
+                                                <div class="courseItem mb-3">
+                                                  <h5>Detail Matakuliah</h5>
+                                                  <label for="nama_matkul" class="form-label">Nama Mata Kuliah:</label>
+                                                  <input type="text" class="form-control" name="nama_matkul[]">
+                                          
+                                                  <label for="jurusan" class="form-label">Jurusan:</label>
+                                                  <input type="text" class="form-control" name="jurusan[]">
+                                          
+                                                  <label for="kelas" class="form-label">Kelas:</label>
+                                                  <input type="text" class="form-control" name="kelas[]">
+                                          
+                                                  <label for="jam" class="form-label">Jam:</label>
+                                                  <input type="number" step="0.1" class="form-control" name="jam[]">
+                                          
+                                                  <label for="maks_kjm" class="form-label">Maks KJM:</label>
+                                                  <input type="number" step="0.1" class="form-control" name="maks_kjm[]">
+                                          
+                                                  <label for="jumlah_kelas" class="form-label">Jumlah Kelas:</label>
+                                                  <input type="text" class="form-control" name="jumlah_kelas[]">
+                                          
+                                                  <label for="jumlah_temu" class="form-label">Jumlah Temu:</label>
+                                                  <input type="number" step="0.1" class="form-control" name="jumlah_temu[]">
+                                          
+                                                  <label for="jam_dibayar" class="form-label">Jam Dibayar:</label>
+                                                  <input type="number" step="0.01" class="form-control" name="jam_dibayar[]">
+                                          
+                                                  <label for="honor_ajar" class="form-label">Honor Ajar:</label>
+                                                  <input type="number" class="form-control" name="honor_ajar[]">
+                                                  <br>
+                                                  <button type="button" id="removeButton" class="btn btn-primary removeButton" onclick="removeCourse(this)">Hapus Mata Kuliah</button>
+                                                  <br>
+                                                </div>
+                                              </div>
+                                            <button type="button" id="addButton" class="btn btn-info" onclick="addCourse()">Tambah Mata Kuliah</button>
+                                            <br><br>
+        
+                                            <!-- Total Honor Field -->
+                                            <div class="mb-3">
+                                                <label for="total_honor" class="form-label">Total Honor:</label>
+                                                <input type="number" class="form-control" id="total_honor" name="total_honor">
+                                            </div>
+                                        
+                                            <!-- PPH Field -->
+                                            <div class="mb-3">
+                                                <label for="pph" class="form-label">PPH:</label>
+                                                <input type="number" class="form-control" id="pph" name="pph">
+                                            </div>
+                                            
+                                            <!-- Submit Button -->
+                                            <button type="button" id="updateButton" class="btn btn-primary">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                           
-                          <!-- Name Field -->
-                          <div class="mb-3">
-                            <label for="name" class="form-label">Nama Pengajar:</label>
-                            <input type="text" class="form-control" id="name" name="nama_pengajar" autocomplete="off" required>
-                          </div>
-                      
-                          <!-- Phone Number Field -->
-                          <div class="mb-3">
-                            <label for="phoneNumber" class="form-label">Nomor Telepon:</label>
-                            <input type="tel" class="form-control" id="phoneNumber" name="phone_number" required>
-                          </div>
-                      
-                          <!-- Courses (Dynamically Add or Remove Courses) -->
-                          <div id="courseList">
-                            <div class="courseItem mb-3">
-                              <h5>Detail Matakuliah</h5>
-                              <label for="nama_matkul" class="form-label">Nama Mata Kuliah:</label>
-                              <input type="text" class="form-control" name="nama_matkul[]">
-                      
-                              <label for="jurusan" class="form-label">Jurusan:</label>
-                              <input type="text" class="form-control" name="jurusan[]">
-                      
-                              <label for="kelas" class="form-label">Kelas:</label>
-                              <input type="text" class="form-control" name="kelas[]">
-                      
-                              <label for="jam" class="form-label">Jam:</label>
-                              <input type="number" step="0.1" class="form-control" name="jam[]">
-                      
-                              <label for="maks_kjm" class="form-label">Maks KJM:</label>
-                              <input type="number" step="0.1" class="form-control" name="maks_kjm[]">
-                      
-                              <label for="jumlah_kelas" class="form-label">Jumlah Kelas:</label>
-                              <input type="text" class="form-control" name="jumlah_kelas[]">
-                      
-                              <label for="jumlah_temu" class="form-label">Jumlah Temu:</label>
-                              <input type="number" step="0.1" class="form-control" name="jumlah_temu[]">
-                      
-                              <label for="jam_dibayar" class="form-label">Jam Dibayar:</label>
-                              <input type="number" step="0.01" class="form-control" name="jam_dibayar[]">
-                      
-                              <label for="honor_ajar" class="form-label">Honor Ajar:</label>
-                              <input type="number" class="form-control" name="honor_ajar[]">
-                              <br>
-                              <button type="button" id="removeButton" class="btn btn-primary removeButton" onclick="removeCourse(this)">Remove Course</button>
-                              <br>
-                            </div>
-                          </div>
-                          <button type="button" id="addButton" class="btn btn-info" onclick="addCourse()">Add Course</button>
-                          <br><br>
-                          <!-- Total Honor Field -->
-                          <div class="mb-3">
-                            <label for="total_honor" class="form-label">Total Honor:</label>
-                            <input type="number" class="form-control" id="total_honor" name="total_honor">
-                          </div>
-                      
-                          <!-- PPH Field -->
-                          <div class="mb-3">
-                            <label for="pph" class="form-label">PPH:</label>
-                            <input type="number" class="form-control" id="pph" name="pph">
-                          </div>
-                          
-                      
-                          <!-- Submit Button -->
-                          <button type="button" id="updateButton" class="btn btn-primary">Submit</button>
-                        </form>
-                      </div>
-                      
-                      
-                      <script src="../../static/js/keuangan/honor/honor-add-row.js" type="module">
-                       
-                      </script>
-                      <script src="../../static/js/keuangan/honor/honor-add.js" type="module">
-                       
-                      </script>
-                      <script src="../../static/js/keuangan/honor/bulkUpload.js" type="module"></script>
+                        </div>
+                    </div>
+        
+                    <!-- Bulk Upload Tab -->
+                    <div class="tab-pane fade" id="bulkUpload">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <label for="fileUpload" class="form-label">Upload Excel File:</label>
+                                        <input type="file" id="fileUpload" accept=".xlsx, .xls" class="form-control">
+                                        <button type="button" id="bulkUploadButton" class="btn btn-success mt-2" onclick="handleFileUpload()">Upload Bulk Data</button>
+                                        <button type="button" id="templateExcel" class="btn btn-info mt-2" >Download Template Excel</button>
 
-              </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </main>
 
         <!-- Main Content End -->
@@ -418,7 +421,13 @@
       src="../static/js/keuangan/master-data-edit.js"
       type="module"
     ></script> -->
-   
+    <script src="../../static/js/keuangan/honor/honor-add-row.js" type="module">
+                       
+    </script>
+    <script src="../../static/js/keuangan/honor/honor-add.js" type="module">
+     
+    </script>
+    <script src="../../static/js/keuangan/honor/bulkUpload.js" type="module"></script>
 
     <!-- Library Javascript Terkait -->
     <script src="https://cdn.jsdelivr.net/gh/PMBULBI/javascript-fe@0.0.7/jquery-3.6.0.min.js"></script>
