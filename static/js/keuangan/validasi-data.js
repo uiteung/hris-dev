@@ -171,7 +171,6 @@ function createRow(item) {
         <td>${item.totalgaji}</td>        
         <td>${item.totalgajibersih}</td>        
         <td>${item.totalpotongan}</td>        
-        <td>${item.transportasi}</td>        
          
 
         
