@@ -4,11 +4,13 @@ function postData() {
   //   const id_jafung = document.getElementById("id_jafung");
   const singkatan = document.getElementById("singkatan");
   const nama_jafung = document.getElementById("nama_jafung");
+  const nominal = document.getElementById("nominal");
 
   const data = {
     // id_jafung: id_jafung,
     nama_jafung: nama_jafung,
     singkatan: singkatan,
+    nominal: nominal,
   };
 
   const options = {
