@@ -43,22 +43,72 @@ function fetchUserDataByEmail(email) {
       );
     });
 }
+function formatRupiah(number) {
+  const format = number.toLocaleString("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  });
+  return format;
+}
+function formatAsRupiah(input) {
+  let value = input.value;
+  // Remove all characters except digits and comma
+  value = value.replace(/[^0-9]/g, "");
+  // Convert string to an integer
+  let number = parseInt(value, 10);
+  if (isNaN(number)) {
+    number = 0;
+  }
+  // Format the number with Indonesian locale to add thousand separators
+  value = number.toLocaleString("id-ID");
+  // Prepend 'Rp' and a space to denote Rupiah
+  input.value = `Rp ${value}`;
+}
+
+// Attach event listeners to the input fields
+document.addEventListener("DOMContentLoaded", function () {
+  const currencyFields = [
+    "gaji_pokok",
+    "pangan",
+    "keluarga",
+    "fgs-struk",
+    "kehadiran",
+    "keluarga",
+    "kinerja",
+    "keahlian",
+    "transportasi",
+  ];
+  currencyFields.forEach((fieldId) => {
+    const inputField = document.getElementById(fieldId);
+    inputField.addEventListener("input", () => formatAsRupiah(inputField));
+  });
+});
 
 function populateForm(userData) {
   const struk = userData["fgs-struk"];
   document.getElementById("nama").value = userData.nama || "0";
   document.getElementById("email").value = userData.email || "0";
-  document.getElementById("gaji_pokok").value = userData.pokok || "0";
-  document.getElementById("pangan").value = userData.pangan || "0";
-  document.getElementById("keluarga").value = userData.keluarga || "0";
-
-  document.getElementById("fgs-struk").value = struk || "0";
-  document.getElementById("kehadiran").value = userData.kehadiran || "0";
-  document.getElementById("keluarga").value = userData.keluarga || "0";
-  document.getElementById("kinerja").value = userData.kinerja || "0";
-
-  document.getElementById("keahlian").value = userData.keahlian || "0";
-  document.getElementById("transportasi").value = userData.transportasi || "0";
+  document.getElementById("gaji_pokok").value = formatRupiah(
+    userData.pokok || 0
+  );
+  document.getElementById("pangan").value = formatRupiah(userData.pangan || 0);
+  document.getElementById("keluarga").value = formatRupiah(
+    userData.keluarga || 0
+  );
+  document.getElementById("fgs-struk").value = formatRupiah(struk || 0);
+  document.getElementById("kehadiran").value = formatRupiah(
+    userData.kehadiran || 0
+  );
+  document.getElementById("kinerja").value = formatRupiah(
+    userData.kinerja || 0
+  );
+  document.getElementById("keahlian").value = formatRupiah(
+    userData.keahlian || 0
+  );
+  document.getElementById("transportasi").value = formatRupiah(
+    userData.transportasi || 0
+  );
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -88,18 +138,23 @@ function updateUserData() {
     email
   )}`;
 
+  const parseRupiahToFloat = (value) => {
+    return parseFloat(value.replace(/[^0-9]/g, ""));
+  };
+
   const formData = {
     nama: document.getElementById("nama").value,
     email: email,
-    pokok: parseFloat(document.getElementById("gaji_pokok").value),
-    pangan: parseFloat(document.getElementById("pangan").value),
-    keluarga: parseFloat(document.getElementById("keluarga").value),
-    "fgs-struk": parseFloat(document.getElementById("fgs-struk").value),
-    kinerja: parseFloat(document.getElementById("kinerja").value),
-
-    kehadiran: parseFloat(document.getElementById("kehadiran").value),
-    keahlian: parseFloat(document.getElementById("keahlian").value),
-    transportasi: parseFloat(document.getElementById("transportasi").value),
+    pokok: parseRupiahToFloat(document.getElementById("gaji_pokok").value),
+    pangan: parseRupiahToFloat(document.getElementById("pangan").value),
+    keluarga: parseRupiahToFloat(document.getElementById("keluarga").value),
+    "fgs-struk": parseRupiahToFloat(document.getElementById("fgs-struk").value),
+    kinerja: parseRupiahToFloat(document.getElementById("kinerja").value),
+    kehadiran: parseRupiahToFloat(document.getElementById("kehadiran").value),
+    keahlian: parseRupiahToFloat(document.getElementById("keahlian").value),
+    transportasi: parseRupiahToFloat(
+      document.getElementById("transportasi").value
+    ),
   };
 
   fetch(url, {
@@ -118,7 +173,19 @@ function updateUserData() {
           text: "Data telah berhasil diperbarui.",
           icon: "success",
           confirmButtonText: "OK",
-        });
+        })
+          .then(() => {
+            window.location.href =
+              "https://euis.ulbi.ac.id/hris-dev/app/Tunjangan/tunjangan-master.html";
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            Swal.fire(
+              "Failed!",
+              "There was an issue submitting your data.",
+              "error"
+            );
+          });
       } else {
         Swal.fire("Error", "Gagal memperbarui data: " + data.message, "error");
       }
