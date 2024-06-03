@@ -2,7 +2,7 @@ import { token } from "../../controller/cookies.js";
 
 function postData() {
   const url =
-    "https://hris_backend.ulbi.ac.id/api/v2/master/honormengajar/insert";
+    "https://hris_backend.ulbi.ac.id/api/v2/honor/honormengajar/insert";
 
   const nama_pengajar = document.getElementById("name").value;
   const phone_number = document.getElementById("phoneNumber").value;
