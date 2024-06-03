@@ -43,6 +43,37 @@ function fetchUserDataByEmail(email) {
       );
     });
 }
+function formatRupiah(number) {
+  const format = number.toLocaleString("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  });
+  return format;
+}
+function formatAsRupiah(input) {
+  let value = input.value;
+  // Remove all characters except digits and comma
+  value = value.replace(/[^0-9]/g, "");
+  // Convert string to an integer
+  let number = parseInt(value, 10);
+  if (isNaN(number)) {
+    number = 0;
+  }
+  // Format the number with Indonesian locale to add thousand separators
+  value = number.toLocaleString("id-ID");
+  // Prepend 'Rp' and a space to denote Rupiah
+  input.value = `Rp ${value}`;
+}
+
+// Attach event listeners to the input fields
+document.addEventListener("DOMContentLoaded", function () {
+  const currencyFields = ["pph", "jumlah_dibayarkan", "tunjangan"];
+  currencyFields.forEach((fieldId) => {
+    const inputField = document.getElementById(fieldId);
+    inputField.addEventListener("input", () => formatAsRupiah(inputField));
+  });
+});
 
 function populateForm(userData) {
   document.getElementById("nama").value = userData.nama || "";
@@ -51,11 +82,13 @@ function populateForm(userData) {
   document.getElementById("jabatan_struktural").value =
     userData.jabatan_struktural || "";
 
-  document.getElementById("pph").value = userData.pph || "";
-  document.getElementById("jumlah_dibayarkan").value =
-    userData.jumlah_dibayarkan || "";
-
-  document.getElementById("tunjangan").value = userData.tunjangan || "";
+  document.getElementById("jumlah_dibayarkan").value = formatRupiah(
+    userData.jumlah_dibayarkan || 0
+  );
+  document.getElementById("pph").value = formatRupiah(userData.pph || 0);
+  document.getElementById("tunjangan").value = formatRupiah(
+    userData.tunjangan || 0
+  );
   document.getElementById("validasi").value = userData.validasi || "";
 
   if (userData.masa_perolehan) {
@@ -110,17 +143,20 @@ function updateUserData() {
   const url = `https://hris_backend.ulbi.ac.id/api/v2/master/doktor/edit?email=${encodeURIComponent(
     email
   )}`;
+  const parseRupiahToFloat = (value) => {
+    return parseFloat(value.replace(/[^0-9]/g, ""));
+  };
 
   const formData = {
     nama: document.getElementById("nama").value,
     email: document.getElementById("email").value,
     jabatan_fungsional: document.getElementById("jafung").value,
     jabatan_struktural: document.getElementById("jabatan_struktural").value,
-    jumlah_dibayarkan: parseFloat(
+    jumlah_dibayarkan: parseRupiahToFloat(
       document.getElementById("jumlah_dibayarkan").value
     ),
-    pph: parseFloat(document.getElementById("pph").value),
-    tunjangan: parseFloat(document.getElementById("tunjangan").value),
+    pph: parseRupiahToFloat(document.getElementById("pph").value),
+    tunjangan: parseRupiahToFloat(document.getElementById("tunjangan").value),
     validasi: document.getElementById("validasi").checked,
     masa_perolehan: document.getElementById("masa_perolehan").value,
   };
