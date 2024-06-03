@@ -140,6 +140,8 @@ function createRow(item) {
 
     <td>${item.singkatan}</td>
     <td>${item.nama_jafung}</td>
+    <td>${item.nominal}</td>
+
     <td>
         <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id_jafung}" data-id="${item.id_jafung}" onclick="editItem(this)">
             <i class="mdi mdi-table-edit"></i>
