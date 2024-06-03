@@ -41,9 +41,42 @@ function fetchUserDataByid_pangkat(id_pangkat) {
       );
     });
 }
+function formatRupiah(number) {
+  const format = number.toLocaleString("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  });
+  return format;
+}
+function formatAsRupiah(input) {
+  let value = input.value;
+  // Remove all characters except digits and comma
+  value = value.replace(/[^0-9]/g, "");
+  // Convert string to an integer
+  let number = parseInt(value, 10);
+  if (isNaN(number)) {
+    number = 0;
+  }
+  // Format the number with Indonesian locale to add thousand separators
+  value = number.toLocaleString("id-ID");
+  // Prepend 'Rp' and a space to denote Rupiah
+  input.value = `Rp ${value}`;
+}
+
+// Attach event listeners to the input fields
+document.addEventListener("DOMContentLoaded", function () {
+  const currencyFields = ["nominal"];
+  currencyFields.forEach((fieldId) => {
+    const inputField = document.getElementById(fieldId);
+    inputField.addEventListener("input", () => formatAsRupiah(inputField));
+  });
+});
 function populateForm(userData) {
   document.getElementById("jenis").value = userData.jenis || "";
-  document.getElementById("nominal").value = userData.nominal || "";
+  document.getElementById("nominal").value = formatRupiah(
+    userData.nominal || ""
+  );
   document.getElementById("persentase").value = userData.persentase || "";
 }
 
@@ -67,31 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
         updateUserData();
       }
     });
-  });
-});
-function formatRupiah(value, prefix = "Rp") {
-  const stringified = String(value)
-    .replace(/[^,\d]/g, "")
-    .toString();
-  let split = stringified.split(",");
-  let sisa = split[0].length % 3;
-  let rupiah = split[0].substr(0, sisa);
-  let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-  if (ribuan) {
-    let separator = sisa ? "." : "";
-    rupiah += separator + ribuan.join(".");
-  }
-
-  rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
-  return prefix ? prefix + " " + rupiah : rupiah;
-}
-document.addEventListener("DOMContentLoaded", function () {
-  const nominalInput = document.getElementById("nominal");
-
-  nominalInput.addEventListener("input", function () {
-    const numbersOnly = this.value.replace(/[^,\d]/g, "").toString();
-    this.value = formatRupiah(numbersOnly);
   });
 });
 
