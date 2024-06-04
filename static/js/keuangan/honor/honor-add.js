@@ -32,7 +32,7 @@ function postData() {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      login: ` ${token}`, // Assuming the token is a Bearer token
+      login: ` ${token}`,
     },
     body: JSON.stringify(data),
   };
