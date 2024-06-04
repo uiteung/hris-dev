@@ -50,9 +50,6 @@ function groupCoursesByInstructor(data) {
         jabatan: row["Jabatan"],
         phone_number: row["Phone Number"],
         mata_kuliah: [],
-        total_honor: 0, // Calculate this on the server-side if possible
-        pph: parseFloat(row["PPH"]), // Assume the last PPH value for simplicity or calculate differently
-        jumlah_dibayar: parseInt(row["Jumlah Dibayar"]), // Assume the last value for simplicity
       };
     }
     instructors[key].mata_kuliah.push({
@@ -61,19 +58,16 @@ function groupCoursesByInstructor(data) {
       kelas: row["Kelas"],
       jam: parseFloat(row["Jam"]),
       maks_kjm: parseFloat(row["Maks KJM"]),
-      jumlah_kelas: row["Jumlah Kelas"],
+      jumlah_kelas: parseInt(row["Jumlah Kelas"]),
       jumlah_temu: parseFloat(row["Jumlah Temu"]),
-      jam_dibayar: parseFloat(row["Jam Dibayar"]),
-      honor_ajar: parseFloat(row["Honor Ajar"]),
     });
-    instructors[key].total_honor += parseFloat(row["Honor Ajar"]); // Sum the honor ajar for each course
   });
 
   return Object.values(instructors);
 }
 function postInstructorData(data) {
   const url =
-    "https://hris_backend.ulbi.ac.id/api/v2/master/honormengajar/insert";
+    "https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/insert";
   fetch(url, {
     method: "POST",
     headers: {
