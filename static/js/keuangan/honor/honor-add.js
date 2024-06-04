@@ -6,6 +6,7 @@ function postData() {
 
   const nama_pengajar = document.getElementById("name").value;
   const phone_number = document.getElementById("phoneNumber").value;
+  const jabatan = document.getElementById("jabatan").value;
 
   const mata_kuliah = Array.from(
     document.getElementsByClassName("courseItem")
@@ -28,6 +29,7 @@ function postData() {
     nama_pengajar: nama_pengajar,
     phone_number: phone_number,
     mata_kuliah: mata_kuliah,
+    jabatan: jabatan,
   };
 
   const options = {
