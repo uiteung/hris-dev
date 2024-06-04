@@ -1,7 +1,7 @@
 import { token } from "../../controller/cookies.js";
 
 function fetchDataById(id) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/honormengajar/get?_id=${id}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/get?_id=${id}`;
   fetch(url, {
     method: "GET",
     headers: {
