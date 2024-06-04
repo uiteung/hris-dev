@@ -54,7 +54,7 @@ function searchFromInput() {
 }
 
 function fetchDataFromSearch(searchKey) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/doktor/search?key=${searchKey}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/search?key=${searchKey}`;
 
   fetch(url, {
     method: "POST",
