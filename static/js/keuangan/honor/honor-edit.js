@@ -86,3 +86,98 @@ document.addEventListener("DOMContentLoaded", () => {
     Swal.fire("Error", "No valid ID was provided for editing.", "error");
   }
 });
+
+function updateData() {
+  const id = localStorage.getItem("editingId"); // Assuming the ID is stored in localStorage
+  const namaPengajar = document.getElementById("name").value;
+  const jabatan = document.getElementById("jabatan").value;
+  const phoneNumber = document.getElementById("phoneNumber").value;
+
+  const mataKuliahElements = document.querySelectorAll(".courseItem");
+  const mataKuliah = Array.from(mataKuliahElements).map((courseElement) => ({
+    nama_matkul: courseElement.querySelector("[name='nama_matkul[]']").value,
+    jurusan: courseElement.querySelector("[name='jurusan[]']").value,
+    kelas: courseElement.querySelector("[name='kelas[]']").value,
+    jam: parseFloat(courseElement.querySelector("[name='jam[]']").value),
+    maks_kjm: parseFloat(
+      courseElement.querySelector("[name='maks_kjm[]']").value
+    ),
+    jumlah_kelas: parseInt(
+      courseElement.querySelector("[name='jumlah_kelas[]']").value
+    ),
+    jumlah_temu: parseFloat(
+      courseElement.querySelector("[name='jumlah_temu[]']").value
+    ),
+    jam_dibayar: parseFloat(
+      courseElement.querySelector("[name='jam_dibayar[]']").value
+    ),
+    honor_ajar: parseFloat(
+      courseElement.querySelector("[name='honor_ajar[]']").value
+    ),
+  }));
+
+  const data = {
+    nama_pengajar: namaPengajar,
+    jabatan: jabatan,
+    phone_number: phoneNumber,
+    mata_kuliah: mataKuliah,
+  };
+
+  if (!id) {
+    console.error("No ID found in localStorage.");
+    Swal.fire("Error", "No valid ID was provided for editing.", "error");
+    return;
+  }
+
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/update?_id=${id}`;
+
+  const options = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      login: ` ${token}`, // Correct header for token authentication
+    },
+    body: JSON.stringify(data),
+  };
+
+  Swal.fire({
+    title: "Anda Yakin?",
+    text: "Kamu ingin mengirim data!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, submit it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch(url, options)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          Swal.fire(
+            "Submitted!",
+            "Your data has been submitted.",
+            "success"
+          ).then(() => {
+            setTimeout(
+              () =>
+                (window.location.href =
+                  "https://euis.ulbi.ac.id/hris-dev/app/honor/honor-master.html"),
+              1000
+            );
+          });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          Swal.fire(
+            "Failed!",
+            "There was an issue submitting your data.",
+            "error"
+          );
+        });
+    }
+  });
+}
+
+// Add an event listener or a button to trigger the updateData function
+document.getElementById("updateButton").addEventListener("click", updateData);
