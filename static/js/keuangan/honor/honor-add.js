@@ -15,8 +15,10 @@ function postData() {
     kelas: course.querySelector('[name="kelas[]"]').value,
     jam: parseFloat(course.querySelector('[name="jam[]"]').value),
     maks_kjm: parseFloat(course.querySelector('[name="maks_kjm[]"]').value),
-    jumlah_kelas: parseInt(course.querySelector('[name="jumlah_kelas[]"]'))
-      .value,
+    jumlah_kelas: parseInt(
+      course.querySelector('[name="jumlah_kelas[]"]').value
+    ),
+
     jumlah_temu: parseFloat(
       course.querySelector('[name="jumlah_temu[]"]').value
     ),
