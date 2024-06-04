@@ -27,8 +27,8 @@ function populateForm(data) {
   document.getElementById("name").value = data.nama_pengajar;
   document.getElementById("phoneNumber").value = data.phone_number;
   document.getElementById("jabatan").value = data.jabatan;
-  document.getElementById("total_honor").value = data.total_honor;
-  document.getElementById("pph").value = data.pph;
+  // document.getElementById("total_honor").value = data.total_honor;
+  // document.getElementById("pph").value = data.pph;
 
   const courseListDiv = document.getElementById("courseList");
   courseListDiv.innerHTML = ""; // Clear existing courses
