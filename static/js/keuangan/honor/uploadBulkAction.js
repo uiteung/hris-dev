@@ -92,7 +92,7 @@ function postInstructorData(data) {
         setTimeout(
           () =>
             (window.location.href =
-              "https://euis.ulbi.ac.id/hris-dev/app/Honor/honor-master.html"),
+              "https://euis.ulbi.ac.id/hris-dev/app/honor/honor-master.html"),
           1000
         );
       });
@@ -108,18 +108,13 @@ function downloadExcelTemplate() {
       "Nama Pengajar",
       "Jabatan",
       "Phone Number",
-      "Honor Ajar",
+      "Nama Mata Kuliah",
       "Jam",
-      "Jam Dibayar",
-      "Jumlah Dibayar",
       "Jumlah Kelas",
       "Jumlah Temu",
       "Jurusan",
       "Kelas",
       "Maks KJM",
-      "Nama Mata Kuliah",
-      "PPH",
-      "Total Honor",
     ],
   ];
 
