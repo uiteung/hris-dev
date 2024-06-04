@@ -2,7 +2,7 @@ import { token } from "../../controller/cookies.js";
 let allRecords = [];
 let allData = []; // Holds the current page data for filtering
 let currentPage = 1; // Start from the first page
-const baseUrl = "https://hris_backend.ulbi.ac.id/api/v2/master/honormengajar";
+const baseUrl = "https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar";
 // export let GetDataValidasi = "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/";
 let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
@@ -54,7 +54,7 @@ function searchFromInput() {
 }
 
 function fetchDataFromSearch(searchKey) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/doktor/search?key=${searchKey}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/doktor/search?key=${searchKey}`;
 
   fetch(url, {
     method: "POST",
@@ -89,7 +89,7 @@ function fetchDataFromSearch(searchKey) {
 function fetchDataFromHRIS(page) {
   let url = `${baseUrl}?page=${page}`;
   if (currentKelompok) {
-    url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/filter/${currentKelompok}?page=${page}`;
+    url = `https://hris_backend.ulbi.ac.id/api/v2/honour/filter/${currentKelompok}?page=${page}`;
   }
 
   fetch(url, {
@@ -225,7 +225,7 @@ function exportToExcel() {
 }
 
 function fetchAllPages(page) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/masterall?page=${page}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/masterall?page=${page}`;
   fetch(url, {
     method: "GET",
     headers: {
@@ -274,7 +274,7 @@ window.deleteItem = function (element) {
   });
 };
 function sendDeleteRequest(id) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/honormengajar/delete?_id=${id}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/delete?_id=${id}`;
   fetch(url, {
     method: "DELETE",
     headers: {
