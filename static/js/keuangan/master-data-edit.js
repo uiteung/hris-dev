@@ -96,6 +96,7 @@ function updateUserData() {
 
   const formData = {
     nama: document.getElementById("name").value,
+    email: document.getElementById("email").value,
     pangkat: document.getElementById("rank").value,
     jabatan: document.getElementById("position").value,
     pokok: parseFloat(document.getElementById("basicSalary").value),
