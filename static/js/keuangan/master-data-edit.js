@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const email = localStorage.getItem("editingEmail");
   if (email) {
     fetchUserDataByEmail(email);
+    fetchstrukturalOptions();
   } else {
     console.error("No email found in localStorage.");
     Swal.fire("Error", "Email tidak ditemukan di penyimpanan lokal.", "error");
@@ -25,7 +26,11 @@ function fetchUserDataByEmail(email) {
     .then((response) => response.json())
     .then((data) => {
       if (data.code === 200 && data.success) {
-        populateForm(data.data); // Mengisi form dengan data yang didapat
+        populateForm(data.data);
+        // Mengisi form dengan data yang didapat
+        const userKelompok = data.data.kelompok;
+        fetchKelompokOptions(userKelompok);
+        fetchstrukturalOptions(data.data.jabatan);
       } else {
         Swal.fire(
           "Informasi",
@@ -42,6 +47,120 @@ function fetchUserDataByEmail(email) {
         "error"
       );
     });
+}
+
+function fetchstrukturalOptions(currentJabatan) {
+  const url =
+    "https://hris_backend.ulbi.ac.id/api/v2/master/jabatan/struktural";
+  fetch(url, {
+    method: "GET",
+    headers: {
+      login: token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.code === 200 && data.success) {
+        populatestrukturalDropdown(data.data, currentJabatan);
+      } else {
+        Swal.fire(
+          "Informasi",
+          "Gagal mengambil data struktural: " +
+            (data.status || "Status tidak diketahui"),
+          "error"
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching struktural options:", error);
+      Swal.fire(
+        "Error",
+        "Terjadi kesalahan saat mengambil data struktural: " + error.message,
+        "error"
+      );
+    });
+}
+function populatestrukturalDropdown(strukturalData, userstruktural) {
+  const strukturalDropdown = document.getElementById("position");
+  strukturalDropdown.innerHTML = "";
+  let foundUserStruktural = false; // Flag to check if user's position exists in the list
+
+  strukturalData.forEach((struktural) => {
+    const option = document.createElement("option");
+    option.text = `${struktural.nama} - ${struktural.singkatan}`;
+    option.value = struktural.nama; // Assuming the value should just be the name
+
+    if (struktural.nama === userstruktural) {
+      option.selected = true;
+      foundUserStruktural = true;
+    }
+    strukturalDropdown.appendChild(option);
+  });
+
+  // If the user's position was not found in the list, add it and select it
+  if (!foundUserStruktural && userstruktural) {
+    const option = document.createElement("option");
+    option.text = userstruktural; // Assuming no abbreviation is provided
+    option.value = userstruktural;
+    option.selected = true;
+    strukturalDropdown.appendChild(option);
+  }
+}
+function fetchKelompokOptions(userKelompok) {
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/master/kelompok";
+  fetch(url, {
+    method: "GET",
+    headers: {
+      login: token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.code === 200 && data.success) {
+        populateKelompokDropdown(data.data, userKelompok);
+      } else {
+        Swal.fire(
+          "Informasi",
+          "Gagal mengambil data kelompok: " +
+            (data.status || "Status tidak diketahui"),
+          "error"
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching kelompok options:", error);
+      Swal.fire(
+        "Error",
+        "Terjadi kesalahan saat mengambil data kelompok: " + error.message,
+        "error"
+      );
+    });
+}
+function populateKelompokDropdown(kelompokData, userKelompok) {
+  const kelompokDropdown = document.getElementById("kelompok");
+  kelompokDropdown.innerHTML = "";
+  const uniqueKelompok = new Set();
+
+  // Ensure the user's current kelompok is added first and marked as selected
+  uniqueKelompok.add(userKelompok);
+
+  kelompokData.forEach((kelompok) => {
+    uniqueKelompok.add(kelompok.nama_kelompok);
+  });
+
+  uniqueKelompok.forEach((kelompok) => {
+    const option = document.createElement("option");
+    option.text = kelompok;
+    option.value = kelompok;
+    if (kelompok === userKelompok) {
+      option.selected = true;
+    }
+    kelompokDropdown.appendChild(option);
+  });
 }
 
 function populateForm(userData) {
@@ -99,6 +218,7 @@ function updateUserData() {
     email: document.getElementById("email").value,
     pangkat: document.getElementById("rank").value,
     jabatan: document.getElementById("position").value,
+    kelompok: document.getElementById("kelompok").value,
     pokok: parseFloat(document.getElementById("basicSalary").value),
     keluarga: parseFloat(document.getElementById("familyAllowance").value),
     pangan: parseFloat(document.getElementById("foodAllowance").value),
