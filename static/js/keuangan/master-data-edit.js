@@ -28,6 +28,8 @@ function fetchUserDataByEmail(email) {
       if (data.code === 200 && data.success) {
         populateForm(data.data);
         // Mengisi form dengan data yang didapat
+        const userPangkat = data.data.pangkat;
+        fetchPangkatOptions(userPangkat);
         const userKelompok = data.data.kelompok;
         fetchKelompokOptions(userKelompok);
         fetchstrukturalOptions(data.data.jabatan);
@@ -47,6 +49,55 @@ function fetchUserDataByEmail(email) {
         "error"
       );
     });
+}
+function fetchPangkatOptions(userPangkat) {
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/master/pangkat";
+  fetch(url, {
+    method: "GET",
+    headers: {
+      login: token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.code === 200 && data.success) {
+        populatePangkatDropdown(data.data, userPangkat);
+      } else {
+        Swal.fire(
+          "Informasi",
+          "Gagal mengambil data pangkat: " +
+            (data.status || "Status tidak diketahui"),
+          "error"
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching pangkat options:", error);
+      Swal.fire(
+        "Error",
+        "Terjadi kesalahan saat mengambil data pangkat: " + error.message,
+        "error"
+      );
+    });
+}
+
+function populatePangkatDropdown(pangkatData, userPangkat) {
+  const pangkatDropdown = document.getElementById("rank");
+  pangkatDropdown.innerHTML = "";
+  const userPangkatOption = document.createElement("option");
+  userPangkatOption.textContent = `${userPangkat} `;
+  userPangkatOption.value = userPangkat;
+  pangkatDropdown.appendChild(userPangkatOption);
+  pangkatData.forEach((pangkat) => {
+    if (pangkat.jenis_pangkat !== userPangkat) {
+      const option = document.createElement("option");
+      option.text = `${pangkat.jenis_pangkat} `;
+      option.value = pangkat.jenis_pangkat;
+      pangkatDropdown.appendChild(option);
+    }
+  });
 }
 
 function fetchstrukturalOptions(currentJabatan) {
