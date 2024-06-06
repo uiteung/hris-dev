@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5"
+    />
+    <meta name="author" content="AdminKit" />
+    <meta
+      name="keywords"
+      content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="shortcut icon"
+      href="../../static/img/enam_berlian-removebg-preview.png"
+    />
+    <title>Validasi data | ULBI</title>
+
+    <!-- Import CSS yang diperlukan -->
+    <link href="../../static/css/app.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../static/css/style.css" />
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="https://unpkg.com/sweetalert2@11.11.0/dist/sweetalert2.all.js
+    "></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+     
+
+
+      .table-container table th,
+      .table-container table td {
+        text-align: center;
+        vertical-align: middle;
+        width: 150px; /* Atur lebar setiap kolom, atau gunakan % untuk responsif */
+      }
+      .table-container table th {
+        background-color: #f4f4f4; /* Warna latar untuk header tabel */
+      }
+      .table-fixed {
+        table-layout: fixed;
+        width: 100%; /* Sesuaikan kebutuhan */
+      }
+
+      .table-fixed th,
+      .table-fixed td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="pdfFilename"></div>
+    <!-- <div id="sidebarcont">  -->
+    <div class="wrapper">
+      <!-- Sidebar Start -->
+      <!---->
+      <nav id="sidebar" class="sidebar js-sidebar">
+        <div class="sidebar-content js-simplebar">
+          <a class="sidebar-brand" href="index.html">
+            <span class="align-middle"
+              ><img
+                src="../../static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png"
+                alt=""
+                style="width: 150px; margin-left: 25px"
+            /></span>
+          </a>
+
+          <ul class="sidebar-nav">
+            <li class="sidebar-header">
+              Master
+              <i class="fa fa-fw fa-check-square-o" style="background-color: #ffffff; color: rgb(255, 0, 0); padding: 2px 5px; border-radius: 5px; font-size: 6.5px;">On Progress</i>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/Biodata/biodata-master.html">
+                  <i class="align-middle" data-feather="user"></i>
+                  <span class="align-middle">Master Biodata</span>
+              </a>
+              <ul class="sub-menu">
+                          <li class="sidebar-item">
+                              <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/Biodata/keluarga-master.html">
+                                  <i class="align-middle" data-feather="users"></i>
+                                  <span class="align-middle">Komponen Keluarga</span>
+                              </a>
+                          </li>
+                          <li class="sidebar-item">
+                            <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/Biodata/pangkat-master.html">
+                                <i class="align-middle" data-feather="user-check"></i>
+                                <span class="align-middle">Pangkat/Golongan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                          <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/Biodata/jabatan-fungsional-master.html">
+                              <i class="align-middle" data-feather="award"></i>
+                              <span class="align-middle">Jabatan Fungsional</span>
+                          </a>
+                      </li>
+                  </li>
+              </ul>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/Tunjangan/tunjangan-master.html">
+                  <i class="align-middle" data-feather="activity"></i>
+                  <span class="align-middle">Master Tunjangan</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+                  <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/Potongan/potongan-master.html">
+                      <i class="align-middle" data-feather="credit-card"></i>
+                      <span class="align-middle">Master Potongan</span>
+                  </a>
+                  <ul class="sub-menu">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/Biodata/pph-master.html">
+                            <i class="align-middle" data-feather="dollar-sign"></i>
+                            <span class="align-middle">Master Pph</span>
+                        </a>
+                    </li>
+                  </ul>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/Doktor/doktor-master.html">
+                  <i class="align-middle" data-feather="check"></i>
+                  <span class="align-middle">Master Doktor</span>
+              </a>
+            </li>
+            </li>
+            <li class="sidebar-header">
+            Penggajian
+            <i class="fa fa-fw fa-check-square-o" style="background-color: #ffffff; color: rgb(255, 0, 0); padding: 2px 5px; border-radius: 5px; font-size: 6.5px;">Testing BETA</i>
+            </li>
+            <li class="sidebar-item">
+            <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/master-data.html">
+                <i class="align-middle" data-feather="bar-chart-2"></i>
+                <span class="align-middle">Detail Gaji</span>
+            </a>
+            </li>
+            <li class="sidebar-item">
+            <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/validasi-data.html">
+                <i class="align-middle" data-feather="check"></i>
+                <span class="align-middle">Dashboard Validasi Data</span>
+            </a>
+            </li>
+            <li class="sidebar-item">
+            <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/history-data.html">
+                <i class="align-middle" data-feather="file-text"></i>
+                <span class="align-middle">History Slip Gaji</span>
+            </a>
+            </li>
+
+            <li class="sidebar-header">
+              Honor Ajar
+              <i class="fa fa-fw fa-check-square-o" style="background-color: #ffffff; color: rgb(255, 0, 0); padding: 2px 5px; border-radius: 5px; font-size: 6.5px;">On Progress</i>
+              </li>
+              <li class="sidebar-item">
+              <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/honor/honor-master.html">
+                  <i class="align-middle" data-feather="bar-chart-2"></i>
+                  <span class="align-middle">Detail Honor Ajar</span>
+              </a>
+              </li>
+              <li class="sidebar-item">
+              <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/validasi-data.html">
+                  <i class="align-middle" data-feather="check"></i>
+                  <span class="align-middle">Dashboard Validasi Data</span>
+              </a>
+              </li>
+              <li class="sidebar-item">
+              <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/history-data.html">
+                  <i class="align-middle" data-feather="file-text"></i>
+                  <span class="align-middle">History Slip Honor Ajar</span>
+              </a>
+              </li>
+          </ul>
+
+          <div class="sidebar-cta">
+            <div class="sidebar-cta-content">
+              <strong class="d-inline-block mb-2">HRIS ULBI</strong>
+              <div class="mb-3 text-sm" style="font-size: 13px">
+                Dashboard Keuangan, untuk memonitor data keuangan dan permintaan
+                slip gaji melalui ITeung
+              </div>
+              <a
+                class="btn btn-success"
+                style="padding: 5px 55px"
+                href="https://api.whatsapp.com/send?phone=628112000279"
+                role="button"
+              >
+                Iteung
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Sidebar End -->
+
+      <div class="main">
+        <!-- Header Start -->
+<nav class="navbar navbar-expand navbar-light navbar-bg">
+    <a class="sidebar-toggle js-sidebar-toggle" style="margin-left: 30px">
+      <i class="hamburger align-self-center"></i>
+    </a>
+
+    <div class="navbar-collapse collapse">
+      <ul class="navbar-nav navbar-align">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-icon dropdown-toggle d-inline-block d-sm-none"
+            href="#"
+            data-bs-toggle="dropdown">
+            <i class="align-middle" data-feather="settings"></i>
+          </a>
+
+          <a
+            class="nav-link dropdown-toggle d-none d-sm-inline-block"
+            href="#"
+            data-bs-toggle="dropdown">
+            <img
+              src="../../static/img/avatars/admin.png"
+              class="avatar img-fluid rounded me-1" />
+            <span class="text-dark">Admin</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item" href="https://euis.ulbi.ac.id"
+              >Log out</a
+            >
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+        <!-- Header End -->
+
+        <!-- Main Content Start -->
+        <main class="content">
+            <div class="container-fluid p-0">
+                <h5 class="right-aligned" style="float: right">
+                    <a href="index.html">Home</a> / Tambah Data Honor
+                </h5>
+                <h1 class="h3 mb-3"><b>Form Tambah Data Honor</b></h1>
+        
+                <!-- Tab Navigation for Different Input Methods -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#manualInput" data-bs-toggle="tab">Manual Input</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#bulkUpload" data-bs-toggle="tab">Unggah Excel</a>
+                    </li>
+                </ul>
+        
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Manual Input Tab -->
+                    <div class="tab-pane fade show active" id="manualInput">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form id="editForm" method="POST" action="/your-endpoint-url">
+                                            <!-- Name Field -->
+                                            <div class="mb-3">
+                                              <label for="nama" class="form-label">Nama:</label>
+                                              <input type="text" class="form-control" id="nama" name="nama" value="ROFI NAFIIS ZAIN" required>
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="email" class="form-label">Email:</label>
+                                              <input type="email" class="form-control" id="email" name="email" value="rofinafiisr@ulbi.ac.id" required>
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="jabatan" class="form-label">Jabatan:</label>
+                                              <input type="text" class="form-control" id="jabatan" name="jabatan" value="STAF TIK" required>
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="kelompok" class="form-label">Kelompok:</label>
+                                              <input type="text" class="form-control" id="kelompok" name="kelompok" value="Tenaga Lepas" required>
+                                          </div>
+                                      
+                                          <!-- Gaji Section -->
+                                          <div class="mb-3">
+                                              <label for="gajiPokok" class="form-label">Gaji Pokok:</label>
+                                              <input type="number" class="form-control" id="gajiPokok" name="gajiPokok" value="2500000" required>
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="keluarga" class="form-label">Tunjangan Keluarga:</label>
+                                              <input type="number" class="form-control" id="keluarga" name="keluarga" value="0">
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="pangan" class="form-label">Tunjangan Pangan:</label>
+                                              <input type="number" class="form-control" id="pangan" name="pangan" value="0">
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="transportasi" class="form-label">Transportasi:</label>
+                                              <input type="number" class="form-control" id="transportasi" name="transportasi" value="0">
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="kehadiran" class="form-label">Tunjangan Kehadiran:</label>
+                                              <input type="number" class="form-control" id="kehadiran" name="kehadiran" value="0">
+                                          </div>
+                                      
+                                          <!-- Potongan Section -->
+                                          <div class="mb-3">
+                                              <label for="kopkar" class="form-label">Potongan Koperasi:</label>
+                                              <input type="number" class="form-control" id="kopkar" name="kopkar" value="0">
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="bankjabar" class="form-label">Potongan Bank Jabar:</label>
+                                              <input type="number" class="form-control" id="bankjabar" name="bankjabar" value="0">
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="arisan" class="form-label">Potongan Arisan:</label>
+                                              <input type="number" class="form-control" id="arisan" name="arisan" value="0">
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="bpjstk" class="form-label">BPJS Ketenagakerjaan:</label>
+                                              <input type="number" class="form-control" id="bpjstk" name="bpjstk" value="0">
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="bauk" class="form-label">BAUK:</label>
+                                              <input type="number" class="form-control" id="bauk" name="bauk" value="0">
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="lain2" class="form-label">Potongan Lain-lain:</label>
+                                              <input type="number" class="form-control" id="lain2" name="lain2" value="0">
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="pph" class="form-label">PPH:</label>
+                                              <input type="number" class="form-control" id="pph" name="pph" value="0">
+                                          </div>
+                                      
+                                          <!-- Submit Button -->
+                                          <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Bulk Upload Tab -->
+                    <div class="tab-pane fade" id="bulkUpload">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <label for="fileUpload" class="form-label">Upload Excel File:</label>
+                                        <input type="file" id="fileUpload" accept=".xlsx, .xls" class="form-control">
+                                        <button type="button" id="bulkUploadButton" class="btn btn-success mt-2" onclick="handleFileUpload()">Upload Bulk Data</button>
+                                        <button type="button" id="templateExcel" class="btn btn-info mt-2" >Unduh Template Excel</button>
+                                        <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none;">
+                                          <span class="sr-only">Loading...</span>
+                                      </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Main Content End -->
+
+        <!-- Footer Start -->
+<footer class="footer">
+    <div class="container-fluid">
+      <div class="row text-muted">
+        <div class="col-6 text-start">
+          <p class="mb-0">
+            <a class="text-muted"><strong>DTI ULBI</strong></a> &copy;
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+        <!-- Footer End -->
+      </div>
+    </div>
+
+    <!-- Spinner Start -->
+    <div class="loader"></div>
+    <!-- Spinner End -->
+
+    <!-- Library Untuk Export to Excel dan DataTables -->
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"
+    ></script>
+
+    <!-- Library Untuk Export to Pdf -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <!-- <script src="https://unpkg.com/jspdf-invoice"></script> -->
+    <!-- <script
+      
+      src="../static/js/keuangan/master-data-edit.js"
+      type="module"
+    ></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
+    <script src="../../static/js/keuangan/honor/honor-add-row.js" type="module">
+                       
+    </script>
+    <script src="../../static/js/keuangan/honor/honor-add.js" type="module">
+     
+    </script>
+    <script src="../../static/js/keuangan/honor/uploadBulkAction.js" type="module"></script>
+
+    <!-- Library Javascript Terkait -->
+    <script src="https://cdn.jsdelivr.net/gh/PMBULBI/javascript-fe@0.0.7/jquery-3.6.0.min.js"></script>
+
+    <!-- <script src="static/js/presensi/cihuyred.js" type="module"></script> -->
+    <script src="../../static/js/style/style.js" defer></script>
+    <!-- <script src="../../static/js/style/table-sorting.js"></script> -->
+    <script src="../../static/js/app.js"></script>
+        <!-- <script src="../../static/js/controller/sidebar.js" type="module"></script> -->
+    <!-- <script src="../../static/js/controller/header.js" type="module"></script>
+    <script src="../../static/js/controller/footer.js" type="module"></script>
+    <!-- <script src="../../static/js/controller/croot.js" type="module"></script> -->
+  </body>
+</html>
