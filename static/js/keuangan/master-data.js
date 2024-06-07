@@ -143,6 +143,7 @@ function createRow(item) {
     <td>${item.pangan}</td>
     <td>${item.kinerja}</td>
     <td>${item.keahlian}</td>
+    <td>${item.rapel_gaji}</td>
     <td>${struk}</td>
     <td>${item.transportasi}</td>
     <td>${item.kehadiran}</td>
