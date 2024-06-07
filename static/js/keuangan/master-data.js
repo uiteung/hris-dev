@@ -157,6 +157,9 @@ function createRow(item) {
         <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" onclick="editItem(this)">
             <i class="mdi mdi-table-edit"></i>
         </button>
+         <button class="btn btn-info btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" onclick="editItem(this)">
+            <i class="mdi mdi-cloud-print-outline"></i>
+        </button>
         <button class="btn btn-danger btn-sm delete-btn" data-id="${item.id}" data-email="${item.email}" onclick="deleteItem(this)">
             <i class="mdi mdi-delete"></i>
         </button>
