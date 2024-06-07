@@ -161,6 +161,8 @@ function createRow(item) {
         <td>${struk}</td>
         <td>${item.transportasi}</td>
         <td>${item.kehadiran}</td>
+        <td>${item.rapel_gaji}</td>
+
         <td>${item.kopkar}</td>
         <td>${item.bankJabar}</td>
         <td>${item.arisan}</td>
