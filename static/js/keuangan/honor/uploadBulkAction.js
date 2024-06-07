@@ -109,6 +109,7 @@ function downloadExcelTemplate() {
       "Jurusan",
       "Kelas",
       "Maks KJM",
+      "Persentase PPH",
     ],
   ];
 
