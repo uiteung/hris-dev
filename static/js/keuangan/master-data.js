@@ -240,12 +240,63 @@ function handlingErrorSearch() {
   });
 }
 
-function exportToExcel() {
-  fetchAllPages(1);
+function getExportUrl() {
+  const kelompok = document.getElementById("filterKelompok").value;
+  let url;
+
+  switch (kelompok) {
+    case "Struktural":
+      url = "https://hris_backend.ulbi.ac.id/api/v2/rpt/Struktural";
+      break;
+    case "Staff ADM":
+      url = "https://hris_backend.ulbi.ac.id/api/v2/rpt/pegawai/Staff_ADM";
+      break;
+    case "TKK":
+      url = "https://hris_backend.ulbi.ac.id/api/v2/rpt/pegawai/TKK";
+      break;
+    case "Dosen Tetap":
+      url = "https://hris_backend.ulbi.ac.id/api/v2/rpt/dosen/Dosen_Tetap";
+      break;
+    case "Dosen Kontrak":
+      url = "https://hris_backend.ulbi.ac.id/api/v2/rpt/dosen/Dosen_Kontrak";
+      break;
+    case "Tenaga Lepas":
+      url = "https://hris_backend.ulbi.ac.id/api/v2/rpt/tenagalepas";
+      break;
+    default:
+      url = "https://hris_backend.ulbi.ac.id/api/v2/wagemst/masterall";
+  }
+
+  return url;
 }
 
+function downloadExcel() {
+  const url = getExportUrl();
+  const link = document.createElement("a");
+  link.href = url;
+  link.setAttribute("download", "");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+document.getElementById("exportButton").addEventListener("click", function () {
+  const kelompok = document.getElementById("filterKelompok").value;
+  if (kelompok === "" || kelompok === "default") {
+    // If no specific group is selected or default is to use authenticated request
+    exportToExcel();
+  } else {
+    // If a specific group is selected and direct download is applicable
+    downloadExcel();
+  }
+});
+function exportToExcel() {
+  allRecords = [];
+  fetchAllPages(1);
+}
 function fetchAllPages(page) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/masterall?page=${page}`;
+  const baseUrl = getExportUrl(); // Get the correct URL based on the dropdown selection
+  const url = `${baseUrl}?page=${page}`;
   fetch(url, {
     method: "GET",
     headers: {
@@ -259,19 +310,23 @@ function fetchAllPages(page) {
     })
     .then((data) => {
       if (data.data.data_query.length === 0) {
-        generateExcel(allRecords);
+        if (allRecords.length > 0) {
+          generateExcel(allRecords); // Generate the Excel file if there are records
+        } else {
+          Swal.fire("Informasi", "No data to download.", "info"); // Inform user if no data
+        }
         return;
       }
       allRecords = allRecords.concat(data.data.data_query);
       if (data.data.next_page_url) {
         fetchAllPages(page + 1);
       } else {
-        generateExcel(allRecords);
+        generateExcel(allRecords); // Generate the Excel file once all data is fetched
       }
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
-      alert("Error fetching data: " + error.message);
+      Swal.fire("Error", "Error fetching data: " + error.message, "error");
     });
 }
 
@@ -335,10 +390,6 @@ function generateExcel(data) {
   XLSX.utils.book_append_sheet(wb, ws, "MasterData");
   XLSX.writeFile(wb, "HRIS_Master_Data_Export.xlsx");
 }
-
-document
-  .getElementById("exportButton")
-  .addEventListener("click", exportToExcel);
 
 document.addEventListener("DOMContentLoaded", () => {
   const generateButton = document.getElementById("generateButton");
