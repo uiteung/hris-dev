@@ -7,6 +7,7 @@ const baseUrlsearch =
   "https://hris_backend.ulbi.ac.id/api/v2/rkp/" + getLastMonth();
 const baseUrl =
   "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/" + getLastMonth();
+
 // export let GetDataValidasi = "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/";
 let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
