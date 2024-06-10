@@ -205,7 +205,7 @@ window.printoutitem = function (element) {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `WageDetails_${yearMonth}_${email}.pdf`;
+      a.download = `SlipGaji_${yearMonth}_${email}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
