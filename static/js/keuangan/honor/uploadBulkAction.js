@@ -60,6 +60,7 @@ function groupCoursesByInstructor(data) {
       maks_kjm: parseFloat(row["Maks KJM"]),
       jumlah_kelas: parseInt(row["Jumlah Kelas"]),
       jumlah_temu: parseFloat(row["Jumlah Temu"]),
+      persentase_pph: parseFloat(row["Persentase PPH"]),
     });
   });
 
