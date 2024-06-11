@@ -49,6 +49,8 @@ function groupCoursesByInstructor(data) {
         nama_pengajar: row["Nama Pengajar"],
         jabatan: row["Jabatan"],
         phone_number: row["Phone Number"],
+        persentase_pph: parseFloat(row["Persentase PPH"]),
+
         mata_kuliah: [],
       };
     }
@@ -60,7 +62,6 @@ function groupCoursesByInstructor(data) {
       maks_kjm: parseFloat(row["Maks KJM"]),
       jumlah_kelas: parseInt(row["Jumlah Kelas"]),
       jumlah_temu: parseFloat(row["Jumlah Temu"]),
-      persentase_pph: parseFloat(row["Persentase PPH"]),
     });
   });
 
