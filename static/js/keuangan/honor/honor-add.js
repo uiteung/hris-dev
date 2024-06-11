@@ -7,6 +7,7 @@ function postData() {
   const nama_pengajar = document.getElementById("name").value;
   const phone_number = document.getElementById("phoneNumber").value;
   const jabatan = document.getElementById("jabatan").value;
+  const persentase_pph = document.getElementById("persentase_pph").value;
 
   const mata_kuliah = Array.from(
     document.getElementsByClassName("courseItem")
@@ -19,7 +20,6 @@ function postData() {
     jumlah_kelas: parseInt(
       course.querySelector('[name="jumlah_kelas[]"]').value
     ),
-
     jumlah_temu: parseFloat(
       course.querySelector('[name="jumlah_temu[]"]').value
     ),
@@ -30,6 +30,7 @@ function postData() {
     phone_number: phone_number,
     mata_kuliah: mata_kuliah,
     jabatan: jabatan,
+    persentase_pph: parseFloat(persentase_pph),
   };
 
   const options = {
