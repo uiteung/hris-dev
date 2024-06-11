@@ -5,10 +5,13 @@ function postData() {
 
   const jafung = document.getElementById("jafung").value;
   const singkatan = document.getElementById("singkatan").value;
+  const nominal = document.getElementById("nominal").value;
+
 
   const data = {
     nama_jafung: jafung,
     singkatan: singkatan,
+    nominal: nominal,
   };
 
   const options = {
