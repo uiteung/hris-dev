@@ -27,6 +27,7 @@ function populateForm(data) {
   document.getElementById("name").value = data.nama_pengajar;
   document.getElementById("phoneNumber").value = data.phone_number;
   document.getElementById("jabatan").value = data.jabatan;
+  document.getElementById("persentase_pph").value = data.persentase_pph;
   // document.getElementById("total_honor").value = data.total_honor;
   // document.getElementById("pph").value = data.pph;
 
@@ -92,6 +93,7 @@ function updateData() {
   const namaPengajar = document.getElementById("name").value;
   const jabatan = document.getElementById("jabatan").value;
   const phoneNumber = document.getElementById("phoneNumber").value;
+  const persentase_pph = document.getElementById("persentase_pph").value;
 
   const mataKuliahElements = document.querySelectorAll(".courseItem");
   const mataKuliah = Array.from(mataKuliahElements).map((courseElement) => ({
@@ -119,6 +121,8 @@ function updateData() {
   const data = {
     nama_pengajar: namaPengajar,
     jabatan: jabatan,
+    persentase_pph: parseFloat(persentase_pph),
+
     phone_number: phoneNumber,
     mata_kuliah: mataKuliah,
   };
