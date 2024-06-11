@@ -84,7 +84,7 @@ function updateUserData() {
     id_pangkat: id_pangkat,
     nama_jafung: document.getElementById("jafung").value,
     singkatan: document.getElementById("singkatan").value,
-    nominal: document.getElementById("nominal").value,
+    nominal: parseFloat(document.getElementById("nominal").value),
 
   };
 

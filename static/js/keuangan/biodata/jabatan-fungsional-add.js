@@ -11,7 +11,7 @@ function postData() {
   const data = {
     nama_jafung: jafung,
     singkatan: singkatan,
-    nominal: nominal,
+    nominal: parseFloat(nominal),
   };
 
   const options = {
