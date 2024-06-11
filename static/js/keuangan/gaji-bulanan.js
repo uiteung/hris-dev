@@ -290,6 +290,6 @@ function generateExcel(data) {
   XLSX.writeFile(wb, "HRIS_Data_Export.xlsx");
 }
 
-document
-  .getElementById("exportButton")
-  .addEventListener("click", exportToExcel);
+// document
+//   .getElementById("exportButton")
+//   .addEventListener("click", exportToExcel);
