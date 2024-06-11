@@ -312,6 +312,7 @@
                                               <label for="name" class="form-label">Jabatan:</label>
                                               <input type="text" class="form-control" id="jabatan" name="jabatan" autocomplete="off" required>
                                             </div>
+                                            
                                             <!-- Dynamic Courses Input -->
                                             <div id="courseList">
                                                 <div class="courseItem mb-3">
@@ -336,17 +337,23 @@
                                           
                                                   <label for="jumlah_temu" class="form-label">Jumlah Temu:</label>
                                                   <input type="number" step="0.1" class="form-control" name="jumlah_temu[]">
-                                                  <label for="persentase_pph" class="form-label">Persentase PPH:</label>
-                                                  <input type="number" step="0.1" class="form-control" name="persentase_pph[]">
+                                                  
                                                   
                                                   <br>
                                                   <button type="button" id="removeButton" class="btn btn-primary removeButton" onclick="removeCourse(this)">Hapus Mata Kuliah</button>
                                                   <br>
                                                 </div>
-                                              </div>
+                                            </div>
+                                            
                                             <button type="button" id="addButton" class="btn btn-info" onclick="addCourse()">Tambah Mata Kuliah</button>
-                                            <br><br>
-        
+                                            
+                                            <br>
+                                            
+                                            <br>
+                                            <div class="mb-3">
+                                              <label for="name" class="form-label">Persentase PPH:</label>
+                                              <input type="text" class="form-control" id="persentase_pph" name="persentase_pph" autocomplete="off" required>
+                                            </div>
                                             
                                             
                                             <!-- Submit Button -->
