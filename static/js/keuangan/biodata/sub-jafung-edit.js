@@ -48,6 +48,8 @@ function fetchUserDataByid_pangkat(id_pangkat) {
 function populateForm(userData) {
   document.getElementById("jafung").value = userData.nama_jafung || "";
   document.getElementById("singkatan").value = userData.singkatan || "";
+  document.getElementById("nominal").value = userData.nominal || "";
+
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -82,6 +84,8 @@ function updateUserData() {
     id_pangkat: id_pangkat,
     nama_jafung: document.getElementById("jafung").value,
     singkatan: document.getElementById("singkatan").value,
+    nominal: document.getElementById("nominal").value,
+
   };
 
   fetch(url, {
