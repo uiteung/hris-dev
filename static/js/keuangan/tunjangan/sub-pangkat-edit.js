@@ -47,9 +47,8 @@ function fetchUserDataByid_pangkat(id_pangkat) {
 }
 function populateForm(userData) {
   document.getElementById("jenis_pangkat").value =
-    userData.jenis_pangkat || "Tidak Tersedia";
-  document.getElementById("kepanjangan").value =
-    userData.kepanjangan || "Tidak Tersedia";
+    userData.jenis_pangkat || "-";
+  document.getElementById("kepanjangan").value = userData.kepanjangan || "-";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
