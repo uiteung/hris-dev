@@ -59,26 +59,27 @@ function setupEventListeners() {
     .getElementById("filterKelompok")
     .addEventListener("change", filterTableByKelompok);
 }
-
 function searchFromInput() {
   const searchInput = document
     .getElementById("searchinput")
     .value.trim()
     .replace(/\s+/g, "_");
+  const waktu = document.getElementById("filterKelompok").value;
+
   if (searchInput) {
-    fetchDataFromSearch(searchInput);
+    fetchDataFromSearch(searchInput, waktu);
   } else {
-    // If search input is empty, fetch the initial dataset
-    fetchDataFromHRIS(1); // Assuming you want to reset to the first page
+    // Jika input pencarian kosong, kembali ke dataset awal
+    fetchDataFromHRIS(1); // Asumsi ingin reset ke halaman pertama
   }
 }
-
-function fetchDataFromSearch(searchKey) {
-  const url =
-    "https://hris_backend.ulbi.ac.id/api/v2/rkp/search/" +
-    getLastMonth() +
-    "?key=" +
-    searchKey;
+function fetchDataFromSearch(searchKey, waktu) {
+  let url;
+  if (waktu) {
+    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?waktu=${waktu}&key=${searchKey}`;
+  } else {
+    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?key=${searchKey}`;
+  }
 
   fetch(url, {
     method: "POST",
@@ -109,7 +110,6 @@ function fetchDataFromSearch(searchKey) {
       handlingErrorSearch();
     });
 }
-
 function fetchDataFromHRIS(page) {
   let url = `${baseUrl}?page=${page}`;
   if (currentKelompok) {
