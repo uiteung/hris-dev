@@ -140,7 +140,7 @@ function createRow(item) {
   }
   return `<tr>
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
-    <td>${item.jabatan || "Tidak Tersedia"}</td>
+    <td>${item.jabatan || "-"}</td>
 
     <td>
             <button class="btn btn-primary btn-sm edit-btn" data-id="${
