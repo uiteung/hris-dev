@@ -141,15 +141,15 @@ function createRow(item) {
   const struk = item["fgs-struk"];
   return `<tr>
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
-    <td>${item.pokok || "Tidak Tersedia"}</td>
-    <td>${item.pangan || "Tidak Tersedia"}</td>
-    <td>${item.keluarga || "Tidak Tersedia"}</td>
-    <td>${struk || "Tidak Tersedia"}  </td>
-    <td>${item.kehadiran || "Tidak Tersedia"}</td>
-    <td>${item.kinerja || "Tidak Tersedia"}</td>
+    <td>${item.pokok || "-"}</td>
+    <td>${item.pangan || "-"}</td>
+    <td>${item.keluarga || "-"}</td>
+    <td>${struk || "-"}  </td>
+    <td>${item.kehadiran || "-"}</td>
+    <td>${item.kinerja || "-"}</td>
 
-    <td>${item.keahlian || "Tidak Tersedia"}</td>
-    <td>${item.transportasi || "Tidak Tersedia"}</td>
+    <td>${item.keahlian || "-"}</td>
+    <td>${item.transportasi || "-"}</td>
     <td>
             <button class="btn btn-primary btn-sm edit-btn" data-id="${
               item.id
