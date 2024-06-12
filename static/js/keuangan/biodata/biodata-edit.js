@@ -261,13 +261,11 @@ function populateKelompokDropdown(kelompokData, userKelompok) {
 }
 
 function populateForm(userData) {
-  document.getElementById("nama").value = userData.nama || "Tidak Tersedia";
-  document.getElementById("email").value = userData.email || "Tidak Tersedia";
-  document.getElementById("pangkat").value =
-    userData.pangkat || "Tidak Tersedia";
-  document.getElementById("jabatan").value =
-    userData.jabatan || "Tidak Tersedia";
-  document.getElementById("jafung").value = userData.jafung || "Tidak Tersedia";
+  document.getElementById("nama").value = userData.nama || "-";
+  document.getElementById("email").value = userData.email || "-";
+  document.getElementById("pangkat").value = userData.pangkat || "-";
+  document.getElementById("jabatan").value = userData.jabatan || "-";
+  document.getElementById("jafung").value = userData.jafung || "-";
   document.getElementById("status_keluarga").value = userData.status_keluarga;
   document.getElementById("suskel_dirisendiri").value =
     userData.suskel.dirisendiri;
@@ -279,7 +277,7 @@ function populateForm(userData) {
 
 // function populatePangkatDropdown(pangkat) {
 //   const pangkatDropdown = document.getElementById("pangkat");
-//   const pangkatValue = pangkat.pangkat || "Tidak Tersedia";
+//   const pangkatValue = pangkat.pangkat || "-";
 //   const option = document.createElement("option");
 //   option.text = pangkatValue;
 //   option.value = pangkatValue;
@@ -288,7 +286,7 @@ function populateForm(userData) {
 
 // function populateJabatanFungsional(userData) {
 //   const pangkatDropdown = document.getElementById("jafung");
-//   const pangkatValue = userData.jafung || "Tidak Tersedia";
+//   const pangkatValue = userData.jafung || "-";
 //   const option = document.createElement("option");
 //   option.text = pangkatValue;
 //   option.value = pangkatValue;
@@ -297,7 +295,7 @@ function populateForm(userData) {
 
 // function polpulateKelompok(userData) {
 //   const pangkatDropdown = document.getElementById("kelompok");
-//   const pangkatValue = userData.kelompok || "Tidak Tersedia";
+//   const pangkatValue = userData.kelompok || "-";
 //   const option = document.createElement("option");
 //   option.text = pangkatValue;
 //   option.value = pangkatValue;
