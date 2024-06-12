@@ -42,10 +42,10 @@ function fetchUserDataByid_pph(id_pph) {
     });
 }
 function populateForm(userData) {
-  document.getElementById("bulan").value = userData.bulan || "Tidak Tersedia";
-  document.getElementById("tahun").value = userData.tahun || "Tidak Tersedia";
+  document.getElementById("bulan").value = userData.bulan || "-";
+  document.getElementById("tahun").value = userData.tahun || "-";
   document.getElementById("persentase_pph").value =
-    userData.persentase_pph || "Tidak Tersedia";
+    userData.persentase_pph || "-";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
