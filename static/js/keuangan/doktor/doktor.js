@@ -89,12 +89,16 @@ function fetchDataFromSearch(searchKey, month) {
       handlingErrorSearch();
     });
 }
-
 function fetchDataFromHRIS(page) {
-  const selectedMonth = document
-    .getElementById("filterBulan")
-    .value.replace(" ", "_");
-  let url = `${baseUrl}/filter/${selectedMonth}?page=${page}`;
+  const selectedMonth = document.getElementById("filterBulan").value;
+  let url;
+
+  // Check if the default option "Pilih Bulan" is selected
+  if (selectedMonth === "" || selectedMonth === "Pilih Bulan") {
+    url = `${baseUrl}?page=${page}`; // URL without month filter
+  } else {
+    url = `${baseUrl}/filter/${selectedMonth.replace(" ", "_")}?page=${page}`; // URL with month filter
+  }
 
   fetch(url, {
     method: "GET",
@@ -129,7 +133,6 @@ function fetchDataFromHRIS(page) {
       });
     });
 }
-
 function populateTableWithData(data) {
   const tableBody = document.getElementById("tablebody");
   tableBody.innerHTML = ""; // Clear existing table data
