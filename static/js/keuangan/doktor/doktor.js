@@ -46,15 +46,19 @@ function searchFromInput() {
     .getElementById("searchinput")
     .value.trim()
     .replace(/\s+/g, "_");
+  const selectedMonth = document
+    .getElementById("filterBulan")
+    .value.replace(" ", "_");
+
   if (searchInput) {
-    fetchDataFromSearch(searchInput);
+    fetchDataFromSearch(searchInput, selectedMonth);
   } else {
     fetchDataFromHRIS(1); // Assuming you want to reset to the first page
   }
 }
 
-function fetchDataFromSearch(searchKey) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/doktor/search?key=${searchKey}`;
+function fetchDataFromSearch(searchKey, month) {
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/doktor/search?bulan=${month}&key=${searchKey}`;
 
   fetch(url, {
     method: "POST",
@@ -85,8 +89,12 @@ function fetchDataFromSearch(searchKey) {
       handlingErrorSearch();
     });
 }
-function fetchDataFromHRIS(month, page) {
-  let url = `${baseUrl}/filter/${month}?page=${page}`;
+
+function fetchDataFromHRIS(page) {
+  const selectedMonth = document
+    .getElementById("filterBulan")
+    .value.replace(" ", "_");
+  let url = `${baseUrl}/filter/${selectedMonth}?page=${page}`;
 
   fetch(url, {
     method: "GET",
