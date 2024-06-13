@@ -36,9 +36,9 @@ function setupEventListeners() {
       searchFromInput();
     }
   });
-  // document
-  //   .getElementById("filterKelompok")
-  //   .addEventListener("change", filterTableByKelompok);
+  document
+    .getElementById("filterBulan")
+    .addEventListener("change", filterTableByMonth);
 }
 
 function searchFromInput() {
@@ -85,12 +85,8 @@ function fetchDataFromSearch(searchKey) {
       handlingErrorSearch();
     });
 }
-
-function fetchDataFromHRIS(page) {
-  let url = `${baseUrl}?page=${page}`;
-  if (currentKelompok) {
-    url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/filter/${currentKelompok}?page=${page}`;
-  }
+function fetchDataFromHRIS(month, page) {
+  let url = `${baseUrl}/filter/${month}?page=${page}`;
 
   fetch(url, {
     method: "GET",
@@ -168,11 +164,11 @@ function updatePaginationButtons(data) {
   document.getElementById("nextPageBtn").disabled = !data.next_page_url;
   currentPage = data.current_page;
 }
-function filterTableByKelompok() {
-  currentKelompok = document
-    .getElementById("filterKelompok")
+function filterTableByMonth() {
+  const selectedMonth = document
+    .getElementById("filterBulan")
     .value.replace(" ", "_");
-  fetchDataFromHRIS(1);
+  fetchDataFromHRIS(selectedMonth, 1);
 }
 
 function handlingErrorSearch() {
