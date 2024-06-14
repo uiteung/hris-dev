@@ -187,3 +187,25 @@ function updateData() {
 
 // Add an event listener or a button to trigger the updateData function
 document.getElementById("updateButton").addEventListener("click", updateData);
+
+const semesterSelect = document.getElementById("semester");
+const currentYear = new Date().getFullYear();
+const options = [];
+
+for (let i = 0; i < 3; i++) {
+  const year = currentYear + i;
+  const prevYear = year - 1;
+  const nextYear = year + 1;
+
+  // Membuat option untuk semester genap
+  options.push(
+    `<option value="Genap ${prevYear}/${year}">Semester Genap ${prevYear} / ${year}</option>`
+  );
+
+  // Membuat option untuk semester ganjil
+  options.push(
+    `<option value="Ganjil ${year}/${nextYear}">Semester Ganjil ${year} / ${nextYear}</option>`
+  );
+}
+
+semesterSelect.innerHTML = options.join("");
