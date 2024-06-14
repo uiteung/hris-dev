@@ -126,7 +126,7 @@ function updateData() {
 
     phone_number: phoneNumber,
     mata_kuliah: mataKuliah,
-    semester: semester,
+    periode_semester: semester,
   };
 
   if (!id) {
