@@ -178,6 +178,7 @@ function createRow(item) {
             <td>${item.persentase_pph.toLocaleString()}</td>
 
       <td>Rp${item.jumlah_dibayar}</td>
+      <td>${item.periode_semester}</td>
       <td>
         <button class="btn btn-primary btn-sm edit-btn" data-id="${
           item._id
