@@ -50,6 +50,7 @@ function groupCoursesByInstructor(data) {
         jabatan: row["Jabatan"],
         phone_number: row["Phone Number"],
         persentase_pph: parseFloat(row["Persentase PPH"]),
+        periode_semester: row["Periode Semester"],
 
         mata_kuliah: [],
       };
@@ -112,6 +113,7 @@ function downloadExcelTemplate() {
       "Kelas",
       "Maks KJM",
       "Persentase PPH",
+      "Periode Semester",
     ],
   ];
 
