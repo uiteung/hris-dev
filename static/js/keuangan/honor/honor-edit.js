@@ -47,28 +47,28 @@ function addCourse(course) {
         <h5>Detail Matakuliah</h5>
         <label for="nama_matkul" class="form-label">Nama Mata Kuliah:</label>
         <input type="text" class="form-control" name="nama_matkul[]" value="${course.nama_matkul}">
-
-        <label for="jurusan" class="form-label">Jurusan:</label>
+        <br>
+        <label for="jurusan" class="form-label">Program Studi:</label>
         <input type="text" class="form-control" name="jurusan[]" value="${course.jurusan}">
-
+        <br>
         <label for="kelas" class="form-label">Kelas:</label>
         <input type="text" class="form-control" name="kelas[]" value="${course.kelas}">
-
+         <br>
         <label for="jam" class="form-label">Jam:</label>
         <input type="number" step="0.1" class="form-control" name="jam[]" value="${course.jam}">
-
+         <br>        
         <label for="maks_kjm" class="form-label">Maks KJM:</label>
         <input type="number" step="0.1" class="form-control" name="maks_kjm[]" value="${course.maks_kjm}">
-
+         <br>
         <label for="jumlah_kelas" class="form-label">Jumlah Kelas:</label>
         <input type="text" class="form-control" name="jumlah_kelas[]" value="${course.jumlah_kelas}">
-
+         <br>
         <label for="jumlah_temu" class="form-label">Jumlah Temu:</label>
         <input type="number" step="0.1" class="form-control" name="jumlah_temu[]" value="${course.jumlah_temu}">
-
+         <br>
         <label for="jam_dibayar" class="form-label">Jam Dibayar:</label>
         <input type="number" step="0.01" class="form-control" name="jam_dibayar[]" value="${course.jam_dibayar}">
-
+         <br>
         <label for="honor_ajar" class="form-label">Honor Ajar:</label>
         <input type="number" class="form-control" name="honor_ajar[]" value="${course.honor_ajar}">
         <br>
