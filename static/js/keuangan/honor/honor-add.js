@@ -96,12 +96,12 @@ for (let i = 0; i < 3; i++) {
 
   // Membuat option untuk semester genap
   options.push(
-    `<option value="Genap ${prevYear}/${year}">Semester Genap ${prevYear} / ${year}</option>`
+    `<option value="Semester Genap ${prevYear}/${year}">Semester Genap ${prevYear} / ${year}</option>`
   );
 
   // Membuat option untuk semester ganjil
   options.push(
-    `<option value="Ganjil ${year}/${nextYear}">Semester Ganjil ${year} / ${nextYear}</option>`
+    `<option value="Semester Ganjil ${year}/${nextYear}">Semester Ganjil ${year} / ${nextYear}</option>`
   );
 }
 
