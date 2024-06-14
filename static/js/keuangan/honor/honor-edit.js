@@ -25,7 +25,7 @@ function fetchDataById(id) {
 
 function populateForm(data) {
   document.getElementById("name").value = data.nama_pengajar;
-  document.getElementById("phoneNumber").value = data.phone_number;
+  document.getElementById("phone_number").value = data.phone_number;
   document.getElementById("jabatan").value = data.jabatan;
   document.getElementById("persentase_pph").value = data.persentase_pph;
   // document.getElementById("total_honor").value = data.total_honor;
