@@ -160,7 +160,7 @@ function createRow(item) {
           <thead>
             <tr>
               <th >Nama Matkul</th>
-              <th>Jurusan</th>
+              <th>Program Studi</th>
               <th>Kelas</th>
               <th>Jam</th>
               <th>Maks KJM</th>
