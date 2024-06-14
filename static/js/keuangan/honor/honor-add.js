@@ -32,7 +32,7 @@ function postData() {
     mata_kuliah: mata_kuliah,
     jabatan: jabatan,
     persentase_pph: parseFloat(persentase_pph),
-    semester: semester,
+    periode_semester: semester,
   };
 
   const options = {
