@@ -355,9 +355,13 @@
                                               <input type="text" class="form-control" id="persentase_pph" name="persentase_pph" autocomplete="off" required>
                                             </div>
                                             <div class="mb-3">
-                                              <label for="name" class="form-label">Semester:</label>
-                                              <input type="text" class="form-control" id="semester" name="semester" autocomplete="off" required>
+                                              <label for="semester" class="form-label">Semester:</label>
+                                              <select class="form-control" id="semester" name="semester" required>
+                                                <option value="Genap 2023/2024">Semester Genap 2023 / 2024</option>
+                                                <option value="Ganjil 2024/2025">Semester Ganjil 2024 / 2025</option>
+                                              </select>
                                             </div>
+                                            
                                             
                                             <!-- Submit Button -->
                                             <button type="button" id="updateButton" class="btn btn-primary">Submit</button>
