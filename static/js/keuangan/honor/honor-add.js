@@ -8,6 +8,7 @@ function postData() {
   const phone_number = document.getElementById("phoneNumber").value;
   const jabatan = document.getElementById("jabatan").value;
   const persentase_pph = document.getElementById("persentase_pph").value;
+  const semester = document.getElementById("semester").value;
 
   const mata_kuliah = Array.from(
     document.getElementsByClassName("courseItem")
@@ -31,6 +32,7 @@ function postData() {
     mata_kuliah: mata_kuliah,
     jabatan: jabatan,
     persentase_pph: parseFloat(persentase_pph),
+    semester: semester,
   };
 
   const options = {
