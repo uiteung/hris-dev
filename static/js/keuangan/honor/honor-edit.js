@@ -94,6 +94,7 @@ function updateData() {
   const jabatan = document.getElementById("jabatan").value;
   const phoneNumber = document.getElementById("phoneNumber").value;
   const persentase_pph = document.getElementById("persentase_pph").value;
+  const semester = document.getElementById("semester").value;
 
   const mataKuliahElements = document.querySelectorAll(".courseItem");
   const mataKuliah = Array.from(mataKuliahElements).map((courseElement) => ({
@@ -125,6 +126,7 @@ function updateData() {
 
     phone_number: phoneNumber,
     mata_kuliah: mataKuliah,
+    semester: semester,
   };
 
   if (!id) {
