@@ -185,6 +185,7 @@ function createRow(item) {
         }" onclick="editItem(this)">
           <i class="mdi mdi-table-edit"></i> 
         </button>
+        
         <button class="btn btn-danger btn-sm delete-btn" data-id="${
           item._id
         }" onclick="deleteItem(this)">
@@ -193,11 +194,58 @@ function createRow(item) {
       </td>  
     </tr>`;
 }
+//button untuk printout
+// <button class="btn btn-info btn-sm edit-btn" data-id="${
+//           item.id
+//         }" data-email="${item.email}" onclick="printoutitem(this)">
+//             <i class="mdi mdi-cloud-print-outline"></i>
+//         </button>
 
 window.editItem = function (element) {
   const id = element.getAttribute("data-id");
   localStorage.setItem("editingId", id);
   window.location.href = "honor-edit.html";
+};
+window.printoutitem = function (element) {
+  const phone_number = element.getAttribute("data-phone_number");
+
+  // Get the current date and calculate the previous month
+  const now = new Date();
+  const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const year = lastMonth.getFullYear();
+  const month = (lastMonth.getMonth() + 1).toString().padStart(2, "0");
+  const yearMonth = `${year}${month}`;
+
+  // Construct the URL for the GET request
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/pdf?phone=&waktu=`;
+
+  fetch(url, {
+    method: "GET",
+    headers: {
+      login: `${token}`,
+      Accept: "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok: " + response.statusText);
+      }
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `SlipHonour_${yearMonth}_${phone_number}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    })
+    .catch((error) => {
+      console.error("Error fetching PDF:", error);
+      Swal.fire("Error", "Failed to fetch PDF: " + error.message, "error");
+    });
 };
 
 function updatePaginationButtons(data) {
