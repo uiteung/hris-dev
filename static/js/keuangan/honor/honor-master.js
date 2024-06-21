@@ -173,11 +173,11 @@ function createRow(item) {
           <tbody>${mataKuliahHtml}</tbody>
         </table>
       </td>
-      <td>Rp${item.total_honor.toLocaleString()}</td>
-      <td>Rp${item.pph.toLocaleString()}</td>
+      <td>${item.total_honor.toLocaleString()}</td>
+      <td>${item.pph.toLocaleString()}</td>
             <td>${item.persentase_pph.toLocaleString()}</td>
 
-      <td>Rp${item.jumlah_dibayar}</td>
+      <td>${item.jumlah_dibayar}</td>
       <td>${item.periode_semester}</td>
       <td>
         <button class="btn btn-primary btn-sm edit-btn" data-id="${
