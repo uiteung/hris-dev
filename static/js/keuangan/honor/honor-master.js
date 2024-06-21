@@ -248,6 +248,26 @@ window.printoutitem = function (element) {
     });
 };
 
+document.addEventListener("DOMContentLoaded", () => {
+  const generateButton = document.getElementById("generateHonorButton");
+  generateButton.addEventListener("click", () => {
+    Swal.fire({
+      title: "Sebelum Anda Menggenerate Honor Pastikan Kembali",
+      text: "Apakah Mata Master Sudah Valid?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, generate!",
+      cancelButtonText: "Batal",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        generateHonor();
+      }
+    });
+  });
+});
+
 function updatePaginationButtons(data) {
   document.getElementById(
     "currentPage"
@@ -346,5 +366,43 @@ function sendDeleteRequest(id) {
     .catch((error) => {
       console.error("Error:", error);
       Swal.fire("Error", "Kesalahan: " + error.message, "error");
+    });
+}
+
+function generateHonor() {
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/generate";
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      login: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({}),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        Swal.fire({
+          title: "Success",
+          text: "Honor berhasil digenerate!",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.value) {
+            window.location.reload(true);
+          }
+        });
+      } else {
+        Swal.fire(
+          "Failed",
+          "Gagal menggenerate Honor: " + data.message,
+          "error"
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      Swal.fire("Error", "Error: " + error.message, "error");
     });
 }
