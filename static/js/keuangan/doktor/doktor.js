@@ -378,3 +378,17 @@ function sendDeleteRequest(email) {
       Swal.fire("Error", "Kesalahan: " + error.message, "error");
     });
 }
+
+document.getElementById("exportButton").addEventListener("click", function () {
+    downloadExcel();
+});
+
+function downloadExcel() {
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/rpt/honor/tunjangandoktor ";
+  const link = document.createElement("a");
+  link.href = url;
+  link.setAttribute("download", "");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
