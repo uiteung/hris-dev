@@ -152,31 +152,14 @@ function createRow(item) {
 
   return `<tr>
 
-  <td class="name-email-cell">${item.nama} <br>${item.email}</td>
+  <td class="name-email-cell">${item.nama}</td>
 
-        <td>${gajipokok}</td>
-        <td>${item.keluarga}</td>
-        <td>${item.pangan}</td>
-        <td>${item.kinerja}</td>
-        <td>${item.keahlian}</td>
-        <td>${struk}</td>
-        <td>${item.transportasi}</td>
-        <td>${item.kehadiran}</td>
-        <td>${item.rapel_gaji}</td>
-
-        <td>${item.kopkar}</td>
-        <td>${item.bankJabar}</td>
-        <td>${item.arisan}</td>
-        <td>${item.bpjs}</td>
-        <td>${item.bauk}</td>
-        <td>${item.lain2}</td>
-        <td>${item.pph}</td> 
-        <td>${item.totalgaji}</td>        
-        <td>${item.totalgajibersih}</td>        
-        <td>${item.totalpotongan}</td>        
-         
-
-        
+        <td>${item.namamatkul}</td>
+        <td>${item.kelas}</td>
+        <td>${item.jurusan}</td>
+        <td>${item['jumlah-temu']}</td>
+        <td>${item['honor-ajar']}</td>
+        <td>${item.pph}</td>
     </tr>`;
 }
 
