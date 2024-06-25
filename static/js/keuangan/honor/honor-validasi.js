@@ -1,5 +1,5 @@
-import { getLastMonth } from "../controller/control.js";
-import { token } from "../controller/cookies.js";
+import { getLastMonth } from "../../controller/control.js";
+import { token } from "../../controller/cookies.js";
 
 let allData = []; // Holds the current page data for filtering
 let currentPage = 1; // Start from the first page
@@ -41,9 +41,9 @@ function setupEventListeners() {
       searchFromInput();
     }
   });
-  document
-    .getElementById("filterKelompok")
-    .addEventListener("change", filterTableByKelompok);
+  // document
+  //   .getElementById("filterKelompok")
+  //   .addEventListener("change", filterTableByKelompok);
 }
 
 function searchFromInput() {
@@ -258,6 +258,6 @@ function generateExcel(data) {
   XLSX.writeFile(wb, "HRIS_Data_Export.xlsx");
 }
 
-document
-  .getElementById("exportButton")
-  .addEventListener("click", exportToExcel);
+// document
+//   .getElementById("exportButton")
+//   .addEventListener("click", exportToExcel);
