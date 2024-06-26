@@ -31,6 +31,7 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/feather-icons"></script>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
@@ -42,7 +43,7 @@
       rel="shortcut icon"
       href="../../static/img/enam_berlian-removebg-preview.png"
     />
-    <title>Validasi data | ULBI</title>
+    <title>Master data | ULBI</title>
 
     <!-- Import CSS yang diperlukan -->
     <link href="../../static/css/app.css" rel="stylesheet" />
@@ -52,19 +53,11 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
-    <style>
-      .table-container table th,
-      .table-container table td {
-        text-align: center;
-        vertical-align: middle;
-        width: 150px; /* Atur lebar setiap kolom, atau gunakan % untuk responsif */
-      }
-      .table-container table th {
-        background-color: #f4f4f4; /* Warna latar untuk header tabel */
-      }
-      .table-fixed {
-        table-layout: fixed;
-        width: 100%; /* Sesuaikan kebutuhan */
+    <!-- <style>
+      .table-container-nopages table th,
+      .table-container-nopages table th {
+        background-color: #495057;
+        color: white;
       }
 
       .table-fixed th,
@@ -72,7 +65,108 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        padding: 10px;
       }
+      .table-container-nopages th,
+      .table-container-nopages td {
+        padding: 10px;
+        width: 150px;
+        text-align: left;
+        vertical-align: middle;
+      }
+      .table-container-nopages {
+        overflow-x: auto;
+      }
+
+      .name-email-header,
+      .name-email-cell {
+        white-space: normal;
+        text-align: left;
+        vertical-align: top;
+        font-size: 12px;
+      }
+      .name-email-cell {
+        overflow-x: auto;
+      }
+      .name-email-cell {
+        white-space: normal;
+      }
+      #selecttag .form-control,
+      #selecttag button {
+        margin-bottom: 0.5rem; /* Ensures spacing on smaller screens */
+      }
+
+      @media (max-width: 768px) {
+        #exportButton {
+          margin-top: 0.5rem; /* Adds space above the export button on small screens */
+        }
+      }
+    </style> -->
+    <style>
+   .table-fixed {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-fixed th, .table-fixed td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.table-fixed thead th {
+  color: black;
+}
+
+.nested-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+}
+
+.nested-table th, .nested-table td {
+  padding: 5px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.nested-table th {
+  background-color: #f1f1f1;
+}
+
+.btn {
+  display: inline-block; /* Pastikan tombol berdampingan secara horizontal */
+  margin-right: 10px; /* Memberikan sedikit ruang antar tombol */
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+.mdi {
+  margin-right: 4px;
+}
+
+
+
     </style>
   </head>
 
@@ -192,7 +286,6 @@
               </a>
               </li>
               </li>
-              </li>
               <li class="sidebar-item">
               <a class="sidebar-link" href="https://euis.ulbi.ac.id/hris-dev/app/honor/honor-validasi.html">
                   <i class="align-middle" data-feather="check"></i>
@@ -205,6 +298,8 @@
                   <span class="align-middle">History Slip Honor Ajar</span>
               </a>
               </li>
+
+           
           </ul>
 
           <div class="sidebar-cta">
@@ -231,48 +326,48 @@
 
       <div class="main">
         <!-- Header Start -->
-<nav class="navbar navbar-expand navbar-light navbar-bg">
-    <a class="sidebar-toggle js-sidebar-toggle" style="margin-left: 30px">
-      <i class="hamburger align-self-center"></i>
-    </a>
-
-    <div class="navbar-collapse collapse">
-      <ul class="navbar-nav navbar-align">
-        <li class="nav-item dropdown">
-          <a
-            class="nav-icon dropdown-toggle d-inline-block d-sm-none"
-            href="#"
-            data-bs-toggle="dropdown">
-            <i class="align-middle" data-feather="settings"></i>
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+          <a class="sidebar-toggle js-sidebar-toggle" style="margin-left: 30px">
+            <i class="hamburger align-self-center"></i>
           </a>
-
-          <a
-            class="nav-link dropdown-toggle d-none d-sm-inline-block"
-            href="#"
-            data-bs-toggle="dropdown">
-            <img
-              src="../../static/img/avatars/admin.png"
-              class="avatar img-fluid rounded me-1" />
-            <span class="text-dark">Admin</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-end">
-            <a class="dropdown-item" href="https://euis.ulbi.ac.id"
-              >Log out</a
-            >
+      
+          <div class="navbar-collapse collapse">
+            <ul class="navbar-nav navbar-align">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-icon dropdown-toggle d-inline-block d-sm-none"
+                  href="#"
+                  data-bs-toggle="dropdown">
+                  <i class="align-middle" data-feather="settings"></i>
+                </a>
+      
+                <a
+                  class="nav-link dropdown-toggle d-none d-sm-inline-block"
+                  href="#"
+                  data-bs-toggle="dropdown">
+                  <img
+                    src="../../static/img/avatars/admin.png"
+                    class="avatar img-fluid rounded me-1" />
+                  <span class="text-dark">Admin</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <a class="dropdown-item" href="https://euis.ulbi.ac.id"
+                    >Log out</a
+                  >
+                </div>
+              </li>
+            </ul>
           </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
+        </nav>
         <!-- Header End -->
 
         <!-- Main Content Start -->
         <main class="content">
           <div class="container-fluid p-0">
             <h5 class="right-aligned" style="float: right">
-              <a href="index.html">Home</a> / Detail Potongan
+              <a href="index.html">Home</a> / Dashboard Histori Data Honor
             </h5>
-            <h1 class="h3 mb-3"><b>Detail Potongan</b></h1>
+            <h1 class="h3 mb-3"><b>Dashboard Histori Data Honor</b></h1>
             <div class="col-md-6 mb-3">
               <input
                 type="hidden"
@@ -287,78 +382,101 @@
               />
             </div>
             <div class="row justify-content-center">
-              <div class="col-md-12">
+              <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Form Perbarui Data Potongan</h4>
-                  </div>
-                  <div class="card-body">
-                    <form id="editForm">
-                      <!-- Name Field -->
+                    <div class="row align-items-center">
+                      <!-- Ensures vertical alignment in the middle -->
+                      <!-- Filter Dropdown -->
+                       <div class="col-md-4">
+                        <select id="filterKelompok" class="form-control">
+                         <!-- <option value="">Pilih Kelompok</option>
+                          <option value="Struktural">Struktural</option>
+                          <option value="Dosen Kontrak">Dosen Kontrak</option>
+                          <option value="Dosen Tetap">Dosen Tetap</option>
+                          <option value="Staff ADM">Staff ADM</option>
+                          <option value="Tenaga Lepas">
+                            Tenaga Lepas (TLH)
+                          </option>
+                          <option value="TKK">
+                            Tenaga Kerja Kontrak (TKK)
+                          </option> -->
+                        </select>
+                      </div>
 
-                      <!-- PPH Deduction -->
-                      <div class="mb-3">
-                        <label for="nama" class="form-label">Nama :</label>
-                        <input class="form-control" id="nama" name="nama" />
-                      </div>
-                      <div class="mb-3">
-                        <label for="email" class="form-label">Email :</label>
-                        <input class="form-control" id="email" name="email" />
-                      </div>
-                      <div class="mb-3">
-                        <label for="kopkar" class="form-label">Kopkar :</label>
-                        <input class="form-control" id="kopkar" name="kopkar" />
-                      </div>
-                      <div class="mb-3">
-                        <label for="Bank Jabar" class="form-label"
-                          >Bank Jabar :</label
-                        >
+                      <!-- Search Input and Button -->
+                      <div class="col-md-4 d-flex">
                         <input
-                          class="form-control"
-                          id="bankjabar"
-                          name="Bank Jabar"
+                          type="text"
+                          placeholder="Search.."
+                          id="searchinput"
+                          class="form-control mr-2"
                         />
+                        <button class="btn btn-primary">Search</button>
                       </div>
-                      <div class="mb-3">
-                        <label for="bauk" class="form-label">Bauk :</label>
-                        <input class="form-control" id="bauk" name="bauk" />
-                      </div>
-                      <div class="mb-3">
-                        <label for="bjpstk" class="form-label">BPJSTK :</label>
-                        <input class="form-control" id="bpjstk" name="bjpstk" />
-                      </div>
-                      <div class="mb-3">
-                        <label for="pph" class="form-label">PPH :</label>
-                        <input class="form-control" id="pph" name="pph" />
-                      </div>
-                      <div class="mb-3">
-                        <label for="Lain-Lain 2" class="form-label"
-                          >Lain-Lain 2 :</label
-                        >
-                        <input
-                          class="form-control"
-                          id="lainlain2"
-                          name="lainlain2"
-                        />
-                      </div>
-                      <div class="mb-3">
-                        <label for="Lain-Lain 3" class="form-label"
-                          >Lain-Lain 3 :</label
-                        >
-                        <input
-                          class="form-control"
-                          id="lainlain3"
-                          name="lainlain3"
-                        />
-                      </div>
-                      <button
-                        id="updatebutton"
-                        type="submit"
-                        class="btn btn-primary"
+
+                      <!-- Export Button -->
+                      <!-- <div
+                        class="col-md-4 d-flex justify-content-end align-items-center"
                       >
-                        Submit
-                      </button>
-                    </form>
+                      <button
+                      type="button"
+                      id="generateHonorButton"
+                      class="btn btn-success mr-2"
+                    >
+                      Generate Honor
+                    </button>
+                        <button
+                          type="button"
+                          id="generateButton"
+                          class="btn btn-info mr-2"
+                          onclick="window.location.href='honor-add.html'"
+                        >
+                          Tambah Data Honor
+                        </button>
+                        <button
+                          type="button"
+                          id="exportButton"
+                          class="btn btn-success"
+                        >
+                          Export to Excel
+                        </button>
+                      </div> -->
+                    </div>
+                    <br />
+                    <!-- <hr /> -->
+                    <div class="table-container-nopages">
+                      <table id="example" class="table table-fixed">
+                          <thead>
+                              <tr>
+                                  <th style="background-color: #495057; color: white;" >Nama Pengajar</th>
+                                  <th style="background-color: #495057; color: white;">Nama Matakuliah</th>
+                                  <th style="background-color: #495057; color: white;">Kelas</th>
+                                  <th style="background-color: #495057; color: white;">Jurusan</th>
+                                  <th style="background-color: #495057; color: white;">Jumlah Temu</th>
+                                  <th style="background-color: #495057; color: white;">Honor Ajar</th>
+                                  <th style="background-color: #495057; color: white;">PPH</th>
+                              </tr>
+                          </thead>
+                          <tbody id="tablebody">
+                              <!-- JavaScript akan mengisi baris tabel di sini -->
+                          </tbody>
+                      </table>
+                  </div>
+                  <br/>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="pagination">
+                              <button id="prevPageBtn" class="btn btn-primary">
+                                  Sebelumnya
+                              </button>
+                              <span id="currentPage" class="mx-2">Page 1</span>
+                              <button id="nextPageBtn" class="btn btn-primary">
+                                  Selanjutnya
+                              </button>
+                          </div>
+                      </div>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -369,17 +487,17 @@
         <!-- Main Content End -->
 
         <!-- Footer Start -->
-<footer class="footer">
-    <div class="container-fluid">
-      <div class="row text-muted">
-        <div class="col-6 text-start">
-          <p class="mb-0">
-            <a class="text-muted"><strong>DTI ULBI</strong></a> &copy;
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row text-muted">
+              <div class="col-6 text-start">
+                <p class="mb-0">
+                  <a class="text-muted"><strong>DTI ULBI</strong></a> &copy;
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
         <!-- Footer End -->
       </div>
     </div>
@@ -393,26 +511,34 @@
       type="text/javascript"
       src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
     <!-- Library Untuk Export to Pdf -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
     <!-- <script src="https://unpkg.com/jspdf-invoice"></script> -->
-    <!-- Include DataTables -->
-    <script
-      src="../../static/js/keuangan/potongan/potongan-edit.js"
-      type="module"
-    ></script>
+    <link
+      href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
     <!-- Library Javascript Terkait -->
     <script src="https://cdn.jsdelivr.net/gh/PMBULBI/javascript-fe@0.0.7/jquery-3.6.0.min.js"></script>
+    <script
+      src="../../static/js/keuangan/honor/honor-histori.js"
+      type="module"
+    ></script>
+    <!-- <script src="../../static/js/controller/filter.js" type="module"></script> -->
+    <!-- <script src="../../static/js/controller/search.js" type="module"></script> -->
 
     <!-- <script src="static/js/presensi/cihuyred.js" type="module"></script> -->
     <script src="../../static/js/style/style.js" defer></script>
-    <script src="../../static/js/style/table-sorting.js"></script>
+    <!-- <script src="../../static/js/style/table-sorting.js"></script> -->
     <script src="../../static/js/app.js"></script>
-        <!-- <script src="../../static/js/controller/sidebar.js" type="module"></script> -->
+    <!--      <script src="../../static/js/controller/sidebar.js" type="module"></script> --> 
     <!-- <script src="../../static/js/controller/header.js" type="module"></script>
-    <script src="../../static/js/controller/footer.js" type="module"></script>
-    <!-- <script src="../../static/js/controller/croot.js" type="module"></script> -->
+    <script src="../../static/js/controller/footer.js" type="module"></script>-->
+    <script src="../../static/js/controller/croot.js" type="module"></script> 
   </body>
 </html>

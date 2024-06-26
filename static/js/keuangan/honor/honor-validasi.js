@@ -1,34 +1,20 @@
-import { getLastMonth } from "../controller/control.js";
-import { token } from "../controller/cookies.js";
+import { getLastMonth } from "../../controller/control.js";
+import { token } from "../../controller/cookies.js";
 
 let allData = []; // Holds the current page data for filtering
 let currentPage = 1; // Start from the first page
-const baseUrlsearch = "https://hris_backend.ulbi.ac.id/api/v2/rkp/";
-// const baseUrl =
-//   "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/" + getLastMonth();
-const baseUrl = "https://hris_backend.ulbi.ac.id/api/v2/rkp/histori";
+const baseUrlsearch =
+  "https://hris_backend.ulbi.ac.id/api/v2/rkp/" + getLastMonth();
+const baseUrl =
+  "https://hris_backend.ulbi.ac.id/api/v2/rkp/rawhonor/" + getLastMonth();
+
 // export let GetDataValidasi = "https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/";
 let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
   fetchDataFromHRIS(currentPage);
-  populateDropdownWithMonths();
 });
-function populateDropdownWithMonths() {
-  const dropdown = document.getElementById("filterKelompok");
-  const currentYear = new Date().getFullYear(); // Get the current year
-  dropdown.innerHTML = '<option value="">Silahkan Pilih Bulan</option>'; // Reset dropdown
 
-  // Create an option for each month of the current year
-  for (let month = 1; month <= 12; month++) {
-    const monthValue = month.toString().padStart(2, "0"); // Ensure the month is two digits
-    const optionValue = `${currentYear}${monthValue}`; // Format: YYYYMM
-    const option = document.createElement("option");
-    option.value = optionValue;
-    option.textContent = `${currentYear}-${monthValue}`; // Display as YYYY-MM
-    dropdown.appendChild(option);
-  }
-}
 function setupEventListeners() {
   document.getElementById("prevPageBtn").addEventListener("click", () => {
     if (currentPage > 1) {
@@ -55,31 +41,30 @@ function setupEventListeners() {
       searchFromInput();
     }
   });
-  document
-    .getElementById("filterKelompok")
-    .addEventListener("change", filterTableByKelompok);
+  // document
+  //   .getElementById("filterKelompok")
+  //   .addEventListener("change", filterTableByKelompok);
 }
+
 function searchFromInput() {
   const searchInput = document
     .getElementById("searchinput")
     .value.trim()
     .replace(/\s+/g, "_");
-  const waktu = document.getElementById("filterKelompok").value;
-
   if (searchInput) {
-    fetchDataFromSearch(searchInput, waktu);
+    fetchDataFromSearch(searchInput);
   } else {
-    // Jika input pencarian kosong, kembali ke dataset awal
-    fetchDataFromHRIS(1); // Asumsi ingin reset ke halaman pertama
+    // If search input is empty, fetch the initial dataset
+    fetchDataFromHRIS(1); // Assuming you want to reset to the first page
   }
 }
-function fetchDataFromSearch(searchKey, waktu) {
-  let url;
-  if (waktu) {
-    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?waktu=${waktu}&key=${searchKey}`;
-  } else {
-    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?key=${searchKey}`;
-  }
+
+function fetchDataFromSearch(searchKey) {
+  const url =
+    "https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/honor/search?waktu=" +
+    getLastMonth() +
+    "?key=" +
+    searchKey;
 
   fetch(url, {
     method: "POST",
@@ -110,13 +95,13 @@ function fetchDataFromSearch(searchKey, waktu) {
       handlingErrorSearch();
     });
 }
+
 function fetchDataFromHRIS(page) {
   let url = `${baseUrl}?page=${page}`;
   if (currentKelompok) {
-    // url =
-    //   `https://hris_backend.ulbi.ac.id/api/v2/rkp/filter/${currentKelompok}?waktu ` +
-    //   getLastMonth();
-    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/${currentKelompok}?page=${page}`;
+    url =
+      `https://hris_backend.ulbi.ac.id/api/v2/rkp/filter/${currentKelompok}?waktu ` +
+      getLastMonth();
   }
 
   fetch(url, {
@@ -167,31 +152,14 @@ function createRow(item) {
 
   return `<tr>
 
-  <td class="name-email-cell">${item.nama} <br>${item.email}</td>
+  <td class="name-email-cell">${item.nama}</td>
 
-        <td>${gajipokok}</td>
-        <td>${item.keluarga}</td>
-        <td>${item.pangan}</td>
-        <td>${item.kinerja}</td>
-        <td>${item.keahlian}</td>
-        <td>${struk}</td>
-        <td>${item.transportasi}</td>
-        <td>${item.kehadiran}</td>
-        <td>${item.rapel_gaji}</td>
-
-        <td>${item.kopkar}</td>
-        <td>${item.bankJabar}</td>
-        <td>${item.arisan}</td>
-        <td>${item.bpjs}</td>
-        <td>${item.bauk}</td>
-        <td>${item.lain2}</td>
-        <td>${item.pph}</td> 
-        <td>${item.totalgaji}</td>        
-        <td>${item.totalgajibersih}</td>        
-        <td>${item.totalpotongan}</td>        
-         
-
-        
+        <td>${item.namamatkul}</td>
+        <td>${item.kelas}</td>
+        <td>${item.jurusan}</td>
+        <td>${item['jumlah-temu']}</td>
+        <td>${item['honor-ajar']}</td>
+        <td>${item.pph}</td>
     </tr>`;
 }
 

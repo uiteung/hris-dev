@@ -146,7 +146,7 @@ function createRow(item) {
         <td>${mk.jumlah_kelas}</td>
         <td>${mk.jumlah_temu.toFixed(1)}</td>
         <td>${mk.jam_dibayar}</td>
-        <td>Rp${mk.honor_ajar.toLocaleString()}</td>
+        <td>${mk.honor_ajar.toLocaleString()}</td>
       </tr>
     `
     )
@@ -248,6 +248,46 @@ window.printoutitem = function (element) {
     });
 };
 
+document.addEventListener("DOMContentLoaded", () => {
+  const generateButton = document.getElementById("generateHonorButton");
+  generateButton.addEventListener("click", () => {
+    Swal.fire({
+      title: "Sebelum Anda Menggenerate Honor Pastikan Kembali",
+      text: "Apakah Mata Master Sudah Valid?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, generate!",
+      cancelButtonText: "Batal",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        generateHonor();
+      }
+    });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const generateButton = document.getElementById("deleteButton");
+  generateButton.addEventListener("click", () => {
+    Swal.fire({
+      title: "Sebelum Anda Menghapus Honor Pastikan Kembali",
+      text: "Apakah Anda Yakin Ingin Menghapus Semuanya?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, hapus!",
+      cancelButtonText: "Batal",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        DeleteHonor();
+      }
+    });
+  });
+});
+
 function updatePaginationButtons(data) {
   document.getElementById(
     "currentPage"
@@ -346,5 +386,80 @@ function sendDeleteRequest(id) {
     .catch((error) => {
       console.error("Error:", error);
       Swal.fire("Error", "Kesalahan: " + error.message, "error");
+    });
+}
+
+function generateHonor() {
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/generate";
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      login: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({}),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        Swal.fire({
+          title: "Success",
+          text: "Honor berhasil digenerate!",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.value) {
+            window.location.reload(true);
+          }
+        });
+      } else {
+        Swal.fire(
+          "Failed",
+          "Gagal menggenerate Honor: " + data.message,
+          "error"
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      Swal.fire("Error", "Error: " + error.message, "error");
+    });
+}
+
+function DeleteHonor() {
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/deleteall";
+
+  fetch(url, {
+    method: "DELETE",
+    headers: {
+      login: token,
+      "Content-Type": "application/json",
+    }
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        Swal.fire({
+          title: "success",
+          text: "Honor berhasil Dihapus!",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.value) {
+            window.location.reload(true);
+          }
+        });
+      } else {
+        Swal.fire(
+          "Failed",
+          "Gagal menghapus Honor: " + data.message,
+          "error"
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      Swal.fire("Error", "Error: " + error.message, "error");
     });
 }

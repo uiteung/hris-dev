@@ -5,7 +5,7 @@ function postData() {
     "https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/insert";
 
   const nama_pengajar = document.getElementById("name").value;
-  const phone_number = document.getElementById("phoneNumber").value;
+  const phone_number = document.getElementById("phone_number").value;
   const jabatan = document.getElementById("jabatan").value;
   const persentase_pph = document.getElementById("persentase_pph").value;
   const semester = document.getElementById("semester").value;
