@@ -275,7 +275,9 @@ function updateUserData() {
     pangan: parseFloat(document.getElementById("foodAllowance").value),
     kinerja: parseFloat(document.getElementById("performanceAllowance").value),
     keahlian: parseFloat(document.getElementById("expertiseAllowance").value),
-    fgs_struk: parseFloat(document.getElementById("structuralAllowance").value),
+    ["fgs-struk"]: parseFloat(
+      document.getElementById("structuralAllowance").value
+    ),
     transportasi: parseFloat(
       document.getElementById("transportationAllowance").value
     ),
