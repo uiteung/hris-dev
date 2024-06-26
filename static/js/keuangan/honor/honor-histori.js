@@ -75,12 +75,13 @@ function searchFromInput() {
   }
 }
 
-function fetchDataFromSearch(searchKey) {
-  const url =
-    "https://hris_backend.ulbi.ac.id/api/v2/rkp/search/" +
-    getLastMonth() +
-    "?key=" +
-    searchKey;
+function fetchDataFromSearch(searchKey, waktu) {
+  let url;
+  if (waktu) {
+    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/honor/search?waktu=${waktu}&key=${searchKey}`;
+  } else {
+    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/honor/search?key=${searchKey}`;
+  }
 
   fetch(url, {
     method: "POST",
