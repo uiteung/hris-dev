@@ -61,7 +61,7 @@ function searchFromInput() {
 
 function fetchDataFromSearch(searchKey) {
   const url =
-    "https://hris_backend.ulbi.ac.id/api/v2/rkp/search/" +
+    "https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/honor/search?waktu=" +
     getLastMonth() +
     "?key=" +
     searchKey;
