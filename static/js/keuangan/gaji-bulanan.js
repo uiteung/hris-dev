@@ -116,7 +116,7 @@ function fetchDataFromHRIS(page) {
     // url =
     //   `https://hris_backend.ulbi.ac.id/api/v2/rkp/filter/${currentKelompok}?waktu ` +
     //   getLastMonth();
-    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/${currentKelompok}`;
+    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/${currentKelompok}?page=${page}`;
   }
 
   fetch(url, {
