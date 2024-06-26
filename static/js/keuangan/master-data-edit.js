@@ -214,27 +214,103 @@ function populateKelompokDropdown(kelompokData, userKelompok) {
   });
 }
 
+function formatRupiah(number) {
+  const format = number.toLocaleString("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  });
+  return format;
+}
+function formatAsRupiah(input) {
+  let value = input.value;
+  // Remove all characters except digits and comma
+  value = value.replace(/[^0-9]/g, "");
+  // Convert string to an integer
+  let number = parseInt(value, 10);
+  if (isNaN(number)) {
+    number = 0;
+  }
+  // Format the number with Indonesian locale to add thousand separators
+  value = number.toLocaleString("id-ID");
+  // Prepend 'Rp' and a space to denote Rupiah
+  input.value = `Rp ${value}`;
+}
+
+// Attach event listeners to the input fields
+document.addEventListener("DOMContentLoaded", function () {
+  const currencyFields = [
+    "basicSalary",
+    "familyAllowance",
+    "foodAllowance",
+    "performanceAllowance",
+    "expertiseAllowance",
+    "structuralAllowance",
+    "transportationAllowance",
+    "attendanceAllowance",
+    "kopkarDeduction",
+    "bankJabarDeduction",
+    "arisanDeduction",
+    "bpjsDeduction",
+    "baukDeduction",
+    "otherDeductions",
+    "pphDeduction",
+  ];
+  currencyFields.forEach((fieldId) => {
+    const inputField = document.getElementById(fieldId);
+    inputField.addEventListener("input", () => formatAsRupiah(inputField));
+  });
+});
 function populateForm(userData) {
   document.getElementById("name").value = userData.nama || "";
   document.getElementById("email").value = userData.email || "";
   document.getElementById("rank").value = userData.pangkat || "";
   document.getElementById("position").value = userData.jabatan || "";
-  document.getElementById("basicSalary").value = userData.pokok;
-  document.getElementById("familyAllowance").value = userData.keluarga;
-  document.getElementById("foodAllowance").value = userData.pangan;
-  document.getElementById("performanceAllowance").value = userData.kinerja;
-  document.getElementById("expertiseAllowance").value = userData.keahlian;
-  document.getElementById("structuralAllowance").value = userData["fgs-struk"];
-  document.getElementById("transportationAllowance").value =
-    userData.transportasi;
-  document.getElementById("attendanceAllowance").value = userData.kehadiran;
-  document.getElementById("kopkarDeduction").value = userData.kopkar;
-  document.getElementById("bankJabarDeduction").value = userData.bankJabar;
-  document.getElementById("arisanDeduction").value = userData.arisan;
-  document.getElementById("bpjsDeduction").value = userData.bpjs;
-  document.getElementById("baukDeduction").value = userData.bauk;
-  document.getElementById("otherDeductions").value = userData.lain2;
-  document.getElementById("pphDeduction").value = userData.pph;
+  document.getElementById("basicSalary").value = formatRupiah(
+    userData.pokok || 0
+  );
+  document.getElementById("familyAllowance").value = formatRupiah(
+    userData.keluarga || 0
+  );
+  document.getElementById("foodAllowance").value = formatRupiah(
+    userData.pangan || 0
+  );
+  document.getElementById("performanceAllowance").value = formatRupiah(
+    userData.kinerja || 0
+  );
+  document.getElementById("expertiseAllowance").value = formatRupiah(
+    userData.keahlian || 0
+  );
+  document.getElementById("structuralAllowance").value = formatRupiah(
+    userData["fgs-struk"] || 0
+  );
+  document.getElementById("transportationAllowance").value = formatRupiah(
+    userData.transportasi || 0
+  );
+  document.getElementById("attendanceAllowance").value = formatRupiah(
+    userData.kehadiran || 0
+  );
+  document.getElementById("kopkarDeduction").value = formatRupiah(
+    userData.kopkar || 0
+  );
+  document.getElementById("bankJabarDeduction").value = formatRupiah(
+    userData.bankJabar || 0
+  );
+  document.getElementById("arisanDeduction").value = formatRupiah(
+    userData.arisan || 0
+  );
+  document.getElementById("bpjsDeduction").value = formatRupiah(
+    userData.bpjs || 0
+  );
+  document.getElementById("baukDeduction").value = formatRupiah(
+    userData.bauk || 0
+  );
+  document.getElementById("otherDeductions").value = formatRupiah(
+    userData.lain2 || 0
+  );
+  document.getElementById("pphDeduction").value = formatRupiah(
+    userData.pph || 0
+  );
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -263,6 +339,9 @@ function updateUserData() {
   const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/update?email=${encodeURIComponent(
     email
   )}`;
+  const parseRupiahToFloat = (value) => {
+    return parseFloat(value.replace(/[^0-9]/g, ""));
+  };
 
   const formData = {
     nama: document.getElementById("name").value,
@@ -270,25 +349,39 @@ function updateUserData() {
     pangkat: document.getElementById("rank").value,
     jabatan: document.getElementById("position").value,
     kelompok: document.getElementById("kelompok").value,
-    pokok: parseFloat(document.getElementById("basicSalary").value),
-    keluarga: parseFloat(document.getElementById("familyAllowance").value),
-    pangan: parseFloat(document.getElementById("foodAllowance").value),
-    kinerja: parseFloat(document.getElementById("performanceAllowance").value),
-    keahlian: parseFloat(document.getElementById("expertiseAllowance").value),
-    ["fgs-struk"]: parseFloat(
+    pokok: parseRupiahToFloat(document.getElementById("basicSalary").value),
+    keluarga: parseRupiahToFloat(
+      document.getElementById("familyAllowance").value
+    ),
+    pangan: parseRupiahToFloat(document.getElementById("foodAllowance").value),
+    kinerja: parseRupiahToFloat(
+      document.getElementById("performanceAllowance").value
+    ),
+    keahlian: parseRupiahToFloat(
+      document.getElementById("expertiseAllowance").value
+    ),
+    ["fgs-struk"]: parseRupiahToFloat(
       document.getElementById("structuralAllowance").value
     ),
-    transportasi: parseFloat(
+    transportasi: parseRupiahToFloat(
       document.getElementById("transportationAllowance").value
     ),
-    kehadiran: parseFloat(document.getElementById("attendanceAllowance").value),
-    kopkar: parseFloat(document.getElementById("kopkarDeduction").value),
-    bankJabar: parseFloat(document.getElementById("bankJabarDeduction").value),
-    arisan: parseFloat(document.getElementById("arisanDeduction").value),
-    bpjs: parseFloat(document.getElementById("bpjsDeduction").value),
-    bauk: parseFloat(document.getElementById("baukDeduction").value),
-    lain2: parseFloat(document.getElementById("otherDeductions").value),
-    pph: parseFloat(document.getElementById("pphDeduction").value),
+    kehadiran: parseRupiahToFloat(
+      document.getElementById("attendanceAllowance").value
+    ),
+    kopkar: parseRupiahToFloat(
+      document.getElementById("kopkarDeduction").value
+    ),
+    bankJabar: parseRupiahToFloat(
+      document.getElementById("bankJabarDeduction").value
+    ),
+    arisan: parseRupiahToFloat(
+      document.getElementById("arisanDeduction").value
+    ),
+    bpjs: parseRupiahToFloat(document.getElementById("bpjsDeduction").value),
+    bauk: parseRupiahToFloat(document.getElementById("baukDeduction").value),
+    lain2: parseRupiahToFloat(document.getElementById("otherDeductions").value),
+    pph: parseRupiahToFloat(document.getElementById("pphDeduction").value),
   };
 
   fetch(url, {
