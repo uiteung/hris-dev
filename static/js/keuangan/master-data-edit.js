@@ -196,7 +196,6 @@ function populateKelompokDropdown(kelompokData, userKelompok) {
   kelompokDropdown.innerHTML = "";
   const uniqueKelompok = new Set();
 
-  // Ensure the user's current kelompok is added first and marked as selected
   uniqueKelompok.add(userKelompok);
 
   kelompokData.forEach((kelompok) => {
