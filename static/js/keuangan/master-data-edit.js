@@ -240,6 +240,7 @@ function formatAsRupiah(input) {
 document.addEventListener("DOMContentLoaded", function () {
   const currencyFields = [
     "basicSalary",
+    "rapel_gaji",
     "familyAllowance",
     "foodAllowance",
     "performanceAllowance",
@@ -267,6 +268,9 @@ function populateForm(userData) {
   document.getElementById("position").value = userData.jabatan || "";
   document.getElementById("basicSalary").value = formatRupiah(
     userData.pokok || 0
+  );
+  document.getElementById("rapel_gaji").value = formatRupiah(
+    userData.rapel_gaji || 0
   );
   document.getElementById("familyAllowance").value = formatRupiah(
     userData.keluarga || 0
@@ -349,6 +353,7 @@ function updateUserData() {
     jabatan: document.getElementById("position").value,
     kelompok: document.getElementById("kelompok").value,
     pokok: parseRupiahToFloat(document.getElementById("basicSalary").value),
+    rapel_gaji: parseRupiahToFloat(document.getElementById("rapel_gaji").value),
     keluarga: parseRupiahToFloat(
       document.getElementById("familyAllowance").value
     ),
