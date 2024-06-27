@@ -179,12 +179,56 @@ function createRow(item) {
         <td>${item['honor-ajar']}</td>
         <td>${item.pph}</td>
         <td>
-        <button class="btn btn-info btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" onclick="printoutitem(this)">
+        <button class="btn btn-info btn-sm edit-btn" data-waktu="${item.waktu}" data-nama="${item.nama}" onclick="printoutitem(this)">
             <i class="mdi mdi-cloud-print-outline"></i>
         </button>
         </td>
     </tr>`;
 }
+
+window.printoutitem = function (element) {
+  const nama = element.getAttribute("data-nama");
+  const waktu = element.getAttribute("data-waktu")
+
+  // Get the current date and calculate the previous month
+  // const now = new Date();
+  // const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  // const year = lastMonth.getFullYear();
+  // const month = (lastMonth.getMonth() + 1).toString().padStart(2, "0");
+  // const yearMonth = `${year}${month}`;
+
+  // Construct the URL for the GET request
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/pdf?nama=${nama}&waktu=${waktu}`;
+
+  fetch(url, {
+    method: "GET",
+    headers: {
+      login: `${token}`,
+      Accept: "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok: " + response.statusText);
+      }
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `SlipHonorMengajar_${waktu}_${nama}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    })
+    .catch((error) => {
+      console.error("Error fetching PDF:", error);
+      Swal.fire("Error", "Failed to fetch PDF: " + error.message, "error");
+    });
+};
+
 
 function updatePaginationButtons(data) {
   document.getElementById(
