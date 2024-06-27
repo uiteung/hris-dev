@@ -160,6 +160,11 @@ function createRow(item) {
         <td>${item['jumlah-temu']}</td>
         <td>${item['honor-ajar']}</td>
         <td>${item.pph}</td>
+        <td>
+        <button class="btn btn-info btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" onclick="printoutitem(this)">
+            <i class="mdi mdi-cloud-print-outline"></i>
+        </button>
+        </td>
     </tr>`;
 }
 
