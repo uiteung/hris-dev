@@ -171,9 +171,9 @@ function createRow(item) {
         <td>${item.bauk}</td>
         <td>${item.lain2}</td>
         <td>${item.pph}</td> 
-        <td>${item.totalgaji}</td>        
+        <td>${item.totalgaji}</td>
+        <td>${item.totalpotongan}</td>                
         <td>${item.totalgajibersih}</td>        
-        <td>${item.totalpotongan}</td>        
          
 
         
