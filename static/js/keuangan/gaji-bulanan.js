@@ -190,7 +190,7 @@ function createRow(item) {
         <td>${item.totalgajibersih}</td>        
         <td>${item.totalpotongan}</td>  
         <td>
-         <button class="btn btn-info btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" data-waktu="${data.waktu} onclick="printoutitem(this)">
+         <button class="btn btn-info btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" data-waktu="${item.waktu} onclick="printoutitem(this)">
             <i class="mdi mdi-cloud-print-outline"></i>
         </button>
     </td>        
