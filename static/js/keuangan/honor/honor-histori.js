@@ -188,7 +188,8 @@ function createRow(item) {
 
 window.printoutitem = function (element) {
   const nama = element.getAttribute("data-nama");
-  const waktu = element.getAttribute("data-waktu")
+  const waktu = element.getAttribute("data-waktu");
+  console.log(waktu)
 
   // Get the current date and calculate the previous month
   // const now = new Date();
