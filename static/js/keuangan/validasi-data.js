@@ -278,3 +278,69 @@ function generateExcel(data) {
 document
   .getElementById("exportButton")
   .addEventListener("click", exportToExcel);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const generateButton = document.getElementById("izinkanButton");
+    generateButton.addEventListener("click", () => {
+      Swal.fire({
+        title: "Sebelum Anda Mengizinkan Permintaan Slip Gaji Pastikan Kembali",
+        text: "Apakah Mata Master Sudah Valid?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, Izinkan!",
+        cancelButtonText: "Batal",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          IzinkanSlipGaji();
+        }
+      });
+    });
+  });
+  
+  function IzinkanSlipGaji() {
+    const url = "https://hris_backend.ulbi.ac.id/api/v2/rkp/validatemany";
+  
+  const now = new Date();
+  const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const year = lastMonth.getFullYear();
+  const month = (lastMonth.getMonth() + 1).toString().padStart(2, "0");
+  const yearMonth = `${year}${month}`;
+
+    fetch(url + "?waktu=" + yearMonth, {
+      method: "POST",
+      headers: {
+        login: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "validasi": true
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          Swal.fire({
+            title: "Success",
+            text: "Slip Gaji Berhasil Diizinkan!",
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.value) {
+              window.location.reload(true);
+            }
+          });
+        } else {
+          Swal.fire(
+            "Failed",
+            "Gagal Mengizinkan slip gaji: " + data.message,
+            "error"
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        Swal.fire("Error", "Error: " + error.message, "error");
+      });
+  }
