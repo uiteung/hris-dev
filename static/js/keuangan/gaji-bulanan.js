@@ -158,6 +158,7 @@ function populateTableWithData(data) {
   tableBody.innerHTML = ""; // Clear existing table data
   data.forEach((item) => {
     tableBody.innerHTML += createRow(item);
+    console.log("waktu " + item.waktu)
   });
 }
 
@@ -231,7 +232,7 @@ window.printoutitem = function (element) {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `SlipGaji_${yearMonth}_${email}.pdf`;
+      a.download = `SlipGaji_${waktu}_${email}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
