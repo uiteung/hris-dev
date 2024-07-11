@@ -190,16 +190,18 @@ function createRow(item) {
         <td>${item.totalgajibersih}</td>        
         <td>${item.totalpotongan}</td>  
         <td>
-         <button class="btn btn-info btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" data-waktu="${item.waktu} onclick="printoutitem(this)">
+        <button class="btn btn-info btn-sm edit-btn" data-waktu="${item.waktu}" data-email="${item.email}" onclick="printoutitem(this)">
             <i class="mdi mdi-cloud-print-outline"></i>
         </button>
-    </td>        
+        </td>    
     </tr>`;
 }
+
 window.printoutitem = function (element) {
   const email = element.getAttribute("data-email");
   const waktu = element.getAttribute("data-waktu")
 
+  console.log(waktu)
   // Get the current date and calculate the previous month
   const now = new Date();
   const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
