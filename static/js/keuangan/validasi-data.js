@@ -300,23 +300,20 @@ document
   });
   
   function IzinkanSlipGaji() {
-    const url = "https://hris_backend.ulbi.ac.id/api/v2/rkp/validatemany";
-  
-  const now = new Date();
-  const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-  const year = lastMonth.getFullYear();
-  const month = (lastMonth.getMonth() + 1).toString().padStart(2, "0");
-  const yearMonth = `${year}${month}`;
+    const now = new Date();
+    const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    const year = lastMonth.getFullYear();
+    const month = (lastMonth.getMonth() + 1).toString().padStart(2, "0");
+    const yearMonth = `${year}${month}`;
+    const url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/validatemany?waktu=${yearMonth}&&validasi=true`;
 
-    fetch(url + "?waktu=" + yearMonth, {
+    fetch(url, {
       method: "POST",
       headers: {
         login: token,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        "validasi": true
-      }),
+      body: JSON.stringify({}),
     })
       .then((response) => response.json())
       .then((data) => {
