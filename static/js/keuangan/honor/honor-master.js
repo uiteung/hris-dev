@@ -154,6 +154,7 @@ function createRow(item) {
 
   return `<tr>
       <td>${item.nama_pengajar}</td>
+      <td>${item['status_dosen']}</td>
       <td>${item.jabatan}</td>
       <td>
         <table class="nested-table">
