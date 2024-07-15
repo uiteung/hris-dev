@@ -153,7 +153,6 @@ function createRow(item) {
   return `<tr>
 
   <td class="name-email-cell">${item.nama}</td>
-  <td class="name-email-cell">${item['status_dosen']}</td>
 
         <td>${item.namamatkul}</td>
         <td>${item.kelas}</td>
