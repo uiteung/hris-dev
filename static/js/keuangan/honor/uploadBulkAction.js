@@ -47,6 +47,7 @@ function groupCoursesByInstructor(data) {
     if (!instructors[key]) {
       instructors[key] = {
         nama_pengajar: row["Nama Pengajar"],
+        status_dosen: row["Status Dosen"],
         jabatan: row["Jabatan"],
         phone_number: row["Phone Number"],
         persentase_pph: parseFloat(row["Persentase PPH"]),
