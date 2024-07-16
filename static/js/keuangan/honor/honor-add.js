@@ -6,6 +6,7 @@ function postData() {
 
   const nama_pengajar = document.getElementById("name").value;
   const phone_number = document.getElementById("phone_number").value;
+  const status_dosen = document.getElementById("status").value;
   const jabatan = document.getElementById("jabatan").value;
   const persentase_pph = document.getElementById("persentase_pph").value;
   const semester = document.getElementById("semester").value;
@@ -29,6 +30,7 @@ function postData() {
   const data = {
     nama_pengajar: nama_pengajar,
     phone_number: phone_number,
+    status_dosen: status_dosen,
     mata_kuliah: mata_kuliah,
     jabatan: jabatan,
     persentase_pph: parseFloat(persentase_pph),
