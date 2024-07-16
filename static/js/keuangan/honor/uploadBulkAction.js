@@ -103,6 +103,7 @@ function downloadExcelTemplate() {
   const ws_data = [
     [
       "Nama Pengajar",
+      "Status Dosen",
       "Jabatan",
       "Phone Number",
       "Nama Mata Kuliah",
