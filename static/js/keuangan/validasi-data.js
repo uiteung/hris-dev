@@ -305,7 +305,7 @@ document
     const year = lastMonth.getFullYear();
     const month = (lastMonth.getMonth() + 1).toString().padStart(2, "0");
     const yearMonth = `${year}${month}`;
-    const url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/validatemany?waktu=${yearMonth}&&validasi=true`;
+    const url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/validatemany?waktu=${yearMonth}&validasi=true`;
 
     fetch(url, {
       method: "POST",
