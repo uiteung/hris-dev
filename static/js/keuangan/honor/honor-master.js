@@ -156,6 +156,7 @@ function createRow(item) {
       <td>${item.nama_pengajar}</td>
       <td>${item['status_dosen']}</td>
       <td>${item.jabatan}</td>
+      <td>${item.jenjang_jabatan}</td>
       <td>
         <table class="nested-table">
           <thead>
@@ -176,7 +177,7 @@ function createRow(item) {
       </td>
       <td>${item.total_honor.toLocaleString()}</td>
       <td>${item.pph.toLocaleString()}</td>
-            <td>${item.persentase_pph.toLocaleString()}</td>
+      <td>${item.persentase_pph.toLocaleString()}</td>
 
       <td>${item.jumlah_dibayar}</td>
       <td>${item.periode_semester}</td>
