@@ -177,6 +177,7 @@ function createRow(item) {
       </td>
       <td>${item.total_honor.toLocaleString()}</td>
       <td>${item.pph.toLocaleString()}</td>
+      <td>${item.maksimal_mengajar}</td>
       <td>${item.persentase_pph.toLocaleString()}</td>
 
       <td>${item.jumlah_dibayar}</td>
