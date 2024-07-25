@@ -1,5 +1,24 @@
 import { token } from "../../controller/cookies.js";
 
+document.addEventListener("DOMContentLoaded", () => {
+  populateDropdownWithJenjangJabatan();
+});
+
+function populateDropdownWithJenjangJabatan() {
+  const dropdown = document.getElementById("filterKelompok");
+  dropdown.innerHTML = '<option value="">Silahkan Pilih Jenjang Jabatan</option>'; // Reset dropdown
+
+  // Create an option for each month of the current year
+  for (let month = 1; month <= 12; month++) {
+    const monthValue = month.toString().padStart(2, "0"); // Ensure the month is two digits
+    const optionValue = `${currentYear}${monthValue}`; // Format: YYYYMM
+    const option = document.createElement("option");
+    option.value = optionValue;
+    option.textContent = `${currentYear}-${monthValue}`; // Display as YYYY-MM
+    dropdown.appendChild(option);
+  }
+}
+
 function postData() {
   const url =
     "https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/insert";
@@ -11,26 +30,6 @@ function postData() {
   const jabatan = document.getElementById("jabatan").value;
   const persentase_pph = document.getElementById("persentase_pph").value;
   const semester = document.getElementById("semester").value;
-
-  document.addEventListener("DOMContentLoaded", () => {
-    populateDropdownWithJenjangJabatan();
-  });
-
-  function populateDropdownWithJenjangJabatan() {
-    const dropdown = document.getElementById("filterKelompok");
-    dropdown.innerHTML = '<option value="">Silahkan Pilih Jenjang Jabatan</option>'; // Reset dropdown
-  
-    // Create an option for each month of the current year
-    for (let month = 1; month <= 12; month++) {
-      const monthValue = month.toString().padStart(2, "0"); // Ensure the month is two digits
-      const optionValue = `${currentYear}${monthValue}`; // Format: YYYYMM
-      const option = document.createElement("option");
-      option.value = optionValue;
-      option.textContent = `${currentYear}-${monthValue}`; // Display as YYYY-MM
-      dropdown.appendChild(option);
-    }
-  }
-
   const mata_kuliah = Array.from(
     document.getElementsByClassName("courseItem")
   ).map((course) => ({
