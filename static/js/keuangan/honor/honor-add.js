@@ -1,8 +1,33 @@
 import { token } from "../../controller/cookies.js";
+const urlDropdown = "https://hris_backend.ulbi.ac.id/api/v2/honour/dikjar/pilihan"
 
 document.addEventListener("DOMContentLoaded", () => {
   populateDropdownWithJenjangJabatan();
+  GetDropdownData()
 });
+
+function GetDropdownData(){
+  const optionsDrop = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      login: ` ${token}`,
+    },
+  };
+
+  fetch(urlDropdown, optionsDrop)
+        .then((response) => response.json())
+        .catch((error) => {
+          console.error("Error:", error);
+          Swal.fire(
+            "Failed!",
+            "There was an issue submitting your data.",
+            "error"
+          );
+        });
+
+      return response
+}
 
 function populateDropdownWithJenjangJabatan() {
   const dropdown = document.getElementById("filterKelompok");
