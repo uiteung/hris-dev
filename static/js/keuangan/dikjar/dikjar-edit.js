@@ -1,5 +1,19 @@
 import { token } from "../../controller/cookies.js";
 
+document.addEventListener("DOMContentLoaded", function () {
+  const id_pangkat = localStorage.getItem("editingid");
+  if (id_pangkat) {
+    fetchUserDataByid_pangkat(id_pangkat);
+  } else {
+    console.error("No id_pangkat found in localStorage.");
+    Swal.fire(
+      "Error",
+      "id_pangkat tidak ditemukan di penyimpanan lokal.",
+      "error"
+    );
+  }
+});
+
 function postData() {
   const url = "https://hris_backend.ulbi.ac.id/api/v2/honour/dikjar/update";
 
