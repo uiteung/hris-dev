@@ -1,22 +1,62 @@
 import { token } from "../../controller/cookies.js";
 
 document.addEventListener("DOMContentLoaded", function () {
-  const id_pangkat = localStorage.getItem("editingid");
-  if (id_pangkat) {
-    fetchUserDataByid_pangkat(id_pangkat);
+  const id_masdikjar = localStorage.getItem("editingid");
+  if (id_masdikjar) {
+    fetchbyID(id_masdikjar);
   } else {
-    console.error("No id_pangkat found in localStorage.");
+    console.error("No id_masdikjar found in localStorage.");
     Swal.fire(
       "Error",
-      "id_pangkat tidak ditemukan di penyimpanan lokal.",
+      "id_masdikjar tidak ditemukan di penyimpanan lokal.",
       "error"
     );
   }
 });
 
+function fetchbyID(id_masdikjar) {
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/dikjar/byid?id=${id_masdikjar}`;
+  fetch(url, {
+    method: "GET",
+    headers: {
+      login: token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.code === 200 && data.success) {
+        populateForm(data.data);
+      } else {
+        Swal.fire(
+          "Informasi",
+          "Gagal mengambil data: " + (data.status || "Status tidak diketahui"),
+          "error"
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+      Swal.fire(
+        "Error",
+        "Terjadi kesalahan saat mengambil data: " + error.message,
+        "error"
+      );
+    });
+}
+function populateForm(userData) {
+  document.getElementById("jenjang").value = userData.jenjang_jabatan || ""
+  document.getElementById("kategori").value = userData.kategori_jabatan || ""
+  document.getElementById("ewmp").value = userData.ewmp_struktural || ""
+  document.getElementById("maksimalngajar").value = userData.maksimal_dikjar || ""
+  document.getElementById("wajib").value = userData.wajib_dikjar || ""
+  document.getElementById("kelebihan").value = userData.kelebihan_dikjar || ""
+  document.getElementById("bonus").value = userData.bonus_jam || ""
+}
+
 function postData() {
   const url = "https://hris_backend.ulbi.ac.id/api/v2/honour/dikjar/update";
-
   const jenjang_jabatan = document.getElementById("jenjang").value;
   const kategori_jabatan = document.getElementById("kategori").value;
   const ewmp = document.getElementById("ewmp").value;
@@ -24,13 +64,12 @@ function postData() {
   const wajib_dikjar = document.getElementById("wajib").value;
   const kelebihan_dikjar = document.getElementById("kelebihan").value;
   const bonus_jam = document.getElementById("bonus").value;
-
   const kategori_array = kategori_jabatan.split(",")
-  
+  const id_masdikjar = localStorage.getItem("editingid");
   
 
   const data = {
-    id_masdikjar : 0,
+    id_masdikjar : parseInt(id_masdikjar),
     jenjang_jabatan : jenjang_jabatan,
     kategori_jabatan : kategori_array,
     ewmp_struktural : parseInt(ewmp),
@@ -43,7 +82,7 @@ function postData() {
   console.log(data)
 
   const options = {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       login: token,
