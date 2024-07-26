@@ -54,7 +54,7 @@ function postData() {
   const nama_pengajar = document.getElementById("name").value;
   const phone_number = document.getElementById("phone_number").value;
   const status_dosen = document.getElementById("status").value;
-  const jenjang_jabatan = document.getElementById("jenjang").value;
+  const jenjang_jabatan = document.getElementById("filterKelompok").value;
   const jabatan = document.getElementById("jabatan").value;
   const persentase_pph = document.getElementById("persentase_pph").value;
   const semester = document.getElementById("semester").value;
@@ -65,7 +65,7 @@ function postData() {
     jurusan: course.querySelector('[name="jurusan[]"]').value,
     kelas: course.querySelector('[name="kelas[]"]').value,
     jam: parseFloat(course.querySelector('[name="jam[]"]').value),
-    maks_kjm: parseFloat(course.querySelector('[name="maks_kjm[]"]').value),
+    maks_kjm: 0,
     jumlah_kelas: parseInt(
       course.querySelector('[name="jumlah_kelas[]"]').value
     ),
