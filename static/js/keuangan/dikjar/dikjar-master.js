@@ -86,10 +86,10 @@ function createRow(item) {
     <td>${item.bonus_jam}</td>
 
     <td>
-        <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id_jafung}" data-id="${item.id_jafung}" onclick="editItem(this)">
+        <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id_masdikjar}" data-id="${item.id_masdikjar}" onclick="editItem(this)">
             <i class="mdi mdi-table-edit"></i>
         </button>
-        <button class="btn btn-danger btn-sm delete-btn" data-id="${item.id_jafung}" data-id="${item.id_jafung}" onclick="deleteItem(this)">
+        <button class="btn btn-danger btn-sm delete-btn" data-id="${item.id_masdikjar}" data-id="${item.id_masdikjar}" onclick="deleteItem(this)">
             <i class="mdi mdi-delete"></i>
         </button>
     </td>  
@@ -98,7 +98,7 @@ function createRow(item) {
 window.editItem = function (element) {
   const id = element.getAttribute("data-id");
   localStorage.setItem("editingid", id);
-  window.location.href = "jabatan-fungsional-edit.html";
+  window.location.href = "dikjar-edit.html";
 };
 
 function updatePaginationButtons(data) {
@@ -178,7 +178,7 @@ window.deleteItem = function (element) {
   });
 };
 function sendDeleteRequest(id) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/jafung/delete?id=${id}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/dikjar/delete?id=${id}`;
   fetch(url, {
     method: "DELETE",
     headers: {
