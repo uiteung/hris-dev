@@ -19,11 +19,11 @@ function postData() {
     id_masdikjar : 0,
     jenjang_jabatan : jenjang_jabatan,
     kategori_jabatan : kategori_array,
-    ewmp_struktural : ewmp,
-    maksimal_dikjar : maksimal_mengajar,
-    wajib_dikjar : wajib_dikjar,
-    kelebihan_dikjar : kelebihan_dikjar,
-    bonus_jam : bonus_jam
+    ewmp_struktural : parseInt(ewmp),
+    maksimal_dikjar : parseInt(maksimal_mengajar),
+    wajib_dikjar : parseInt(wajib_dikjar),
+    kelebihan_dikjar : parseInt(kelebihan_dikjar),
+    bonus_jam : parseInt(bonus_jam)
   };
 
   console.log(data)
