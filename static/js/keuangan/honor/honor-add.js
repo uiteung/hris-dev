@@ -3,44 +3,47 @@ const urlDropdown = "https://hris_backend.ulbi.ac.id/api/v2/honour/dikjar/piliha
 
 document.addEventListener("DOMContentLoaded", () => {
   populateDropdownWithJenjangJabatan();
-  GetDropdownData()
+  // GetDropdownData()
 });
 
-function GetDropdownData(){
+async function GetDropdownData() {
   const optionsDrop = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      login: ` ${token}`,
+      login: `${token}`,
     },
   };
-
-  fetch(urlDropdown, optionsDrop)
-        .then((response) => response.json())
-        .catch((error) => {
-          console.error("Error:", error);
-          Swal.fire(
-            "Failed!",
-            "There was an issue submitting your data.",
-            "error"
-          );
-        });
-
-      return response
+  
+  try {
+    const response = await fetch(urlDropdown, optionsDrop);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    // console.log(data)
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    Swal.fire("Failed!", "There was an issue submitting your data.", "error");
+    return null;
+  }
+ 
 }
 
-function populateDropdownWithJenjangJabatan() {
+async function populateDropdownWithJenjangJabatan() {
   const dropdown = document.getElementById("filterKelompok");
   dropdown.innerHTML = '<option value="">Silahkan Pilih Jenjang Jabatan</option>'; // Reset dropdown
 
-  // Create an option for each month of the current year
-  for (let month = 1; month <= 12; month++) {
-    const monthValue = month.toString().padStart(2, "0"); // Ensure the month is two digits
-    const optionValue = `${currentYear}${monthValue}`; // Format: YYYYMM
-    const option = document.createElement("option");
-    option.value = optionValue;
-    option.textContent = `${currentYear}-${monthValue}`; // Display as YYYY-MM
-    dropdown.appendChild(option);
+  const data = await GetDropdownData();
+  // console.log(data)
+  if (data) {
+    data.data.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item.jenjang_jabatan; // Adjust based on your data structure
+      option.textContent = `${item.jenjang_jabatan} - ${item.kategori_jabatan}`; // Adjust based on your data structure
+      dropdown.appendChild(option);
+    });
   }
 }
 
