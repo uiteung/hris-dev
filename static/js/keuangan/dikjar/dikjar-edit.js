@@ -56,7 +56,8 @@ function populateForm(userData) {
 }
 
 function postData() {
-  const url = "https://hris_backend.ulbi.ac.id/api/v2/honour/dikjar/update";
+  const id_masdikjar = localStorage.getItem("editingid");
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/dikjar/update?id=${id_masdikjar}`;
   const jenjang_jabatan = document.getElementById("jenjang").value;
   const kategori_jabatan = document.getElementById("kategori").value;
   const ewmp = document.getElementById("ewmp").value;
@@ -65,7 +66,7 @@ function postData() {
   const kelebihan_dikjar = document.getElementById("kelebihan").value;
   const bonus_jam = document.getElementById("bonus").value;
   const kategori_array = kategori_jabatan.split(",")
-  const id_masdikjar = localStorage.getItem("editingid");
+  
   
 
   const data = {
