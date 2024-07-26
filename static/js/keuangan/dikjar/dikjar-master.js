@@ -7,56 +7,21 @@ const baseUrl = "https://hris_backend.ulbi.ac.id/api/v2/honour/dikjar";
 let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
-  fetchDataFromHRIS(allData);
+  fetchDataFromHRIS(currentPage);
 });
 
 function setupEventListeners() {
+    document.getElementById("prevPageBtn").addEventListener("click", () => {
+        if (currentPage > 1) {
+          fetchDataFromHRIS(currentPage - 1);
+        }
+      });
+    
+      document.getElementById("nextPageBtn").addEventListener("click", () => {
+        fetchDataFromHRIS(currentPage + 1);
+      });
 }
 
-function searchFromInput() {
-  const searchInput = document
-    .getElementById("searchinput")
-    .value.trim()
-    .replace(/\s+/g, "_");
-  if (searchInput) {
-    fetchDataFromSearch(searchInput);
-  } else {
-    fetchDataFromHRIS(1); // Assuming you want to reset to the first page
-  }
-}
-
-function fetchDataFromSearch(searchKey) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/wagemst/search?key=${searchKey}`;
-
-  fetch(url, {
-    method: "POST",
-    headers: {
-      login: `${token}`,
-      Accept: "application/json",
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(
-          "Terjadi kesalahan saat mencari data. Silakan coba lagi."
-        );
-      }
-      return response.json();
-    })
-    .then((data) => {
-      if (!data.data.data_query || data.data.data_query.length === 0) {
-        Swal.fire("Informasi", "Tidak ada data yang cocok ditemukan.", "info");
-        return;
-      }
-      allData = data.data.data_query;
-      populateTableWithData(allData);
-      // updatePaginationButtons(data.data);
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-      handlingErrorSearch();
-    });
-}
 function fetchDataFromHRIS(page) {
   let url = `${baseUrl}/get?page=${page}`;
 //   if (currentKelompok) {
@@ -89,7 +54,7 @@ function fetchDataFromHRIS(page) {
       }
       allData = data.data.data_query;
       populateTableWithData(allData);
-      // updatePaginationButtons(data);
+      updatePaginationButtons(data);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -139,10 +104,10 @@ window.editItem = function (element) {
 function updatePaginationButtons(data) {
   document.getElementById(
     "currentPage"
-  ).textContent = `Page ${data.current_page}`;
-  document.getElementById("prevPageBtn").disabled = !data.prev_page_url;
-  document.getElementById("nextPageBtn").disabled = !data.next_page_url;
-  currentPage = data.current_page;
+  ).textContent = `Page ${data.data.current_page}`;
+  document.getElementById("prevPageBtn").disabled = !data.data.prev_page_url;
+  document.getElementById("nextPageBtn").disabled = !data.data.next_page_url;
+  currentPage = data.data.current_page;
 }
 function filterTableByKelompok() {
   currentKelompok = document
