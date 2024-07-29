@@ -1,5 +1,52 @@
 import { token } from "../../controller/cookies.js";
 
+const urlDropdown = "https://hris_backend.ulbi.ac.id/api/v2/honour/dikjar/pilihan"
+document.addEventListener("DOMContentLoaded", () => {
+  populateDropdownWithJenjangJabatan();
+  // GetDropdownData()
+});
+
+async function GetDropdownData() {
+  const optionsDrop = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      login: `${token}`,
+    },
+  };
+  
+  try {
+    const response = await fetch(urlDropdown, optionsDrop);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    // console.log(data)
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    Swal.fire("Failed!", "There was an issue submitting your data.", "error");
+    return null;
+  }
+ 
+}
+
+async function populateDropdownWithJenjangJabatan() {
+  const dropdown = document.getElementById("filterKelompok");
+  dropdown.innerHTML = '<option value="">Silahkan Pilih Jenjang Jabatan</option>'; // Reset dropdown
+
+  const data = await GetDropdownData();
+  // console.log(data)
+  if (data) {
+    data.data.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item.jenjang_jabatan; // Adjust based on your data structure
+      option.textContent = `${item.jenjang_jabatan} - ${item.kategori_jabatan}`; // Adjust based on your data structure
+      dropdown.appendChild(option);
+    });
+  }
+}
+
 function fetchDataById(id) {
   const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/get?_id=${id}`;
   fetch(url, {
@@ -28,6 +75,8 @@ function populateForm(data) {
   document.getElementById("phone_number").value = data.phone_number;
   document.getElementById("jabatan").value = data.jabatan;
   document.getElementById("persentase_pph").value = data.persentase_pph;
+  document.getElementById("filterKelompok").value = data.jenjang_jabatan;
+  document.getElementById("status").value = data.status_dosen;
   // document.getElementById("total_honor").value = data.total_honor;
   // document.getElementById("pph").value = data.pph;
 
@@ -95,6 +144,8 @@ function updateData() {
   const phoneNumber = document.getElementById("phone_number").value;
   const persentase_pph = document.getElementById("persentase_pph").value;
   const semester = document.getElementById("semester").value;
+  const jenjang_jabatan = document.getElementById("filterKelompok").value;
+  const status_dosen = document.getElementById("status").value;
 
   const mataKuliahElements = document.querySelectorAll(".courseItem");
   const mataKuliah = Array.from(mataKuliahElements).map((courseElement) => ({
@@ -120,10 +171,12 @@ function updateData() {
   }));
 
   const data = {
+    _id : id,
     nama_pengajar: namaPengajar,
     jabatan: jabatan,
     persentase_pph: parseFloat(persentase_pph),
-
+    jenjang_jabatan : jenjang_jabatan,
+    status_dosen : status_dosen,
     phone_number: phoneNumber,
     mata_kuliah: mataKuliah,
     periode_semester: semester,
