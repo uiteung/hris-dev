@@ -368,7 +368,7 @@ window.deleteItem = function (element) {
   });
 };
 function sendDeleteRequest(id) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/delete?_id=${id}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/honour/assessment/delete?id=${id}`;
   fetch(url, {
     method: "DELETE",
     headers: {
@@ -431,7 +431,7 @@ function generateHonor() {
 }
 
 function DeleteHonor() {
-  const url = "https://hris_backend.ulbi.ac.id/api/v2/honour/honormengajar/deleteall";
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/honour/assessment/deleteall";
 
   fetch(url, {
     method: "DELETE",
