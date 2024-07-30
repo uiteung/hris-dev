@@ -72,6 +72,7 @@ function postData() {
     jumlah_temu: parseFloat(
       course.querySelector('[name="jumlah_temu[]"]').value
     ),
+    honor_ajar: parseFloat(course.querySelector('[name="honor_ajar[]"]').value)
   }));
 
   const data = {
