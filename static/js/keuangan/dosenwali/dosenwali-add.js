@@ -8,12 +8,10 @@ function postData() {
   const kelas = document.getElementById("kelas").value;
   const semester =
     document.getElementById("semester").value;
-  const prodi = parseFloat(document.getElementById("prodi").value);
+  const prodi = document.getElementById("prodi").value;
   const laporan = parseFloat(document.getElementById("laporan").value);
-  //   const jumlah_dibayarkan = parseFloat(
-  //     document.getElementById("jumlah_dibayarkan").value
-  //   );
   const honor = document.getElementById("honor").value;
+  const masa_perolehan = document.getElementById("masa_perolehan").value;
 
   const data = {
     nama: nama,
@@ -21,8 +19,13 @@ function postData() {
     kelas: kelas,
     semester: semester,
     prodi: prodi,
-    laporan: laporan,
-    honor: honor,// Convert to boolean
+    laporan: {
+      "tahap1" : laporan,
+      "tahap2" : laporan,
+    },
+    honor: parseFloat(honor),
+    jumlahdibayarkan: parseFloat(0),
+    masa_perolehan: masa_perolehan
   };
   const options = {
     method: "POST",
