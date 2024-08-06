@@ -386,12 +386,11 @@
                         <label for="laporan" class="form-label"
                           >Laporan Perwalian:</label
                         >
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="laporan"
-                          name="laporan"
-                        />
+                        <select class="form-select" id="laporan" name="laporan">
+                          <option value="" aria-disabled="true"></option>
+                            <option value="OK">OK - Laporan Lengkap</option>
+                            <option value="TAL">TAL - Tidak Ada Laporan</option>
+                        </select>
                       </div>
                       <div class="mb-3">
                         <label for="honor" class="form-label"
@@ -493,8 +492,8 @@
       src="../static/js/keuangan/master-data-edit.js"
       type="module"
     ></script> -->
-    <!-- <script src="../../static/js/keuangan/doktor/doktor-add.js" type="module"></script> -->
-    <script src="../../static/js/keuangan/doktor/doktor-fill.js" type="module"></script>
+    <script src="../../static/js/keuangan/dosenwali/dosenwali-add.js" type="module"></script>
+    <!-- <script src="../../static/js/keuangan/doktor/doktor-fill.js" type="module"></script> -->
 
     <!-- Library Javascript Terkait -->
     <script src="https://cdn.jsdelivr.net/gh/PMBULBI/javascript-fe@0.0.7/jquery-3.6.0.min.js"></script>
