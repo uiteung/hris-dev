@@ -9,7 +9,8 @@ function postData() {
   const semester =
     document.getElementById("semester").value;
   const prodi = document.getElementById("prodi").value;
-  const laporan = parseFloat(document.getElementById("laporan").value);
+  const laporan = document.getElementById("laporan").value;
+  console.log(laporan)
   const honor = document.getElementById("honor").value;
   const masa_perolehan = document.getElementById("masa_perolehan").value;
 
@@ -20,8 +21,8 @@ function postData() {
     semester: semester,
     prodi: prodi,
     laporan: {
-      "tahap1" : laporan,
-      "tahap2" : laporan,
+      tahap1 : laporan,
+      tahap2 : laporan,
     },
     honor: parseFloat(honor),
     jumlahdibayarkan: parseFloat(0),
