@@ -121,6 +121,7 @@ function fetchDataFromHRIS(page) {
         return;
       }
       allData = data.data.data_query;
+    //   console.log(allData)
       populateTableWithData(allData);
       updatePaginationButtons(data.data);
     })
@@ -143,22 +144,25 @@ function populateTableWithData(data) {
 
 function createRow(item) {
   return `<tr>
-    <td class="name-email-cell">${item.nama} <br>${item.email}</td>
+    <td class="name-email-cell">${item.nama}
 
-    <td>${item.jabatan_fungsional}</td>
-    <td>${item.jabatan_struktural}</td>
-    <td>${item.tunjangan}</td>
+    <td>${item.angkatan}</td>
+    <td>${item.semester}</td>
+    <td>${item.kelas}</td>
+    <td>${item.prodi}</td>
+    <td>${item.tahapan.tahap1}</td>
+    <td>${item.honor}</td>
     <td>${item.pph}</td>
-    <td>${item.jumlah_dibayarkan}</td>
+    <td>${item.jumlahdibayarkan}</td>
     <td>${item.masa_perolehan}</td>
     <td>
-        <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" onclick="editItem(this)">
+        <button class="btn btn-primary btn-sm edit-btn" data-id="${item.nama_pengajar}" data-email="${item.nama_pengajar}" onclick="editItem(this)">
             <i class="mdi mdi-table-edit"></i>
         </button>
-        <button class="btn btn-info btn-sm edit-btn" data-id="${item.id}" data-email="${item.email}" data-bulan="${item.masa_perolehan}" onclick="printoutitem(this)">
+        <button class="btn btn-info btn-sm edit-btn" data-id="${item.nama_pengajar}" data-email="${item.nama_pengajar}" data-bulan="${item.nama_pengajar}" onclick="printoutitem(this)">
         <i class="mdi mdi-cloud-print-outline"></i>
     </button>
-        <button class="btn btn-danger btn-sm delete-btn" data-id="${item.id}" data-email="${item.email}" onclick="deleteItem(this)">
+        <button class="btn btn-danger btn-sm delete-btn" data-id="${item.nama_pengajar}" data-email="${item.nama_pengajar}" onclick="deleteItem(this)">
             <i class="mdi mdi-delete"></i>
         </button>
     </td>  
