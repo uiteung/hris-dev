@@ -20,7 +20,7 @@ function postData() {
     kelas: kelas,
     semester: semester,
     prodi: prodi,
-    laporan: {
+    tahapan: {
       tahap1 : laporan,
       tahap2 : laporan,
     },
