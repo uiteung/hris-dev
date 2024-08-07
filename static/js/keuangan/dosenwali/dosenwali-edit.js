@@ -98,6 +98,7 @@ function populateForm(userData) {
     document.getElementById("laporan").value = 
     userData.laporan || "";
     document.getElementById("honor").value = formatRupiah(userData.honor || 0);
+    document.getElementById("pph").value = formatRupiah(userData.pph || 0);
   // document.getElementById("tunjangan").value = formatRupiah(
   //   userData.tunjangan || 0
   // );
