@@ -332,91 +332,77 @@
                     
                     
 
-                      <!-- Email Field -->
+                      <!-- angkatan Field -->
                       <div class="mb-3">
                         <label for="angkatan" class="form-label">Angkatan:</label>
                         <input
                           type="text"
                           class="form-control"
-                          id="email"
-                          name="email"
+                          id="angkatan"
+                          name="angkatan"
                           required
                         />
                       </div>
 
                       <!-- Rank (Pangkat) Field -->
                       <div class="mb-3">
-                        <label for="jafung" class="form-label">Semester:</label>
+                        <label for="semester" class="form-label">Semester:</label>
                         <input
                           type="text"
                           class="form-control"
-                          id="jafung"
-                          name="jafung"
+                          id="semester"
+                          name="semester"
                         />
                       </div>
 
                       <!-- Position (Jabatan) Field -->
                       <div class="mb-3">
-                        <label for="jabatan_struktural" class="form-label"
+                        <label for="kelas" class="form-label"
                           >Kelas:</label
                         >
                         <input
                           type="text"
                           class="form-control"
-                          id="jabatan_struktural"
-                          name="jabatan_struktural"
+                          id="kelas"
+                          name="kelas"
                         />
                       </div>
 
                       <!-- Basic Salary Field -->
                       <div class="mb-3">
-                        <label for="basicSalary" class="form-label"
+                        <label for="prodi" class="form-label"
                           >Prodi:</label
                         >
                         <input
                           type="text"
                           class="form-control"
-                          id="tunjangan"
-                          name="tunjangan"
+                          id="prodi"
+                          name="prodi"
                         />
                       </div>
 
                       <!-- Family Allowance Field -->
                       <div class="mb-3">
-                        <label for="pph" class="form-label"
+                        <label for="laporan" class="form-label"
                           >Laporan Perwalian:</label
                         >
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="pph"
-                          name="pph"
-                        />
+                        <select class="form-select" id="laporan" name="laporan">
+                          <option value="" aria-disabled="true"></option>
+                            <option value="OK">OK - Laporan Lengkap</option>
+                            <option value="TAL">TAL - Tidak Ada Laporan</option>
+                        </select>
                       </div>
                       <div class="mb-3">
-                        <label for="pph" class="form-label"
+                        <label for="honor" class="form-label"
                           >Total Honor:</label
                         >
                         <input
                           type="text"
                           class="form-control"
-                          id="pph"
-                          name="pph"
+                          id="honor"
+                          name="honor"
                         />
                       </div>
-
-                      <!-- Food Allowance Field -->
-                      <!-- <div class="mb-3">
-                        <label for="jumlah_dibayarkan" class="form-label"
-                          >Jumlah Dibayarkan:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="jumlah_dibayarkan"
-                          name="jumlah_dibayarkan"
-                        />
-                      </div> -->
 
                       <!-- Performance Allowance Field -->
                       <div class="mb-3">
@@ -502,10 +488,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
     <!-- <script src="https://unpkg.com/jspdf-invoice"></script> -->
-    <!-- <script
-      src="../static/js/keuangan/master-data-edit.js"
+    <script
+      src="../../static/js/keuangan/dosenwali/dosenwali-edit.js"
       type="module"
-    ></script> -->
+    ></script>
     <!-- <script src="../../static/js/keuangan/doktor/doktor-add.js" type="module"></script> -->
     <script src="../../static/js/keuangan/doktor/doktor-fill.js" type="module"></script>
 
