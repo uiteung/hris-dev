@@ -169,9 +169,9 @@ function createRow(item) {
 </tr>`;
 }
 window.editItem = function (element) {
-  const email = element.getAttribute("data-email");
-  localStorage.setItem("editingEmail", email);
-  window.location.href = "doktor-edit.html";
+  const id = element.getAttribute("data-id");
+  localStorage.setItem("editingid", id);
+  window.location.href = "dosenwali-edit.html";
 };
 
 window.printoutitem = function (element) {
