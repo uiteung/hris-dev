@@ -171,7 +171,6 @@ function updateData() {
   }));
 
   const data = {
-    _id : id,
     nama_pengajar: namaPengajar,
     jabatan: jabatan,
     persentase_pph: parseFloat(persentase_pph),
