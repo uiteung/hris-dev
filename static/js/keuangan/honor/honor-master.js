@@ -1,4 +1,5 @@
 import { token } from "../../controller/cookies.js";
+import { convertToPercentage } from "../utils.js";
 let allRecords = [];
 let allData = []; // Holds the current page data for filtering
 let currentPage = 1; // Start from the first page
@@ -178,7 +179,7 @@ function createRow(item) {
       <td>${item.total_honor.toLocaleString()}</td>
       <td>${item.pph.toLocaleString()}</td>
       <td>${item.maksimal_mengajar}</td>
-      <td>${item.persentase_pph.toLocaleString()}</td>
+      <td>${convertToPercentage(item.persentase_pph.toLocaleString())}</td>
 
       <td>${item.jumlah_dibayar}</td>
       <td>${item.periode_semester}</td>
