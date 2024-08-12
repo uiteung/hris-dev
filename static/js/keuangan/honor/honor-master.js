@@ -142,10 +142,10 @@ function createRow(item) {
         <td>${mk.jurusan}</td>
         <td>${mk.kelas}</td>
         <td>${mk.jam}</td>
-        <td>${mk.maks_kjm.toFixed(1)}</td>
+        <td>${mk.maks_kjm.toFixed(2)}</td>
         <td>${mk.jumlah_kelas}</td>
         <td>${mk.jumlah_temu.toFixed(1)}</td>
-        <td>${mk.jam_dibayar}</td>
+        <td>${mk.jam_dibayar.toFixed(2)}</td>
         <td>${mk.honor_ajar.toLocaleString()}</td>
       </tr>
     `
