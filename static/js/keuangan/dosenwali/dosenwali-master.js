@@ -396,3 +396,40 @@ function downloadExcel() {
   link.click();
   document.body.removeChild(link);
 }
+
+function DeleteDoswal() {
+  const url = "https://hris_backend.ulbi.ac.id/api/v2/dosenwali/deleteall";
+
+  fetch(url, {
+    method: "DELETE",
+    headers: {
+      login: token,
+      "Content-Type": "application/json",
+    }
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        Swal.fire({
+          title: "success",
+          text: "Honor berhasil Dihapus!",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.value) {
+            window.location.reload(true);
+          }
+        });
+      } else {
+        Swal.fire(
+          "Failed",
+          "Gagal menghapus Honor: " + data.message,
+          "error"
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      Swal.fire("Error", "Error: " + error.message, "error");
+    });
+}
