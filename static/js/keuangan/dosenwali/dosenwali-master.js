@@ -58,7 +58,7 @@ function searchFromInput() {
 }
 
 function fetchDataFromSearch(searchKey, month) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/doktor/search?bulan=${month}&key=${searchKey}`;
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/dosenwali/search?key=${searchKey}`;
 
   fetch(url, {
     method: "POST",
