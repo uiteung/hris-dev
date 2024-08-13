@@ -277,6 +277,26 @@ function fetchAllPages(page) {
     });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const generateButton = document.getElementById("deleteButton");
+  generateButton.addEventListener("click", () => {
+    Swal.fire({
+      title: "Sebelum Anda Menghapus Honor Pastikan Kembali",
+      text: "Apakah Anda Yakin Ingin Menghapus Semuanya?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, hapus!",
+      cancelButtonText: "Batal",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        DeleteHonor();
+      }
+    });
+  });
+});
+
 function generateExcel(data) {
   const ws = XLSX.utils.json_to_sheet(
     data.map((item) => ({
