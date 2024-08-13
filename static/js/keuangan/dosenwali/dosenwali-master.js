@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cancelButtonText: "Batal",
     }).then((result) => {
       if (result.isConfirmed) {
-        DeleteHonor();
+        DeleteDoswal();
       }
     });
   });
