@@ -1,7 +1,8 @@
 import { token } from "../../controller/cookies.js";
 //
+let id = ""
 document.addEventListener("DOMContentLoaded", function () {
-  const id = localStorage.getItem("editingid");
+  id = localStorage.getItem("editingid");
   if (id) {
     fetchUserDataByid(id);
   } else {
@@ -68,7 +69,7 @@ function formatAsRupiah(input) {
 
 // Attach event listeners to the input fields
 document.addEventListener("DOMContentLoaded", function () {
-  const currencyFields = ["pph", "jumlah_dibayarkan", "tunjangan"];
+  const currencyFields = ["pph"];
   currencyFields.forEach((fieldId) => {
     const inputField = document.getElementById(fieldId);
     inputField.addEventListener("input", () => formatAsRupiah(inputField));
@@ -152,7 +153,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function updateUserData() {
-  const id = document.getElementById("id").value; // mendapatkan id dari form
   const url = `https://hris_backend.ulbi.ac.id/api/v2/dosenwali/update?id=${encodeURIComponent(
     id
   )}`;
@@ -161,17 +161,18 @@ function updateUserData() {
   };
 
   const formData = {
-    nama: document.getElementById("nama").value,
-    id: document.getElementById("id").value,
-    jabatan_fungsional: document.getElementById("jafung").value,
-    jabatan_struktural: document.getElementById("jabatan_struktural").value,
-    jumlah_dibayarkan: parseRupiahToFloat(
-      document.getElementById("jumlah_dibayarkan").value
-    ),
-    pph: parseRupiahToFloat(document.getElementById("pph").value),
-    tunjangan: parseRupiahToFloat(document.getElementById("tunjangan").value),
-    validasi: document.getElementById("validasi").checked,
-    masa_perolehan: document.getElementById("masa_perolehan").value,
+    nama: document.getElementById("name").value,
+    angkatan: document.getElementById("angkatan").value,
+    kelas: document.getElementById("kelas").value,
+    semester: document.getElementById("semester").value,
+    prodi: document.getElementById("prodi").value ,
+    tahapan: {
+      tahap1 : document.getElementById("laporan").value,
+      tahap2 : document.getElementById("laporan").value,
+    },
+    honor: parseRupiahToFloat(document.getElementById('honor').value),
+    pph: parseRupiahToFloat(document.getElementById('pph').value),
+    masa_perolehan: document.getElementById("masa_perolehan").value
   };
 
   fetch(url, {
@@ -194,7 +195,7 @@ function updateUserData() {
           setTimeout(
             () =>
               (window.location.href =
-                "https://euis.ulbi.ac.id/hris-dev/app/Doktor/dokter-master.html"),
+                "https://euis.ulbi.ac.id/hris-dev/app/dosenwali/dosenwali-master.html"),
             1000
           );
         });
