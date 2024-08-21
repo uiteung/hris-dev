@@ -11,9 +11,9 @@ export function ConvertJenisPrimbon(jenis) {
 
 export function ConvertKeteranganPrimbon(keterangan) {
     if (keterangan == "pu") {
-        keterangan = "Pendamping Utama"
+        keterangan = "Penguji Utama"
     } else if (keterangan == "pp") {
-        keterangan = "Pembimbing Pendamping"
+        keterangan = "Penguji Pendamping"
     } else if (keterangan == "pb") {
         keterangan = "Pembimbing"
     } else if (keterangan == "pb1") {
