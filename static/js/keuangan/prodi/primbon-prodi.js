@@ -1,4 +1,5 @@
 import { token } from "../../controller/cookies.js";
+import { ConvertJenisPrimbon, ConvertKeteranganPrimbon } from "./utils.js";
 let allRecords = [];
 let allData = []; // Holds the current page data for filtering
 let currentPage = 1; // Start from the first page
@@ -137,9 +138,9 @@ function populateTableWithData(data) {
 
 function createRow(item) {
   return `<tr>
-    <td class="name-email-cell">${item.jenis}</td>
+    <td class="name-email-cell">${ConvertJenisPrimbon(item.jenis)}</td>
 
-    <td>${item.keterangan}</td>
+    <td>${ConvertKeteranganPrimbon(item.keterangan)}</td>
     <td>${item.nominal}</td>
     <td>
         <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id}" data-email="${item.id}" onclick="editItem(this)">
