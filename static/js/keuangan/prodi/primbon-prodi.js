@@ -156,9 +156,9 @@ function createRow(item) {
 </tr>`;
 }
 window.editItem = function (element) {
-  const email = element.getAttribute("data-email");
-  localStorage.setItem("editingEmail", email);
-  window.location.href = "doktor-edit.html";
+  const id = element.getAttribute("data-id");
+  localStorage.setItem("editingid", id);
+  window.location.href = "primbon-edit.html";
 };
 
 window.printoutitem = function (element) {
@@ -326,7 +326,7 @@ function generateExcel(data) {
 }
 
 window.deleteItem = function (element) {
-  const email = element.getAttribute("data-email"); // Mengambil email dari attribute
+  const id = element.getAttribute("data-id"); // Mengambil email dari attribute
 
   Swal.fire({
     title: "Apakah Anda yakin?",
@@ -339,13 +339,13 @@ window.deleteItem = function (element) {
     cancelButtonText: "Batal",
   }).then((result) => {
     if (result.isConfirmed) {
-      sendDeleteRequest(email); // Melakukan request penghapusan
+      sendDeleteRequest(id); // Melakukan request penghapusan
     }
   });
 };
-function sendDeleteRequest(email) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/master/doktor/delete?email=${encodeURIComponent(
-    email
+function sendDeleteRequest(id) {
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/prodi/primbon/delete?id=${encodeURIComponent(
+    id
   )}`;
   fetch(url, {
     method: "DELETE",
