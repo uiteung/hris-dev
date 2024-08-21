@@ -142,13 +142,13 @@ function createRow(item) {
     <td>${item.keterangan}</td>
     <td>${item.nominal}</td>
     <td>
-        <button class="btn btn-primary btn-sm edit-btn" data-id="${item.jenis}" data-email="${item.jenis}" onclick="editItem(this)">
+        <button class="btn btn-primary btn-sm edit-btn" data-id="${item.id}" data-email="${item.id}" onclick="editItem(this)">
             <i class="mdi mdi-table-edit"></i>
         </button>
-        <button class="btn btn-info btn-sm edit-btn" data-id="${item.jenis}" data-email="${item.jenis}" data-bulan="${item.jenis}" onclick="printoutitem(this)">
+        <button class="btn btn-info btn-sm edit-btn" data-id="${item.id}" data-email="${item.id}" data-bulan="${item.id}" onclick="printoutitem(this)">
         <i class="mdi mdi-cloud-print-outline"></i>
     </button>
-        <button class="btn btn-danger btn-sm delete-btn" data-id="${item.jenis}" data-email="${item.jenis}" onclick="deleteItem(this)">
+        <button class="btn btn-danger btn-sm delete-btn" data-id="${item.id}" data-email="${item.id}" onclick="deleteItem(this)">
             <i class="mdi mdi-delete"></i>
         </button>
     </td>  
