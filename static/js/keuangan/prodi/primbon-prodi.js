@@ -138,7 +138,7 @@ function populateTableWithData(data) {
 
 function createRow(item) {
   return `<tr>
-    <td class="name-email-cell">${ConvertJenisPrimbon(item.jenis)}</td>
+    <td >${ConvertJenisPrimbon(item.jenis)}</td>
 
     <td>${ConvertKeteranganPrimbon(item.keterangan)}</td>
     <td>${item.nominal}</td>
