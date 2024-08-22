@@ -59,7 +59,7 @@ function fetchDataFromSearch(searchKey) {
   const url = `https://hris_backend.ulbi.ac.id/api/v2/prodi/search?key=${searchKey}`;
 
   fetch(url, {
-    method: "POST",
+    method: "GET",
     headers: {
       login: `${token}`,
       Accept: "application/json",
@@ -149,13 +149,13 @@ function createRow(item) {
       <td>${ConvertJenisPrimbon(item.jenisHonor)}</td>
       <td>
         <button class="btn btn-primary btn-sm edit-btn" data-id="${
-          item.nama
+          item.id
         }" onclick="editItem(this)">
           <i class="mdi mdi-table-edit"></i> 
         </button>
         
         <button class="btn btn-danger btn-sm delete-btn" data-id="${
-          item.nama
+          item.id
         }" onclick="deleteItem(this)">
           <i class="mdi mdi-delete"></i> 
         </button>
