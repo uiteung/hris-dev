@@ -172,7 +172,7 @@ function createRow(item) {
 window.editItem = function (element) {
   const id = element.getAttribute("data-id");
   localStorage.setItem("editingId", id);
-  window.location.href = "honor-edit.html";
+  window.location.href = "prodi-edit.html";
 };
 window.printoutitem = function (element) {
   const phone_number = element.getAttribute("data-phone_number");
