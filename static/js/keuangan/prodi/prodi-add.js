@@ -23,18 +23,18 @@ function postData() {
     nama: nama,
     bimbingan: {
       jenisBimbingan1: jenis_pembimbing1,
-      pb1: jml_mhs1,
+      pb1: parseInt(jml_mhs1),
       nominalPB1: parseFloat(0),
       jenisBimbingan2: jenis_pembimbing2,
-      pb2: jml_mhs2,
+      pb2: parseInt(jml_mhs2),
       nominalPB2: parseFloat(0)
     },
     menguji: {
       jenisMenguji1: jenis_penguji1,
-      penguji_utama: jml_mhsU,
+      penguji_utama: parseInt(jml_mhsU),
       nominalPU: parseFloat(0),
       jenisMenguji2: jenis_penguji2,
-      penguji_pendamping: jml_mhsP,
+      penguji_pendamping: parseInt(jml_mhsP),
       nominalPP: parseFloat(0)
     },
     totalHonor: parseFloat(0),
