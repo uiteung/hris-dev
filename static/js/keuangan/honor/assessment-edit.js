@@ -221,7 +221,7 @@ function updateData() {
             setTimeout(
               () =>
                 (window.location.href =
-                  "https://euis.ulbi.ac.id/hris-dev/app/honor/honor-master.html"),
+                  "https://euis.ulbi.ac.id/hris-dev/app/honor/honor-assessment.html"),
               1000
             );
           });
