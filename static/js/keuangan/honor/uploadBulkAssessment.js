@@ -66,6 +66,7 @@ function groupCoursesByInstructor(data) {
       maks_kjm: 0,
       jumlah_kelas: parseInt(row["Jumlah Kelas"]),
       jumlah_temu: parseFloat(row["Jumlah Temu"]),
+      honor_ajar: parseFloat(row["Honor ATS"])
     });
   });
 
@@ -111,11 +112,12 @@ function downloadExcelTemplate() {
       "Jenjang Jabatan",
       "Phone Number",
       "Nama Mata Kuliah",
+      "Jurusan",
+      "Kelas",
       "Jam",
       "Jumlah Kelas",
       "Jumlah Temu",
-      "Jurusan",
-      "Kelas",
+      "Honor ATS",
       "Persentase PPH",
       "Periode Semester",
     ],
