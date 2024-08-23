@@ -93,7 +93,7 @@ function postInstructorData(data) {
         setTimeout(
           () =>
             (window.location.href =
-              "https://euis.ulbi.ac.id/hris-dev/app/honor/assessment-master.html"),
+              "https://euis.ulbi.ac.id/hris-dev/app/honor/honor-assessment.html"),
           1000
         );
       });
