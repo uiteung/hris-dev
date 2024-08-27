@@ -345,56 +345,94 @@
                   <div class="card-header">
                     <h4>Form Insert Primbon Honor Prodi</h4>
                   </div>
-                  <div class="card-body">
-                    <form id="editForm">
-                      <!-- Name Field -->
+                  
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#manualInput" data-bs-toggle="tab">Manual Input</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#bulkUpload" data-bs-toggle="tab">Unggah Excel</a>
+                    </li>
+                </ul>
 
-                      <!-- PPH Deduction -->
-
-                      <div class="mb-3">
-                        <label for="Jenjang jabatan" class="form-label"
-                          >Jenis:</label
-                        >
-                        <select class="form-select" id="jenis" name="jenis">
-                            <option value="" aria-disabled="true"></option>
-                              <option value="proyek">Proyek</option>
-                              <option value="internship">Internship</option>
-                              <option value="ta">Tugas Akhir</option>
-                          </select>
+                <div class="tab-content">
+                  <!-- Manual Input Tab -->
+                  <div class="tab-pane fade show active" id="manualInput">
+                      <div class="row justify-content-center">
+                          <div class="col-md-12">
+                              <div class="card">
+                                  <div class="card-body">
+                                    <form id="editForm">
+                                      <div class="mb-3">
+                                        <label for="Jenjang jabatan" class="form-label"
+                                          >Jenis:</label
+                                        >
+                                        <select class="form-select" id="jenis" name="jenis">
+                                            <option value="" aria-disabled="true"></option>
+                                              <option value="proyek">Proyek</option>
+                                              <option value="internship">Internship</option>
+                                              <option value="ta">Tugas Akhir</option>
+                                          </select>
+                                      </div>
+                                      <div class="mb-3">
+                                        <label for="kategori"  class="form-label"
+                                          >Keterangan Jenis Primbon:</label
+                                        >
+                                        <select class="form-select" id="keterangan" name="keterangan">
+                                            <option value="" aria-disabled="true"></option>
+                                              <option value="pb">Pembimbing Proyek / Internship</option>
+                                              <option value="pb1">Pembimbing 1 Tugas Akhir</option>
+                                              <option value="pb2">Pembimbing 2 Tugas Akhir</option>
+                                              <option value="pu">Penguji Utama</option>
+                                              <option value="pp">Penguji Pendamping</option>
+                                          </select>
+                                      </div>
+                                      <div class="mb-3">
+                                        <label for="ewmp" class="form-label"
+                                          >Nominal :</label
+                                        >
+                                        <input
+                                          class="form-control"
+                                          id="nominal"
+                                          name="nominal"
+                                          type="number"
+                                        />
+                                      </div>
+                                      <button
+                                        id="updatebutton"
+                                        type="button"
+                                        class="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </form>
+                                  </div>
+                              </div>
+                          </div>
                       </div>
-                      <div class="mb-3">
-                        <label for="kategori"  class="form-label"
-                          >Keterangan Jenis Primbon:</label
-                        >
-                        <select class="form-select" id="keterangan" name="keterangan">
-                            <option value="" aria-disabled="true"></option>
-                              <option value="pb">Pembimbing Proyek / Internship</option>
-                              <option value="pb1">Pembimbing 1 Tugas Akhir</option>
-                              <option value="pb2">Pembimbing 2 Tugas Akhir</option>
-                              <option value="pu">Penguji Utama</option>
-                              <option value="pp">Penguji Pendamping</option>
-                          </select>
-                      </div>
-                      <div class="mb-3">
-                        <label for="ewmp" class="form-label"
-                          >Nominal :</label
-                        >
-                        <input
-                          class="form-control"
-                          id="nominal"
-                          name="nominal"
-                          type="number"
-                        />
-                      </div>
-                      <button
-                        id="updatebutton"
-                        type="button"
-                        class="btn btn-primary"
-                      >
-                        Submit
-                      </button>
-                    </form>
                   </div>
+      
+                  <!-- Bulk Upload Tab -->
+                  <div class="tab-pane fade" id="bulkUpload">
+                      <div class="row justify-content-center">
+                          <div class="col-md-12">
+                              <div class="card">
+                                  <div class="card-body">
+                                      <label for="fileUpload" class="form-label">Upload Excel File:</label>
+                                      <input type="file" id="fileUpload" accept=".xlsx, .xls" class="form-control">
+                                      <button type="button" id="bulkUploadButton" class="btn btn-success mt-2" onclick="handleFileUpload()">Upload Bulk Data</button>
+                                      <button type="button" id="templateExcel" class="btn btn-info mt-2" >Unduh Template Excel</button>
+                                      <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none;">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
                 </div>
               </div>
             </div>
@@ -438,6 +476,10 @@
       src="../../static/js/keuangan/prodi/primbon-add.js"
       type="module"
     ></script>
+    <script
+      src="../../static/js/keuangan/prodi/uploadbulkprimbon.js"
+      type="module"
+    ></script>
     <!-- Library Javascript Terkait -->
     <script src="https://cdn.jsdelivr.net/gh/PMBULBI/javascript-fe@0.0.7/jquery-3.6.0.min.js"></script>
     <!-- <script src="../../static/js/keuangan/dikjar/dikjar-add.js" type="module"></script> -->
@@ -449,6 +491,6 @@
         <!-- <script src="../../static/js/controller/sidebar.js" type="module"></script> -->
     <!-- <script src="../../static/js/controller/header.js" type="module"></script>
     <script src="../../static/js/controller/footer.js" type="module"></script> -->
-    <script src="../../static/js/controller/croot.js" type="module"></script>
+    <!-- <script src="../../static/js/controller/croot.js" type="module"></script> -->
   </body>
 </html>
