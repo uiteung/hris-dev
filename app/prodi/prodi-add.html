@@ -329,145 +329,169 @@
         <main class="content">
           <div class="container-fluid p-0">
             <h5 class="right-aligned" style="float: right">
-              <a href="index.html">Home</a> / Tambah Tunjangan Doktor
+              <a href="index.html">Home</a> / Tambah Honor Prodi
             </h5>
-            <h1 class="h3 mb-3"><b>Form Tambah Tunjangan Doktor</b></h1>
-            <div class="col-md-6 mb-3">
-              <input
-                type="hidden"
-                id="titleTextBox"
-                value="Dashboard Presensi Karyawan"
-                disabled
-              />
-              <input
-                type="hidden"
-                id="filenameTextBox"
-                value="presensi_karyawan"
-              />
-            </div>
+            <h1 class="h3 mb-3"><b>Form Tambah Honor Prodi</b></h1>
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#manualInput" data-bs-toggle="tab">Manual Input</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#bulkUpload" data-bs-toggle="tab">Unggah Excel</a>
+              </li>
+          </ul>
+
             <div class="row justify-content-center">
               <div class="col-md-12">
-                <div class="card">
-                  
-                  <div class="card-body">
-                    <form id="editForm">
-                      <!-- Name Field -->
-                      <div class="mb-3">
-                        <label for="name" class="form-label">Nama:</label>
-                        <input type="text" class="form-control" id="name" name="name" autocomplete="off" required>
-                        <div id="customDropdown" class="custom-dropdown" style="display:none;"></div>
+                <div class="tab-content">
+                  <!-- Manual Input Tab -->
+                  <div class="tab-pane fade show active" id="manualInput">
+                      <div class="row justify-content-center">
+                          <div class="col-md-12">
+                              <div class="card">
+                                  <div class="card-body">
+                                    <form id="editForm">
+                                      <!-- Name Field -->
+                                      <div class="mb-3">
+                                        <label for="name" class="form-label">Nama:</label>
+                                        <input type="text" class="form-control" id="name" name="name" autocomplete="off" required>
+                                        <div id="customDropdown" class="custom-dropdown" style="display:none;"></div>
+                                      </div>
+                                    
+                                    
+                
+                                      <!-- Email Field -->
+                                      <div class="mb-3">
+                                        <label for="jenis" class="form-label">Jenis Honor:</label>
+                                        <select class="form-select" id="jenis_honor" name="jenis_honor">
+                                            <option value="" aria-disabled="true"></option>
+                                              <option value="ta">TA - Tugas Akhir</option>
+                                              <option value="proyek">Proyek</option>
+                                              <option value="internship">Internship</option>
+                                          </select>
+                                      </div>
+                
+                                      <!-- Rank (Pangkat) Field -->
+                                      <div class="mb-3">
+                                        <label for="jafung" class="form-label">Jenis Pembimbing:</label>
+                                        <select class="form-select" id="jenis_pembimbing1" name="jenis_pembimbing1">
+                                            <option value="" aria-disabled="true"></option>
+                                              <option value="pb">PB - Pembimbing (Proyek/Internship)</option>
+                                              <option value="pb1">PB1 - Pembimbing 1 (Tugas Akhir)</option>
+                                              <option value="pb2">PB2 - Pembimbing 2 (Tugas Akhir)</option>
+                                          </select>
+                                      </div>
+                
+                                      <!-- Position (Jabatan) Field -->
+                                      <div class="mb-3">
+                                        <label for="jml_mhs" class="form-label"
+                                          >Jumlah Mahasiswa:</label
+                                        >
+                                        <input
+                                          type="number"
+                                          class="form-control"
+                                          id="jml_mhs1"
+                                          name="jml_mhs1"
+                                        />
+                                      </div>
+                
+                                      <div class="mb-3">
+                                        <label for="jafung" class="form-label">Jenis Pembimbing 2: (Abaikan jika jenis Honor Proyek/Internship)</label>
+                                        <select class="form-select" id="jenis_pembimbing2" name="jenis_pembimbing2">
+                                            <option value="" aria-disabled="true"></option>
+                                              <option value="pb">PB - Pembimbing (Proyek/Internship)</option>
+                                              <option value="pb1">PB1 - Pembimbing 1 (Tugas Akhir)</option>
+                                              <option value="pb2">PB2 - Pembimbing 2 (Tugas Akhir)</option>
+                                          </select>
+                                      </div>
+                
+                                      <!-- Position (Jabatan) Field -->
+                                      <div class="mb-3">
+                                        <label for="jml_mhs" class="form-label"
+                                          >Jumlah Mahasiswa:</label
+                                        >
+                                        <input
+                                          type="number"
+                                          class="form-control"
+                                          id="jml_mhs2"
+                                          name="jml_mhs2"
+                                        />
+                                      </div>
+                
+                                      <div class="mb-3">
+                                        <label for="jafung" class="form-label">Jenis Penguji 1:</label>
+                                        <select class="form-select" id="jenis_penguji1" name="jenis_penguji1">
+                                              <option selected value="pu" disabled>PU - Penguji Utama</option>
+                                          </select>
+                                      </div>
+                
+                                      <!-- Position (Jabatan) Field -->
+                                      <div class="mb-3">
+                                        <label for="jml_mhs" class="form-label"
+                                          >Jumlah Mahasiswa:</label
+                                        >
+                                        <input
+                                          type="number"
+                                          class="form-control"
+                                          id="jml_mhsU"
+                                          name="jml_mhsU"
+                                        />
+                                      </div>
+                
+                                      <div class="mb-3">
+                                        <label for="jafung" class="form-label">Jenis Penguji 2:</label>
+                                        <select class="form-select" id="jenis_penguji2" name="jenis_penguji2">
+                                              <option selected value="pp" disabled>PP - Penguji Pendamping</option>
+                                          </select>
+                                      </div>
+                
+                                      <!-- Position (Jabatan) Field -->
+                                      <div class="mb-3">
+                                        <label for="jml_mhs" class="form-label"
+                                          >Jumlah Mahasiswa:</label
+                                        >
+                                        <input
+                                          type="number"
+                                          class="form-control"
+                                          id="jml_mhsP"
+                                          name="jml_mhsP"
+                                        />
+                                      </div>
+                
+                                      <button
+                                        id="updatebutton"
+                                        type="button"
+                                        class="btn btn-primary"
+                                      >
+                                        Submit
+                                      </button>
+                                    </form>
+                                  </div>
+                              </div>
+                          </div>
                       </div>
-                    
-                    
-
-                      <!-- Email Field -->
-                      <div class="mb-3">
-                        <label for="jenis" class="form-label">Jenis Honor:</label>
-                        <select class="form-select" id="jenis_honor" name="jenis_honor">
-                            <option value="" aria-disabled="true"></option>
-                              <option value="ta">TA - Tugas Akhir</option>
-                              <option value="proyek">Proyek</option>
-                              <option value="internship">Internship</option>
-                          </select>
-                      </div>
-
-                      <!-- Rank (Pangkat) Field -->
-                      <div class="mb-3">
-                        <label for="jafung" class="form-label">Jenis Pembimbing:</label>
-                        <select class="form-select" id="jenis_pembimbing1" name="jenis_pembimbing1">
-                            <option value="" aria-disabled="true"></option>
-                              <option value="pb">PB - Pembimbing (Proyek/Internship)</option>
-                              <option value="pb1">PB1 - Pembimbing 1 (Tugas Akhir)</option>
-                              <option value="pb2">PB2 - Pembimbing 2 (Tugas Akhir)</option>
-                          </select>
-                      </div>
-
-                      <!-- Position (Jabatan) Field -->
-                      <div class="mb-3">
-                        <label for="jml_mhs" class="form-label"
-                          >Jumlah Mahasiswa:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="jml_mhs1"
-                          name="jml_mhs1"
-                        />
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="jafung" class="form-label">Jenis Pembimbing 2: (Abaikan jika jenis Honor Proyek/Internship)</label>
-                        <select class="form-select" id="jenis_pembimbing2" name="jenis_pembimbing2">
-                            <option value="" aria-disabled="true"></option>
-                              <option value="pb">PB - Pembimbing (Proyek/Internship)</option>
-                              <option value="pb1">PB1 - Pembimbing 1 (Tugas Akhir)</option>
-                              <option value="pb2">PB2 - Pembimbing 2 (Tugas Akhir)</option>
-                          </select>
-                      </div>
-
-                      <!-- Position (Jabatan) Field -->
-                      <div class="mb-3">
-                        <label for="jml_mhs" class="form-label"
-                          >Jumlah Mahasiswa:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="jml_mhs2"
-                          name="jml_mhs2"
-                        />
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="jafung" class="form-label">Jenis Penguji 1:</label>
-                        <select class="form-select" id="jenis_penguji1" name="jenis_penguji1">
-                              <option selected value="pu" disabled>PU - Penguji Utama</option>
-                          </select>
-                      </div>
-
-                      <!-- Position (Jabatan) Field -->
-                      <div class="mb-3">
-                        <label for="jml_mhs" class="form-label"
-                          >Jumlah Mahasiswa:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="jml_mhsU"
-                          name="jml_mhsU"
-                        />
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="jafung" class="form-label">Jenis Penguji 2:</label>
-                        <select class="form-select" id="jenis_penguji2" name="jenis_penguji2">
-                              <option selected value="pp" disabled>PP - Penguji Pendamping</option>
-                          </select>
-                      </div>
-
-                      <!-- Position (Jabatan) Field -->
-                      <div class="mb-3">
-                        <label for="jml_mhs" class="form-label"
-                          >Jumlah Mahasiswa:</label
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="jml_mhsP"
-                          name="jml_mhsP"
-                        />
-                      </div>
-
-                      <button
-                        id="updatebutton"
-                        type="button"
-                        class="btn btn-primary"
-                      >
-                        Submit
-                      </button>
-                    </form>
                   </div>
-                </div>
+      
+                  <!-- Bulk Upload Tab -->
+                  <div class="tab-pane fade" id="bulkUpload">
+                      <div class="row justify-content-center">
+                          <div class="col-md-12">
+                              <div class="card">
+                                  <div class="card-body">
+                                      <label for="fileUpload" class="form-label">Upload Excel File:</label>
+                                      <input type="file" id="fileUpload" accept=".xlsx, .xls" class="form-control">
+                                      <button type="button" id="bulkUploadButton" class="btn btn-success mt-2" onclick="handleFileUpload()">Upload Bulk Data</button>
+                                      <button type="button" id="templateExcel" class="btn btn-info mt-2" >Unduh Template Excel</button>
+                                      <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none;">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
               </div>
             </div>
           </div>
@@ -512,6 +536,10 @@
       src="../../static/js/keuangan/prodi/prodi-add.js"
       type="module"
     ></script>
+    <script
+    src="../../static/js/keuangan/prodi/uploadbulkprodi.js"
+    type="module"
+  ></script>
     <!-- <script src="../../static/js/keuangan/doktor/doktor-add.js" type="module"></script> -->
     <!-- <script src="../../static/js/keuangan/doktor/doktor-fill.js" type="module"></script> -->
 
