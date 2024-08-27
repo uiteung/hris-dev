@@ -5,6 +5,10 @@ export function ConvertJenisPrimbon(jenis) {
         jenis = "Proyek"
     } else if (jenis == "ta") {
         jenis = "Tugas Akhir"
+    } else if (jenis == "kompehensif") {
+        jenis = "Komprehensif"
+    } else if (jenis == "sempro") {
+        jenis = "Sempro"
     }
     return jenis
 }
