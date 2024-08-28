@@ -27,3 +27,18 @@ export function ConvertKeteranganPrimbon(keterangan) {
     }
     return keterangan
 }
+
+export function ConvertDropdown(keterangan) {
+    let html = ``
+    if (keterangan == "OK") {
+        html = `<option selected value="OK">OK - Laporan Lengkap</option>
+        <option value="TAL">TAL - Tidak Ada Laporan</option>`
+    }else if (keterangan == "TAL"){
+        html = `<option value="OK">OK - Laporan Lengkap</option>
+        <option selected value="TAL">TAL - Tidak Ada Laporan</option>`
+    } else {
+        html = `<option value="OK">OK - Laporan Lengkap</option>
+        <option value="TAL">TAL - Tidak Ada Laporan</option>`
+    }
+    return html
+}
