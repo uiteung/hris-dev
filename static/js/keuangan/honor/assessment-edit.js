@@ -143,6 +143,7 @@ function updateData() {
   const jabatan = document.getElementById("jabatan").value;
   const phoneNumber = document.getElementById("phone_number").value;
   const persentase_pph = document.getElementById("persentase_pph").value;
+  const pph = document.getElementById("pph").value;
   const semester = document.getElementById("semester").value;
   const jenjang_jabatan = document.getElementById("filterKelompok").value;
   const status_dosen = document.getElementById("status").value;
@@ -174,7 +175,8 @@ function updateData() {
     _id : id,
     nama_pengajar: namaPengajar,
     jabatan: jabatan,
-    persentase_pph: parseFloat(persentase_pph),
+    persentase_pph: parseFloat(0),
+    pph: parseFloat(pph),
     jenjang_jabatan : jenjang_jabatan,
     status_dosen : status_dosen,
     phone_number: phoneNumber,
