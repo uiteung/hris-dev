@@ -143,15 +143,38 @@ function populateTableWithData(data) {
 }
 
 function createRow(item) {
+  let mataKuliahHtml = item.kelas
+  .map(
+    (mk) => `
+    <tr>
+      <td>${mk.angkatan}</td>
+      <td>${mk.semester}</td>
+      <td>${mk.kelas}</td>
+      <td>${mk.prodi}</td>
+      <td>${mk.tahapan.tahap1}</td>
+      <td>${mk.honor}</td>
+    </tr>
+  `
+  )
+  .join("");
   return `<tr>
     <td class="name-email-cell">${item.nama}
-
-    <td>${item.angkatan}</td>
-    <td>${item.semester}</td>
-    <td>${item.kelas}</td>
-    <td>${item.prodi}</td>
-    <td>${item.tahapan.tahap1}</td>
-    <td>${item.honor}</td>
+        <td>
+        <table class="nested-table">
+          <thead>
+            <tr>
+              <th style="background-color: #495057; color: white;">Angkatan</th>
+              <th style="background-color: #495057; color: white;">Semester</th>
+              <th style="background-color: #495057; color: white;">Kelas</th>
+              <th style="background-color: #495057; color: white;">Prodi</th>
+              <th style="background-color: #495057; color: white;">Laporan</th>
+              <th style="background-color: #495057; color: white;">Honor</th>
+            </tr>
+          </thead>
+          <tbody>${mataKuliahHtml}</tbody>
+        </table>
+      </td>
+    <td>${item.total_honor}</td>
     <td>${item.pph}</td>
     <td>${item.jumlahdibayarkan}</td>
     <td>${item.masa_perolehan}</td>
