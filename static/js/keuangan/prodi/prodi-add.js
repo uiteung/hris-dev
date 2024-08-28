@@ -5,16 +5,28 @@ function postData() {
 
   const nama = document.getElementById("name").value;
   const jenis_honor = document.getElementById("jenis_honor").value;
-  const jenis_pembimbing1 = document.getElementById("jenis_pembimbing1").value;
-  const jml_mhs1 = document.getElementById("jml_mhs1").value;
-  const jenis_pembimbing2 = document.getElementById("jenis_pembimbing2").value;
-  const jml_mhs2 = document.getElementById("jml_mhs2").value;
+  let jenis_pembimbing1 = document.getElementById("jenis_pembimbing1").value;
+  let jml_mhs1 = document.getElementById("jml_mhs1").value;
+  let jenis_pembimbing2 = document.getElementById("jenis_pembimbing2").value;
+  let jml_mhs2 = document.getElementById("jml_mhs2").value;
   const jenis_penguji1 = document.getElementById("jenis_penguji1").value;
   const jml_mhsU = document.getElementById("jml_mhsU").value;
   const jenis_penguji2 = document.getElementById("jenis_penguji2").value;
   const jml_mhsP = document.getElementById("jml_mhsP").value;
+  var selectElement = document.getElementById('jenis_honor');
+
+  // Get the text of the selected option
+  var nama_proyek = selectElement.options[selectElement.selectedIndex].text;
+
   
   if (jenis_pembimbing2 == "") {
+    jenis_pembimbing2 = "-"
+    jml_mhs2 = 0
+  }
+
+  if (jenis_honor == "komprehensif") {
+    jenis_pembimbing1 = "-"
+    jml_mhs1 = 0
     jenis_pembimbing2 = "-"
     jml_mhs2 = 0
   }
@@ -41,7 +53,8 @@ function postData() {
     persentasepph: parseFloat(0),
     pph: parseFloat(0),
     dibayarkan: parseFloat(0),
-    jenisHonor: jenis_honor
+    jenisHonor: jenis_honor,
+    nama_proyek: nama_proyek
   };
 
   const options = {
