@@ -57,6 +57,7 @@ function postData() {
   const jenjang_jabatan = document.getElementById("filterKelompok").value;
   const jabatan = document.getElementById("jabatan").value;
   const persentase_pph = document.getElementById("persentase_pph").value;
+  const pph = document.getElementById("pph").value;
   const semester = document.getElementById("semester").value;
   const mata_kuliah = Array.from(
     document.getElementsByClassName("courseItem")
@@ -82,7 +83,8 @@ function postData() {
     jenjang_jabatan: jenjang_jabatan,
     mata_kuliah: mata_kuliah,
     jabatan: jabatan,
-    persentase_pph: parseFloat(persentase_pph),
+    persentase_pph: parseFloat(0),
+    pph: parseFloat(pph),
     periode_semester: semester,
   };
 
