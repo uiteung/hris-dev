@@ -51,7 +51,8 @@ function groupCoursesByInstructor(data) {
         jabatan: row["Jabatan"],
         jenjang_jabatan: row["Jenjang Jabatan"],
         phone_number: row["Phone Number"],
-        persentase_pph: parseFloat(row["Persentase PPH"]),
+        persentase_pph: 0,
+        pph: parseFloat(row["Nominal PPH"]),
         periode_semester: row["Periode Semester"],
 
         mata_kuliah: [],
@@ -116,7 +117,7 @@ function downloadExcelTemplate() {
       "Jumlah Temu",
       "Jurusan",
       "Kelas",
-      "Persentase PPH",
+      "Nominal PPH",
       "Periode Semester",
     ],
   ];
