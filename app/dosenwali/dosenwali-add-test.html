@@ -327,130 +327,171 @@
 
         <!-- Main Content Start -->
         <main class="content">
-            <div class="container-fluid p-0">
-                <h5 class="right-aligned" style="float: right">
-                    <a href="index.html">Home</a> / Tambah Data Honor
-                </h5>
-                <h1 class="h3 mb-3"><b>Form Tambah Data Honor</b></h1>
-        
-                <!-- Tab Navigation for Different Input Methods -->
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#manualInput" data-bs-toggle="tab">Manual Input</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#bulkUpload" data-bs-toggle="tab">Unggah Excel</a>
-                    </li>
-                </ul>
-        
-                <!-- Tab Content -->
-                <div class="tab-content">
-                    <!-- Manual Input Tab -->
-                    <div class="tab-pane fade show active" id="manualInput">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <form id="editForm" method="POST" action="/your-endpoint-url">
-                                            <!-- Name Field -->
-                                            <div class="mb-3">
-                                              <label for="name" class="form-label">Nama:</label>
-                                              <input type="text" class="form-control" id="name" name="name" autocomplete="off" required>
-                                              <div id="customDropdown" class="custom-dropdown" style="display:none;"></div>
-                                            </div>                                     
-                                            <!-- Phone Number Field -->
-                                            <!-- Dynamic Courses Input -->
-                                            <div id="courseList">
-                                                <div class="courseItem mb-3">
-                                                  <h5>Detail Kelas Walian</h5>
-                                                  <label for="nama_matkul" class="form-label">Angkatan:</label>
-                                                  <input type="text" class="form-control" name="angkatan[]">
-                                          
-                                                  <label for="jurusan" class="form-label">Program Studi:</label>
-                                                  <input type="text" class="form-control" name="jurusan[]">
-                                          
-                                                  <label for="kelas" class="form-label">Semester:</label>
-                                                  <input type="text" class="form-control" name="semester[]">
-
-                                                  <label for="kelas" class="form-label">Kelas:</label>
-                                                  <input type="text" class="form-control" name="kelas[]">
-                                          
-                                                  <label for="jam" class="form-label">Laporan Perwalian:</label>
-                                                  <select class="form-select" id="laporan" step="0.1" name="laporan[]">
-                                                    <option value="" aria-disabled="true"></option>
-                                                      <option value="OK">OK - Laporan Lengkap</option>
-                                                      <option value="TAL">TAL - Tidak Ada Laporan</option>
-                                                  </select>
-
-                                                  <label for="Honor" class="form-label">Honor:</label>
-                                                  <input type="number" class="form-control" name="honor[]">
-
-                                                  <br>
-                                                  <button type="button" id="removeButton" class="btn btn-primary removeButton" onclick="removeCourse(this)">Hapus Kelas Walian</button>
-                                                  <br>
-                                                </div>
-                                            </div>
-                                            
-                                            <button type="button" id="addButton" class="btn btn-info" onclick="addCourse()">Tambah Kelas Walian</button>
-                                            
-                                            <br>
-                                            
-                                            <br>
-                                            <div class="mb-3">
-                                              <label for="name" class="form-label" hidden>Persentase PPH:</label>
-                                              <input type="text" class="form-control" id="persentase_pph" name="persentase_pph" autocomplete="off">
-                                            </div>
-                                            
-                                            <div class="mb-3">
-                                              <label for="semester" class="form-label">Masa Perolehan:</label>
-                                              <select class="form-select" id="masa_perolehan" name="masa_perolehan">
-                                                <option value="" aria-disabled="true"></option>
-                                                  <option value="Januari">Januari</option>
-                                                  <option value="Februari">Februari</option>
-                                                  <option value="Maret">Maret</option>
-                                                  <option value="April">April</option>
-                                                  <option value="Mei">Mei</option>
-                                                  <option value="Juni">Juni</option>
-                                                  <option value="Juli">Juli</option>
-                                                  <option value="Agustus">Agustus</option>
-                                                  <option value="September">September</option>
-                                                  <option value="Oktober">Oktober</option>
-                                                  <option value="November">November</option>
-                                                  <option value="Desember">Desember</option>
-                                              </select>
-                                            </div>
-                                            
-                                            
-                                            <!-- Submit Button -->
-                                            <button type="button" id="updateButton" class="btn btn-primary">Submit</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <!-- Bulk Upload Tab -->
-                    <div class="tab-pane fade" id="bulkUpload">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <label for="fileUpload" class="form-label">Upload Excel File:</label>
-                                        <input type="file" id="fileUpload" accept=".xlsx, .xls" class="form-control">
-                                        <button type="button" id="bulkUploadButton" class="btn btn-success mt-2" onclick="handleFileUpload()">Upload Bulk Data</button>
-                                        <button type="button" id="templateExcel" class="btn btn-info mt-2" >Unduh Template Excel</button>
-                                        <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none;">
-                                          <span class="sr-only">Loading...</span>
-                                      </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <div class="container-fluid p-0">
+            <h5 class="right-aligned" style="float: right">
+              <a href="index.html">Home</a> / Tambah Honor Dosen Wali
+            </h5>
+            <h1 class="h3 mb-3"><b>Form Tambah Honor Dosen Wali</b></h1>
+            <div class="col-md-6 mb-3">
+              <input
+                type="hidden"
+                id="titleTextBox"
+                value="Dashboard Presensi Karyawan"
+                disabled
+              />
+              <input
+                type="hidden"
+                id="filenameTextBox"
+                value="presensi_karyawan"
+              />
             </div>
+            <div class="row justify-content-center">
+              <div class="col-md-12">
+                <div class="card">
+                  
+                  <div class="card-body">
+                    <form id="editForm">
+                      <!-- Name Field -->
+                      <div class="mb-3">
+                        <label for="name" class="form-label">Nama:</label>
+                        <input type="text" class="form-control" id="name" name="name" autocomplete="off" required>
+                        <div id="customDropdown" class="custom-dropdown" style="display:none;"></div>
+                      </div>
+                    
+                      <div id="courseList">
+                        <div class="courseItem mb-3">
+                          <h5>Detail Kelas Walian</h5>
+                          <label for="angkatan" class="form-label">Angkatan:</label>
+                          <input
+                            type="text"
+                            step="0.1"
+                            class="form-control"
+                            id="angkatan"
+                            name="angkatan[]"
+                            required
+                          />
+                  
+                          <label for="semester" class="form-label">Semester:</label>
+                          <input
+                            type="text"
+                            step="0.1"
+                            class="form-control"
+                            id="semester"
+                            name="semester[]"
+                          />
+                          <label for="kelas" class="form-label"
+                          >Kelas:</label
+                        >
+                        <input
+                          type="text"
+                          step="0.1"
+                          class="form-control"
+                          id="kelas"
+                          name="kelas[]"
+                        />
+                  
+                        <label for="prodi" class="form-label"
+                          >Prodi:</label
+                        >
+                        <input
+                          type="text"
+                          step="0.1"
+                          class="form-control"
+                          id="prodi"
+                          name="prodi[]"
+                        />
+
+                        <div class="mb-3">
+                          <label for="laporan" class="form-label"
+                            >Laporan Perwalian:</label
+                          >
+                          <select class="form-select" id="laporan" step="0.1" name="laporan[]">
+                            <option value="" aria-disabled="true"></option>
+                              <option value="OK">OK - Laporan Lengkap</option>
+                              <option value="TAL">TAL - Tidak Ada Laporan</option>
+                          </select>
+
+                          <label for="prodi" class="form-label"
+                          >Honor:</label
+                        >
+                        <input
+                          type="number"
+                          step="0.1"
+                          class="form-control"
+                          id="honor"
+                          name="honor[]"
+                        />
+                          <br>
+                          <button type="button" id="removeButton" class="btn btn-primary removeButton" onclick="removeCourse(this)">Hapus Kelas Walian</button>
+                          <br>
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="addButton" class="btn btn-info" onclick="addCourse()">Tambah Kelas Walian</button>
+                    
+                    <br>
+                    <br>
+
+                      <!-- Basic Salary Field -->
+                      <div class="mb-3">
+                        <label for="honor" class="form-label"
+                          >Persentase PPH:</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="persentasepph"
+                          name="persentasepph"
+                        />
+                      </div>
+
+                      <!-- Performance Allowance Field -->
+                      <div class="mb-3">
+                        <label for="masa_perolehan" class="form-label">Masa Perolehan:</label>
+                        <select class="form-select" id="masa_perolehan" name="masa_perolehan">
+                          <option value="" aria-disabled="true"></option>
+                            <option value="Januari">Januari</option>
+                            <option value="Februari">Februari</option>
+                            <option value="Maret">Maret</option>
+                            <option value="April">April</option>
+                            <option value="Mei">Mei</option>
+                            <option value="Juni">Juni</option>
+                            <option value="Juli">Juli</option>
+                            <option value="Agustus">Agustus</option>
+                            <option value="September">September</option>
+                            <option value="Oktober">Oktober</option>
+                            <option value="November">November</option>
+                            <option value="Desember">Desember</option>
+                        </select>
+                    </div>
+                    
+
+                      <!-- Expertise Allowance Field -->
+                      <div class="mb-3">
+                        <label for="validasi" class="form-label">Validasi:</label>
+                        <select class="form-select" id="validasi" name="validasi">
+                          <option value="" aria-disabled="true"></option>
+                            
+                            <option value="true">Valid</option>
+                            <option value="false">Tidak Valid</option>
+                        </select>
+                    </div>
+
+                      
+
+                      <button
+                        id="updatebutton"
+                        type="button"
+                        class="btn btn-primary"
+                      >
+                        Submit
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </main>
 
         <!-- Main Content End -->
@@ -489,21 +530,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
     <!-- <script src="https://unpkg.com/jspdf-invoice"></script> -->
     <!-- <script
-      
       src="../static/js/keuangan/master-data-edit.js"
       type="module"
     ></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="../../static/js/keuangan/dosenwali/doswal-addrow.js" type="module"></script>
 
-    <script src="../../static/js/keuangan/honor/honor-add-row.js" type="module">
-                       
-    </script>
-    <script src="../../static/js/keuangan/prodi/prodi-add.js" type="module">
-     
-    </script>
-        <script src="../../static/js/keuangan/honor/honor-fill.js" type="module"></script>
-
-    <script src="../../static/js/keuangan/honor/uploadBulkAction.js" type="module"></script>
+    <script src="../../static/js/keuangan/dosenwali/dosenwali-add.js" type="module"></script>
+    <!-- <script src="../../static/js/keuangan/doktor/doktor-fill.js" type="module"></script> -->
 
     <!-- Library Javascript Terkait -->
     <script src="https://cdn.jsdelivr.net/gh/PMBULBI/javascript-fe@0.0.7/jquery-3.6.0.min.js"></script>
@@ -514,7 +547,7 @@
     <script src="../../static/js/app.js"></script>
         <!-- <script src="../../static/js/controller/sidebar.js" type="module"></script> -->
     <!-- <script src="../../static/js/controller/header.js" type="module"></script>
-    <script src="../../static/js/controller/footer.js" type="module"></script>-->
-     <script src="../../static/js/controller/croot.js" type="module"></script> 
+    <script src="../../static/js/controller/footer.js" type="module"></script> -->
+    <script src="../../static/js/controller/croot.js" type="module"></script>
   </body>
 </html>
