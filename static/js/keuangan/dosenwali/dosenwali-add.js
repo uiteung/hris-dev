@@ -4,27 +4,28 @@ function postData() {
   const url = "https://hris_backend.ulbi.ac.id/api/v2/dosenwali/insert";
 
   const nama = document.getElementById("name").value;
-  const angkatan = document.getElementById("angkatan").value;
-  const kelas = document.getElementById("kelas").value;
-  const semester =
-    document.getElementById("semester").value;
-  const prodi = document.getElementById("prodi").value;
-  const laporan = document.getElementById("laporan").value;
-  console.log(laporan)
-  const honor = document.getElementById("honor").value;
   const masa_perolehan = document.getElementById("masa_perolehan").value;
+  const classes = Array.from(
+    document.getElementsByClassName("courseItem")
+  ).map((course) => ({
+    angkatan: course.querySelector('[name="angkatan[]"]').value,
+    prodi: course.querySelector('[name="jurusan[]"]').value,
+    semester: course.querySelector('[name="semester[]"]').value,
+    kelas: course.querySelector('[name="kelas[]"]').value,
+    tahapan: {
+      tahap1: course.querySelector('[name="laporan[]"]').value,
+      tahap2:course.querySelector('[name="laporan[]"]').value,
+    },
+    honor: parseFloat(
+      course.querySelector('[name="honor[]"]').value
+    ),
+  }));
+  const persentase_pph = document.getElementById("persentase_pph").value;
 
   const data = {
     nama: nama,
-    angkatan: angkatan,
-    kelas: kelas,
-    semester: semester,
-    prodi: prodi,
-    tahapan: {
-      tahap1 : laporan,
-      tahap2 : laporan,
-    },
-    honor: parseFloat(honor),
+    kelas: classes,
+    persentase_pph: parseFloat(persentase_pph),
     jumlahdibayarkan: parseFloat(0),
     masa_perolehan: masa_perolehan
   };
