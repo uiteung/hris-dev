@@ -146,7 +146,7 @@ function createRow(item) {
       <td>${item.totalHonor.toLocaleString()}</td>
       <td>${item.pph.toLocaleString()}</td>
       <td>${item.dibayarkan}</td>
-      <td>${ConvertJenisPrimbon(item.jenisHonor)}</td>
+      <td>${ConvertJenisPrimbon(item.nama_proyek)}</td>
       <td>
         <button class="btn btn-primary btn-sm edit-btn" data-id="${
           item.id
