@@ -1,117 +1,115 @@
 import { token } from "../../controller/cookies.js";
-//
-let id = ""
-document.addEventListener("DOMContentLoaded", function () {
-  id = localStorage.getItem("editingid");
-  if (id) {
-    fetchUserDataByid(id);
-  } else {
-    console.error("No id found in localStorage.");
-    Swal.fire("Error", "id tidak ditemukan di penyimpanan lokal.", "error");
-  }
+import { ConvertDropdown } from "../prodi/utils.js";
+
+const urlDropdown = "https://hris_backend.ulbi.ac.id/api/v2/honour/dikjar/pilihan"
+document.addEventListener("DOMContentLoaded", () => {
+  // GetDropdownData()
 });
 
-function fetchUserDataByid(id) {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/dosenwali/byid?_id=${encodeURIComponent(
-    id
-  )}`;
+async function GetDropdownData() {
+  const optionsDrop = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      login: `${token}`,
+    },
+  };
+  
+  try {
+    const response = await fetch(urlDropdown, optionsDrop);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    // console.log(data)
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    Swal.fire("Failed!", "There was an issue submitting your data.", "error");
+    return null;
+  }
+ 
+}
+
+function fetchDataById(id) {
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/dosenwali/byid?_id=${id}`;
   fetch(url, {
     method: "GET",
     headers: {
-      login: token,
-      Accept: "application/json",
+      login: ` ${token}`, // Assuming you use Bearer token for authentication
       "Content-Type": "application/json",
     },
   })
     .then((response) => response.json())
-    .then((data) => {
-      if (data.code === 200 && data.success) {
-        populateForm(data.data); // Mengisi form dengan data yang didapat
+    .then((result) => {
+      // console.log(result.data)
+      if (result.code === 200 && result.success) {
+        populateForm(result.data);
       } else {
-        Swal.fire(
-          "Informasi",
-          "Gagal mengambil data: " + (data.status || "Status tidak diketahui"),
-          "error"
-        );
+        Swal.fire("Error", "Failed to fetch data: " + result.status, "error");
       }
     })
     .catch((error) => {
-      console.error("Error fetching data:", error);
-      Swal.fire(
-        "Error",
-        "Terjadi kesalahan saat mengambil data: " + error.message,
-        "error"
-      );
+      console.error("Error:", error);
+      Swal.fire("Error", "An error occurred while fetching data.", "error");
     });
 }
-function formatRupiah(number) {
-  const format = number.toLocaleString("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    minimumFractionDigits: 0,
+
+function populateForm(data) {
+  // console.log(data)
+  document.getElementById("name").value = data.nama;
+  document.getElementById("persentase_pph").value = data.persentase_pph;
+
+
+  const courseListDiv = document.getElementById("courseList");
+  courseListDiv.innerHTML = ""; // Clear existing courses
+
+  data.kelas.forEach((course) => {
+    addCourse(course);
   });
-  return format;
-}
-function formatAsRupiah(input) {
-  let value = input.value;
-  // Remove all characters except digits and comma
-  value = value.replace(/[^0-9]/g, "");
-  // Convert string to an integer
-  let number = parseInt(value, 10);
-  if (isNaN(number)) {
-    number = 0;
-  }
-  // Format the number with Indonesian locale to add thousand separators
-  value = number.toLocaleString("id-ID");
-  // Prepend 'Rp' and a space to denote Rupiah
-  input.value = `Rp ${value}`;
-}
-
-// Attach event listeners to the input fields
-document.addEventListener("DOMContentLoaded", function () {
-  const currencyFields = ["pph"];
-  currencyFields.forEach((fieldId) => {
-    const inputField = document.getElementById(fieldId);
-    inputField.addEventListener("input", () => formatAsRupiah(inputField));
-  });
-});
-
-const nama = document.getElementById("name").value;
-const angkatan = document.getElementById("angkatan").value;
-const kelas = document.getElementById("kelas").value;
-const semester =
-  document.getElementById("semester").value;
-const prodi = document.getElementById("prodi").value;
-const laporan = document.getElementById("laporan").value;
-console.log(laporan)
-const honor = document.getElementById("honor").value;
-const masa_perolehan = document.getElementById("masa_perolehan").value;
-
-function populateForm(userData) {
-  document.getElementById("name").value = userData.nama || "";
-  document.getElementById("angkatan").value = userData.angkatan || "";
-  document.getElementById("kelas").value = userData.kelas || "";
-  document.getElementById("semester").value =
-    userData.semester || "";
-
-    document.getElementById("prodi").value = 
-    userData.prodi || "";
-    document.getElementById("laporan").value = 
-    userData.laporan || "";
-    document.getElementById("honor").value = formatRupiah(userData.honor || 0);
-    document.getElementById("pph").value = formatRupiah(userData.pph || 0);
-  // document.getElementById("tunjangan").value = formatRupiah(
-  //   userData.tunjangan || 0
-  // );
-  document.getElementById("validasi").value = userData.validasi || "";
-
-  if (userData.masa_perolehan) {
+  if (data.masa_perolehan) {
     const masaPerolehan = document.getElementById("masa_perolehan");
     const formattedMasaPerolehan = capitalize(
-      userData.masa_perolehan.toLowerCase()
+      data.masa_perolehan.toLowerCase()
     );
     selectDropdownOption(masaPerolehan, formattedMasaPerolehan);
   }
+}
+
+function addCourse(course) {
+  const courseListDiv = document.getElementById("courseList");
+  const div = document.createElement("div");
+  div.className = "courseItem mb-3";
+  div.innerHTML = `
+         <h5>Detail Kelas Walian</h5>
+         <label for="nama_matkul" class="form-label">Angkatan:</label>
+         <input type="text" class="form-control" name="angkatan[]" value="${course.angkatan}">
+ 
+         <label for="jurusan" class="form-label">Program Studi:</label>
+         <input type="text" class="form-control" name="jurusan[]" value="${course.prodi}">
+ 
+         <label for="kelas" class="form-label">Semester:</label>
+         <input type="text" class="form-control" name="semester[]" value="${course.semester}">
+
+         <label for="kelas" class="form-label">Kelas:</label>
+         <input type="text" class="form-control" name="kelas[]" value="${course.kelas}">
+ 
+         <label for="jam" class="form-label">Laporan Perwalian:</label>
+         <select class="form-select" id="laporan" step="0.1" name="laporan[]">
+           <option value="" aria-disabled="true"></option>
+            ${ConvertDropdown(course.tahapan.tahap1)}
+         </select>
+
+         <label for="Honor" class="form-label">Honor:</label>
+         <input type="number" class="form-control" name="honor[]" value="${course.honor}">
+
+         <br>
+         <button type="button" id="removeButton" class="btn btn-primary removeButton" onclick="removeCourse(this)">Hapus Kelas Walian</button>
+         <br>
+    `;
+  courseListDiv.appendChild(div);
+
+
 }
 
 function capitalize(text) {
@@ -121,7 +119,6 @@ function capitalize(text) {
     .join(" ");
 }
 
-// Function to select the correct dropdown option
 function selectDropdownOption(dropdown, valueToSelect) {
   for (const option of dropdown.options) {
     if (option.value === valueToSelect) {
@@ -131,84 +128,99 @@ function selectDropdownOption(dropdown, valueToSelect) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const buttonupdate = document.getElementById("updatebutton");
-  buttonupdate.addEventListener("click", function (event) {
-    event.preventDefault();
-    Swal.fire({
-      title: "Konfirmasi",
-      text: "Apakah Anda yakin ingin memperbarui data ini?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Ya, perbarui data!",
-      cancelButtonText: "Batal",
-    }).then((result) => {
-      if (result.value) {
-        updateUserData();
-      }
-    });
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  const id = localStorage.getItem("editingid"); // Retrieve the ID from localStorage
+  if (id) {
+    fetchDataById(id);
+  } else {
+    console.error("No ID found in localStorage.");
+    Swal.fire("Error", "No valid ID was provided for editing.", "error");
+  }
 });
 
-function updateUserData() {
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/dosenwali/update?id=${encodeURIComponent(
-    id
-  )}`;
-  const parseRupiahToFloat = (value) => {
-    return parseFloat(value.replace(/[^0-9]/g, ""));
-  };
-
-  const formData = {
-    nama: document.getElementById("name").value,
-    angkatan: document.getElementById("angkatan").value,
-    kelas: document.getElementById("kelas").value,
-    semester: document.getElementById("semester").value,
-    prodi: document.getElementById("prodi").value ,
+function updateData() {
+  const id = localStorage.getItem("editingid"); // Assuming the ID is stored in localStorage
+  const nama = document.getElementById("name").value;
+  const persentase_pph = document.getElementById("persentase_pph").value;
+  const masa_perolehan = document.getElementById("masa_perolehan").value;
+  const mataKuliahElements = document.querySelectorAll(".courseItem");
+  const classes = Array.from(mataKuliahElements).map((course) => ({
+    angkatan: course.querySelector('[name="angkatan[]"]').value,
+    prodi: course.querySelector('[name="jurusan[]"]').value,
+    semester: course.querySelector('[name="semester[]"]').value,
+    kelas: course.querySelector('[name="kelas[]"]').value,
     tahapan: {
-      tahap1 : document.getElementById("laporan").value,
-      tahap2 : document.getElementById("laporan").value,
+      tahap1: course.querySelector('[name="laporan[]"]').value,
+      tahap2:course.querySelector('[name="laporan[]"]').value,
     },
-    honor: parseRupiahToFloat(document.getElementById('honor').value),
-    pph: parseRupiahToFloat(document.getElementById('pph').value),
-    masa_perolehan: document.getElementById("masa_perolehan").value
+    honor: parseFloat(
+      course.querySelector('[name="honor[]"]').value
+    ),
+  }));
+
+  const data = {
+    nama: nama,
+    kelas: classes,
+    persentase_pph: parseFloat(persentase_pph),
+    jumlahdibayarkan: parseFloat(0),
+    masa_perolehan: masa_perolehan
   };
 
-  fetch(url, {
+  if (!id) {
+    console.error("No ID found in localStorage.");
+    Swal.fire("Error", "No valid ID was provided for editing.", "error");
+    return;
+  }
+
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/dosenwali/update?id=${id}`;
+
+  const options = {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      login: token,
+      login: ` ${token}`, // Correct header for token authentication
     },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        Swal.fire({
-          title: "Berhasil!",
-          text: "Data telah berhasil diperbarui.",
-          icon: "success",
-          confirmButtonText: "OK",
-        }).then((result) => {
-          setTimeout(
-            () =>
-              (window.location.href =
-                "https://euis.ulbi.ac.id/hris-dev/app/dosenwali/dosenwali-master.html"),
-            1000
+    body: JSON.stringify(data),
+  };
+
+  Swal.fire({
+    title: "Anda Yakin?",
+    text: "Kamu ingin mengirim data!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, submit it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch(url, options)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          Swal.fire(
+            "Submitted!",
+            "Your data has been submitted.",
+            "success"
+          ).then(() => {
+            setTimeout(
+              () =>
+                (window.location.href =
+                  "https://euis.ulbi.ac.id/hris-dev/app/dosenwali/dosenwali-master.html"),
+              1000
+            );
+          });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          Swal.fire(
+            "Failed!",
+            "There was an issue submitting your data.",
+            "error"
           );
         });
-      } else {
-        Swal.fire("Error", "Gagal memperbarui data: " + data.message, "error");
-      }
-    })
-    .catch((error) => {
-      console.error("Error updating user data:", error);
-      Swal.fire(
-        "Error",
-        "Terjadi kesalahan saat memperbarui data: " + error.message,
-        "error"
-      );
-    });
+    }
+  });
 }
+
+// Add an event listener or a button to trigger the updateData function
+document.getElementById("updatebutton").addEventListener("click", updateData);
