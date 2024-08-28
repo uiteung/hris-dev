@@ -78,7 +78,7 @@ function populateForm(data) {
   document.getElementById("filterKelompok").value = data.jenjang_jabatan;
   document.getElementById("status").value = data.status_dosen;
   // document.getElementById("total_honor").value = data.total_honor;
-  // document.getElementById("pph").value = data.pph;
+  document.getElementById("pph").value = data.pph;
 
   const courseListDiv = document.getElementById("courseList");
   courseListDiv.innerHTML = ""; // Clear existing courses
@@ -146,6 +146,7 @@ function updateData() {
   const semester = document.getElementById("semester").value;
   const jenjang_jabatan = document.getElementById("filterKelompok").value;
   const status_dosen = document.getElementById("status").value;
+  const pph = document.getElementById("pph").value;
 
   const mataKuliahElements = document.querySelectorAll(".courseItem");
   const mataKuliah = Array.from(mataKuliahElements).map((courseElement) => ({
@@ -174,6 +175,7 @@ function updateData() {
     nama_pengajar: namaPengajar,
     jabatan: jabatan,
     persentase_pph: parseFloat(persentase_pph),
+    pph: parseFloat(pph),
     jenjang_jabatan : jenjang_jabatan,
     status_dosen : status_dosen,
     phone_number: phoneNumber,
