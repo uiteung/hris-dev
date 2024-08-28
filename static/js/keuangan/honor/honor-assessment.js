@@ -179,7 +179,7 @@ function createRow(item) {
       <td>${item.total_honor.toLocaleString()}</td>
       <td>${item.pph.toLocaleString()}</td>
       <td>${item.maksimal_mengajar}</td>
-      <td>${convertToPercentage(item.persentase_pph)}</td>
+      <td>${convertToPercentage(item.persentase_pph.toLocaleString())}</td>
 
       <td>${item.jumlah_dibayar}</td>
       <td>${item.periode_semester}</td>
