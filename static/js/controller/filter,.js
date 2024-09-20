@@ -1,5 +1,5 @@
-import { postWithToken } from "https://jscroot.github.io/api/croot.js";
-import  { getValue } from "https://jscroot.github.io/element/croot.js";
+import { postWithToken } from "https://jscroot.if.co.id/api/croot.js";
+import  { getValue } from "https://jscroot.if.co.id/element/croot.js";
 import { getLastMonth,  responseFilter } from "./control.js";
 import { UrlFilterGaji } from "./template.js";
 import { token } from "./cookies.js";
