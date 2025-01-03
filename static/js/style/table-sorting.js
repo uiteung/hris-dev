@@ -31,7 +31,7 @@ function getCookieValue(cookieName) {
 const role = decryptRole();
 
 const sidebarMenus = document.getElementById("sidebar-menus");
-const tableHeader = document.getElementById("example");
+const tableHeader = document.getElementById("headerTable");
 
 console.log(role);
 
@@ -319,7 +319,6 @@ if (role === "DTI" || role === "keuangan") {
   `;
 
   tableHeader.innerHTML = `
-  <thead>
 				<tr
 				  style="text-align: center; vertical-align: middle"
 				>
@@ -354,7 +353,6 @@ if (role === "DTI" || role === "keuangan") {
 				  <th id="linkDokumenTh">Total Gaji Potongan</th>
 				  <th id="linkDokumenTh">Action</th>
 				</tr>
-			  </thead>
 `;
 } else {
   sidebarMenus.innerHTML = `
@@ -384,7 +382,6 @@ if (role === "DTI" || role === "keuangan") {
   `;
 
   tableHeader.innerHTML = `
-  <thead>
 				<tr
 				  style="text-align: center; vertical-align: middle"
 				>
@@ -399,7 +396,6 @@ if (role === "DTI" || role === "keuangan") {
 				  <th id="linkDokumenTh">Total Gaji Potongan</th>
 				  <th id="linkDokumenTh">Action</th>
 				</tr>
-			  </thead>
 `;
 }
 

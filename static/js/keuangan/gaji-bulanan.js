@@ -135,6 +135,9 @@ function fetchDataFromHRIS(page) {
       return response.json();
     })
     .then((data) => {
+      console.log(data);
+      
+
       if (!data.data.data_query || data.data.data_query.length === 0) {
         Swal.fire("Informasi", "Tidak ada data lebih lanjut.", "info");
         return;
