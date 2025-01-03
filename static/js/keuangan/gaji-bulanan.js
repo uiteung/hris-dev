@@ -1,6 +1,95 @@
 import { getLastMonth } from "../controller/control.js";
 import { token } from "../controller/cookies.js";
 
+const SECRET_KEY = "!uLBi123!"; // Pastikan kunci sama dengan yang digunakan untuk enkripsi
+
+function decryptRole() {
+  const encryptedRole = getCookieValue("hris-role");
+  if (!encryptedRole) {
+    console.error("No encrypted role found in cookies.");
+    return null;
+  }
+
+  try {
+    // Dekripsi nilai dari cookie
+    const bytes = CryptoJS.AES.decrypt(encryptedRole, SECRET_KEY);
+    const decryptedRole = bytes.toString(CryptoJS.enc.Utf8);
+
+    // Kembalikan role yang didekripsi
+    return decryptedRole;
+  } catch (error) {
+    console.error("Failed to decrypt role:", error);
+    return null;
+  }
+}
+
+// Fungsi untuk membaca cookie
+function getCookieValue(cookieName) {
+  const cookies = document.cookie.split("; ");
+  const cookie = cookies.find((row) => row.startsWith(`${cookieName}=`));
+  return cookie ? cookie.split("=")[1] : null;
+}
+
+// Dekripsi dan cetak hasilnya
+const role = decryptRole();
+
+const tableHeader = document.getElementById("headerTable");
+
+if (role === "DTI" || role === "keuangan") {
+  tableHeader.innerHTML = `
+   <tr
+                            style="text-align: center; vertical-align: middle"
+                          >
+                            <th
+                              class="name-email-header"
+                              style="background-color: #2b343d"
+                            >
+                              Nama
+                            </th>
+                            <!-- <th id="posisiTh">Jabatan</th> -->
+                            <th id="statusTh">Gaji Pokok</th>
+                            <th id="tanggalTh">Keluarga</th>
+                            <th id="DurasiTh">Pangan</th>
+                            <th id="pctDurasiTh">KPI</th>
+                            <th id="keteranganTh">Keahlian</th>
+                            <!-- <th id="linkDokumenTh">Struktural</th> -->
+
+                            <th id="linkDokumenTh">FGS/Struktural</th>
+                            <th id="linkDokumenTh">Transport</th>
+                            <th id="linkDokumenTh">Kehadiran</th>
+                            <th id="linkDokumenTh">Rapel Gaji</th>
+
+                            <th id="linkDokumenTh">Kopkar</th>
+                            <th id="linkDokumenTh">Bank Jabar</th>
+                            <th id="linkDokumenTh">Arisan</th>
+                            <th id="linkDokumenTh">BPJS TK</th>
+                            <th id="linkDokumenTh">BAUK</th>
+                            <th id="linkDokumenTh">Lain - lain</th>
+                            <th id="linkDokumenTh">PPH</th>
+                            <th id="linkDokumenTh">Total Gaji</th>
+                            <th id="linkDokumenTh">Total Gaji Bersih</th>
+                            <th id="linkDokumenTh">Total Gaji Potongan</th>
+                            <th id="linkDokumenTh">Action</th>
+                          </tr>`
+} else {
+  tableHeader.innerHTML = `
+   <tr
+                            style="text-align: center; vertical-align: middle"
+                          >
+                            <th
+                              class="name-email-header"
+                              style="background-color: #2b343d"
+                            >
+                              Nama
+                            </th>
+                            <th id="linkDokumenTh">Total Gaji</th>
+                            <th id="linkDokumenTh">Total Gaji Bersih</th>
+                            <th id="linkDokumenTh">Total Gaji Potongan</th>
+                            <th id="linkDokumenTh">Action</th>
+                          </tr>
+  `
+}
+
 let allData = []; // Holds the current page data for filtering
 let currentPage = 1; // Start from the first page
 const baseUrlsearch = "https://hris_backend.ulbi.ac.id/api/v2/rkp/";
@@ -135,9 +224,6 @@ function fetchDataFromHRIS(page) {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
-      
-
       if (!data.data.data_query || data.data.data_query.length === 0) {
         Swal.fire("Informasi", "Tidak ada data lebih lanjut.", "info");
         return;
@@ -161,7 +247,7 @@ function populateTableWithData(data) {
   tableBody.innerHTML = ""; // Clear existing table data
   data.forEach((item) => {
     tableBody.innerHTML += createRow(item);
-    console.log("waktu " + item.waktu)
+    console.log("waktu " + item.waktu);
   });
 }
 
@@ -169,43 +255,60 @@ function createRow(item) {
   const struk = item["fgs-struk"];
   const gajipokok = item["gaji-pokok"];
 
-  return `<tr>
+  if (role === "DTI" || role === "keuangan") {
 
-  <td class="name-email-cell">${item.nama} <br>${item.email}</td>
+    return `<tr>
+  
+    <td class="name-email-cell">${item.nama} <br>${item.email}</td>
+  
+          <td>${gajipokok}</td>
+          <td>${item.keluarga}</td>
+          <td>${item.pangan}</td>
+          <td>${item.kinerja}</td>
+          <td>${item.keahlian}</td>
+          <td>${struk}</td>
+          <td>${item.transportasi}</td>
+          <td>${item.kehadiran}</td>
+          <td>${item.rapel_gaji}</td>
+  
+          <td>${item.kopkar}</td>
+          <td>${item.bankJabar}</td>
+          <td>${item.arisan}</td>
+          <td>${item.bpjs}</td>
+          <td>${item.bauk}</td>
+          <td>${item.lain2}</td>
+          <td>${item.pph}</td> 
+          <td>${item.totalgaji}</td>        
+          <td>${item.totalgajibersih}</td>        
+          <td>${item.totalpotongan}</td>  
+          <td>
+          <button class="btn btn-info btn-sm edit-btn" data-waktu="${item.waktu}" data-email="${item.email}" onclick="printoutitem(this)">
+              <i class="mdi mdi-cloud-print-outline"></i>
+          </button>
+          </td>    
+      </tr>`;
+  } else {
+    return `<tr>
+  
+    <td class="name-email-cell">${item.nama} <br>${item.email}</td>
+          <td>${item.totalgaji}</td>        
+          <td>${item.totalgajibersih}</td>        
+          <td>${item.totalpotongan}</td>  
+          <td>
+          <button class="btn btn-info btn-sm edit-btn" data-waktu="${item.waktu}" data-email="${item.email}" onclick="printoutitem(this)">
+              <i class="mdi mdi-cloud-print-outline"></i>
+          </button>
+          </td>    
+      </tr>`;
+  }
 
-        <td>${gajipokok}</td>
-        <td>${item.keluarga}</td>
-        <td>${item.pangan}</td>
-        <td>${item.kinerja}</td>
-        <td>${item.keahlian}</td>
-        <td>${struk}</td>
-        <td>${item.transportasi}</td>
-        <td>${item.kehadiran}</td>
-        <td>${item.rapel_gaji}</td>
-
-        <td>${item.kopkar}</td>
-        <td>${item.bankJabar}</td>
-        <td>${item.arisan}</td>
-        <td>${item.bpjs}</td>
-        <td>${item.bauk}</td>
-        <td>${item.lain2}</td>
-        <td>${item.pph}</td> 
-        <td>${item.totalgaji}</td>        
-        <td>${item.totalgajibersih}</td>        
-        <td>${item.totalpotongan}</td>  
-        <td>
-        <button class="btn btn-info btn-sm edit-btn" data-waktu="${item.waktu}" data-email="${item.email}" onclick="printoutitem(this)">
-            <i class="mdi mdi-cloud-print-outline"></i>
-        </button>
-        </td>    
-    </tr>`;
 }
 
 window.printoutitem = function (element) {
   const email = element.getAttribute("data-email");
-  const waktu = element.getAttribute("data-waktu")
+  const waktu = element.getAttribute("data-waktu");
 
-  console.log(waktu)
+  console.log(waktu);
   // Get the current date and calculate the previous month
   const now = new Date();
   const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);

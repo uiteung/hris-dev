@@ -31,9 +31,6 @@ function getCookieValue(cookieName) {
 const role = decryptRole();
 
 const sidebarMenus = document.getElementById("sidebar-menus");
-const tableHeader = document.getElementById("headerTable");
-
-console.log(role);
 
 if (role === "DTI" || role === "keuangan") {
   sidebarMenus.innerHTML = `
@@ -317,43 +314,6 @@ if (role === "DTI" || role === "keuangan") {
 		</a>
 	  </li>
   `;
-
-  tableHeader.innerHTML = `
-				<tr
-				  style="text-align: center; vertical-align: middle"
-				>
-				  <th
-					class="name-email-header"
-					style="background-color: #2b343d"
-				  >
-					Nama
-				  </th>
-				  <!-- <th id="posisiTh">Jabatan</th> -->
-				  <th id="statusTh">Gaji Pokok</th>
-				  <th id="tanggalTh">Keluarga</th>
-				  <th id="DurasiTh">Pangan</th>
-				  <th id="pctDurasiTh">KPI</th>
-				  <th id="keteranganTh">Keahlian</th>
-				  <!-- <th id="linkDokumenTh">Struktural</th> -->
-
-				  <th id="linkDokumenTh">FGS/Struktural</th>
-				  <th id="linkDokumenTh">Transport</th>
-				  <th id="linkDokumenTh">Kehadiran</th>
-				  <th id="linkDokumenTh">Rapel Gaji</th>
-
-				  <th id="linkDokumenTh">Kopkar</th>
-				  <th id="linkDokumenTh">Bank Jabar</th>
-				  <th id="linkDokumenTh">Arisan</th>
-				  <th id="linkDokumenTh">BPJS TK</th>
-				  <th id="linkDokumenTh">BAUK</th>
-				  <th id="linkDokumenTh">Lain - lain</th>
-				  <th id="linkDokumenTh">PPH</th>
-				  <th id="linkDokumenTh">Total Gaji</th>
-				  <th id="linkDokumenTh">Total Gaji Bersih</th>
-				  <th id="linkDokumenTh">Total Gaji Potongan</th>
-				  <th id="linkDokumenTh">Action</th>
-				</tr>
-`;
 } else {
   sidebarMenus.innerHTML = `
    <li class="sidebar-header">
@@ -380,23 +340,6 @@ if (role === "DTI" || role === "keuangan") {
 		</a>
 	  </li>
   `;
-
-  tableHeader.innerHTML = `
-				<tr
-				  style="text-align: center; vertical-align: middle"
-				>
-				  <th
-					class="name-email-header"
-					style="background-color: #2b343d"
-				  >
-					Nama
-				  </th>
-				  <th id="linkDokumenTh">Total Gaji</th>
-				  <th id="linkDokumenTh">Total Gaji Bersih</th>
-				  <th id="linkDokumenTh">Total Gaji Potongan</th>
-				  <th id="linkDokumenTh">Action</th>
-				</tr>
-`;
 }
 
 // Fungsi umum untuk penyortiran tabel
