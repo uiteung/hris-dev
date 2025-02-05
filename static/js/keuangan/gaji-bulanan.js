@@ -192,9 +192,11 @@ function fetchDataFromSearch(searchKey, waktu) {
   let url;
   if (waktu) {
     url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?waktu=${waktu}&key=${searchKey}`;
-  } else {
-    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?key=${searchKey}`;
   }
+
+  // else {
+  //   url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?key=${searchKey}`;
+  // }
 
   fetch(url, {
     method: "POST",
