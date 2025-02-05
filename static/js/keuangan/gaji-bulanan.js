@@ -70,7 +70,7 @@ if (role === "DTI" || role === "keuangan") {
                             <th id="linkDokumenTh">Total Gaji Bersih</th>
                             <th id="linkDokumenTh">Total Gaji Potongan</th>
                             <th id="linkDokumenTh">Action</th>
-                          </tr>`
+                          </tr>`;
 } else {
   tableHeader.innerHTML = `
    <tr
@@ -87,7 +87,7 @@ if (role === "DTI" || role === "keuangan") {
                             <th id="linkDokumenTh">Total Gaji Potongan</th>
                             <th id="linkDokumenTh">Action</th>
                           </tr>
-  `
+  `;
 }
 
 let allData = []; // Holds the current page data for filtering
@@ -103,21 +103,47 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchDataFromHRIS(currentPage);
   populateDropdownWithMonths();
 });
+
+// function populateDropdownWithMonths() {
+//   const dropdown = document.getElementById("filterKelompok");
+//   const currentYear = new Date().getFullYear(); // Get the current year
+//   dropdown.innerHTML = '<option value="">Silahkan Pilih Bulan</option>'; // Reset dropdown
+
+//   // Create an option for each month of the current year
+//   for (let month = 1; month <= 12; month++) {
+//     const monthValue = month.toString().padStart(2, "0"); // Ensure the month is two digits
+//     const optionValue = `${currentYear}${monthValue}`; // Format: YYYYMM
+//     const option = document.createElement("option");
+//     option.value = optionValue;
+//     option.textContent = `${currentYear}-${monthValue}`; // Display as YYYY-MM
+//     dropdown.appendChild(option);
+//   }
+// }
+
 function populateDropdownWithMonths() {
   const dropdown = document.getElementById("filterKelompok");
-  const currentYear = new Date().getFullYear(); // Get the current year
   dropdown.innerHTML = '<option value="">Silahkan Pilih Bulan</option>'; // Reset dropdown
 
-  // Create an option for each month of the current year
-  for (let month = 1; month <= 12; month++) {
-    const monthValue = month.toString().padStart(2, "0"); // Ensure the month is two digits
-    const optionValue = `${currentYear}${monthValue}`; // Format: YYYYMM
+  const currentDate = new Date();
+
+  // Iterasi mundur untuk mendapatkan 12 bulan terakhir
+  for (let i = 0; i < 12; i++) {
+    const pastDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() - i,
+      1
+    );
+    const year = pastDate.getFullYear();
+    const month = (pastDate.getMonth() + 1).toString().padStart(2, "0"); // Pastikan dua digit
+
+    const optionValue = `${year}${month}`; // Format: YYYYMM
     const option = document.createElement("option");
     option.value = optionValue;
-    option.textContent = `${currentYear}-${monthValue}`; // Display as YYYY-MM
+    option.textContent = `${year}-${month}`; // Tampilan sebagai YYYY-MM
     dropdown.appendChild(option);
   }
 }
+
 function setupEventListeners() {
   document.getElementById("prevPageBtn").addEventListener("click", () => {
     if (currentPage > 1) {
@@ -256,7 +282,6 @@ function createRow(item) {
   const gajipokok = item["gaji-pokok"];
 
   if (role === "DTI" || role === "keuangan") {
-
     return `<tr>
   
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
@@ -301,7 +326,6 @@ function createRow(item) {
           </td>    
       </tr>`;
   }
-
 }
 
 window.printoutitem = function (element) {
