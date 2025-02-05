@@ -154,39 +154,39 @@ function setupEventListeners() {
   document.getElementById("nextPageBtn").addEventListener("click", () => {
     fetchDataFromHRIS(currentPage + 1);
   });
-  const searchButton = document.querySelector(".btn-primary");
-  const searchInput = document.getElementById("searchinput");
+  // const searchButton = document.querySelector(".btn-primary");
+  // const searchInput = document.getElementById("searchinput");
 
-  searchButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    searchFromInput();
-  });
+  // searchButton.addEventListener("click", (event) => {
+  //   event.preventDefault();
+  //   searchFromInput();
+  // });
 
   // Listen for Enter key on the search input
-  searchInput.addEventListener("keypress", (event) => {
-    if (event.keyCode === 13) {
-      // 13 is the keycode for Enter
-      event.preventDefault(); // Prevent form submission
-      searchFromInput();
-    }
-  });
+  // searchInput.addEventListener("keypress", (event) => {
+  //   if (event.keyCode === 13) {
+  //     // 13 is the keycode for Enter
+  //     event.preventDefault(); // Prevent form submission
+  //     searchFromInput();
+  //   }
+  // });
   document
     .getElementById("filterKelompok")
     .addEventListener("change", filterTableByKelompok);
 }
 function searchFromInput() {
-  const searchInput = document
-    .getElementById("searchinput")
-    .value.trim()
-    .replace(/\s+/g, "_");
+  // const searchInput = document
+  //   .getElementById("searchinput")
+  //   .value.trim()
+  //   .replace(/\s+/g, "_");
   const waktu = document.getElementById("filterKelompok").value;
 
-  if (searchInput) {
-    fetchDataFromSearch(searchInput, waktu);
-  } else {
-    // Jika input pencarian kosong, kembali ke dataset awal
-    fetchDataFromHRIS(1); // Asumsi ingin reset ke halaman pertama
-  }
+  // if (searchInput) {
+  //   fetchDataFromSearch(searchInput, waktu);
+  // } else {
+  //   // Jika input pencarian kosong, kembali ke dataset awal
+  // }
+  fetchDataFromHRIS(1); // Asumsi ingin reset ke halaman pertama
 }
 function fetchDataFromSearch(searchKey, waktu) {
   let url;
