@@ -188,47 +188,54 @@ function searchFromInput() {
   // }
   fetchDataFromHRIS(1); // Asumsi ingin reset ke halaman pertama
 }
-function fetchDataFromSearch(searchKey, waktu) {
+// function fetchDataFromSearch(searchKey, waktu) {
+//   let url;
+//   if (waktu) {
+//     url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?waktu=${waktu}&key=${searchKey}`;
+//   }
+
+//   // else {
+//   //   url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?key=${searchKey}`;
+//   // }
+
+//   fetch(url, {
+//     method: "POST",
+//     headers: {
+//       login: `${token}`,
+//       Accept: "application/json",
+//     },
+//   })
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error(
+//           "Terjadi kesalahan saat mencari data. Silakan coba lagi."
+//         );
+//       }
+//       return response.json();
+//     })
+//     .then((data) => {
+//       if (!data.data.data_query || data.data.data_query.length === 0) {
+//         Swal.fire("Informasi", "Tidak ada data yang cocok ditemukan.", "info");
+//         return;
+//       }
+//       allData = data.data.data_query;
+//       populateTableWithData(allData);
+//       updatePaginationButtons(data.data);
+//     })
+//     .catch((error) => {
+//       console.error("Error fetching data:", error);
+//       handlingErrorSearch();
+//     });
+// }
+function fetchDataFromHRIS(page) {
   let url;
-  if (waktu) {
-    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?waktu=${waktu}&key=${searchKey}`;
+
+  if (role === "DTI" || role === "keuangan") {
+    url = `${baseUrl}?page=${page}`;
+  } else {
+    url = `${baseUrl}/karyawan?page=${page}`;
   }
 
-  // else {
-  //   url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?key=${searchKey}`;
-  // }
-
-  fetch(url, {
-    method: "POST",
-    headers: {
-      login: `${token}`,
-      Accept: "application/json",
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(
-          "Terjadi kesalahan saat mencari data. Silakan coba lagi."
-        );
-      }
-      return response.json();
-    })
-    .then((data) => {
-      if (!data.data.data_query || data.data.data_query.length === 0) {
-        Swal.fire("Informasi", "Tidak ada data yang cocok ditemukan.", "info");
-        return;
-      }
-      allData = data.data.data_query;
-      populateTableWithData(allData);
-      updatePaginationButtons(data.data);
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-      handlingErrorSearch();
-    });
-}
-function fetchDataFromHRIS(page) {
-  let url = `${baseUrl}?page=${page}`;
   if (currentKelompok) {
     // url =
     //   `https://hris_backend.ulbi.ac.id/api/v2/rkp/filter/${currentKelompok}?waktu ` +
