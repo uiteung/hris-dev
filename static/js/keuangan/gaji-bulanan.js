@@ -280,6 +280,9 @@ function fetchDataFromHRIS(page) {
 function populateTableWithData(data) {
   const tableBody = document.getElementById("tablebody");
   tableBody.innerHTML = ""; // Clear existing table data
+
+  // console.log(data);
+
   data.forEach((item) => {
     tableBody.innerHTML += createRow(item);
     console.log("waktu " + item.waktu);
@@ -350,38 +353,49 @@ window.printoutitem = function (element) {
   const yearMonth = `${year}${month}`;
 
   // Construct the URL for the GET request
-  const url = `https://hris_backend.ulbi.ac.id/api/v2/wage/pdf/${waktu}?email=${encodeURIComponent(
-    email
-  )}`;
+  if (waktu) {
+    const url = `https://hris_backend.ulbi.ac.id/api/v2/wage/pdf/${waktu}?email=${encodeURIComponent(
+      email
+    )}`;
 
-  fetch(url, {
-    method: "GET",
-    headers: {
-      login: `${token}`,
-      Accept: "application/json",
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok: " + response.statusText);
-      }
-      return response.blob();
+    fetch(url, {
+      method: "GET",
+      headers: {
+        login: `${token}`,
+        Accept: "application/json",
+      },
     })
-    .then((blob) => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `SlipGaji_${waktu}_${email}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      window.URL.revokeObjectURL(url);
-    })
-    .catch((error) => {
-      console.error("Error fetching PDF:", error);
-      Swal.fire("Error", "Failed to fetch PDF: " + error.message, "error");
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            "Network response was not ok: " + response.statusText
+          );
+        }
+        return response.blob();
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `SlipGaji_${waktu}_${email}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.error("Error fetching PDF:", error);
+        Swal.fire("Error", "Failed to fetch PDF: " + error.message, "error");
+      });
+  } else {
+    Swal.fire({
+      icon: "info",
+      title: "Data waktu tidak tersedia",
+      text: "Mohon periksa kembali data waktu yang tersedia",
     });
+  }
 };
+
 function updatePaginationButtons(data) {
   document.getElementById(
     "currentPage"
