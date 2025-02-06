@@ -291,6 +291,39 @@ function populateTableWithData(data) {
   });
 }
 
+function convertToMonthYear(dateString) {
+  if (!dateString || dateString.length !== 6) {
+    return "Format tidak valid";
+  }
+
+  const year = dateString.substring(0, 4); // Ambil 4 digit pertama sebagai tahun
+  const monthNumber = dateString.substring(4, 6); // Ambil 2 digit terakhir sebagai bulan
+
+  // Array nama bulan dalam bahasa Indonesia
+  const monthNames = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
+
+  const monthIndex = parseInt(monthNumber, 10) - 1; // Ubah ke index (0-11)
+
+  if (monthIndex < 0 || monthIndex > 11) {
+    return "Bulan tidak valid";
+  }
+
+  return `${monthNames[monthIndex]} ${year}`;
+}
+
 function createRow(item) {
   const struk = item["fgs-struk"];
   const gajipokok = item["gaji-pokok"];
@@ -331,7 +364,7 @@ function createRow(item) {
   
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
 
-          <td>${item.waktu ? item.waktu : "-"}</td>        
+          <td>${item.waktu ? convertToMonthYear(item.waktu) : "-"}</td>        
           <td>${item.totalgaji}</td>        
           <td>${item.totalgajibersih}</td>        
           <td>${item.totalpotongan}</td>  
