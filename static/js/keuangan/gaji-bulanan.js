@@ -82,6 +82,7 @@ if (role === "DTI" || role === "keuangan") {
                             >
                               Nama
                             </th>
+                            <th id="linkDokumenTh">Periode</th>
                             <th id="linkDokumenTh">Total Gaji</th>
                             <th id="linkDokumenTh">Total Gaji Bersih</th>
                             <th id="linkDokumenTh">Total Gaji Potongan</th>
@@ -101,7 +102,7 @@ let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
   fetchDataFromHRIS(currentPage);
-  populateDropdownWithMonths();
+  // populateDropdownWithMonths();
 });
 
 // function populateDropdownWithMonths() {
@@ -120,29 +121,29 @@ document.addEventListener("DOMContentLoaded", () => {
 //   }
 // }
 
-function populateDropdownWithMonths() {
-  const dropdown = document.getElementById("filterKelompok");
-  dropdown.innerHTML = '<option value="">Silahkan Pilih Bulan</option>'; // Reset dropdown
+// function populateDropdownWithMonths() {
+//   const dropdown = document.getElementById("filterKelompok");
+//   dropdown.innerHTML = '<option value="">Silahkan Pilih Bulan</option>'; // Reset dropdown
 
-  const currentDate = new Date();
+//   const currentDate = new Date();
 
-  // Iterasi mundur untuk mendapatkan 12 bulan terakhir
-  for (let i = 0; i < 12; i++) {
-    const pastDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() - i,
-      1
-    );
-    const year = pastDate.getFullYear();
-    const month = (pastDate.getMonth() + 1).toString().padStart(2, "0"); // Pastikan dua digit
+//   // Iterasi mundur untuk mendapatkan 12 bulan terakhir
+//   for (let i = 0; i < 12; i++) {
+//     const pastDate = new Date(
+//       currentDate.getFullYear(),
+//       currentDate.getMonth() - i,
+//       1
+//     );
+//     const year = pastDate.getFullYear();
+//     const month = (pastDate.getMonth() + 1).toString().padStart(2, "0"); // Pastikan dua digit
 
-    const optionValue = `${year}${month}`; // Format: YYYYMM
-    const option = document.createElement("option");
-    option.value = optionValue;
-    option.textContent = `${year}-${month}`; // Tampilan sebagai YYYY-MM
-    dropdown.appendChild(option);
-  }
-}
+//     const optionValue = `${year}${month}`; // Format: YYYYMM
+//     const option = document.createElement("option");
+//     option.value = optionValue;
+//     option.textContent = `${year}-${month}`; // Tampilan sebagai YYYY-MM
+//     dropdown.appendChild(option);
+//   }
+// }
 
 function setupEventListeners() {
   document.getElementById("prevPageBtn").addEventListener("click", () => {
@@ -170,16 +171,16 @@ function setupEventListeners() {
   //     searchFromInput();
   //   }
   // });
-  document
-    .getElementById("filterKelompok")
-    .addEventListener("change", filterTableByKelompok);
+  // document
+  //   .getElementById("filterKelompok")
+  //   .addEventListener("change", filterTableByKelompok);
 }
 function searchFromInput() {
   // const searchInput = document
   //   .getElementById("searchinput")
   //   .value.trim()
   //   .replace(/\s+/g, "_");
-  const waktu = document.getElementById("filterKelompok").value;
+  // const waktu = document.getElementById("filterKelompok").value;
 
   // if (searchInput) {
   //   fetchDataFromSearch(searchInput, waktu);
@@ -188,6 +189,7 @@ function searchFromInput() {
   // }
   fetchDataFromHRIS(1); // Asumsi ingin reset ke halaman pertama
 }
+
 // function fetchDataFromSearch(searchKey, waktu) {
 //   let url;
 //   if (waktu) {
@@ -281,7 +283,7 @@ function populateTableWithData(data) {
   const tableBody = document.getElementById("tablebody");
   tableBody.innerHTML = ""; // Clear existing table data
 
-  // console.log(data);
+  console.log(data);
 
   data.forEach((item) => {
     tableBody.innerHTML += createRow(item);
@@ -328,11 +330,15 @@ function createRow(item) {
     return `<tr>
   
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
+
+          <td>${item.waktu ? item.waktu : "-"}</td>        
           <td>${item.totalgaji}</td>        
           <td>${item.totalgajibersih}</td>        
           <td>${item.totalpotongan}</td>  
           <td>
-          <button class="btn btn-info btn-sm edit-btn" data-waktu="${item.waktu}" data-email="${item.email}" onclick="printoutitem(this)">
+          <button class="btn btn-info btn-sm edit-btn" data-waktu="${
+            item.waktu
+          }" data-email="${item.email}" onclick="printoutitem(this)">
               <i class="mdi mdi-cloud-print-outline"></i>
           </button>
           </td>    
@@ -404,12 +410,12 @@ function updatePaginationButtons(data) {
   document.getElementById("nextPageBtn").disabled = !data.next_page_url;
   currentPage = data.current_page; // Update the current page
 }
-function filterTableByKelompok() {
-  currentKelompok = document
-    .getElementById("filterKelompok")
-    .value.replace(" ", "_");
-  fetchDataFromHRIS(1);
-}
+// function filterTableByKelompok() {
+//   currentKelompok = document
+//     .getElementById("filterKelompok")
+//     .value.replace(" ", "_");
+//   fetchDataFromHRIS(1);
+// }
 
 function handlingErrorSearch() {
   Swal.fire({
