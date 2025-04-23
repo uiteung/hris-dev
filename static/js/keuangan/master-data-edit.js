@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const email = localStorage.getItem("editingEmail");
   if (email) {
     fetchUserDataByEmail(email);
-    fetchstrukturalOptions();
+    // fetchstrukturalOptions();
   } else {
     console.error("No email found in localStorage.");
     Swal.fire("Error", "Email tidak ditemukan di penyimpanan lokal.", "error");
