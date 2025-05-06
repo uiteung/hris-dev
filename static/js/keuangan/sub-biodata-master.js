@@ -135,6 +135,9 @@ function populateTableWithData(data) {
 }
 
 function createRow(item) {
+  if (item.jafung == "undefined" || item.jafung == "") {
+    item.jafung = "-";
+  }
   if (!item || Object.keys(item).length === 0) {
     return `<tr><td colspan="10">No data available</td></tr>`;
   }
