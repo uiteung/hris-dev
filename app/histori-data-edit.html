@@ -319,7 +319,7 @@
             <h5 class="right-aligned" style="float: right">
               <a href="index.html">Home</a> / Presensi Masuk
             </h5>
-            <h1 class="h3 mb-3"><b>Dashboard Validasi Data Gaji</b></h1>
+            <h1 class="h3 mb-3"><b>Dashboard Edit Histori Gaji</b></h1>
             <div class="col-md-6 mb-3">
               <input
                 type="hidden"
@@ -362,6 +362,7 @@
                           id="email"
                           name="email"
                           required
+                          disabled
                         />
                       </div>
 
@@ -405,7 +406,7 @@
                                   name="position"
                           />
                       </div>
-                      
+
 
                       <!-- Basic Salary Field -->
                       <div class="mb-3">
@@ -612,6 +613,30 @@
                           name="pphDeduction"
                         />
                       </div>
+                        <div class="mb-3">
+                            <label for="waktu" class="form-label"
+                            >Waktu:</label
+                            >
+                            <input
+                                    class="form-control"
+                                    id="waktu"
+                                    name="waktu"
+                                    disabled
+                            />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="validasi" class="form-label"
+                            >Validasi:</label
+                            >
+                            <select
+                                    class="form-control"
+                                    id="validasi"
+                                    name="validasi">
+                            <option value="false">Belum Divalidasi</option>
+                            <option value="true">Sudah Divalidasi</option>
+                            </select>
+                        </div>
 
                       <button
                         id="updatebutton"
@@ -661,7 +686,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
     <!-- <script src="https://unpkg.com/jspdf-invoice"></script> -->
     <script
-      src="../static/js/keuangan/master-data-edit.js"
+      src="../static/js/keuangan/histori-data-edit.js"
       type="module"
     ></script>
     <!-- Library Javascript Terkait -->
@@ -671,9 +696,9 @@
     <script src="../static/js/style/style.js" defer></script>
     <script src="../static/js/style/table-sorting.js"></script>
     <script src="../static/js/app.js"></script>
-    <script src="../static/js/controller/sidebar.js" type="module"></script>
-    <script src="../static/js/controller/header.js" type="module"></script>
-    <script src="../static/js/controller/footer.js" type="module"></script>
+<!--    <script src="../static/js/controller/sidebar.js" type="module"></script>-->
+<!--    <script src="../static/js/controller/header.js" type="module"></script>-->
+<!--    <script src="../static/js/controller/footer.js" type="module"></script>-->
     <script src="../static/js/controller/croot.js" type="module"></script>
   </body>
 </html>

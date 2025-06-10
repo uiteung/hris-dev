@@ -34,8 +34,32 @@ function getCookieValue(cookieName) {
 const role = decryptRole();
 
 const tableHeader = document.getElementById("headerTable");
+const headSelect = document.getElementById("selecttag");
+const searchSelect = document.getElementById("searchTag");
+const buttonTag = document.getElementById("buttonTag");
 
 if (role === "DTI" || role === "keuangan") {
+  headSelect.innerHTML = `
+                        <select id="filterKelompok" class="form-control">
+                        </select>`
+
+  searchSelect.innerHTML = `
+                          <input
+                          type="text"
+                          placeholder="Search.."
+                          id="searchinput"
+                          class="form-control mr-2"
+                        />
+                        <button class="btn btn-primary">Search</button>`
+  buttonTag.innerHTML = `
+                    <button
+                      type="button"
+                      id="izinkanButton"
+                      class="btn btn-info mr-2"
+                    >
+                      Izinkan Slip Gaji
+                    </button>
+  `
   tableHeader.innerHTML = `
    <tr
                             style="text-align: center; vertical-align: middle"
@@ -46,6 +70,7 @@ if (role === "DTI" || role === "keuangan") {
                             >
                               Nama
                             </th>
+                            <th id="waktu">Periode</th>
                             <!-- <th id="posisiTh">Jabatan</th> -->
                             <th id="statusTh">Gaji Pokok</th>
                             <th id="tanggalTh">Keluarga</th>
@@ -69,6 +94,7 @@ if (role === "DTI" || role === "keuangan") {
                             <th id="linkDokumenTh">Total Gaji</th>
                             <th id="linkDokumenTh">Total Gaji Bersih</th>
                             <th id="linkDokumenTh">Total Gaji Potongan</th>
+                            <th id="status">Status</th>
                             <th id="linkDokumenTh">Action</th>
                           </tr>`;
 } else {
@@ -102,14 +128,14 @@ let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
   fetchDataFromHRIS(currentPage);
-  // populateDropdownWithMonths();
+  populateDropdownWithMonths();
 });
 
 // function populateDropdownWithMonths() {
 //   const dropdown = document.getElementById("filterKelompok");
 //   const currentYear = new Date().getFullYear(); // Get the current year
 //   dropdown.innerHTML = '<option value="">Silahkan Pilih Bulan</option>'; // Reset dropdown
-
+//
 //   // Create an option for each month of the current year
 //   for (let month = 1; month <= 12; month++) {
 //     const monthValue = month.toString().padStart(2, "0"); // Ensure the month is two digits
@@ -121,29 +147,29 @@ document.addEventListener("DOMContentLoaded", () => {
 //   }
 // }
 
-// function populateDropdownWithMonths() {
-//   const dropdown = document.getElementById("filterKelompok");
-//   dropdown.innerHTML = '<option value="">Silahkan Pilih Bulan</option>'; // Reset dropdown
+function populateDropdownWithMonths() {
+  const dropdown = document.getElementById("filterKelompok");
+  dropdown.innerHTML = '<option value="">Silahkan Pilih Bulan</option>'; // Reset dropdown
 
-//   const currentDate = new Date();
+  const currentDate = new Date();
 
-//   // Iterasi mundur untuk mendapatkan 12 bulan terakhir
-//   for (let i = 0; i < 12; i++) {
-//     const pastDate = new Date(
-//       currentDate.getFullYear(),
-//       currentDate.getMonth() - i,
-//       1
-//     );
-//     const year = pastDate.getFullYear();
-//     const month = (pastDate.getMonth() + 1).toString().padStart(2, "0"); // Pastikan dua digit
+  // Iterasi mundur untuk mendapatkan 12 bulan terakhir
+  for (let i = 0; i < 12; i++) {
+    const pastDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() - i,
+      1
+    );
+    const year = pastDate.getFullYear();
+    const month = (pastDate.getMonth() + 1).toString().padStart(2, "0"); // Pastikan dua digit
 
-//     const optionValue = `${year}${month}`; // Format: YYYYMM
-//     const option = document.createElement("option");
-//     option.value = optionValue;
-//     option.textContent = `${year}-${month}`; // Tampilan sebagai YYYY-MM
-//     dropdown.appendChild(option);
-//   }
-// }
+    const optionValue = `${year}${month}`; // Format: YYYYMM
+    const option = document.createElement("option");
+    option.value = optionValue;
+    option.textContent = `${year}-${month}`; // Tampilan sebagai YYYY-MM
+    dropdown.appendChild(option);
+  }
+}
 
 function setupEventListeners() {
   document.getElementById("prevPageBtn").addEventListener("click", () => {
@@ -155,80 +181,80 @@ function setupEventListeners() {
   document.getElementById("nextPageBtn").addEventListener("click", () => {
     fetchDataFromHRIS(currentPage + 1);
   });
-  // const searchButton = document.querySelector(".btn-primary");
-  // const searchInput = document.getElementById("searchinput");
+  const searchButton = document.querySelector(".btn-primary");
+  const searchInput = document.getElementById("searchinput");
 
-  // searchButton.addEventListener("click", (event) => {
-  //   event.preventDefault();
-  //   searchFromInput();
-  // });
+  searchButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    searchFromInput();
+  });
 
   // Listen for Enter key on the search input
-  // searchInput.addEventListener("keypress", (event) => {
-  //   if (event.keyCode === 13) {
-  //     // 13 is the keycode for Enter
-  //     event.preventDefault(); // Prevent form submission
-  //     searchFromInput();
-  //   }
-  // });
-  // document
-  //   .getElementById("filterKelompok")
-  //   .addEventListener("change", filterTableByKelompok);
+  searchInput.addEventListener("keypress", (event) => {
+    if (event.keyCode === 13) {
+      // 13 is the keycode for Enter
+      event.preventDefault(); // Prevent form submission
+      searchFromInput();
+    }
+  });
+  document
+    .getElementById("filterKelompok")
+    .addEventListener("change", filterTableByKelompok);
 }
 function searchFromInput() {
-  // const searchInput = document
-  //   .getElementById("searchinput")
-  //   .value.trim()
-  //   .replace(/\s+/g, "_");
-  // const waktu = document.getElementById("filterKelompok").value;
+  const searchInput = document
+    .getElementById("searchinput")
+    .value.trim()
+    .replace(/\s+/g, "_");
+  const waktu = document.getElementById("filterKelompok").value;
 
-  // if (searchInput) {
-  //   fetchDataFromSearch(searchInput, waktu);
-  // } else {
-  //   // Jika input pencarian kosong, kembali ke dataset awal
-  // }
-  fetchDataFromHRIS(1); // Asumsi ingin reset ke halaman pertama
+  if (searchInput) {
+    fetchDataFromSearch(searchInput, waktu);
+  } else {
+    // Jika input pencarian kosong, kembali ke dataset awal
+    fetchDataFromHRIS(1);
+  }
+   // Asumsi ingin reset ke halaman pertama
 }
 
-// function fetchDataFromSearch(searchKey, waktu) {
-//   let url;
-//   if (waktu) {
-//     url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?waktu=${waktu}&key=${searchKey}`;
-//   }
+function fetchDataFromSearch(searchKey, waktu) {
+  let url;
+  if (waktu) {
+    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?waktu=${waktu}&key=${searchKey}`;
+  } else {
+    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?key=${searchKey}&limit=5`;
+  }
 
-//   // else {
-//   //   url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?key=${searchKey}`;
-//   // }
 
-//   fetch(url, {
-//     method: "POST",
-//     headers: {
-//       login: `${token}`,
-//       Accept: "application/json",
-//     },
-//   })
-//     .then((response) => {
-//       if (!response.ok) {
-//         throw new Error(
-//           "Terjadi kesalahan saat mencari data. Silakan coba lagi."
-//         );
-//       }
-//       return response.json();
-//     })
-//     .then((data) => {
-//       if (!data.data.data_query || data.data.data_query.length === 0) {
-//         Swal.fire("Informasi", "Tidak ada data yang cocok ditemukan.", "info");
-//         return;
-//       }
-//       allData = data.data.data_query;
-//       populateTableWithData(allData);
-//       updatePaginationButtons(data.data);
-//     })
-//     .catch((error) => {
-//       console.error("Error fetching data:", error);
-//       handlingErrorSearch();
-//     });
-// }
+  fetch(url, {
+    method: "POST",
+    headers: {
+      login: `${token}`,
+      Accept: "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          "Terjadi kesalahan saat mencari data. Silakan coba lagi."
+        );
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (!data.data.data_query || data.data.data_query.length === 0) {
+        Swal.fire("Informasi", "Tidak ada data yang cocok ditemukan.", "info");
+        return;
+      }
+      allData = data.data.data_query;
+      populateTableWithData(allData);
+      updatePaginationButtons(data.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+      handlingErrorSearch();
+    });
+}
 function fetchDataFromHRIS(page) {
   let url;
 
@@ -239,9 +265,9 @@ function fetchDataFromHRIS(page) {
   }
 
   if (currentKelompok) {
-    // url =
-    //   `https://hris_backend.ulbi.ac.id/api/v2/rkp/filter/${currentKelompok}?waktu ` +
-    //   getLastMonth();
+    url =
+      `https://hris_backend.ulbi.ac.id/api/v2/rkp/filter/${currentKelompok}?waktu ` +
+      getLastMonth();
     url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/raw/${currentKelompok}?page=${page}`;
   }
 
@@ -283,11 +309,11 @@ function populateTableWithData(data) {
   const tableBody = document.getElementById("tablebody");
   tableBody.innerHTML = ""; // Clear existing table data
 
-  console.log(data);
+  // console.log(data);
 
   data.forEach((item) => {
     tableBody.innerHTML += createRow(item);
-    console.log("waktu " + item.waktu);
+    // console.log("waktu " + item.waktu);
   });
 }
 
@@ -328,11 +354,18 @@ function createRow(item) {
   const struk = item["fgs-struk"];
   const gajipokok = item["gaji-pokok"];
 
+  let validasi
+  if (item.validasi === true) {
+    validasi = "Sudah Divalidasi"
+  } else {
+    validasi = "Belum Divalidasi";
+  }
+
   if (role === "DTI" || role === "keuangan") {
     return `<tr>
   
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
-  
+          <td>${convertToMonthYear(item.waktu, "-")}</td>
           <td>${gajipokok}</td>
           <td>${item.keluarga}</td>
           <td>${item.pangan}</td>
@@ -353,9 +386,13 @@ function createRow(item) {
           <td>${item.totalgaji}</td>        
           <td>${item.totalgajibersih}</td>        
           <td>${item.totalpotongan}</td>  
+          <td>${validasi}</td>
           <td>
-          <button class="btn btn-info btn-sm edit-btn" data-waktu="${item.waktu}" data-email="${item.email}" onclick="printoutitem(this)">
+          <button class="btn btn-outline-success btn-sm edit-btn" data-waktu="${item.waktu}" data-email="${item.email}" onclick="printoutitem(this)">
               <i class="mdi mdi-cloud-print-outline"></i>
+          </button>
+          <button class="btn btn-outline-info btn-sm edit-btn" data-waktu="${item.waktu}" data-email="${item.email}" onclick="editItem(this)">
+              <i class="mdi mdi-file-edit-outline"></i>
           </button>
           </td>    
       </tr>`;
@@ -435,6 +472,14 @@ window.printoutitem = function (element) {
   }
 };
 
+window.editItem = function (element) {
+    const email = element.getAttribute("data-email");
+    const waktu = element.getAttribute("data-waktu");
+    localStorage.setItem("editingEmail", email);
+    localStorage.setItem("editingWaktu", waktu);
+    window.location.href = "histori-data-edit.html";
+};
+
 function updatePaginationButtons(data) {
   document.getElementById(
     "currentPage"
@@ -443,12 +488,12 @@ function updatePaginationButtons(data) {
   document.getElementById("nextPageBtn").disabled = !data.next_page_url;
   currentPage = data.current_page; // Update the current page
 }
-// function filterTableByKelompok() {
-//   currentKelompok = document
-//     .getElementById("filterKelompok")
-//     .value.replace(" ", "_");
-//   fetchDataFromHRIS(1);
-// }
+function filterTableByKelompok() {
+  currentKelompok = document
+    .getElementById("filterKelompok")
+    .value.replace(" ", "_");
+  fetchDataFromHRIS(1);
+}
 
 function handlingErrorSearch() {
   Swal.fire({
@@ -530,6 +575,74 @@ function generateExcel(data) {
   XLSX.writeFile(wb, "HRIS_Data_Export.xlsx");
 }
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  const generateButton = document.getElementById("izinkanButton");
+
+  generateButton.addEventListener("click", () => {
+    const waktu = document.getElementById("filterKelompok").value;
+    if (waktu === "") {
+      Swal.fire({
+        title: "Warning",
+        text: "Pilih Waktu Terlebih dahulu",
+        icon: "warning",
+        confirmButtonText: "OK",
+      })
+    } else {
+      Swal.fire({
+        title: "Sebelum Anda Mengizinkan Permintaan Slip Gaji Pastikan Kembali",
+        text: "Apakah Mata Master Sudah Valid?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, Izinkan!",
+        cancelButtonText: "Batal",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          IzinkanSlipGaji(waktu);
+        }
+      });
+    }
+  });
+});
+
+function IzinkanSlipGaji(waktu) {
+  const url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/validatemany?waktu=${waktu}&validasi=true`;
+  fetch(url, {
+    method: "POST",
+    headers: {
+      login: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({}),
+  })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          Swal.fire({
+            title: "Success",
+            text: "Slip Gaji Berhasil Diizinkan!",
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.value) {
+              window.location.reload(true);
+            }
+          });
+        } else {
+          Swal.fire(
+              "Failed",
+              "Gagal Mengizinkan slip gaji: " + data.message,
+              "error"
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        Swal.fire("Error", "Error: " + error.message, "error");
+      });
+}
 // document
 //   .getElementById("exportButton")
 //   .addEventListener("click", exportToExcel);
