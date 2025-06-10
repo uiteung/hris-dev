@@ -222,7 +222,7 @@ function fetchDataFromSearch(searchKey, waktu) {
   if (waktu) {
     url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?waktu=${waktu}&key=${searchKey}`;
   } else {
-    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?key=${searchKey}&limit=5`;
+    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?key=${searchKey}`;
   }
 
 
