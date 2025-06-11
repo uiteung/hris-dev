@@ -128,7 +128,9 @@ let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
   fetchDataFromHRIS(currentPage);
-  populateDropdownWithMonths();
+  if (role == "DTI" || role == "keuangan") {
+    populateDropdownWithMonths();
+  }
 });
 
 // function populateDropdownWithMonths() {
