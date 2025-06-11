@@ -128,7 +128,7 @@ let currentKelompok = "";
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
   fetchDataFromHRIS(currentPage);
-  if (role == "DTI" || role == "keuangan") {
+  if (role === "DTI" || role === "keuangan") {
     populateDropdownWithMonths();
   }
 });
@@ -192,17 +192,20 @@ function setupEventListeners() {
   });
 
   // Listen for Enter key on the search input
-  searchInput.addEventListener("keypress", (event) => {
-    if (event.keyCode === 13) {
-      // 13 is the keycode for Enter
-      event.preventDefault(); // Prevent form submission
-      searchFromInput();
-    }
-  });
-  document
-    .getElementById("filterKelompok")
-    .addEventListener("change", filterTableByKelompok);
+  if (role === "DTI" || role === "keuangan") {
+    searchInput.addEventListener("keypress", (event) => {
+      if (event.keyCode === 13) {
+        // 13 is the keycode for Enter
+        event.preventDefault(); // Prevent form submission
+        searchFromInput();
+      }
+    });
+    document
+        .getElementById("filterKelompok")
+        .addEventListener("change", filterTableByKelompok);
+  }
 }
+
 function searchFromInput() {
   const searchInput = document
     .getElementById("searchinput")
@@ -578,36 +581,38 @@ function generateExcel(data) {
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const generateButton = document.getElementById("izinkanButton");
+if (role === "DTI" || role === "keuangan")  {
+  document.addEventListener("DOMContentLoaded", () => {
+    const generateButton = document.getElementById("izinkanButton");
 
-  generateButton.addEventListener("click", () => {
-    const waktu = document.getElementById("filterKelompok").value;
-    if (waktu === "") {
-      Swal.fire({
-        title: "Warning",
-        text: "Pilih Waktu Terlebih dahulu",
-        icon: "warning",
-        confirmButtonText: "OK",
-      })
-    } else {
-      Swal.fire({
-        title: "Sebelum Anda Mengizinkan Permintaan Slip Gaji Pastikan Kembali",
-        text: "Apakah Mata Master Sudah Valid?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Ya, Izinkan!",
-        cancelButtonText: "Batal",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          IzinkanSlipGaji(waktu);
-        }
-      });
-    }
+    generateButton.addEventListener("click", () => {
+      const waktu = document.getElementById("filterKelompok").value;
+      if (waktu === "") {
+        Swal.fire({
+          title: "Warning",
+          text: "Pilih Waktu Terlebih dahulu",
+          icon: "warning",
+          confirmButtonText: "OK",
+        })
+      } else {
+        Swal.fire({
+          title: "Sebelum Anda Mengizinkan Permintaan Slip Gaji Pastikan Kembali",
+          text: "Apakah Mata Master Sudah Valid?",
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya, Izinkan!",
+          cancelButtonText: "Batal",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            IzinkanSlipGaji(waktu);
+          }
+        });
+      }
+    });
   });
-});
+}
 
 function IzinkanSlipGaji(waktu) {
   const url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/validatemany?waktu=${waktu}&validasi=true`;
