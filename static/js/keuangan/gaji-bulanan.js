@@ -174,17 +174,35 @@ function populateDropdownWithMonths() {
 }
 
 function setupEventListeners() {
-  document.getElementById("prevPageBtn").addEventListener("click", () => {
-    if (currentPage > 1) {
-      fetchDataFromHRIS(currentPage - 1);
-    }
-  });
-
-  document.getElementById("nextPageBtn").addEventListener("click", () => {
-    fetchDataFromHRIS(currentPage + 1);
-  });
   const searchButton = document.querySelector(".btn-primary");
   const searchInput = document.getElementById("searchinput");
+  // console.log(currentPage)
+  const waktu = document.getElementById("filterKelompok").value;
+  if (searchInput) {
+    document.getElementById("prevPageBtn").addEventListener("click", () => {
+      if (currentPage > 1) {
+        fetchDataFromSearchPages(searchInput.value
+            .trim()
+            .replace(/\s+/g, "_"), waktu, currentPage - 1);
+      }
+    });
+
+    document.getElementById("nextPageBtn").addEventListener("click", () => {
+      fetchDataFromSearchPages(searchInput.value
+          .trim()
+          .replace(/\s+/g, "_"), waktu, currentPage + 1);
+    });
+  } else {
+    document.getElementById("prevPageBtn").addEventListener("click", () => {
+      if (currentPage > 1) {
+        fetchDataFromHRIS(currentPage - 1);
+      }
+    });
+
+    document.getElementById("nextPageBtn").addEventListener("click", () => {
+      fetchDataFromHRIS(currentPage + 1);
+    });
+  }
 
   searchButton.addEventListener("click", (event) => {
     event.preventDefault();
@@ -212,14 +230,11 @@ function searchFromInput() {
     .value.trim()
     .replace(/\s+/g, "_");
   const waktu = document.getElementById("filterKelompok").value;
-
   if (searchInput) {
     fetchDataFromSearch(searchInput, waktu);
   } else {
-    // Jika input pencarian kosong, kembali ke dataset awal
-    fetchDataFromHRIS(1);
+    fetchDataFromHRIS(1)
   }
-   // Asumsi ingin reset ke halaman pertama
 }
 
 function fetchDataFromSearch(searchKey, waktu) {
@@ -229,7 +244,6 @@ function fetchDataFromSearch(searchKey, waktu) {
   } else {
     url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?key=${searchKey}`;
   }
-
 
   fetch(url, {
     method: "POST",
@@ -260,6 +274,45 @@ function fetchDataFromSearch(searchKey, waktu) {
       handlingErrorSearch();
     });
 }
+
+function fetchDataFromSearchPages(searchKey, waktu, page) {
+  let url;
+  if (waktu) {
+    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?waktu=${waktu}&key=${searchKey}&page=${page}`;
+  } else {
+    url = `https://hris_backend.ulbi.ac.id/api/v2/rkp/histori/search?key=${searchKey}&page=${page}`;
+  }
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      login: `${token}`,
+      Accept: "application/json",
+    },
+  })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+              "Terjadi kesalahan saat mencari data. Silakan coba lagi."
+          );
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (!data.data.data_query || data.data.data_query.length === 0) {
+          Swal.fire("Informasi", "Tidak ada data yang cocok ditemukan.", "info");
+          return;
+        }
+        allData = data.data.data_query;
+        populateTableWithData(allData);
+        updatePaginationButtons(data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        handlingErrorSearch();
+      });
+}
+
 function fetchDataFromHRIS(page) {
   let url;
 
