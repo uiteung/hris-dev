@@ -177,8 +177,8 @@ function setupEventListeners() {
   const searchButton = document.querySelector(".btn-primary");
   const searchInput = document.getElementById("searchinput");
   // console.log(currentPage)
-  const waktu = document.getElementById("filterKelompok").value;
   if (searchInput) {
+    const waktu = document.getElementById("filterKelompok").value;
     document.getElementById("prevPageBtn").addEventListener("click", () => {
       if (currentPage > 1) {
         fetchDataFromSearchPages(searchInput.value
