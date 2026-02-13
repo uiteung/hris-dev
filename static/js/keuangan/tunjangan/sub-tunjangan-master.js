@@ -139,12 +139,14 @@ function createRow(item) {
     return `<tr><td colspan="10">No data available</td></tr>`;
   }
   const struk = item["fgs-struk"];
+  const fung = item["fgs-fung"];
   return `<tr>
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
     <td>${item.pokok || "-"}</td>
     <td>${item.pangan || "-"}</td>
     <td>${item.keluarga || "-"}</td>
     <td>${struk || "-"}  </td>
+    <td>${fung || "-"}</td>
     <td>${item.kehadiran || "-"}</td>
     <td>${item.kinerja || "-"}</td>
 
