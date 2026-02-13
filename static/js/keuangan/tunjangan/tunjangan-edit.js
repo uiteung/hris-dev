@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "pangan",
     "keluarga",
     "fgs-struk",
+    "fgs-fung",
     "kehadiran",
     "keluarga",
     "kinerja",
@@ -87,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function populateForm(userData) {
   const struk = userData["fgs-struk"];
+  const fung = userData["fgs-fung"];
   document.getElementById("nama").value = userData.nama || "0";
   document.getElementById("email").value = userData.email || "0";
   document.getElementById("gaji_pokok").value = formatRupiah(
@@ -97,6 +99,7 @@ function populateForm(userData) {
     userData.keluarga || 0
   );
   document.getElementById("fgs-struk").value = formatRupiah(struk || 0);
+  document.getElementById("fgs-fung").value = formatRupiah(fung || 0);
   document.getElementById("kehadiran").value = formatRupiah(
     userData.kehadiran || 0
   );
@@ -149,6 +152,7 @@ function updateUserData() {
     pangan: parseRupiahToFloat(document.getElementById("pangan").value),
     keluarga: parseRupiahToFloat(document.getElementById("keluarga").value),
     "fgs-struk": parseRupiahToFloat(document.getElementById("fgs-struk").value),
+    "fgs-fung": parseRupiahToFloat(document.getElementById("fgs-fung").value),
     kinerja: parseRupiahToFloat(document.getElementById("kinerja").value),
     kehadiran: parseRupiahToFloat(document.getElementById("kehadiran").value),
     keahlian: parseRupiahToFloat(document.getElementById("keahlian").value),
