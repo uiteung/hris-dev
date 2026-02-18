@@ -148,6 +148,7 @@ function populateTableWithData(data) {
 
 function createRow(item) {
   const struk = item["fgs-struk"];
+  const fung = item["fgs-fung"];
   const gajipokok = item["gaji-pokok"];
 
   return `<tr>
@@ -160,6 +161,7 @@ function createRow(item) {
         <td>${item.kinerja}</td>
         <td>${item.keahlian}</td>
         <td>${struk}</td>
+        <td>${fung}</td>
         <td>${item.transportasi}</td>
         <td>${item.kehadiran}</td>
         <td>${item.rapel_gaji}</td>
@@ -257,7 +259,8 @@ function generateExcel(data) {
       Pangan: item.pangan,
       KPI: item.kinerja,
       Keahlian: item.keahlian,
-      "FGS/Struktural": item["fgs-struk"],
+      "Struktural": item["fgs-struk"],
+      "Fungsional": item["fgs-fung"],
       Transport: item.transportasi,
       Kehadiran: item.kehadiran,
       Kopkar: item.kopkar,
