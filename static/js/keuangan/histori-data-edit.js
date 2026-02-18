@@ -250,6 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "performanceAllowance",
     "expertiseAllowance",
     "structuralAllowance",
+    "fungsionalAllowance",
     "transportationAllowance",
     "attendanceAllowance",
     "kopkarDeduction",
@@ -291,6 +292,9 @@ function populateForm(userData) {
     userData.keahlian || 0
   );
   document.getElementById("structuralAllowance").value = formatRupiah(
+    userData["str-struk"] || 0
+  );
+  document.getElementById("fungsionalAllowance").value = formatRupiah(
     userData["fgs-struk"] || 0
   );
   document.getElementById("transportationAllowance").value = formatRupiah(
@@ -377,8 +381,11 @@ function updateUserData() {
     keahlian: parseRupiahToFloat(
       document.getElementById("expertiseAllowance").value
     ),
-    ["fgs-struk"]: parseRupiahToFloat(
+    ["str-struk"]: parseRupiahToFloat(
       document.getElementById("structuralAllowance").value
+    ),
+    ["fgs-struk"]: parseRupiahToFloat(
+      document.getElementById("fungsionalAllowance").value
     ),
     transportasi: parseRupiahToFloat(
       document.getElementById("transportationAllowance").value
