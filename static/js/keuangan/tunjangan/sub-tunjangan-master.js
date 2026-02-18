@@ -145,8 +145,8 @@ function createRow(item) {
     <td>${item.pokok || "-"}</td>
     <td>${item.pangan || "-"}</td>
     <td>${item.keluarga || "-"}</td>
-    <td>${fung || "-"}  </td>
     <td>${struk || "-"}</td>
+    <td>${fung || "-"}  </td>
     <td>${item.kehadiran || "-"}</td>
     <td>${item.kinerja || "-"}</td>
 
