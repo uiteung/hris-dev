@@ -135,8 +135,8 @@ function populateTableWithData(data) {
 }
 
 function createRow(item) {
-  const struk = item["fgs-struk"];
-  const fung = item["fgs-fung"];
+  const fung = item["fgs-struk"];
+  const struk = item["str-struk"];
   return `<tr>
     <td class="name-email-cell">${item.nama} <br>${item.email}</td>
     <td>${item.pokok}</td>
@@ -144,8 +144,8 @@ function createRow(item) {
     <td>${item.pangan}</td>
     <td>${item.kinerja}</td>
     <td>${item.keahlian}</td>
-    <td>${struk}</td>
-    <td>${fung}</td>
+    <td>${struk || "-"}</td>
+    <td>${fung || "-"}  </td>
     <td>${item.transportasi}</td>
     <td>${item.kehadiran}</td>
     <td>${item.rapel_gaji}</td>
@@ -341,7 +341,7 @@ function generateExcel(data) {
       Pangan: item.pangan,
       KPI: item.kinerja,
       Keahlian: item.keahlian,
-      "Struktural": item["fgs-struk"],
+      "Struktural": item["str-struk"],
       "Fungsional": item["fgs-fung"],
       Transport: item.transportasi,
       Kehadiran: item.kehadiran,
@@ -363,7 +363,8 @@ function generateExcel(data) {
     { wch: 15 }, // Pangan
     { wch: 15 }, // KPI
     { wch: 15 }, // Keahlian
-    { wch: 20 }, // FGS/Struktural
+    { wch: 15 }, // Struktural
+    { wch: 15 }, // Fungsional
     { wch: 15 }, // Transport
     { wch: 15 }, // Kehadiran
     { wch: 15 }, // Kopkar

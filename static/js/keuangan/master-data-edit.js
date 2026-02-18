@@ -286,10 +286,10 @@ function populateForm(userData) {
     userData.keahlian || 0
   );
   document.getElementById("structuralAllowance").value = formatRupiah(
-    userData["fgs-struk"] || 0
+    userData["str-struk"] || 0
   );
   document.getElementById("fungsionalAllowance").value = formatRupiah(
-    userData["fgs-fung"] || 0
+    userData["fgs-struk"] || 0
   );
   document.getElementById("transportationAllowance").value = formatRupiah(
     userData.transportasi || 0
@@ -368,11 +368,11 @@ function updateUserData() {
     keahlian: parseRupiahToFloat(
       document.getElementById("expertiseAllowance").value
     ),
+    ["str-struk"]: parseRupiahToFloat(
+      document.getElementById("fungsionalAllowance").value
+    ),
     ["fgs-struk"]: parseRupiahToFloat(
       document.getElementById("structuralAllowance").value
-    ),
-    ["fgs-fung"]: parseRupiahToFloat(
-      document.getElementById("fungsionalAllowance").value
     ),
     transportasi: parseRupiahToFloat(
       document.getElementById("transportationAllowance").value
