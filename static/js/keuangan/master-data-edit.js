@@ -369,10 +369,10 @@ function updateUserData() {
       document.getElementById("expertiseAllowance").value
     ),
     ["str-struk"]: parseRupiahToFloat(
-      document.getElementById("fungsionalAllowance").value
+      document.getElementById("structuralAllowance").value
     ),
     ["fgs-struk"]: parseRupiahToFloat(
-      document.getElementById("structuralAllowance").value
+      document.getElementById("fungsionalAllowance").value
     ),
     transportasi: parseRupiahToFloat(
       document.getElementById("transportationAllowance").value
