@@ -410,8 +410,8 @@ function convertToMonthYear(dateString) {
 }
 
 function createRow(item) {
-  const struk = item["fgs-struk"];
-  const fung = item["fgs-fung"];
+  const struk = item["str-struk"];
+  const fung = item["fgs-struk"];
   const gajipokok = item["gaji-pokok"];
 
   let validasi
@@ -618,8 +618,8 @@ function generateExcel(data) {
       Pangan: item.pangan,
       KPI: item.kinerja,
       Keahlian: item.keahlian,
-      "Struktural": item["fgs-struk"],
-      "Fungsional": item["fgs-fung"],
+      "Struktural": item["str-struk"],
+      "Fungsional": item["fgs-struk"],
       Transport: item.transportasi,
       Kehadiran: item.kehadiran,
       Kopkar: item.kopkar,

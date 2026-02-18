@@ -240,7 +240,7 @@ function generateExcel(data) {
       KPI: item.kinerja,
       Keahlian: item.keahlian,
       "Struktural": item["str-struk"],
-      "Fungsional": item["fgs-fung"],
+      "Fungsional": item["fgs-struk"],
       Transport: item.transportasi,
       Kehadiran: item.kehadiran,
       Kopkar: item.kopkar,
