@@ -28,7 +28,7 @@ function fetchUserDataByEmail(email) {
     .then((data) => {
       if (data.code === 200 && data.success) {
         populateForm(data.data);
-        const userJafung = data.jafung;
+        const userJafung = data.data.jafung || "-";
         fetchJafungOptions(userJafung);
         const userPangkat = data.data.pangkat;
         fetchPangkatOptions(userPangkat);
@@ -352,7 +352,10 @@ function updateUserData() {
     email: email,
     pangkat: document.getElementById("pangkat").value,
     jabatan: document.getElementById("jabatan").value,
-    jafung: document.getElementById("jafung").value,
+    jafung:
+      document.getElementById("jafung").value === "undefined"
+        ? "-"
+        : document.getElementById("jafung").value || "-",
     status_keluarga: document.getElementById("status_keluarga").value,
     suskel: {
       dirisendiri: parseInt(
