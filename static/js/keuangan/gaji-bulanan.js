@@ -178,7 +178,8 @@ function setupEventListeners() {
   const searchButton = document.querySelector(".btn-primary");
   const searchInput = document.getElementById("searchinput");
   // console.log(currentPage)
-  if (searchInput.value != "") {
+  if (role != "Staff" || role != "Dosen") {
+    if (searchInput.value != "") {
     const waktu = document.getElementById("filterKelompok").value;
     document.getElementById("prevPageBtn").addEventListener("click", () => {
       if (currentPage > 1) {
@@ -204,11 +205,22 @@ function setupEventListeners() {
       fetchDataFromHRIS(currentPage + 1);
     });
   }
+} else {
+    document.getElementById("prevPageBtn").addEventListener("click", () => {
+      if (currentPage > 1) {
+        fetchDataFromHRIS(currentPage - 1);
+      }
+    });
 
-  searchButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    searchFromInput();
-  });
+    document.getElementById("nextPageBtn").addEventListener("click", () => {
+      fetchDataFromHRIS(currentPage + 1);
+    });
+  }
+
+  // searchButton.addEventListener("click", (event) => {
+  //   event.preventDefault();
+  //   searchFromInput();
+  // });
 
   // Listen for Enter key on the search input
   if (role === "DTI" || role === "keuangan") {
