@@ -178,7 +178,7 @@ function setupEventListeners() {
   const searchButton = document.querySelector(".btn-primary");
   const searchInput = document.getElementById("searchinput");
   // console.log(currentPage)
-  if (role != "Staff" || role != "Dosen") {
+  if (role != "Staff" && role != "Dosen") {
     if (searchInput.value != "") {
     const waktu = document.getElementById("filterKelompok").value;
     document.getElementById("prevPageBtn").addEventListener("click", () => {
